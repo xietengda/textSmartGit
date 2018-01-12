@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+		<title>寒假报名</title>
+		<link rel="stylesheet" href="http://qhb.lelego.net.cn/upload/tpl_file/public/module_swiper.min.css" />
+		<link rel="stylesheet" href="http://qhb.lelego.net.cn/plugins/layui/css/layui.css">
+		<link rel="stylesheet" href="<{$template_path}>/winter_vacation01.css" />
+		<style>
+			/*报名页面样式*/
+			
+			#signDiv_cont {
+				width: 7.2rem;
+				margin: 0 auto;
+				margin-top: 0.29rem;
+				text-align: center;
+				position: relative;
+			}
+			
+			#signDiv_cont input {
+				width: 98%;
+			    display: inline-block;
+			    padding-left: 0.26rem;
+			    margin-bottom: 0.4rem;
+			    height: 1rem;
+			    border-radius: 0.24rem;
+			    border: 0.05rem solid #53A135;
+			    /* background: url('<{$template_path}>/all_textframe@2x.png') center center; */
+			    font-size: 0.40rem;
+			    color: #53A135;
+			    text-align: center;
+			}
+			
+			#classOption {
+				width: 98%;
+				display: inline-block;
+				height: 1rem;
+				position: absolute;
+				margin-left: 2%;
+				opacity: 0;
+				color: #1C5224;
+			}
+			#signDiv_cont p{
+				text-align: left;
+				width: 100%;
+				color: #D61013;
+				font-size: 0.4rem;
+			}
+			
+			#sign_btn {
+				width: 4.8rem;
+				height: 1rem;
+				display: inline-block;
+				margin-top: 0.4rem;
+				background-color: #53A135;
+				font-size: 0.5rem;
+				line-height: 1rem;
+				font-weight: bold;
+				border-radius: 0.24rem;
+				color: white;
+			}
+			::-webkit-input-placeholder {
+				/* WebKit browsers */
+				color:#9cc18e;
+			}
+			
+			:-moz-placeholder {
+				/* Mozilla Firefox 4 to 18 */
+				color:#9cc18e;
+			}
+			
+			::-moz-placeholder {
+				/* Mozilla Firefox 19+ */
+				color:#9cc18e;
+			}
+			
+			:-ms-input-placeholder {
+				/* Internet Explorer 10+ */
+				color:#9cc18e;
+			}
+			/*报名页面样式*/
+		</style>
+		<script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+		<script type="text/javascript" src="http://qhb.lelego.net.cn/upload/tpl_file/public/adaptive.js"></script>
+		<script type="text/javascript" src="http://qhb.lelego.net.cn/upload/tpl_file/public/module_swiper.js"></script>
+	</head>
+
+	<body>
+		<div id="father">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide swi_bgi" id="signDiv">
+						<div class="swi_title">
+							<p>现报名超划算</p>
+						</div>
+						<!--内容-->
+						<div class="swi_cont">
+							<div id="signDiv_cont">
+								<input type="text" id="userName" placeholder="学生姓名/家长姓名" />
+								<select id="classOption" onchange="changeClassName()">
+									<!-- <option>一对一钢琴</option>
+									<option>一对一</option>
+									<option>钢琴</option> -->
+								</select>
+								<input type="text" id="ClassSelectInput" value="一对一钢琴" readonly="readonly" />
+								<input type="text" id="phone" placeholder="联系方式" onchange="checkphone($(this))"/>
+								<input type="text" id="remark" placeholder="请输入其他备注信息" />
+								<butto id='sign_btn' onclick='submitApply()'>提交报名信息</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</body>
+	<script>
+		
+		
+		$(document).ready(function(){
+			//给body固定高度,安卓会挤压页面
+			var phoneHigiht = document.body.scrollHeight;
+			$('body').css('height', phoneHigiht + 'px');
+
+			
+			var ClassOption = sessionStorage.getItem('ClassOption');
+			var className  = ClassOption.split(',');
+			console.log(className);
+			$.each(className,function(i){
+				if(i == 0){
+					$('#ClassSelectInput').val(className[i]);
+				}
+				$('#classOption').append("<option>"+className[i]+"</option>");
+			});
+		});
+		
+		
+		
+		//更改option函数
+		function changeClassName() {
+			$('#ClassSelectInput').val($("#classOption  option:selected").text());
+		}
+		
+		
+		//电话号码检查
+		function checkphone(a) {
+			var phone = $("#phone").val();
+			var isPhone = /^1[34578]\d{9}$/;
+			var isMob = /^0(([1,2]\d)|([3-9]\d{2}))\d{7,8}$/;
+			var value = $("#phone").val().trim();
+			if(/^1[34578]\d{9}$/.test(value)) {
+				return true;
+			} else if(isMob.test(value)) {
+				if(phone.split("")[0] == 0) {
+					if(phone.split("")[1] == 2) {
+						var a1 = phone.substr(0, 3);
+						var a2 = phone.substr(3, 10);
+						$("#phone").val(a1 + '-' + a2);
+					} else {
+						var a1 = phone.substr(0, 4);
+						var a2 = phone.substr(4, 11);
+						$("#phone").val(a1 + '-' + a2);
+					};
+				};
+				return true;
+			} else {
+				alert("请输入正确的手机号码或固定电话");
+				$("#phone").val("");
+				return false;
+			};
+
+		};
+
+		//点击提交
+		function submitApply(){
+			var stuName = $('#userName').val();
+			var stuPhone = $('#phone').val();
+			var stuCourse = $('#classOption').children('option:selected').val();
+			if(stuName == ""){
+				alert("请输入您的姓名或您家长的姓名!");
+				return false;
+			}else if(stuPhone == ""){
+				alert("不要忘了您的电话号码哦~");
+				return false;
+			}else{
+				$.ajax({
+					type: "post",
+					url: "http://<{$sys_domain}>/modules/wap_tpl_list/order_post.php?id=<{$user_template_id}>",
+					type: "POST",
+					dataType: "json",
+					data: {
+						userid: '<{$template_user_id}>',
+						name:stuName,
+						phone:stuPhone,
+						course:stuCourse,
+						remark:stuRemark,
+						email:'',
+					},
+					success: function(data) {
+						if(data.status == true){
+							alert('报名成功！');
+							window.location.href="<{$user_template_url}>" ;
+						}else{
+							alert("您已经报名成功，请不要重新报名哦~")
+						}
+					}
+				});
+			}
+				
+		}
+	</script>
+
+</html>

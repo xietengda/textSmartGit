@@ -1,0 +1,164 @@
+   /*样式*/
+   /*保存/编辑/音乐 框*/
+	#prevSAndE {
+		width: 100%;
+		position: fixed;
+		z-index: 999;
+		padding: 0.2rem 0rem;
+		margin-top: 0.2rem;
+	}
+	
+	#prevSAndE ul li:not(:nth-child(3)) {
+		float: left;
+		color: white;
+		margin-left: 0.3rem;
+		padding: 0.2rem 0.1rem;
+		border-radius: 10rem;
+		font-size: 0.30rem;
+		text-align: center;
+	}
+	
+	#prevSAndE ul li:nth-child(2) {
+		margin-left: 1rem;
+	}
+	
+	#prevSAndE ul li:not(:nth-child(3)) span {
+		position: absolute;
+	}
+	
+	#prevSAndE ul li:not(:nth-child(3)) span:nth-child(1) {
+		padding: 0.5rem;
+		border-radius: 10rem;
+		background-color: black;
+		opacity: 0.7;
+	}
+	
+	#prevSAndE ul li:not(:nth-child(3)) span:nth-child(2) {
+		padding: 0.25rem 0.15rem;
+		z-index: 5;
+		font-size: 0.36rem;
+	}
+	
+	#prevMiusc {
+		float: right;
+		margin-right: 5%;
+		margin-top: 2.5%;
+	}
+	
+	#preMiusc_bgm {
+		width: 40px;
+		height: 40px;
+	}
+	
+	#preMiusc_bgm span {
+		position: absolute;
+		width: 36px;
+		height: 40px;
+		overflow: hidden;
+	}
+	
+	#preMiusc_bgm span:nth-child(1) {
+		background-image: url(http://qhb.lelego.net.cn/upload/tpl_file/public/module_sprite_global@2x.png);
+		background-position: -105px -46px;
+		background-size: 355px;
+	}
+	
+	#preMiusc_bgm span:nth-child(2) {
+		background-image: url(http://qhb.lelego.net.cn/upload/tpl_file/public/module_sprite_global@2x.png);
+		background-position: 9px -99px;
+		background-size: 355px;
+		-webkit-animation: play_sate 4s infinite;
+	}
+	
+	@-webkit-keyframes play_sate {
+		0% {
+			-webkit-transform: perspective(400px) rotateY(0);
+		}
+		100% {
+			-webkit-transform: perspective(400px) rotateY(360deg);
+		}
+	}
+	/*保存/编辑/音乐 框*/
+
+
+
+
+	/*html*/
+
+	<!--左上角保存和编辑-->
+	<div id="prevSAndE">
+		<ul>
+			<li id="prevSave" onClick='saveDialog()' class='divHide'><span></span><span>保存</span></li>
+			<li id="prevEdit" onClick='LeftEditFun()' class='divHide'><span></span><span>编辑</span></li>
+			<li id="prevMiusc">
+				<div id="preMiusc_bgm">
+					<span></span>
+					<span id='preMiusc_bgm1' onClick='playPause()'></span>
+				</div>
+				<audio src="" style=" display:none" id='preMiuscAudio' controls loop autoplay></audio>
+			</li>
+		</ul>
+	</div>
+	<!--左上角保存和编辑-->
+
+
+
+	/*js*/
+	//一加载就获取判断是否是编辑页面跳转
+	var changeImgUrl = window.location.href;
+	var hrefUrl = changeImgUrl.split('?')[1];
+	var hrefArr =hrefUrl.split('&');
+	$.each(hrefArr,function(i){
+		//判断是否显示左上角按钮
+		if(hrefArr[i] == "a=1"){
+			 sessionStorage.setItem('a','1');
+			 $('#prevSave').removeClass('divHide');
+			 $('#prevEdit').removeClass('divHide');
+		}
+		
+	});
+
+	//如果不是编辑，就给咨询加跳转链接
+	if(hrefArr.indexOf('a=1') == -1){
+		$('#zixun').find('a').attr('href','<{$consulting_url}>');
+		sessionStorage.setItem('a','0');
+	}
+
+
+
+
+	//监听播放音乐
+	var myAudio = document.getElementById('preMiuscAudio');
+	var miuscIcon = $('#preMiusc_bgm').find('span:nth-child(2)');
+	document.addEventListener('DOMContentLoaded', function () {
+		function audioAutoPlay() {
+			var audio = document.getElementById('preMiuscAudio');
+				audio.play();
+			document.addEventListener("WeixinJSBridgeReady", function () {
+				audio.play();
+			}, false);
+		}
+		audioAutoPlay();
+	});
+	function playPause(){
+			if(myAudio.paused){
+				myAudio.play();
+				miuscIcon.css('-webkit-animation','play_sate 4s infinite');
+			}else{
+				myAudio.pause();
+				miuscIcon.css('-webkit-animation','');
+			}
+	}
+
+
+	//点击左上角编辑
+	function LeftEditFun(){
+		window.location.href='<{$template_edit_url}>';
+	}
+
+
+	//点击我要报名函数
+	function sign_upFun(){
+		sessionStorage.setItem('ClassOption',ClassOption);
+		window.location.href="http://qhb.lelego.net.cn?id=44&lang=cn&pid=<{$user_template_id}>&tpl_id=15&file=sign_up.tpl";
+	}

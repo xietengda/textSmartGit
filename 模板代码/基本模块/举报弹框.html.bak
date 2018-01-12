@@ -1,0 +1,153 @@
+   /*样式*/
+   /*举报、关注框样式*/
+	#report_div{
+		width: 100%;
+		text-align: center;
+		padding: 0.2rem 0.3rem;
+		position: fixed;
+		bottom: 0;
+		font-size: 0.34rem;
+		background-color: dimgrey;
+		color: white;
+		z-index:99;
+	}
+	#report_div span:nth-child(2){
+		float: left;
+		left: 10%;
+	}
+	#report_div span:nth-child(3){
+		margin-left: -10%;
+	}
+	#report_div a{
+		color: #00AAFB;
+		text-decoration: none;
+		margin-left: 2%;
+	}
+	/*举报、关注框样式*/
+
+
+
+	/*举报弹框样式*/
+	.hide_all{ width:100%; height:100%; position:absolute; left:0; top:0; background-color:#000; opacity:0.6; z-index:9999; display:none}
+	.jubao{ position:relative; z-index:9999999999;width:90%;border:1px solid #ccc; border-radius:0.2rem; padding:0; box-sizing:border-box; display:none; background-color:#fff;margin-top:-120%;margin-left:5%}
+	.jubao h2{ width:100%; text-align:center; border-bottom:1px solid #ccc; line-height:0.8rem; color:#000;}
+	.jubao .layui-form-item{ margin-top:15px; text-align:center}
+	.layui-form-radio{ text-align:left;}
+	.close_jibao{ position:absolute; right:0.1rem; top:0.05rem; width:0.4rem; height:0.4rem;}
+	.close_jibao img{ width:100%; height:100%}
+	.layui-form-radio span{ color:#000;}
+	.layui-form-radio{ display:block; width:60%; margin:0 auto; margin-bottom:0.1rem;}
+	
+	/*举报弹框样式*/
+
+
+
+	/*html*/
+	<!--举报弹框-->
+	<!--举报-->
+	<div class="hide_all"></div>
+	<div class="jubao">
+		<span class="close_jibao" onClick="close_jibao()"><img src="http://qhb.lelego.net.cn/upload/tpl_file/public/module_close.png"/></span>
+		<form class="layui-form" action="">
+			<h2>请选择举报原因</h2>
+			<div class="layui-form-item">
+				<div class="layui-input-block" id="jubaoBox">
+					<div class="div1"  onClick="other1()"><input type="radio" name="reason" class="reason1" value="1" title="恶意营销、虚假传播"></div>
+					<div class="div2"  onClick="other1()"><input type="radio" name="reason" class="reason2" value="2" title="侵权"></div>
+					<div class="div3"  onClick="other1()"><input type="radio" name="reason" class="reason3" value="3" title="色情、赌博、毒品"></div>
+					<div class="div4"  onClick="other1()"><input type="radio" name="reason" class="reason4" value="4" title="违反国家政策和法律"></div>
+					<div class="div5" onClick="other()"><input type="radio" name="reason" value="5" title="其他原因" class="reason5"></div>
+					<textarea placeholder="请输入其他原因" class="layui-textarea other"></textarea>
+					<input type="button" class="layui-btn" lay-submit="" lay-filter="demo1" onclick="return check()" value="立即提交" />
+				</div>
+
+			</div>
+		</form>
+	</div>
+
+	<!--底部举报及关注-->
+	<!--举报及关注-->
+	<div id="report_div" class='divHide'>
+		<i></i>
+		<span onClick='jubaoShow()'>举报</span>
+		<span>技术支持by<a href="http://mp.weixin.qq.com/s/_pwmasgjTxofB_uxgtaSaA"/>琴行宝</a></span>
+	</div>
+
+
+
+
+
+	/*js*/
+
+	//举报选项的渲染
+	layui.use(['form', 'layedit', 'laydate'], function(){
+	  var form = layui.form
+	  ,layer = layui.layer
+	  ,layedit = layui.layedit
+	  ,laydate = layui.laydate;
+	  form.render();
+	  $(".layui-anim.layui-icon").click(function(){
+			$(".layui-textarea").css("display","none");
+			$(".div5 .layui-unselect i").click(function(){
+				$(".layui-textarea").css("display","block")
+			});
+		});
+	});
+	
+	//点击举报
+	function jubaoShow(){
+		$(".jubao").show();
+		$(".hide_all").show();
+		//监听举报选中
+	};
+	//关闭举报
+	function close_jibao(){
+		$(".jubao").fadeOut(500);
+		$(".hide_all").fadeOut(1000);
+	};
+
+	//点击举报提交
+	function check(form) {
+		var value = $(".layui-form-radioed").children("span").text();
+		var type;
+		$("input[name=reason]").each(function(){
+			if($(this).next("div").hasClass("layui-form-radioed")){type = $(this).val();};
+		});
+		if($(".layui-unselect").hasClass("layui-form-radioed")){
+			if($(".reason5").next("div").hasClass("layui-form-radioed")){value = $(".layui-textarea").val();};
+			$.ajax({
+						type: "post",
+						dataType: "json",
+						url: "http://<{$sys_domain}>/modules/wap_tpl_list/complain.php",
+						data:{
+							id:'<{$user_template_id}>',
+							reason:value,
+							type:type,
+							
+						},
+						success: function (e) {
+							if(e.status == true){
+								layer.msg('举报成功', {time: 3000, icon:6});
+								$(".jubao").fadeOut(1000);
+								$(".hide_all").fadeOut(3000);
+							}
+							else{layer.msg('您已经举报过了，请不要重新举报哦~', {time: 3000, icon:7});$(".jubao").fadeOut(1000);$(".hide_all").fadeOut(3000);}
+						},
+						error:function(e){
+							
+						},
+					});
+			return false;
+		}
+		else{layer.msg('请选择举报内容', {time: 3000, icon:7});$(".jubao").hide();setTimeout(function(){$(".jubao").show()},3000);return false;}
+		return false;
+	};
+	//举报里的点击函数
+	function other(){
+		$(".layui-textarea").css("display","block");
+	};
+	function other1(){
+		$(".layui-textarea").css("display","none");;
+	};
+
+
