@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+		<meta charset="UTF-8">
+		<title>春节报名</title>
+		<style>
+			#Clip_pic{
+				width: 150px;
+				height: 100px;
+			}
+			img{
+				width: 100%;
+				height: 100%;
+			}
+			
+			
+			/*裁剪图片框的样式*/
+			.hide {display: none;}
+			.show {display: block;}
+			#clipArea {margin: 0 auto; width:100%;height:100%;background:#000; margin-top:1rem}
+			#clipBtn{margin-top: 5px;background:none;color: #fff;padding: 8px 20px;border-radius: 5px;width: 3rem; position:fixed; right:0.2rem; bottom:0.2rem; z-index:999999999; border:none; font-size:0.4rem}
+			#clipBtn1{margin-top: 5px;background:none;color: #fff;padding: 8px 20px;border-radius: 5px;width: 3rem; position:fixed; left:0.2rem; bottom:0.2rem; z-index:999999999; border:none; font-size:0.4rem}
+			#clipBtn2{margin-top: 5px;background:none;color: #fff;padding: 8px 20px;border-radius: 5px;width: 3rem; position:fixed; left:50%; margin-left:-1.5rem; bottom:0.2rem; z-index:999999999; border:none; font-size:0.4rem}
+			.caiBox{z-index:99999999; width:100%; height:100%; position:fixed; left:0; top:0; overflow:hidden; display:none; background-color:#000}
+			.lazy_tip{position: absolute;margin-top: 35%;z-index: 1001;font-size: 25px;width: 100%;color: #4eaf7a;line-height: 30px;}
+			.lazy_cover {width: 100%;height: 100%;background-color: black;z-index: 1000;color: #4eaf7a;font-size: 25px;opacity: 0.7;position: fixed;top: 0;left: 0;}
+			#plan{ position:absolute;top:0;left:0; width:100%; clear:both; height:100%;display: none;
+			background: rgb(255, 255, 255);
+			vertical-align: baseline;
+			text-align: center;
+			line-height: 1.5;
+			padding-top: 25%;}
+			.guanbi{ width:0.45rem; position:absolute; right:0rem; top:-0.15rem;overflow:hidden; display:block; z-index:99}
+			.guanbi img{ width:100%; height:100%;}
+			
+		</style>
+	</head>
+
+	<body>
+
+		<div id="father">
+			<div id="Clip_pic">
+				<img id="edimg1" src="pic_01@2x.png"  onClick="clipPhoto('#img_input',$(this),'200','260','1')" />
+			</div>
+		</div>
+		
+		
+		<!--图片上传input-->
+		<input id="img_input" type="file" accept="image/*" style="display: none;"  >
+		
+		<!--图片裁剪框-->
+		<div class="caiBox">
+		    <button id="clipBtn">确定裁剪</button>
+		    <button id="clipBtn1" onClick="Close()">取消</button>
+		    <button id="clipBtn2" onClick="romete()">旋转</button>
+		    <div id="clipArea"></div>
+		    <canvas id="myCanvas" style=" display:none"></canvas>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+		
+	<script type="text/javascript" src="adaptive.js" ></script>	
+	<!--图片裁剪-->
+	<script type="text/javascript" src="hammer.min_0109.js" ></script>
+	<script type="text/javascript" src="iscroll-zoom-min_0109.js" ></script>
+	<script type="text/javascript" src="lrz.all.bundle_0109.js" ></script>
+	<script type="text/javascript" src="PhotoClip_0109.js" ></script>
+	<script>
+		//分享封面图片（变量在主页面定义）
+		// var tal_shareBgi = new Array();
+		// var imgArr = new Array();
+		//显示截取后图像的容器的选择器或者DOM对象。
+		var view_pid;
+
+		//自定义图片
+		var clipArea = new PhotoClip('#clipArea',{
+			size: [0,0], // 截取框的宽和高组成的数组。默认值为[260,260]
+			outputSize: 640,// 输出图像的宽和高组成的数组。默认值为[0,0]，表示输出图像原始大小
+			//adaptive: ['60%', '80%'],
+			file: '#img', //上传图片的<input      type="file">控件的选择器或者DOM对象。
+			view: '#view',//显示截取后图像的容器的选择器或者DOM对象。
+			ok: '#clipBtn',//确认截图按钮的选择器或者DOM对象。
+			loadStart: function (dataURL) {
+				//开始加载的回调函数。this指向 fileReader 对象，并将正在加载的 file 对象作为参数传入。
+				$(".caiBox").show();
+				
+			},
+			loadComplete: function (dataURL) {
+				//加载完成的回调函数。this指向图片对象，并将图片地址作为参数传入。
+			},
+			done:function (dataURL) {
+				$(".caiBox").hide();
+				$(view_pid).attr('src',dataURL);
+			}
+		});
+	
+	
+		//自定义图片（裁剪）函数
+		//file_id上传图片的（input）id，view_id:截图完成显示的id(img);
+		//view_width,view_height:截取区域宽高，imgIndex:图片的下标
+		function clipPhoto(file_id,view_id,view_width,view_height,imgIndex){
+			// var v_id;
+			//等于-1就是分享图片
+			if(imgIndex != -1){
+				view_pid = '#'+$(view_id)[0].id;
+				$(file_id).click();
+			}else{
+				view_pid = view_id;
+			}
+			$(".photo-clip-mask").remove();
+			$(".photo-clip-view").remove();
+
+
+			clipArea.clear();
+			clipArea._options.view=view_id;
+			clipArea._options.file=file_id;
+			clipArea._init();
+			clipArea._resize(parseInt(view_width),parseInt(view_height));
+		};
+		//关闭裁剪函数
+		function Close(){
+			$('.caiBox').hide();
+		} 
+		//裁剪图片旋转函数
+		function romete(){
+			clipArea._rotateCW90(90);
+		};
+
+	</script>
+
+</html>
