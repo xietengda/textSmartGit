@@ -1,0 +1,91 @@
+//html
+<input id="date_input_1" readonly="readonly" onfocus="this.blur()" />
+<input id="date_input_2" readonly="readonly" onfocus="this.blur()" />
+
+//js
+//日历
+//日期触发函数
+var now = new Date(),
+	max = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+var currYear = now.getFullYear();
+var currMonth = now.getMonth();
+var currDay = now.getDate();
+
+$('#date_input_1').mobiscroll().date({
+	seconds: false,
+	ampm: false,
+	lang: 'zh',
+	dateOrder: 'yymd',
+	theme: 'android-ics light',
+	startYear: currYear, //开始年份
+	setText: '确定',
+	cancelText: '取消',
+	display: 'bottom',
+	onSelect: function(valueText, inst) {
+		console.log(inst.val);
+
+
+		// 获取某个时间格式的时间戳
+		var stringTime = inst.val;
+		var timestamp2 = Date.parse(new Date(stringTime));
+		timestampStart = timestamp2 / 1000;
+		//2014-07-10 10:21:12的时间戳为：1404958872 
+		console.log(stringTime + "的时间戳为：" + timestampStart);
+
+
+
+		var newYear = inst.temp[0]; //年
+		var newMonth = inst.temp[1]; //月
+		var newDay = inst.temp[2]; //日
+
+		var newWeek = new Date(newYear, newMonth, (newDay));
+		var weekArray = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+		var week = weekArray[newWeek.getDay()]; // 星期
+
+		$('#ed9').html(parseInt(newMonth) + 1);
+		$('#ed10').html(newDay);
+	}
+});
+
+
+
+$('#date_input_2').mobiscroll().date({
+	seconds: false,
+	ampm: false,
+	lang: 'zh',
+	dateOrder: 'yymd',
+	theme: 'android-ics light',
+	startYear: currYear, //开始年份
+	setText: '确定',
+	cancelText: '取消',
+	display: 'bottom',
+	onSelect: function(valueText, inst) {
+
+
+		// 获取某个时间格式的时间戳
+		var stringTime = inst.val;
+		var timestamp2 = Date.parse(new Date(stringTime));
+		timestampStop = timestamp2 / 1000;
+		//2014-07-10 10:21:12的时间戳为：1404958872 
+		console.log(stringTime + "的时间戳为：" + timestampStop);
+
+		//结束时间不能小于开始时间
+		if(timestampStop > timestampStart){
+			var newYear = inst.temp[0]; //年
+			var newMonth = inst.temp[1]; //月
+			var newDay = inst.temp[2]; //日
+
+			var newWeek = new Date(newYear, newMonth, (newDay));
+			var weekArray = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+			var week = weekArray[newWeek.getDay()]; // 星期
+
+			$('#ed11').html(parseInt(newMonth) + 1);
+			$('#ed12').html(newDay);
+		}else{
+			alert("活动结束时间不能小于活动开始时间！");
+		}
+
+
+		
+	}
+});
