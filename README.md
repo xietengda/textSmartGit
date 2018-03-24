@@ -1,2 +1,1 @@
-# textSmartGit
-测试
+插件存放
