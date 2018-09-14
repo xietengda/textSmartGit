@@ -1,0 +1,88 @@
+﻿		小程序
+
+1.（scroll-view）横向滑动时  不能设置float  要对子元素进行display:inline-block ,容器（父级）进行 white-space: nowrap;
+2.（map）发现后台传来的经纬度是字符串类型的。而字符串类型的经纬度在IOS真机上经测试就是显示不出来。
+3.（cover-view 组件）覆盖在原生组件之上的文本视图，可覆盖的原生组件包括map、video、canvas，支持嵌套。得到的官方解释是：map组件上目前只支持cover-*标签的覆盖，该功能目前可能无法用input实现
+3.禁止页面上下拉动 json文件配置
+{
+  "disableScroll": true
+}
+
+4.用了弹性布局最后一行居左  给父级加
+.box:after {
+    content: "";
+    flex: auto;
+}
+5.出现弹窗时禁止页面滑动：catchtouchmove="true"
+
+6.苹果手机电话样式自定义
+<meta name="format-detection" content="telephone=no" />
+
+7、小程序获取手机型号时，会带上一些其他的信息，所有要转换成字符串，然后判断是否存在要显示的字符串，
+    例:iPhone 7<iPhone9,1> 
+    res.model.toString().indexOf('iPhone 7') != -1
+
+8、小程序用indexOf   console.log('dbac'.indexOf('a'));
+
+9、小程序下拉刷新不回弹  在下拉刷新方法中加 
+	wx.stopPullDownRefresh();
+	为停止当前页面下拉刷新
+即可解决刷新 页面不弹回的问题
+
+10. rich-text 文字溢出解决方法     overflow-wrap: break-word;
+
+11.rich-text  图片宽度自适应 
+
+goods.goods_desc = res.data.goods_desc.replace(/\<img/gi, '<img class="rich_img"');   
+
+再设置 
+ .rich_img{
+  max-width: 100% !important;
+}
+
+
+12：获取小程序码  scene：传值不传键
+page是页面地址，例如：'pages/index'。pages前面不能有斜杠
+scene是参数，为字符串。比如要传入一个用户id=1234，要根据这个用户id来给当前页面返回不同的内容，那么scene参数就可以写成"1234"，多个参数按一定规则分开，如&符号，第二个参数是recommendId=123则可以这样写"1234&123"。
+
+作者：dillon1234
+链接：https://www.jianshu.com/p/108233ed7ed0
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
+
+
+
+
+
+
+                                        npmVue:注意事项
+
+1、创建新页面的main.js文件中import App from './abc' abc是页面的abc.vue的名字。
+
+2、穿件新页面的或者组件的时候，必须暴露  export default({  data(){  return { }  }),不然可能会启动不成功。
+
+3、api部分用的是小程序的api，但是生命周期vue的和小程序都可以用
+
+4、图片都放在static里面，新建一个文件夹存放，编译时，会在小程序代码中变异出现
+引用路劲为"static/....." 以为编译后app.json和static文件夹同级
+
+5、自定义（动态）标签属性 :data-year 注意冒号 data-加自定名称 相当于 v-bind:
+
+自定义（静态）标签属性data-year: (data前不要：)
+
+6：mptoast  一个基于mpvue的toast弹窗组件
+
+7:当自定义事件this.$store... 引用报错（路径错，找不到某个方法或者对象）
+
+   直接输入查看路径 console.log(this.$store)
+
+8：onShow 获取 option  console.log(this.$root.$mp.query)
+
+9：在input 范围内，上面浮动的icon不能点击，解决办法 ：缩短input  
+
+10：设置分享后显示“回首页”图标，onHide的时候，触发重新检验进入页面的场景值，点击的时候也要将方法设置成充值检验场景值
+
+11：json的键值要用双引号括住，不可以用单引号
+
+12：阻止事件冒泡@click.stop='xx()'  
+
