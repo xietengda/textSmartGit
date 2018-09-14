@@ -1,0 +1,9 @@
+@import "../../template/template.wxss";
+
+.com_two_cont{
+  position: fixed;
+  top: 135rpx;
+  bottom: 0;
+  padding-bottom: 20rpx;
+  background-color: white;
+}

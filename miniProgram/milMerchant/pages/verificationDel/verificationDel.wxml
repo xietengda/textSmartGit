@@ -1,0 +1,30 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='ver_head'>
+    <view class='ver_head_input'>
+      <input type='text' placeholder='输入提货码' placeholder-class='ver_h_input_P' />
+      <view class='camera cameraIcon' catchtap='scanerQR'></view>
+    </view>
+    <button class='ver_head_btn'>确认</button>
+  </view>
+
+  <view class='ver_cont'>
+    <view class='ver_cont_one'>
+      <view class='cont_one_til'>订单号：123456789</view>
+      <view class='cont_pro'>
+        <block wx:for="{{proList}}" wx:key="proList">
+          <view class='cont_pro_list div_flaot'>
+            <image class='cont_pro_img' src='../../images/pro2.png'/>
+            <view class='cont_pro_til'>{{item.til}}</view>
+            <view class='cont_pro_num'>x{{item.num}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <button class='ver_Btn'>确认核销</button>
+  </view>
+
+</view>

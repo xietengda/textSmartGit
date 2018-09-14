@@ -1,0 +1,42 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='push_head'>
+    <view hidden="{{editSta == '1'}}" catchtap='editPro'>编辑</view>
+    <view hidden="{{editSta == '0'}}" catchtap='editPro'>删除</view>
+  </view>
+  <view class='pro_cont'>
+    <block wx:for="{{proList}}" wx:for-index="pIndex" wx:key="proList">
+      <view class='proList div_float'>
+        <view class='proListSel {{selArr[pIndex] ? "checkboxSel":"checkbox"}}' data-p-index="{{pIndex}}" catchtap='clickPro'></view>
+        <image  class='proImg' src='../../images/pro2.png'/>
+        <view class='proMsg'>
+          <view class='proTil'>{{item.til}}</view>
+          <view class='cart_count div_float'>
+                <view catchtap='changeToatl' data-c-type="cut" data-c-index="{{pIndex}}">-</view>
+                <input type='number' value='{{item.num}}'/>
+                <view catchtap='changeToatl' data-c-type="add" data-c-index="{{pIndex}}">+</view>
+              </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+
+  <view class='push_btm div_float'>
+    <view class='push_btm_L'>
+      <view class='pushAllSel {{allSel?"checkboxSel":"checkbox"}}' catchtap='allClickPro'></view>
+      <view>全选</view>
+    </view>
+    <view class='push_btm_R div_float'  hidden="{{editSta == '1'}}">
+      <view>共7件</view>
+      <button>确认订单</button>
+    </view>
+    <button class='push_btm_del' hidden="{{editSta == '0'}}">删除</button>
+  </view>
+
+  <template is="backHome" />
+
+</view>

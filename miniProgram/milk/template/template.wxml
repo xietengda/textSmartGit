@@ -1,0 +1,193 @@
+<!--头部-->
+<template name="all_head">
+  <view class='index_head'>
+    <view class='head_logo'></view>
+    <navigator open-type='navigateBack'>
+      <view wx:if="{{type==1}}" class='headIconView div_float'>
+        <text class='left_arrow backIcon'></text><text>返回</text>
+      </view>
+    </navigator>
+  </view>
+</template>
+<!--领取优惠券-->
+<template name="get_discount">
+  <scroll-view scroll-x class='index_discount'>
+      <block wx:for="{{discountList}}" wx:for-item="discount" wx:key="discountList">
+        <navigator url='../getDiscount/getDiscount' hover-class="none">
+          <view class='index_discount_list div_float'>
+            <text>￥</text>
+            <view class='discount_list_L'>
+              <text>{{discount.price}}</text>
+            </view>
+            <view class='discount_list_R'>
+              <text>{{discount.text}}</text>
+              <text>点击领取<text class='disRIcon'></text></text>
+            </view>
+          </view>
+        </navigator>
+      </block>
+  </scroll-view>
+</template>
+
+<!--搜索 null:全部 1:订单 2:兑换-->
+<template name="t_search_input">
+  <view class='t_search_view'>
+    <input type='text' wx:if="{{seaTye == null}}" value='{{searchText}}' placeholder='搜索香满楼产品' placeholder-class='search_pla' bindblur='searchBlur' />
+    <input type='text' wx:elif="{{seaTye == 1}}" value='{{searchText}}' placeholder='搜索相关关键字' placeholder-class='search_pla' bindblur='searchBlur'/>
+    <input type='text' wx:elif="{{seaTye == 2}}" value='{{searchText}}' placeholder='搜索兑换产品' placeholder-class='search_pla'  bindblur='searchBlur'/>
+    <view class='input_bg searchIcon'></view>
+    <button class='t_search_btn' catchtap='searchBtn'>搜索</button>
+  </view>
+</template>
+
+<!--黑色遮罩层-->
+<template name="black_layer">
+  <view class='black_layer {{type ? "": "divHide"}}' catchtap='clickLayer'></view>
+</template>
+
+<!--商品二级标题-->
+<template name="home_sub_til">
+  <view wx:if="{{type==1}}" class='action_div div_float'>
+    <image src='../../images/discounts.png'/>
+    <text>领取优惠</text>
+  </view>
+  <view wx:if="{{type==2}}" class='action_div action_div2 div_float'>
+    <image src='../../images/milk.png'/>
+    <text>订奶套餐</text>
+  </view>
+  <view wx:if="{{type==3}}" class='action_div action_div3 div_float'>
+    <image src='../../images/purchase.png'/>
+    <text>限时抢购</text>
+  </view>
+  <view wx:if="{{type==4}}" class='action_div action_div3 div_float'>
+    <image src='../../images/hot.png'/>
+    <text>热门推荐</text>
+  </view>
+</template>
+
+
+<!--商品展示（抢购、全部商品）showType:1.抢购2.全部商品3.套餐列表-->
+<template name="proShow">
+  <block wx:for="{{reshList}}" wx:for-item="reshList" wx:key="reshList">
+      <view class='resh_view div_float {{showType != 1 ? "resh_view_other" : " "}}'> 
+        <view class='resh_view_L'>
+          <view wx:if="{{showType == 1}}" class='timeLimt_list_time resh_view_time'>
+              仅剩<text>14</text>小时<text>01</text>分<text>50</text>秒
+          </view>
+          <navigator url='../proDetails/proDetails?proType=1' hover-class='none'>
+            <image src="../../images/buy_milk_pro.jpg"/>
+          </navigator>
+        </view>
+        <view class='resh_view_R'>
+          <view class='resh_til {{showType != 1 ? "resh_til_other" : " "}}'>香满楼酸牛奶180克草莓味3盒</view>
+          <view class='resh_subTil'>采用巴氏杀菌，较大限度保留原奶的营养和鲜味</view>
+          <view class='resh_subView div_float {{showType != 1 ? "resh_subView_other" : " "}}'>
+            <view class='resh_subView_L'>
+              <view class='resh_oldPrice'>原价￥<text>33.38</text></view>
+              <view class='resh_newPrice'>抢购价:￥<text>6.9</text></view>
+            </view>
+            <view class='resh_subView_R float'>
+              <text class='subView_clo col_no'></text>
+              <text wx:if="{{showType == 1 || showType == 2}}">加入购物车</text>
+              <text wx:if="{{showType == 3}}">查看详情</text>
+            </view>
+          </view>
+        </view>
+    </view>
+  </block>
+</template>
+
+<!--上传图片 uploadType：1、评价2、投诉 -->
+<template name="uploadPhoto">
+  <view class='o_eval_photo_list div_float'>
+    <block wx:for="{{photo_data}}" wx:for-item="photoList" wx:for-index="p_index" wx:key="{{photoList}}">
+      <view class='ev_photo_list' bindtap='lookPhoto' data-list-arr="{{photo_data}}"  data-list-index="{{photo_data[p_index]}}">
+        <image src='{{photoList}}'/>
+        <text catchtap='delPhoto' data-photo-index="{{p_index}}">×</text>
+      </view>
+    </block>
+    <view class='upLoad_icon' bindtap='uploadPhoto'>
+      <image src='../../images/take_icon.png'/>
+      <view wx:if="{{uploadType == 1}}">点击上传图片</view>
+      <view wx:else>点击上传凭证</view>
+    </view>
+  </view>
+</template>
+
+<!--图片广告 积分,签到-->
+<template name="picture_adver">
+  <view class='sco_cont'>
+    <block wx:for="{{sco_list}}" wx:for-item="scoList" wx:key="scoList">
+        <image src='../../images/classMilk.png'/>
+    </block>
+  </view>
+</template>
+
+<!--优惠券列表-->
+<template name="discount_temp">
+  <view class='discount_vew'>
+    <block wx:for="{{disList}}" wx:for-item="disList" wx:key='disKey'>
+        <view class='dis_cont_list listBg{{disList.bgNum}}'>
+        <view class='dis_list_L div_float'>
+          <view class='dis_list_L_one'>{{disList.num}}<text>元</text></view>
+          <view class='dis_list_L_two'>
+            <view>{{disList.til}}</view>
+            <view>{{disList.date}}</view>
+          </view>
+        </view>
+        <view class='dis_list_R'>
+          <view wx:if="{{disList.dis_type == '1'}}" class='dis_red'><view>立即</view><view>使用</view></view>
+          <view wx:elif="{{disList.dis_type == '2'}}" class='dis_red'><view>立即</view><view>领取</view></view>
+          <view wx:else="{{disList.dis_type == '3'}}" class='dis_gray'><view>不可</view><view>使用</view></view>
+        </view>
+        <view wx:if="{{disList.dis_type == '1' && getDiscount}}" class='dis_list_m'></view>
+      </view>
+    </block>
+  </view>
+</template>
+
+<!--商品推荐-->
+<template name="recommend_product">
+    <view class='recom_pro'>
+      <view class='recom_til'>商品推荐</view>
+      <view class='recom_cont div_float'>
+        <block wx:for="{{recomList}}" wx:for-index='recomIndex' wx:for-item="recomList" wx:key="recommendKey">
+          <view class='recom_cont_list {{recomIndex % 2 == 0 ? "recom_cont_list_R":""}}'>
+            <image class='recom_list_img' src='{{recomList.img}}' />
+            <view class='recom_list_til'>{{recomList.til}}</view>
+            <view class='recom_list_btm div_float'>
+                <view class='recom_list_price'>￥<text>{{recomList.price}}</text></view>
+                <view class='recom_addCart redCart'></view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+</template>
+
+
+<!--社区文章-->
+<template name="commEssay">
+  <block wx:for="{{essayList}}" wx:kye="essay">
+    <view class='comm_essay_cont'>
+      <view class='comm_essay_cont_list'>
+        <image class='comm_essay_img' src='{{item.img}}' />
+        <view class="comm_essay_til ellipsis_one">{{item.til}}</view>
+        <view class='comm_essay_msg div_float'>
+          <view class='comm_essay_msg_L'>{{item.date}}</view>
+          <view class='comm_essay_msg_R div_float'> 
+            <view class='comm_essay_msg_R_list div_float'>
+              <text class='share'></text><text>分享</text>
+            </view>
+            <view class='comm_essay_msg_R_list div_float'>
+              <text class='browse msg_R_listIcon_b'></text><text>{{item.bowser}}</text>
+            </view>
+            <view class='comm_essay_msg_R_list div_float'>
+              <text class='approval'></text><text>{{item.zan}}</text>
+            </view>
+          </view>
+        </view>
+      </view> 
+    </view>
+  </block>
+</template>

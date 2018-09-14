@@ -1,0 +1,20 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='inforDe_cont'>
+    <view class='inforDeta_head'>
+      <view class='inforDeta_head_L div_float'>
+        <view class='inforDeta_head_til'>香满楼酸牛奶180克草莓味3盒</view>
+        <view class='inforDeta_head_date'>2016/03/19   16:00:00</view>
+      </view>
+      <button class='inforDeta_head_R'>删除</button>
+    </view>
+
+    <view class='inforDe_describe'>
+      香满楼酸牛奶180克草莓味3盒香满楼酸牛奶180克草莓味3盒香满楼酸牛奶180克草莓味3盒香满楼酸牛奶180克草莓味3盒香满楼香满楼
+    </view>
+  </view>
+
+</view>

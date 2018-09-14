@@ -1,0 +1,67 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con myDis_cont'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='payMent_head addressBg div_float'>
+    <navigator url='../addSelect/addSelect' hover-class='none'>
+      <view class='payMent_head_L'>
+        <view>李小白<text>13531031987</text></view> 
+        <view>广东省广州市海珠区昌岗中路中路大厦2507</view>
+      </view>
+      <view class='payMent_head_R right_arrow'></view>
+    </navigator>
+  </view>
+
+  <view class='pay_pro div_float'>
+    <image class='pay_pro_img' src='../../images/timeLimt.png'/>
+    <view class='pay_pro_M'>
+      <view class='pay_pro_til'>香满楼酸牛奶180克草莓味3盒</view>
+      <view class='pay_pro_subTil'>采用巴氏杀菌，较大限度保留原奶的营养和鲜味</view>
+    </view>
+    <view class='pay_pro_R'>
+      <view class='pay_pro_score'>800积分</view>
+      <view class='pay_pro_num'>x1</view>
+    </view>
+  </view>
+
+  <view class='payMent_btm div_float'>
+    <view class='payMent_btm_L'>提取方式</view>
+    <view class='payMent_btm_R div_float'>
+      <view class='payMent_R_radio'>
+        <text class='{{getType == "0" ? "checkboxSel":"checkbox"}}' catchtap='getTypeFun'></text>自提
+      </view>
+      <view  class='payMent_R_radio'>
+        <text class='{{getType == "0" ? "checkbox":"checkboxSel"}}' catchtap='getTypeFun'></text>配送服务(需配送费)
+      </view>
+    </view>
+  </view>
+  <view class='payMent_btm div_float'>
+    <view class='payMent_btm_L'>附近发货门店</view>
+    <navigator url='../selShop/selShop' hover-class='none'>
+      <view class='payMent_btm_R_other div_float'>
+        <view class='payMent_btm_R_other_L'>香满楼昌岗中路店  距离：<view class='coloeRed'>50<text>M</text></view></view>
+        <view class='payMent_btm_R_arrow right_arrow'></view>
+      </view>
+    </navigator>
+  </view>
+
+
+  <view class='payMent_btm div_float'>
+    <view class='payMent_btm_L'>订单备注</view>
+    <navigator url='../orderRemark/orderRemark' hover-class='none'>
+      <view class='payMent_btm_R_other div_float'>
+        <view class='payMent_btm_R_other_L'>如：配送时间等</view>
+        <view class='payMent_btm_R_arrow right_arrow'></view>
+      </view>
+    </navigator>
+  </view> 
+
+  <view class='payMent_practical_price'>
+    <view>实际金额：<text>¥0.00</text></view>
+    <view>（消耗800积分）</view>
+  </view>
+
+  <button class='payMent_btn'>兑换支付</button>
+ 
+</view>

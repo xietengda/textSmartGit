@@ -1,0 +1,18 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='add_sel_cont'>
+    <block wx:for="{{addList}}" wx:key="addList">
+      <view class='sel_list div_float'>
+        <view class='sel_list_L checkbox {{item.def == 1? "checkboxSel" : ""}}'  catchtap='selectAdd' data-s-index="{{index}}"></view>
+        <view class='sel_list_M'>
+          <view class='sel_list_M_one'>陈明<text>13816881688</text></view>  
+          <view class='sel_list_M_two'>广东省广州市越秀区沿江中路中路国际大厦2505</view>  
+        </view>
+        <view class='sel_list_R'><text class='grayEditIcon'></text>编辑</view>
+      </view>
+    </block>
+  </view>
+</view>

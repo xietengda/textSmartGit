@@ -1,0 +1,41 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='banner_view'>
+    <swiper class='ex_banner' bindchange="bannerChange">
+      <block wx:for="{{bannerList}}" wx:for-item="banner" wx:key="banner">
+        <swiper-item>
+          <image src="{{banner}}" class="slide-image"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='ban_dost'>
+      <block wx:for="{{bannerList}}" wx:for-item="bannerDots" wx:for-index="DotsIndex" wx:key="bannerDots">
+        <text class='{{DotsIndex == bannerIndex ? "ban_dost_sel" : ""}}'></text>
+      </block>
+    </view>
+  </view>
+  
+  <view class='pro_msg'>
+    <view class='pro_til'>法式马卡龙西式甜点</view>
+    <view class='pro_subTil'>可用积分兑换</view>
+    <view class='pro_price'>¥<text>700.00+3000</text>积分</view>
+  </view>
+
+  <view class='pro_deta_msg'>
+    <view class='pro_deta_msg_til'>
+    马卡龙法式小圆饼，这是一种用蛋白、杏仁粉、白砂糖和糖霜所做的法式甜点，在两块饼干之间夹有水果酱或奶油等内馅。形成一个圆形小巧甜
+    </view>
+    <view class='pro_deta_msg_con'>
+      <image src='../../images/classMilk.png'/>
+      <image src='../../images/classMilk.png'/>
+    </view>
+  </view>
+  
+  <view class='pro_deta_btm'> 
+    <button catchtap='exChangeBtn'>立即兑换</button>
+  </view>
+
+</view>

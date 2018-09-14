@@ -1,0 +1,11 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='orRemark_head'>
+    <textarea class='orRemark_textarea' placeholder='填写额外对店铺的备注'></textarea>
+  </view>
+  <button class='orRemark_btn'>确认提交</button>
+
+</view> 

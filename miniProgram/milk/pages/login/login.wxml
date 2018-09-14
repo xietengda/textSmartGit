@@ -1,0 +1,31 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='login_head'>
+    <view class='head_input'>
+      <text>账号：</text>
+      <input type='text' placeholder='手机号码'/>
+    </view>
+    <view class='head_input'>
+      <text>密码：</text>
+      <input type='password'placeholder='请输入密码'/>
+    </view>
+    <view class='forget_pwd'>忘记密码</view>
+    <button class='login_btn'>登录</button>
+    <button class='rapid_login'>快速登录</button>
+  </view>
+
+  <view class='login_btm'>
+    <view class='login_btm_list'>
+        <view>还没有账号？</view>
+        <button>立即注册</button>
+    </view>
+    <view class='login_btm_list'>
+        <view>加盟我们的大家庭</view>
+        <button>加盟申请</button>
+    </view>
+  </view>
+
+</view>

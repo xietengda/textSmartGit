@@ -1,0 +1,18 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='help_cont'>
+    <view class='help_til'>常见问题</view>
+    <view class='help_cont_list'>
+      <block wx:for="{{helpList}}" wx:key="{{help}}">
+        <view class='help_list'>
+        <view class='help_list_til'>售后问题</view>
+        <view class='help_list_cont'>产品售出如出现质量等问题需到订单系统提交申诉</view>
+      </view>
+      </block>
+    </view>
+  </view>
+
+</view>

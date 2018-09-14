@@ -1,0 +1,66 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='pro_de_head'>
+    <view class='pro_de_head_one'>账户余额（元）</view>
+    <view class='pro_de_head_two'>10999.00</view>
+  </view>
+
+  <view class='pro_de_one'>
+    <view class='{{switchNum == 0 ? "pro_de_one_sel":""}}' data-s-index='0' catchtap='switchList'>采购记录</view>
+    <view class='{{switchNum == 1 ? "pro_de_one_sel":""}}' data-s-index='1'  catchtap='switchList'>充值记录</view>
+  </view>
+
+  <view class='pro_de_two'>
+    <!--采购记录-->
+    <view class='p_two_list'  hidden='{{switchNum == 1}}'>
+      <view class='p_two_list_head div_float'>
+        <view class='list_head_L'> 
+          <view>本月</view>
+          <view>采购￥3890.00</view>
+        </view>
+        <picker mode="date" fields="month" value="{{date}}" start="2018-01"bindchange="bindDateChange">
+        <view class="picker">
+          <view class='list_head_R calendarIcon picker'></view>
+        </view>
+        </picker>
+      </view>
+
+      <view class='p_two_list_cont'>
+        <block wx:for="{{proDetail}}" wx:key="proDetail">
+          <view class='list_cont_list div_flaot'>
+            <view class='list_cont_list_L'>
+              <view>采购商品</view>
+              <view>05-05  11:30</view>
+            </view>
+            <view class='list_cont_list_R'>
+              <view>-50</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!--充值记录-->
+    <view class='p_two_list' hidden='{{switchNum == 0}}'>
+      <view class='p_two_list_head div_float'>
+        <view class='list_head_L'> 
+          <view>本月</view>
+          <view>采购￥3890.00</view>
+        </view>
+        <picker mode="date" fields="month" value="{{date}}" start="2018-01"bindchange="bindDateChange">
+        <view class="picker">
+          <view class='list_head_R calendarIcon picker'></view>
+        </view>
+        </picker>
+      </view>
+
+      <view class='p_two_list_cont'></view>
+    </view>
+  </view>
+
+  <template is="backHome" />
+
+</view>

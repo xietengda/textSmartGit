@@ -1,0 +1,24 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+  
+  <view class='col_cont div_float'>
+    <block wx:for="{{colList}}" wx:for-item="colList" wx:for-index="colIndex" wx:key="colList">
+      <view class='col_cont_list {{colIndex % 2 == 0 ? "col_odd" : " "}}'>
+        <navigator url='../proDetails/proDetails?proType=1' hover-class='none'>
+          <image src='../../images/buy_milk_pro.jpg'/>
+        </navigator>
+        <view class='col_cont_til'>香满楼酸牛奶180克草莓味3盒</view>
+        <view class='col_cont_btm div_float'>
+          <view class='col_cont_btm_l'>¥<text>6.9</text></view>
+          <view class='col_cont_btm_R div_float'>
+            <view class='col_del del_icon'></view>
+            <view class='col_add_cart'>加入购物车</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+</view>

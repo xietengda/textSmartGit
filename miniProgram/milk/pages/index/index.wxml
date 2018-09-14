@@ -1,0 +1,131 @@
+<import src="../../template/template.wxml" />
+ 
+<view class='all_con'>
+  <template is="all_head" data="{{type:0}}"/>
+  <!--轮播图-->
+  <view class='index_ban'>
+    <swiper class='banner_swiper' bindchange="banChange"  current="{{current}}">
+      <block wx:for="{{bannerList}}" wx:for-item="banner" wx:key="banner">
+          <swiper-item>
+            <image src='{{banner}}'/>
+          </swiper-item>
+      </block>
+    </swiper>
+    <!--左右切换按钮-->
+    <text class='ban_prev left_arrow' bindtap='banPrev'></text>
+    <text class='ban_next left_arrow' bindtap='banNext'></text>
+    <!--定位-->
+    <view class='add_search_view div_float'>
+        <view class='add_view div_float'>
+          <image src='../../images/add_icon.png'/>
+          <text>广州市</text>
+        </view>
+        <view class='search_view div_float'>
+         <navigator url='../search/search' hover-class='none'>
+            <image src='../../images/search_home.png'/>
+            <text>搜索</text>
+          </navigator>
+        </view>
+    </view>
+  </view>
+
+  <!--程序入口-->
+  <view class='class_view div_float'>
+    <block wx:for="{{classArr}}" wx:for-item="classArr" wx:key="classArr">
+        <view class='class_list'>
+          <image src='{{classArr.icon}}'/>
+          <text>{{classArr.text}}</text>
+        </view>
+    </block>
+  </view>  
+
+  
+
+  <!--领取优惠-->  
+  <view class='discount_div'>
+    <template is="home_sub_til" data="{{type:1}}"/>
+    <template is="get_discount" data="{{discountList:discountList}}"/>
+  </view>
+
+  <!--订奶套餐-->
+  <view class='buy_milk'>
+    <image src='../../images/buy_milk.jpg'/>
+    <template is="home_sub_til" data="{{type:2}}"/>
+    <view class='buy_milk_cont'>
+      <block wx:for="{{comboList}}" wx:for-item="comboList" wx:key="comboList">
+        <navigator url='../proDetails/proDetails?proType=2' hover-class="none">
+          <view class='buy_milk_list'>
+            <view class='but_milk_price div_float'>
+              <text>特惠套餐价</text>
+              <text>{{comboList.price}}</text>
+              <text>元</text>       
+            </view>
+            <view class='buy_milk_list_til'>{{comboList.title}}</view>
+            <view class='buy_milk_list_rec'>{{comboList.subtil}}</view>
+            <image src='{{comboList.imgUrl}}'/>
+          </view>
+        </navigator>
+      </block>
+    </view>
+  </view>
+
+  <!--限时抢购-->
+  <view class='time_limit'>
+      <template is="home_sub_til" data="{{type:3}}"/>
+      <scroll-view scroll-x class='index_timeLimt'>
+        <block wx:for="{{timeLimtList}}" wx:for-item="timeLimt" wx:key="timeLimtList">
+          <navigator url='../rushBuy/rushBuy' hover-class='none'>
+            <view class='timeLimt_list'>
+                <view class='timeLimt_list_time'>
+                    仅剩<text>14</text>小时<text>01</text>分<text>50</text>秒
+                </view>
+                <image src='../../images/timeLimt.png'/>
+                <view class='timeLimt_til'>香满楼酸奶</view>
+                <view class='timeLimt_price'>¥<text>75</text></view>
+                <button class='timeLimt_add'>加入购物车</button>
+            </view>
+          </navigator>
+        </block>
+      </scroll-view>
+  </view>
+
+  <!--大分类-->
+  <template name="ClassMilk">
+    <view class='ClassMilk_view'>
+        <view class='ClassMilk_til div_float'>
+          <image src='../../images/milk.png'/>
+          <text>{{title}}</text>
+          <navigator url='../allPro/allPro' open-type='switchTab' hover-class='none'>
+            <text>更多>></text>
+          </navigator>
+        </view>
+        <image src='../../images/classMilk.png'/>
+        <view class='ClassMilk_list'>
+          <block wx:for="{{milkList}}" wx:for-item="milkList" wx:key="milkList">
+            <view class='milkList div_float'>
+                <image src='../../images/milkPro.png'/>
+                <view class='milkList_msg'>
+                    <text class='milkList_til'>香满楼鲜牛奶</text>
+                    <view class='milkList_ml'>236ml</view>
+                    <view class='milkList_price'>￥<text>6.9</text></view>
+                    <navigator url='../proDetails/proDetails?proType=1' hover-class='none'>
+                      <button>点击购买</button>
+                    </navigator>
+                </view>
+            </view>
+          </block>
+        </view>
+    </view>
+  </template>
+
+  <template is="ClassMilk" data="{{title:'鲜牛奶',milkList:milkList}}"/>
+  <template is="ClassMilk" data="{{title:'酸牛奶',milkList:milkList}}"/>
+  <template is="ClassMilk" data="{{title:'常温奶',milkList:milkList}}"/>
+
+  <!--底部-->
+  <view class='home_fotter'>
+    <image src='../../images/fotter1.png'/>
+    <image src='../../images/fotter1.png'/>
+  </view>
+
+</view>

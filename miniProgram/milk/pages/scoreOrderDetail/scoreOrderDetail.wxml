@@ -1,0 +1,25 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='order_head div_float'>
+    <image class='order_head_img'  src='../../images/timeLimt.png'/>
+    <view class='order_head_R'>
+      <view class='order_head_R_one'>香满楼酸牛奶180克草莓味3盒</view>
+      <view class='order_head_R_two'>领取成功</view>
+    </view>
+  </view>
+  
+  <view class='order_cont'>
+    <view class='order_cont_list'>消耗积分：<text class='redText'>58积分</text></view>
+    <view class='order_cont_list'>订单号：<text>56067843668</text></view>
+    <view class='order_cont_list'>状态：<text class='redText'>待取货</text></view>
+    <view class='order_cont_list'>收货地址：<text>广州市海珠区昌岗中路中路大厦2501</text></view>
+    <view class='order_cont_list'>收货人：<text>李小明   13123456789</text></view>
+    <view class='order_cont_list'>订单备注：<text>在9点配送</text></view>
+    <view class='order_cont_list'>快递单号：<text>896454545451</text></view>
+    <view class='order_cont_list'>下单时间：<text>2018-05-05 17:52</text></view>
+  </view>
+
+  </view>

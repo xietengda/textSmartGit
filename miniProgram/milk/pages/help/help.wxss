@@ -1,0 +1,32 @@
+@import "../../template/template.wxss";
+
+.help_cont{
+  margin-top: 20rpx;
+}
+.help_til{
+  font-size: 24rpx;
+  color: #747474;
+  line-height: 50rpx;
+  padding: 0 5%;
+}
+.help_cont_list{
+  margin-top: 10rpx;
+}
+.help_list{
+  padding: 0 5%;
+  background-color: white;
+  margin-bottom: 10rpx;
+  padding-bottom: 20rpx;
+}
+.help_list_til{
+  color: #232323;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.help_list_cont{
+  margin-top: 10rpx;
+  color: #747474;
+  font-size: 24rpx;
+  line-height: 1.8;
+}

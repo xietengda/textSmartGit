@@ -1,0 +1,19 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='lea_head'>
+    <view class='lea_head_list div_flaot'>
+        <view>联系人：</view>
+        <input type='text' placeholder='联系人' />
+    </view>
+    <view class='lea_head_list div_flaot'>
+        <view>手机号码：</view>
+        <input type='number' placeholder='手机号码' />
+    </view>
+    <textarea class='lea_textarea' placeholder='输入留言' placeholder-class='lea_textarea_p'></textarea>
+    <button class='lea_btn'>提交</button>
+  </view>
+
+</view>

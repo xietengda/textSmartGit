@@ -1,0 +1,57 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:0}}"/>
+
+  <view class='scrore_head'>
+    <image class='score_img' src='../../images/classMilk.png'/>
+    <view class='score_head_menu div_float'>
+      <navigator url='../signIn/signIn' hover-class='none'>
+        <view class='score_menu_list'>
+          <view class='score_menu_list_icon makeMoney '></view>
+          <view>赚积分</view>
+        </view>
+      </navigator>
+      <navigator url='../scoreDetail/scoreDetail' hover-class='none'>
+        <view class='score_menu_list'>
+          <view class='score_menu_list_icon checkScore'></view>
+          <view>查积分</view>
+        </view>
+      </navigator>
+      <navigator url='../exChangeList/exChangeList' hover-class='none'>
+        <view class='score_menu_list'>
+          <view class='score_menu_list_icon classify'></view>
+          <view>分类搜索</view>
+        </view>
+      </navigator>
+      <navigator url='../scoreOrder/scoreOrder' hover-class='none'>
+        <view class='score_menu_list'>
+          <view class='score_menu_list_icon orderList icon_s'></view>
+          <view>我的订单</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+  <view class='score_cont'>
+    <view class='score_cont_til'>
+      <template is="home_sub_til" data="{{type:4}}"/>
+    </view>
+    <image class='score_img score_cont_img' src='../../images/classMilk.png'/>
+    <view class='score_cont_list div_float'>
+      <block wx:for="{{scorePro}}" wx:for-item="scorePro" wx:for-index="sIndex" wx:key="scoreKey">
+        <view class='score_pro {{sIndex%2 == 0 ? "score_pro_right":""}}'>
+          <image class='score_pro_img' src='../../images/timeLimt.png' />
+          <view class='score_pro_til'>牧场纯牛奶一箱</view>
+          <view class='score_pro_price'>3000积分+52.2元</view>
+          <view class='score_pro_oldPri'>市场参考价：326元</view>
+          <navigator url='../exChangeDetail/exChangeDetail' hover-class='none'>
+            <button class='score_pro_buy'>点击兑换</button>
+          </navigator>
+        </view>
+      </block>
+    </view>
+  </view>
+
+
+</view>

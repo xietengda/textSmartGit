@@ -1,0 +1,15 @@
+{
+  "pages":[
+    "pages/verificationDel/verificationDel",
+    "pages/orderDetail/orderDetail",
+    "pages/login/login",
+    "pages/purchaseList/purchaseList",
+    "pages/procurementDetail/procurementDetail",
+    "pages/procurement/procurement",
+    "pages/index/index"
+  ],
+  "window":{
+    "navigationStyle":"custom",
+    "navigationBarTextStyle": "black"
+  }
+}

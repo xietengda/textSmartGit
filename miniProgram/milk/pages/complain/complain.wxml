@@ -1,0 +1,22 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='com_cont'>
+    <view class='com_sub_cont'>
+      <view class='com_cont_til'>申诉类型</view>
+      <view class='com_cont_type div_float'>
+        <view class='com_cont_type_sel'>产品质量问题</view>
+        <view>商家服务态度问题</view>
+        <view>配送问题</view>
+        <view>其他</view>
+      </view>
+      <textarea class='com_cont_textarea' placeholder-class="com_textare"  placeholder='填写内容，字数限制300个字' maxlength='300'></textarea>
+      <view class='com_cont_photo'>
+          <template is="uploadPhoto" data="{{uploadType:2,photo_data:photo_data}}"/>
+      </view>
+      <button class='com_cont_btn'>提交</button>
+    </view>
+  </view>
+</view>

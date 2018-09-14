@@ -1,0 +1,40 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+  <template is="t_search_input"/>
+
+  <view class='all_P_head'>
+    <view class='all_P_head_one'>
+        <text class='all_P_head_one_sel'>酸牛奶</text>
+        <text>鲜牛奶</text>
+        <text>常温牛奶</text>
+        <text>其他</text>
+    </view>
+  </view>
+
+  <view class='all_P_cont'>
+    <block wx:for="{{proList}}" wx:for-index="pIndex" wx:key="pro">
+      <view class='proList div_float'>
+        <image  class='proImg' src='../../images/pro2.png'/>
+        <view class='proMsg'>
+          <view class='proTil'>{{item.til}}</view>
+          <view class='cart_count div_float'>
+                <view catchtap='changeToatl' data-c-type="cut" data-c-index="{{pIndex}}">-</view>
+                <input type='number' value='{{item.num}}'/>
+                <view catchtap='changeToatl' data-c-type="add" data-c-index="{{pIndex}}">+</view>
+              </view>
+        </view>
+        <button class='probtn'>加入采购单</button>
+      </view>
+    </block>
+  </view>
+
+  <view class='all_P_btm div_float'>
+    <button>查看采购单</button>
+    <view>共7件</view>
+  </view>
+
+  <template is="backHome" />
+
+</view>

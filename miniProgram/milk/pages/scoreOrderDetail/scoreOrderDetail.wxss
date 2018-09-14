@@ -1,0 +1,47 @@
+@import "../../template/template.wxss";
+
+.order_head{
+  margin-top: 10rpx;
+  border: 1px soli red;
+  padding: 0 3%;
+  background-color: white;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.order_head_img{
+  float: left;
+  width: 144rpx;
+  height: 144rpx;
+  margin-top: 5rpx;
+}
+.order_head_R{
+  float: left;
+  margin-left: 35rpx;
+}
+.order_head_R_one{
+  font-size: 24rpx;
+  color: #353535;
+  margin-top: 33rpx;
+  font-weight: bold;
+}
+.order_head_R_two{
+  margin-top: 37rpx;
+  color: #3e403f;
+  font-size: 20rpx;
+}
+.order_cont{
+  margin-top: 10rpx;
+  background-color: white;
+  padding: 0 3%;
+}
+.order_cont_list{
+  color: #989898;
+  font-size: 24rpx;
+  line-height: 50rpx;
+}
+.order_cont_list>text{
+  color: #000000;
+}
+.redText{
+  color: #e50012 !important;
+}

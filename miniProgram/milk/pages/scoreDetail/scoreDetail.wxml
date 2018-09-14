@@ -1,0 +1,37 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='sco_deta_head div_float'>
+      <view class='sco_deta_head_L'>133<text>分</text></view>
+      <view class='sco_deta_head_R'>
+        <navigator url='../scorecard/scorecard' hover-class='none'>
+          <view>充值</view>
+        </navigator>
+        <navigator url='../score/score' open-type='switchTab' hover-class='none'>
+          <view>去商城兑换>></view>
+        </navigator>
+      </view>
+  </view>
+
+  <view class='sco_deta_cont'>
+    <view class='sco_deta_cont_til div_float'>
+      <text class='cont_one'>消费项目</text>
+      <text class='cont_two'>来源</text>
+      <text class='cont_three'>积分</text>
+      <text class='cont_four'>日期</text> 
+    </view>
+
+    <block wx:for="{{scoDetaList}}" wx:for-item="scoItem" wx:for-index="scoDetaIndex" wx:key="scoKey">
+      <view class='sco_deta_cont_list'>
+        <text class='cont_one'>{{scoItem.til}}</text>
+        <text class='cont_two'>{{scoItem.ScoType}}</text>
+        <text class='cont_three {{scoItem.mold == "add" ? "sco_add" : "sco_cut"}}'>{{scoItem.score}}</text>
+        <text class='cont_four'>{{scoItem.date}}</text> 
+      </view>
+    </block>
+    
+  </view>
+
+</view>

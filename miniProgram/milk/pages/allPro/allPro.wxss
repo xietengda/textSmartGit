@@ -1,0 +1,48 @@
+@import '../../template/template.wxss';
+
+
+.all_P_head_one{
+  background-color: white;
+  width: 100%;
+  height: 70rpx;
+  color: #333;
+  font-size:24rpx;
+  vertical-align:  middle;
+  display: flex;
+  justify-content: space-around; 
+  align-items: center;
+}
+.all_P_head_one>text{
+  line-height: 50rpx;
+  height: 50rpx;
+}
+.all_P_head_one_sel{
+  border-bottom: 5rpx solid #e50012;
+}
+.all_P_head_two{
+  background-color: white;
+  width: 100%;
+  height: 70rpx;
+  color: #232323;
+  font-size:20rpx;
+  vertical-align:  middle;
+  display: flex;
+  justify-content: space-around; 
+  align-items: center;
+  margin-top: 10rpx;
+}
+.all_P_head_two>text{
+  width: 165rpx;
+  line-height: 50rpx;
+  height: 50rpx;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 50rpx;
+}
+.all_P_head_two_sel{
+  background-color: #e50012 !important;
+  color: white;
+}
+.all_P_head_cont{
+  margin-top: 10rpx;
+}

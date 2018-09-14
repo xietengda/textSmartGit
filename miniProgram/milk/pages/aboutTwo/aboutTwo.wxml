@@ -1,0 +1,29 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='aboutDetail'>
+    <image class='detail_img' src='../../images/fotter1.png' />
+    <view class='detail_text'>
+      <text>广美香满楼畜牧有限公司是一家外商独资企业，成立于1982年，坐落在空气清新、环境优美的广州市天河东圃小新塘，占地面积500亩，总资产达两亿多元，是广州市大型乳品加工企业之一，也是国家政府非常重视的企业。</text>
+    </view>
+    <view class='detail_text'>
+      <text>经过20多年的发展，形成了以集牧场，加工、销售一条龙的综合性企业，公司秉持“为增进大众健康服务”的宗旨和“以人为本”的管理原则，诚信经营，生产出享誉四海的“香满楼”“鲜健”等牛奶品牌。</text>
+    </view>
+    <view class='detail_text'>
+      <text>香满楼公司自成立起就立足于高起点，无论是从奶牛的饲养还是生产设备的引进、产品质量，都是以高标准作为衡量准则。其生产经营活动始终坚持高质量，对产品产前产后整体控制，一丝不苟，严格遵循国际无抗标准，保证牛奶中绝不含抗生素。</text>
+    </view>
+    <view class='detail_text'>
+      <text>香满楼创新的产品理念，更是引领乳制品市场，公司聘请世界乳品行业享有盛誉的饲养能手、营养学博士、乳品加工能手负责技术管理支持。香满楼产品以“鲜”为特点，不断研制出新产品，带出新理念，现有牛奶品种多达50多个。在市场上香满楼产品享有很高的信誉度和美誉度，得到消费者的广泛认可。</text>
+    </view>
+
+    <view class='detail_btm'>
+      <view class='detail_btm_list'>公司名称：<text>广美香满楼畜牧有限公司</text></view>
+      <view class='detail_btm_list'>公司地址：<text>广东省广州市天河区东圃镇小新塘大观中路712号</text></view>
+      <view class='detail_btm_list'>联系电话：<text>123456789</text></view>
+    </view>
+    
+  </view>
+
+</view>

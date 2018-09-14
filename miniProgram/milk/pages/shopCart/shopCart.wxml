@@ -1,0 +1,73 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:0}}"/>
+
+  <view wx:if="{{hasProduct}}" class='hasProduct'>
+    <view class='Cart_head div_flaot'>
+      <view class='Cart_head_L div_float'>
+        <view class='cart_addICon gray_add_icon'></view>
+        <view>广州市海珠区</view>
+      </view>
+      <view class='Cart_head_R'>
+          <view wx:if="{{editBtn}}" catchtap='editCart'>编辑</view>
+          <view wx:else catchtap='editCart'>完成</view>
+      </view>
+    </view>
+
+    <view class='cart_cont'>
+      <block wx:for="{{cartList}}" wx:for-item="cartList" wx:for-index='cartIndex' wx:key="cartList">
+        <view class='cart_list div_float'> 
+          <view class='cart_list_L div_float'>
+              <view class='cart_sel {{selArr[cartIndex] ? "checkboxSel" : "checkbox"}}' data-sel-index="{{cartIndex}}" catchtap='selChange'></view>
+              <navigator url='../proDetails/proDetails?proType=1' hover-class='none'>
+                <image class='cart_img' src='{{cartList.img}}'/>
+              </navigator>
+          </view>
+          <view class='cart_list_R'>
+            <view class='cart_til'>{{cartList.til}}</view>
+            <view class='cart_subTil'>{{cartList.subTil}}</view>
+            <view class='cart_price'>会员专享:￥<text>{{cartList.price}}</text></view>
+            <view class='cart_count div_float'>
+              <view catchtap='changeToatl' data-c-type="cut" data-c-index="{{cartIndex}}">-</view>
+              <input type='number' value='{{cartList.num}}'/>
+              <view catchtap='changeToatl' data-c-type="add" data-c-index="{{cartIndex}}">+</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <view class='cart_btm div_float'>
+      <view class='cart_btm_L'>
+        <view class='cart_all_sel {{allSel ? "checkboxSel" : "checkbox"}}' catchtap='allSel'></view>
+        <view>全选</view>
+      </view>
+      <view wx:if="{{editBtn}}" class='cart_btm_R div_float'>
+        <view class='cart_btm_R_L'>
+          <view class='cart_c_price'>合计:<text>￥{{countPrice}}</text></view>
+          <view class='cart_dis'>总额￥600.00，优惠￥30.00</view>
+        </view>
+        <view class='cart_btm_R_R' bindtap='clickTotal'>
+          <view>结算</view>
+          <view>共{{countToatl}}件</view>
+        </view>
+      </view>
+      <view wx:else class='delCart'>
+        <button catchtap='delCart'>删除</button>
+      </view>
+    </view>
+
+  </view>
+
+  <view wx:else class='noProduct'>
+    <view class='nullCart'>
+      <view class='nullCart_icon bigShopCart'></view>
+      <view class='nullText'>购物车没有属于您的物品，快去首页瞧瞧</view>
+    </view>
+
+    <template is="recommend_product"  data="{{recomList:cartList}}"/>
+
+  </view>
+
+</view>

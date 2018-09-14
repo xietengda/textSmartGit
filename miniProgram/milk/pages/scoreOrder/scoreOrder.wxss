@@ -1,0 +1,53 @@
+@import "../../template/template.wxss";
+
+.order_cont>navigator{
+  display: block;
+}
+.order_list{
+  margin-top: 20rpx;
+  padding: 0 5%;
+  background-color: white;
+}
+.o_list_til{
+  font-size: 20rpx;
+  color: #989898;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.o_list_til>text{
+  color: #232323;
+}
+.o_list_cont{
+  height: 164rpx;
+  padding: 20rpx 0;
+}
+.o_list_img{
+  float: left;
+  width: 154rpx;
+  height: 154rpx;
+  margin-top: 5rpx;
+}
+.o_list_R{
+  float: left;
+  margin-left: 35rpx;
+}
+.o_list_R_one{
+  color: #353535;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.o_list_R_two{
+  color: #3e403f;
+  margin-top: 22rpx;
+  font-size: 20rpx;
+}
+.o_list_R_third{
+  color: #989898;
+  font-size: 20rpx;
+  margin-top: 18rpx;
+}
+.o_list_R_third>text{
+  color: #232323;
+}

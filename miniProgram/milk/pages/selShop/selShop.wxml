@@ -1,0 +1,47 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+  
+  <view class='selShop_head div_float'>
+    <view class='sel_city'>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          {{array[index]}}<text class='right_arrow'></text>
+        </view>
+      </picker>
+    </view>
+    <input type='text' placeholder='小区/写字楼/学校 等' />
+    <view class='searchIcon'></view>
+  </view>
+
+  <view class='selShop_adr div_float'>
+    <view class='selShop_L'>
+      <view>当前地址</view>
+      <view>昌岗中路中路国际大厦</view>
+    </view>
+    <view class='selShop_R'>
+      <text class='redAddrIcon'></text>重新定位
+    </view>
+  </view>
+
+  <view class='selShop_cont'>
+    <block wx:for="{{selShopList}}" wx:for-item="selShop" wx:for-index="selShopIndex" wx:key="selShop">
+      <view class='selShop_adr_list div_float'> 
+        <image class='selShop_img' src='{{selShop.img}}' />
+        <view class='selShop_m'>
+            <view class='selShop_m_til'>{{selShop.til}}</view> 
+            <view class='selShop_m_time'><text class='phoneIcon'></text>营业时间：{{selShop.time}}</view> 
+            <view class='selShop_m_adr'><text class='allgray_adr'></text>{{selShop.adr}}</view> 
+        </view>
+        <view class='selShop_cont_R'>
+          <view class='selShop_cont_R_one'>
+            <text catchtap='clickAdr' data-C-index="{{selShopIndex}}" class='{{selShop.sel == 1 ? "checkboxSel" : "checkbox"}}'></text>{{selShop.sel == 1 ? "已选" : "可选"}}
+          </view>
+          <view class='selShop_cont_R_two'>距离<text>{{selShop.m}}m</text></view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+</view>

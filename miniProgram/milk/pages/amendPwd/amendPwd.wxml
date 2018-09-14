@@ -1,0 +1,22 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='add_adr'>
+      <view class='add_adr_list'>
+        <view>原密码：</view>
+        <input type='password'placeholder-class="phcolor" placeholder='请输入字母、数字或符号'/>
+      </view>
+      <view class='add_adr_list'>
+        <view>密码：</view>
+        <input type='password' placeholder-class="phcolor" placeholder='请输入字母、数字或符号'/>
+      </view>
+      <view class='add_adr_list'>
+        <view>确认密码：</view>
+        <input type='password' placeholder-class="phcolor" placeholder='请输入字母、数字或符号'/>
+      </view>
+      <button class='add_adr_btn amen_pwd_btn'>确认修改</button>
+  </view>
+
+</view>

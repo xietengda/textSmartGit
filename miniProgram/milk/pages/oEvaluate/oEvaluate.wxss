@@ -1,0 +1,64 @@
+@import "../../template/template.wxss";
+
+
+.o_eval_head{
+  background-color: white;
+  width: 100%;
+  height: 105rpx;
+}
+.o_eval_head>image{
+  float: left;
+  width: 100rpx;
+  height: 50rpx;
+  margin-top: 27.5rpx;
+  margin-left: 50rpx;
+}
+.o_eval_head>text{
+  float: left;
+  color: #353535;
+  font-size: 30rpx;
+  line-height: 105rpx;
+  margin-left: 50rpx
+}
+.o_eval_cont{
+  background-color: white;
+  padding-bottom: 100rpx;
+}
+.o_eval_star{
+  margin-top: 10rpx;
+}
+.o_eval_star>view:nth-child(1){
+  color: #232323;
+  font-size: 30rpx;
+  text-align: center;
+}
+.o_eval_star_list{
+  text-align: center;
+  margin-top: 40rpx;
+}
+.o_eval_star_list>text{
+  width: 55rpx;
+  height: 50rpx;
+  display: inline-block;
+  margin: 0rpx 10rpx;
+}
+.o_eval_cont>textarea{
+  width: 85%;
+  height: 235rpx;
+  border-radius: 30rpx;
+  background-color: #F9F9F9;
+  padding: 20rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: #333;
+}
+.o_evla_ph{
+  color: #BDBDBD;
+}
+.o_eval_photo_view{
+  margin: 0 auto;
+  margin-top:30rpx;
+  width: 88%; 
+}
+

@@ -1,0 +1,70 @@
+@import "../../template/template.wxss";
+
+.col_cont{
+  padding-bottom: 30rpx;  
+}
+.col_cont_list{
+  width: 48.5%;
+  height: 485rpx;
+  text-align: center;
+  background-color: white;
+  margin-top: 20rpx;
+  float: left;
+}
+.col_odd{
+  margin-right: 3%;
+}
+.col_cont_list>navigator>image{
+  width: 300rpx;
+  height: 180rpx;
+  margin: 0 auto;
+  margin-top:95rpx; 
+}
+.col_cont_til{
+  width: 95%;
+  margin: 0 auto;
+  text-align: center;
+  color: #353535;
+  font-size: 24rpx;
+  margin-top: 70rpx;
+}
+.col_cont_btm{
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 25rpx;
+  height: 58rpx;
+}
+.col_cont_btm_l{
+  float: left;
+  color: #3e403f;
+  font-size: 24rpx;
+  line-height: 58rpx;
+}
+.col_cont_btm_l>text{
+  color: #e50012;
+  font-size: 40rpx;
+}
+.col_cont_btm_R{
+  width: 240rpx;
+  height: 58rpx;
+  background-color: #e50012;
+  border-radius: 20rpx;
+  color: white;
+  float: right;
+}
+.col_del{
+  width: 32rpx;
+  height: 32rpx;
+  float: left;
+  margin-left: 25rpx;
+  margin-top: 15rpx;
+}
+.col_add_cart{
+  float: left;
+  font-size: 24rpx;
+  line-height:40rpx; 
+  margin-top: 9rpx;
+  margin-left: 20rpx;
+  border-left: 1rpx solid white;
+  padding-left: 20rpx;
+}

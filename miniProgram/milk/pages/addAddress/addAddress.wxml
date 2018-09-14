@@ -1,0 +1,40 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='add_adr'>
+      <view class='add_adr_list'>
+        <view>联系人</view>
+        <input type='text' placeholder-class="phcolor" placeholder='姓名'/>
+      </view>
+      <view class='add_adr_list_sex'>
+        <view>联系人</view>
+        <text class='sex_sel'>先生</text>
+        <text>女士</text>
+      </view>
+      <view class='add_adr_list'>
+        <view>电话</view>
+        <input type='text' placeholder-class="phcolor" placeholder='手机号码'/>
+      </view>
+       <view class='add_adr_list_adrs' bindtap='selAddress'>
+        <view>地址</view> 
+        <view class='list_adrs_view'>
+            <view>{{selAddres}}</view>
+        </view>
+        <view class='add_adr_right right_arrow'  bindtap='selAddress'></view>
+      </view> 
+      <view class='add_adr_list'>
+        <view>门牌号</view>
+        <input type='text' placeholder-class="phcolor" placeholder='例：E座803室'/>
+      </view>
+      <view class='add_adr_default'>
+        <view>是否设为默认地址</view>
+        <radio-group>
+        <radio/><text>是</text>
+        <radio/>否
+        </radio-group>
+      </view>
+      <button class='add_adr_btn'>保存</button>
+  </view>
+</view>

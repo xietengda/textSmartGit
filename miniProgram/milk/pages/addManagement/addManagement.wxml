@@ -1,0 +1,30 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='add_cont'> 
+    <block wx:for="{{addList}}" wx:key="addList">
+      <view class='cont_list'> 
+        <view class='cont_list_one div_float'>
+          <view class='cont_list_one_L'>陈明<text>13816881688</text></view>
+          <navigator url='../addAddress/addAddress?addId={{index}}' hover-class='none'>
+             <view class='cont_list_one_R'><text class='grayEditIcon'></text>编辑</view>
+          </navigator>
+        </view>
+        <view class='cont_list_two'>广东省广州市越秀区沿江中路中路国际大厦2505</view>
+        <view class='cont_list_third div_float'>
+          <view class='cont_list_third_L'><text class='setDefault'></text>设为默认地址</view>
+          <view class='cont_list_third_R'><text class='del_icon_gray'></text>删除</view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class='add_addr_btm'>
+    <navigator url='../addAddress/addAddress' hover-class='none'>
+      <button class='add_addrBtn'>新增地址</button>
+    </navigator>
+  </view>
+
+</view>

@@ -1,0 +1,133 @@
+@import "../../template/template.wxss";
+
+.push_head{
+  background-color: white;
+  height: 59rpx;
+  padding: 0 5%;
+  text-align: right;
+  line-height: 59rpx;
+  font-size: 24rpx;
+  color: #e50112;
+}
+
+.pro_cont{
+  margin-top: 10rpx;
+  padding-bottom: 110rpx;
+}
+.proList{
+  height: 138rpx;
+  padding: 0 3%;
+  background-color: white;
+  position: relative;
+  margin-bottom: 5rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.proListSel{
+  float: left;
+  width: 34rpx;
+  height: 34rpx;
+  margin-right: 14rpx;
+  margin-top:43rpx; 
+}
+.proImg{
+  width: 138rpx;
+  height: 138rpx;
+  float: left;
+}
+.proMsg{
+  float: left;
+  margin-left: 27rpx;
+}
+.proTil{
+  color: #353535;
+  font-size: 30rpx;
+  margin-top: 29rpx;
+  font-weight: bold;
+}
+.probtn{
+  position: absolute;
+  display: inline-block;
+  line-height: 44rpx;
+  width: 170rpx;
+  height: 44rpx;
+  background-color: white;
+  border: 1rpx solid #e50012;
+  border-radius: 5rpx;
+  font-size: 22rpx;
+  color: #e70012;
+  right: 3%;
+  bottom: 16rpx;
+}
+.cart_count{
+  position: absolute;
+  left: 232rpx;
+  bottom: 16rpx;
+  color: #353535;
+  background-color: #f9f9f9;
+}
+.cart_count>view{
+  width: 40rpx;
+  height: 44rpx;
+  font-size:22rpx;
+  float: left;
+  text-align: center;
+  line-height: 44rpx;
+}
+.cart_count>input{
+  width: 50rpx;
+  float: left;
+  font-size: 20rpx;
+  min-height: 42rpx !important;
+  height: 42rpx !important; 
+  text-align: center;
+} 
+.push_btm{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 100rpx;
+  background-color: white;
+}
+.push_btm_L{
+  float: left;
+  margin-top: 18rpx;
+  margin-left: 3%
+}
+.pushAllSel{
+  width: 34rpx;
+  height: 34rpx;
+}
+.push_btm_L>view:nth-child(2){
+  font-size: 18rpx;
+  margin-top: 5rpx;
+}
+.push_btm_R{
+  float: right;
+}
+.push_btm_R>view{
+  float: left;
+  line-height: 100rpx;
+  color: #646464;
+  font-size: 18rpx;
+  margin-right: 20rpx;
+}
+.push_btm_R>button{
+  float: left;
+  width: 230rpx;
+  height: 100rpx;
+  background-color: #e50012;
+  font-size: 30rpx;
+  line-height: 100rpx;
+  color: white;
+  border-radius: 0;
+}
+.push_btm_del{
+  float: right;
+  width: 230rpx;
+  height: 100rpx;
+  background-color: #e50012;
+  font-size: 30rpx;
+  line-height: 100rpx;
+  color: white;
+  border-radius: 0;
+}

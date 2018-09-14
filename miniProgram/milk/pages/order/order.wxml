@@ -1,0 +1,78 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='order_head'>
+    <template is="t_search_input" data="{{seaTye:1,searchText:searchText}}"/>
+    <view class='order_head_sta div_float'>
+      <view class='{{h_state == 0 ? "sta_sel":""}}' data-s-index="0" catchtap='changeState'>全部</view>
+      <view class='{{h_state == 1 ? "sta_sel":""}}' data-s-index="1" catchtap='changeState'>待支付</view>
+      <view class='{{h_state == 2 ? "sta_sel":""}}' data-s-index="2" catchtap='changeState'>待配送</view>
+      <view class='{{h_state == 3 ? "sta_sel":""}}' data-s-index="3" catchtap='changeState'>待取货</view>
+      <view class='{{h_state == 4 ? "sta_sel":""}}' data-s-index="4" catchtap='changeState'>待评价</view>
+    </view>
+  </view>
+
+  <scroll-view class='order_cont' scroll-y>
+    <block wx:for="{{orderList}}" wx:for-index="orIndex" wx:for-item="orLlist" wx:key="orKey">
+        <view class='order_list'>
+        <view class='order_list_one div_float'>
+          <view class='order_list_one_L'>
+            <view>订单号：<text>56067843668</text></view>
+          </view>
+          <view class='order_list_one_R div_float'>
+            <view>
+              <navigator url='../complain/complain' hover-class='none'>
+                <text class='complaintIcon'></text>申述
+              </navigator>
+            </view>
+            <view><text class='del_icon_gray'></text>删除</view>
+          </view>
+        </view>
+        <view class='order_list_two div_float'>
+          <view class='order_list_two_L'>
+            <view>状态：<text class='order_state'>{{orLlist.staType}}</text></view>
+            <view>总价：<text>¥996.00</text></view>
+          </view>
+          <view class='order_list_two_R'>
+            <navigator url='../oEvaluate/oEvaluate' hover-class='none' wx:if="{{orLlist.state == 4}}">
+              <button class='order_evaluate'>评价晒单</button>
+            </navigator>
+            <navigator url='../payment/payment' hover-class='none' wx:if="{{orLlist.state == 1}}">
+              <button  class='order_list_R_btn'>立即付款</button>
+            </navigator>
+            <!-- <button wx:elif="{{orLlist.state == 2}}" class='order_list_R_btn'>待配送</button> -->
+            <navigator hover-class='none'  wx:elif="{{orLlist.state == 3}}">
+              <button class='order_list_R_btn'>查看取货码</button>
+            </navigator>
+            <navigator url='../payment/payment' hover-class='none' wx:if="{{orLlist.state == 4}}">
+              <button  class='order_list_R_btn'>再来一单</button>
+            </navigator>
+          </view>
+        </view>
+        <view class='order_list_three'>
+          <navigator url='../orderDetail/orderDetail' hover-class='none'>
+            <view class='order_list_three_til'>
+              <text class='MilkIcon'></text><view>昌岗中路店</view>
+            </view>
+            <view class='order_list_view'>
+              <block wx:for="{{orLlist.proList}}" wx:for-index="orIndex" wx:for-item="orLlist2" wx:key="orKey">
+                <view class='order_list_view_msg'>
+                  <image class='order_list_msg_img' src='../../images/timeLimt.png'/>
+                  <view class='list_view_msg_R'>
+                    <view class='list_view_msg_R_til'>香满楼酸牛奶180克草莓味3盒</view>
+                    <view class='list_view_msg_R_num'>x1100</view>
+                    <view class='list_view_msg_R_price'>￥<text>6.9</text></view>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </navigator>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
+
+</view>

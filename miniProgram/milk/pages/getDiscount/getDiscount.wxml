@@ -1,0 +1,13 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con myDis_cont'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <scroll-view class='getDis_cont'>
+      <template is="discount_temp" data="{{disList:disList,getDiscount:getDiscount}}"/>
+  </scroll-view>
+  <navigator url='../myDiscount/myDiscount' hover-class='none'>
+    <button class='dis_btn'>我的优惠券<text>>></text></button>
+  </navigator>
+
+</view>

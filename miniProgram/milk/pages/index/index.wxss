@@ -1,0 +1,322 @@
+@import "../../template/template.wxss";
+
+page{
+  width: 100%;
+  height: 100%; 
+  background-color: #fafafa;
+}
+.index_ban{
+  width: 100%;
+  height: 445rpx;
+  position: relative;
+}
+ .banner_swiper{
+  width: 100%;
+  height: 100%;
+} 
+.banner_swiper swiper-item>image{
+  width: 100%;
+  height: 100%;
+}
+.index_ban>text{
+  display: inline-block;
+  position: absolute;
+  width: 80rpx;
+  height: 80rpx;
+  top: 225rpx;
+  font-size: 50rpx;
+  color: #434343;
+}
+.ban_prev{
+  left: 5rpx;
+}
+.ban_next{
+  right: 5rpx;
+  transform: rotate(180deg);
+}
+.add_search_view{
+  position: absolute;
+  top: 10rpx;
+  width: 100%;
+}
+.add_search_view>view{
+  padding: 5rpx 30rpx;
+  height: 45rpx;
+  background-color: rgba(0, 0, 0, .3);
+  color: white;
+  line-height: 45rpx;
+  font-size: 28rpx;
+  border-radius: 50rpx;
+}
+.add_view>image{
+  width: 45rpx;
+  height: 45rpx;
+  float: left; 
+  margin-right: 10rpx;
+}
+.add_search_view>view>navigator>image{
+  width: 45rpx;
+  height: 45rpx;
+  float: left; 
+  margin-right: 10rpx;
+}
+.add_view{
+  float: left;
+  margin-left: 30rpx;
+}
+.search_view{
+  float: right;
+  margin-right: 30rpx;
+}
+.class_view{
+   display: flex;
+  /* justify-content: space-between; */
+  flex-wrap: wrap;
+  padding-bottom: 30rpx; 
+  background-color: white;
+  padding-left:19rpx;
+}
+.class_list{
+  width:90rpx;
+  text-align: center;
+  margin:0rpx 27rpx;
+  float: left;
+  margin-top: 30rpx;
+}
+.class_list>image{
+  width: 85rpx;
+  height: 85rpx;
+}
+.class_list>text{
+  display: inherit;
+  font-size: 22rpx;
+  color: #434343;
+}
+.discount_div{
+  background-color: white;
+}
+
+.buy_milk{
+  background-color: white;
+  padding-bottom: 20rpx;
+}
+.buy_milk>image{
+  width: 100%;
+  height: 235rpx;
+}
+.buy_milk_cont{
+  display: flex;
+  justify-content: space-around;
+  padding-top: 15rpx;
+}
+.buy_milk_list{
+  width: 345rpx;
+  height: 330rpx;
+  border-radius: 50rpx;
+  border: 1rpx solid #f62736;
+  text-align: center;
+  font-size: 0;
+  position: relative;
+  overflow: hidden;
+}
+.but_milk_price{
+  display: inline-block;
+  padding: 0rpx 15rpx;
+  color: white;
+  text-align: center;
+  border-radius: 10rpx;
+  background-color: #f62736;
+  letter-spacing: 4rpx;
+  font-weight: bold;
+  margin-top: 15rpx;
+}
+.but_milk_price>text:nth-child(1){
+  font-size: 18rpx;
+  margin-top: 6rpx;
+  float: left;
+}
+.but_milk_price>text:nth-child(2){
+  font-size: 24rpx;
+  float: left;
+}
+.but_milk_price>text:nth-child(3){
+  font-size: 12rpx;
+  float: left;
+  margin-top: 6rpx;
+}
+.buy_milk_list_til{
+  color: #353535;
+  font-size: 28rpx;
+  margin-top: 25rpx;
+}
+.buy_milk_list_rec{
+  color: #4e4d4d;
+  font-size: 16rpx;
+  margin-top: 25rpx;
+}
+.buy_milk_list>image{
+  width: 100%;
+  height: 165rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.time_limit{
+  margin-top: 20rpx;
+  background-color: white;
+  padding-bottom: 20rpx;
+}
+.index_timeLimt{
+  border: 3rpx solid #E70012;
+  width: 95%;
+  height:450rpx;
+  margin:0 auto;
+  padding-left: 15rpx;
+  margin-top: 15rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 20rpx;
+}
+.timeLimt_list{
+  width: 300rpx;
+  height: 420rpx;
+  margin-top:15rpx;
+  border-right: 1rpx solid #E5e5e5;
+  text-align: center;
+  display: inline-block;
+}
+.index_timeLimt>view:last-child{
+  border-right: none;
+}
+.timeLimt_list>image{
+  width: 205rpx;
+  height: 195rpx;
+  margin-top: 25rpx;
+}
+.timeLimt_til{
+  color: #353535;
+  font-size: 24rpx;
+  margin-top: 1rpx;
+}
+.timeLimt_price{
+  font-size: 18rpx;
+  color: #353535;
+  margin-top: 15rpx;
+}
+.timeLimt_price>text{
+  font-size: 26rpx;
+  color: #ff3338;
+  font-weight: bold;
+}
+.timeLimt_add{
+  width: 184rpx;
+  height: 52rpx;
+  background-color: #E70012;
+  color: white;
+  font-size: 20rpx;
+  border-radius: 50rpx;
+  margin-top: 10rpx;
+}
+.ClassMilk_view{
+  margin-top: 20rpx;
+  background-color: white;
+}
+.ClassMilk_til{
+  height: 70rpx;
+  line-height: 70rpx;
+}
+.ClassMilk_til>image{
+  float: left;
+  width: 30rpx;
+  height: 40rpx;
+  margin-left: 30rpx;
+  margin-top: 12rpx;
+}
+.ClassMilk_til>text:nth-child(2){
+  float: left;
+  color: #353535;
+  font-size: 32rpx;
+  margin-left: 20rpx;
+}
+ .ClassMilk_til>navigator{
+  float: right;
+  color: #989898;
+  font-size: 24rpx;
+  margin-right: 30rpx;
+} 
+.ClassMilk_view>image{
+  width: 95%;
+  height: 265rpx;
+  display: block;
+  margin: 0 auto;
+}
+.ClassMilk_list{
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+}
+.milkList{
+  width: 48%;
+  height: 220rpx;
+}
+.milkList>image{
+  float: left;
+  width:140rpx;
+  height:198rpx;
+  margin-top:5px;
+}
+.milkList_msg{
+  width: 40%;
+  height: 100%;
+  margin-left: 20rpx;
+  float: left;
+  font-size: 0;
+  -webkit-text-size-adjust:none;
+}
+.milkList_msg>text{
+  display: inline-block;
+}
+.milkList_til{
+  color: #353535;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-top: 25rpx;
+}
+.milkList_ml{
+  color: #4e4d4d;
+  font-size: 18rpx;
+  margin-top: 5rpx;
+}
+.milkList_price{
+  color: #3e403f;
+  font-size: 18rpx;
+  margin-top: 5rpx;
+}
+.milkList_price text{
+  font-size: 26rpx;
+  color: #E70012;
+  font-weight: bold;
+}
+.milkList_msg>navigator>button{
+  width: 150rpx;
+  height: 50rpx;
+  background-color: #E70012;
+  color: white;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 50rpx;
+  font-size: 18rpx;
+  margin-top: 10rpx;
+}
+.home_fotter{
+  margin-top: 10rpx;
+  background-color: white;
+  text-align: center;
+  padding-top: 20rpx;
+}
+.home_fotter>image{
+  width: 95%;
+  height: 165rpx;
+  margin-bottom: 10rpx;
+}

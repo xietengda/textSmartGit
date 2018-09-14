@@ -1,0 +1,50 @@
+@import "../../template/template.wxss";
+
+page{
+  background-color: white;
+}
+.login_cont{
+  padding: 0 5%;
+  padding-top: 70rpx;
+
+}
+.login_cont_list{
+  height: 98rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.login_cont_list>view{
+  line-height: 98rpx;
+  font-size: 30rpx;
+  color: #323232;
+  float: left;
+}
+.login_cont_list>input{
+  float: left;
+  width: 50%;
+  margin-left: 56rpx;
+  font-size: 26rpx;
+  margin-top: 23rpx;
+  border: none;
+}
+.lg_input_p{
+  color: #bbbbbb;
+  font-size: 26rpx;
+}
+navigator{
+  display: block;
+}
+.forgetPwd{
+  text-align: right;
+  color: #8e8e8e;
+  font-size: 24rpx;
+  line-height: 50rpx;
+}
+.loginBtn{
+  width: 100%;
+  height: 84rpx;
+  background-color: #e50012;
+  color: white;
+  font-size: 30rpx;
+  border-radius: 30rpx;
+  margin-top: 43rpx;
+}

@@ -1,0 +1,18 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con myDis_cont'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='discount_head'>
+    <view class='discount_head_sel'>未使用</view>
+    <view>已使用</view>
+    <view>已过期</view>
+  </view>
+
+  <scroll-view scroll-y class='dis_cont'>
+    <template is="discount_temp" data="{{disList:disList}}"/>
+  </scroll-view>
+  <navigator url='../getDiscount/getDiscount' hover-class='none'>
+    <button class='dis_btn'>领取优惠券<text>>></text></button>
+  </navigator>
+</view>

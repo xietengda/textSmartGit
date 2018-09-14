@@ -1,0 +1,164 @@
+@import "../../template/template.wxss";
+
+.payMent_head{
+  width: 100%;
+  height: 135rpx;
+  background-color: white;
+  background-size: 100% 10rpx;
+  background-position: bottom;
+}
+.payMent_head_L{
+  float: left;
+  margin-left: 30rpx;
+}
+.payMent_head_L>view:nth-child(1){
+  color: #232323;
+  font-size: 24rpx;
+  margin-top:20rpx; 
+}
+.payMent_head_L>view:nth-child(1)>text{
+  margin-left: 20rpx;
+}
+.payMent_head_L>view:nth-child(2){
+  color: #232323;
+  font-size: 20rpx;
+  margin-top: 20rpx;
+}
+.payMent_head_R{
+  float: right;
+  width: 12rpx;
+  height:24rpx; 
+  margin-right: 30rpx;
+  margin-top: 55rpx;
+}
+.pay_pro{
+  margin-top: 38rpx;
+  padding: 0 3%;
+  height: 166rpx;
+  background-color: white;
+}
+.pay_pro_img{
+  float: left;
+  width: 138rpx;
+  height: 138rpx;
+  margin-top: 14rpx;
+}
+.pay_pro_M{
+  float: left;
+  margin-left: 50rpx;
+}
+.pay_pro_til{
+  color: #353535;
+  font-size: 24rpx;
+  margin-top: 50rpx;
+  font-weight: bold;
+}
+.pay_pro_subTil{
+  color: #232323;
+  font-size: 18rpx;
+  margin-top: 18rpx;
+}
+.pay_pro_R{
+  float: right;
+  font-size: 24rpx;
+  color: #878787;
+  text-align: right;
+}
+.pay_pro_score{
+  margin-top: 50rpx;
+}
+.pay_pro_num{
+  color: #7d7d7d;
+  margin-top: 10rpx;
+}
+
+.payMent_btm{
+  height: 68rpx;
+  padding: 0rpx 30rpx;
+  background-color: white;
+  margin-top: 10rpx;
+}
+.payMent_btm_L{
+  float: left;
+  color: #232323;
+  font-size: 24rpx;
+  line-height: 68rpx;
+}
+.payMent_btm>navigator{
+  float: right;
+}
+.payMent_btm_R{
+  float: right;
+  color: #353535;
+  font-size: 18rpx;
+  line-height: 68rpx;
+}
+.payMent_R_radio{
+  float: left;
+}
+.payMent_R_radio>text{
+  display: inline-block;
+  width: 38rpx;
+  height: 38rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+.payMent_btm_R>view:nth-child(1){
+  margin-right: 40rpx;
+}
+.payMent_btm_R_other{
+  float: right;
+  line-height: 68rpx;
+}
+.payMent_btm_R_other_L{
+  float: left;
+  color: #b9b9b9;
+  font-size: 20rpx;
+}
+.payMent_btm_R_other_L>view{
+  color: #E70012;
+  display: inline-block;
+}
+.coloeRed{
+  color: #E70012;
+}
+.payMent_btm_R_other_L>view>text{
+  font-size: 14rpx;
+}
+.payMent_btm_R_arrow{
+  float: left;
+  width: 13rpx;
+  height: 24rpx;
+  margin-left: 20rpx;
+  margin-top: 22rpx;
+}
+.payMent_practical_price{
+  padding: 0rpx 30rpx;
+  height: 86rpx;
+  background-color:white;
+  margin-top: 20rpx;
+  text-align: right;
+  padding-top: 1rpx;
+}
+.payMent_practical_price>view:nth-child(1){
+  color: #232323;
+  font-size: 24rpx;
+  margin-top: 15rpx;
+}
+.payMent_practical_price>view:nth-child(1)>text{
+  color: #E70012;
+}
+.payMent_practical_price>view:nth-child(2){
+  color: #E50012;
+  margin-top: 5rpx;
+  font-size: 16rpx;
+}
+.payMent_btn{
+  width: 95%;
+  height: 66rpx;
+  background-color: #2f9833;
+  color: white;
+  font-size: 24rpx;
+  margin-top: 40rpx;
+  border-radius: 30rpx;
+}

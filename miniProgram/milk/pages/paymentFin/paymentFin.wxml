@@ -1,0 +1,36 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='payFin_head'>
+    <icon type="success" size="35"/>
+    <view>支付成功</view> 
+    <view>您可以在会员中心进行查看订单等操作</view>
+  </view>
+
+  <view class='payFin_head_btn'>
+    <navigator url='../mySelf/mySelf' open-type='switchTab' hover-class='none'>
+      <view>返回会员中心</view>
+    </navigator>
+    <navigator url='../allPro/allPro' open-type='switchTab' hover-class='none'>
+      <view>继续购买</view>
+    </navigator>
+    <navigator url='../order/order' hover-class='none'>
+      <view>查看我的订单</view>
+    </navigator>
+  </view>
+
+  <view class='payFin_QRcode'>
+      <view class='payFin_QRcode_til'><text class='pwdIcon'></text>取货时需出示提货码或条形码</view>
+      <image src='../../images/timeLimt.png'/>
+      <view class='payFin_QRcode_num'>1102010201</view>
+  </view>
+
+  <view class='payFin_btm'>
+    <image src='../../images/classMilk.png'/>
+  </view>
+
+  <template is="recommend_product"  data="{{recomList:cartList}}"/>
+
+</view>

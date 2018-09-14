@@ -1,0 +1,95 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/mySelf/mySelf",
+    "pages/recommend/recommend",
+    "pages/proDetails/proDetails",
+    "pages/addManagement/addManagement",
+    "pages/payment/payment",
+    "pages/addSelect/addSelect",
+    "pages/scoreOrderDetail/scoreOrderDetail",
+    "pages/scoreOrder/scoreOrder",
+    "pages/help/help",
+    "pages/search/search",
+    "pages/login/login",
+    "pages/allPro/allPro",
+    "pages/editPerson/editPerson",
+    "pages/score/score",
+    "pages/checkCombo/checkCombo",
+    "pages/takeMilk/takeMilk",
+    "pages/complain/complain",
+    "pages/comboList/comboList",
+    "pages/addAddress/addAddress",
+    "pages/aboutTwo/aboutTwo",
+    "pages/about/about",
+    "pages/turntable/turntable",
+    "pages/communityThird/communityThird",
+    "pages/communityTwo/communityTwo",
+    "pages/community/community",
+    "pages/exChangeList/exChangeList",
+    "pages/exChangePay/exChangePay",
+    "pages/exChangeDetail/exChangeDetail",
+    "pages/order/order",
+    "pages/orderDetail/orderDetail",
+    "pages/paymentFin/paymentFin",
+    "pages/selShop/selShop",
+    "pages/shopCart/shopCart",
+    "pages/orderRemark/orderRemark",
+    "pages/inforDetail/inforDetail",
+    "pages/information/information",
+    "pages/getDiscount/getDiscount",
+    "pages/amendPwd/amendPwd",
+    "pages/register/register",
+    "pages/collect/collect",
+    "pages/signIn/signIn",
+    "pages/leaveWrods/leaveWrods",
+    "pages/scoreDetail/scoreDetail",
+    "pages/scorecard/scorecard",
+    "pages/myDiscount/myDiscount",
+    "pages/oEvaluate/oEvaluate",
+    "pages/rushBuy/rushBuy",
+    "pages/useDiscount/useDiscount"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#353535",
+    "selectedColor": "#FF2424",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_sel.png"
+      },
+      {
+        "pagePath": "pages/allPro/allPro",
+        "text": "全部商品",
+        "iconPath": "images/all_pro.png",
+        "selectedIconPath": "images/all_pro_sel.png"
+      },
+      {
+        "pagePath": "pages/score/score",
+        "text": "积分商城",
+        "iconPath": "images/int.png",
+        "selectedIconPath": "images/int_sel.png"
+      },
+      {
+        "pagePath": "pages/shopCart/shopCart",
+        "text": "购物车",
+        "iconPath": "images/shop_cart.png",
+        "selectedIconPath": "images/shop_cart_sel.png"
+      },
+      {
+        "pagePath": "pages/mySelf/mySelf",
+        "text": "个人中心",
+        "iconPath": "images/me.png",
+        "selectedIconPath": "images/me_sel.png"
+      }
+    ]
+  }
+}

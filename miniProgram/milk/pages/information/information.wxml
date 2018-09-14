@@ -1,0 +1,20 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <scroll-view scroll-y class='infor_cont'>
+    <block wx:for="{{inforList}}" wx:for-item="inforList"  wx:key="inforKey">
+      <navigator url='../inforDetail/inforDetail' hover-class='none'>
+        <view class='infor_cont_list'>
+          <view class='infor_lit_L div_float'>
+            <view class='infor_til'>香满楼酸牛奶180克草莓味3盒</view>
+            <view class='infor_date'>2016/03/19   16:00:00</view>
+          </view>
+          <view class='infor_lit_R'>〉</view>
+        </view>
+      </navigator>
+    </block>
+  </scroll-view>
+
+</view>

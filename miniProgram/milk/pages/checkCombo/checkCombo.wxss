@@ -1,0 +1,123 @@
+@import "../../template/template.wxss";
+
+.comList_head{
+  width: 100%;
+  height: 65rpx;
+  background-color:white;
+  line-height: 65rpx;
+}
+.comList_head>text{
+  float: left;
+  width: 50%;
+  text-align: center;
+  font-size: 24rpx;
+  color: #232323;
+  line-height: 65rpx;
+}
+.comList_head_sel{
+  border-bottom: 3rpx solid #e50012;
+}
+.comList_cont{
+  margin-top: 10rpx;
+}
+
+.comList_cont_list{
+  padding-bottom: 20rpx;
+  background-color: white;
+  margin-bottom: 20rpx;
+}
+.comList_cont_list>view{
+  padding: 0 3%;
+}
+.cont_list_til{
+  height: 63rpx;
+  color: #989898;
+  font-size: 24rpx;
+  line-height: 63rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.cont_list_til>text{
+  color: #000000;
+}
+.cont_list_two{
+  height: 92rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.cont_list_two_L{
+  float: left;
+  color: #989898;
+  font-size: 24rpx;
+}
+.cont_list_two_L>view>text{
+  color: #e50012;
+}
+.cont_list_two_L>view:nth-child(1){
+  margin-top: 15rpx;
+}
+.cont_list_two_R{
+  float: right;
+}
+.cont_list_two_R button::after{
+  border: none;
+}
+.cont_list_two_R button{
+  width:199rpx;
+  height: 53rpx;
+  border-radius: 26rpx; 
+  line-height: 53rpx;
+  background-color: #e50012;
+  font-size: 24rpx;
+  color: white;
+  margin-top: 20rpx;
+}
+.list_third_one{
+  border-bottom: 1rpx solid #e5e5e5;
+  height: 84rpx;
+  line-height: 84rpx;
+}
+.list_third_one_img{
+  float: left;
+  width: 71rpx;
+  height: 71rpx;
+  margin-top: 11rpx;
+}
+.list_third_one_til{
+  float: left;
+  color: #353535;
+  font-size: 24rpx;
+  margin-left: 20rpx;
+}
+.list_third_one_total{
+  float: right;
+  color: #3e403f;
+  font-size: 20rpx;
+}
+.list_third_one_total>text{
+  color: #e50012;
+}
+.list_third_two{
+  margin-top: 20rpx;
+}
+.list_third_two_list{
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.third_two_list_L{
+  float: left;
+  color: #2e2e2e;
+  font-size: 24rpx;
+}
+.third_two_list_R{
+  float: right;
+  color: #3e403f;
+  font-size: 20rpx;
+}
+.third_two_list_R>text{
+  color: #e50012;
+}
+.third_two_list_M{
+  float: right;
+  font-size: 20rpx;
+  color: #7a7b7b;
+  margin-right: 128rpx;
+}

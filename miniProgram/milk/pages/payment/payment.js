@@ -1,0 +1,35 @@
+
+Page({
+
+  data: {
+    productList:[
+      { img: '../../images/timeLimt.png', til: '香满楼酸牛奶180克草莓味3盒', subTil: '采用巴氏杀菌，较大限度保留原奶的营养和鲜味', price: '6.9', num:"8"},
+      { img: '../../images/timeLimt.png', til: '香满楼酸牛奶180克草莓味3盒', subTil: '采用巴氏杀菌，较大限度保留原奶的营养和鲜味', price: '6.9', num: "8" },
+      { img: '../../images/timeLimt.png', til: '香满楼酸牛奶180克草莓味3盒', subTil: '采用巴氏杀菌，较大限度保留原奶的营养和鲜味', price: '6.9', num: "8" }
+    ],
+    getType:1,
+  },
+  onLoad: function (options) {
+  
+  },
+  getTypeFun:function(){
+    var getType = this.data.getType;
+    var typeNum = 1;
+
+    if (getType == "1"){
+      typeNum = 0;
+    }
+
+    getType = typeNum;
+
+    this.setData({
+      getType: getType
+    });
+    
+  },
+  paymentFinish:function(){
+    wx.navigateTo({
+      url: '../paymentFin/paymentFin',
+    })
+  }
+})

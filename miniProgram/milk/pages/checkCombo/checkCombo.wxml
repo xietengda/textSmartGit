@@ -1,0 +1,48 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <template is="t_search_input" data="{{seaTye:1}}"/>
+
+  <view class='comList_head'>
+    <text class='comList_head_sel'>固定套餐</text>
+    <text>自由组合套餐</text>
+  </view>
+  
+  <view class='comList_cont'> 
+    <block wx:for="{{comboList}}" wx:key="combo">
+      <view class='comList_cont_list'>
+        <view class='cont_list_til'>订单号：<text>56067843668</text></view>
+        <view class='cont_list_two div_float'>
+          <view class='cont_list_two_L'>
+            <view>状态：<text>已付款</text></view>
+            <view>已取：<text>10支</text></view>
+          </view>
+          <view class='cont_list_two_R'>
+            <navigator url='../takeMilk/takeMilk' hover-class='none'>
+              <button>查看订单</button>
+            </navigator>
+          </view>
+        </view>
+        <view class='cont_list_third'>
+          <view class='list_third_one div_float'>
+            <image class='list_third_one_img' src='../../images/timeLimt.png' />
+            <view class='list_third_one_til'>香满楼酸牛奶180克草莓味套餐</view>
+            <view class='list_third_one_total'>共<text>20</text>支</view>
+          </view>
+          <view class='list_third_two'>
+            <block wx:for="{{item.subList}}" wx:for-item="subList" wx:key="subList">
+              <view class='list_third_two_list div_float'>
+                <view class='third_two_list_L'>酸牛奶340g</view>
+                <view class='third_two_list_R'>剩余<text>3</text>支</view>
+                <view class='third_two_list_M'>x10</view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  
+</view>

@@ -1,0 +1,21 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:0}}"/>
+
+  <view class='login_cont'>
+    <view class='login_cont_list div_float'>
+      <view>账号：</view>
+      <input type='text' placeholder-class='lg_input_p' placeholder='后台划分账号'/>
+    </view>
+    <view class='login_cont_list div_float'>
+      <view>密码：</view>
+      <input type='password' placeholder-class='lg_input_p' placeholder='登录密码'/>
+    </view>
+    <navigator hover-class='none'>
+      <view class='forgetPwd'>忘记密码？</view>
+    </navigator>
+    <button class='loginBtn'>登录</button>
+  </view>
+
+</view>

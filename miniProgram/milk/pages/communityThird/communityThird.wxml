@@ -1,0 +1,68 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='com_one'>
+    <view class='com_one_til'>牛奶是最古老的天然饮料之一，被誉为“白色 血液”，对人体的重要性可想而知</view>
+    <view class='com_one_date'>
+      <text>奶牛先生</text>
+      <text>2018-05-05</text>
+    </view>
+    <view class='com_cont'>
+      <text>牛奶含有丰富的矿物质、钙、磷、铁、锌、铜、锰、钼。最难得的是，牛奶是人体钙的最佳来源，而且钙磷比例非常适当，利于钙的吸收。种类复杂，至少有100多种，主要成份有水、脂肪、磷脂、蛋白质、乳糖、无机盐等。</text>
+    </view>
+    <image class='com_img' src='../../images/fotter1.png' />
+    <view class='com_subTil'>牛奶“助眠”的原理</view>
+    <view class='com_cont'>
+      <text>牛奶含有丰富的矿物质、钙、磷、铁、锌、铜、锰、钼。最难得的是，牛奶是人体钙的最佳来源，而且钙磷比例非常适当，利于钙的吸收。种类复杂，至少有100多种，主要成份有水、脂肪、磷脂、蛋白质、乳糖、无机盐等。</text>
+    </view>
+    <view class='com_cont'>
+      <text>一般牛奶的主要化学成分含量如下：\n水分：87.5%\n脂肪：3.5～4.2%\n蛋白质：2.8～3.4%\n乳糖：4.6～4.8%\n无机盐：0.7%左右</text>
+    </view>
+  </view>
+
+  <view class='com_comment'>
+    <view class='com_comment_til'>最新跟帖</view>
+    <view class='com_comment_cont'>
+      <block wx:for="{{commentList}}" wx:key="comment">
+        <view class='comment_cont_list div_float'>
+          <image class='comment_cont_img' src='../../images/me_sel.png' />
+          <view class='comment_cont_msg'>
+            <view class='comment_cont_name'>奶牛先生</view>
+            <view class='comment_cont_date'>2017-08-05</view>
+            <view class='comment_cont_text ellipsis_one'>我觉得可以</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class='com_btm div_float'>
+    <view class='com_btm_list'>
+      <view class='browse'></view>
+      <view>1133</view>
+    </view>
+    <view class='com_btm_list'>
+      <view class='approval'></view>
+      <view>520</view>
+    </view>
+    <view class='com_btm_list' catchtap='clickComment'>
+      <view class='commentIcon'></view>
+      <view>评论</view>
+    </view>
+    <view class='com_btm_list'>
+      <view class='share'></view>
+      <view>分享</view>
+    </view>
+  </view>
+
+  <view class='com_comment_frame' hidden='{{commentF}}'>
+    <textarea placeholder='请输入评论' placeholder-class='commentPla'></textarea>
+    <view class='com_comment_frame_btm div_float'>
+      <button catchtap='exitCom'>取消</button>
+      <button>提交评论</button>
+    </view>
+  </view>
+
+</view>

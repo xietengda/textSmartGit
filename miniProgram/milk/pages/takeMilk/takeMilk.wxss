@@ -1,0 +1,152 @@
+@import "../../template/template.wxss";
+
+.take_list{
+  padding: 0 3%;
+  margin-bottom: 20rpx;
+  background-color: white;
+  padding-bottom: 10rpx;
+}
+.take_list_head{
+  height: 76rpx;
+  line-height: 76rpx;
+}
+.list_head_L{
+  float: left;
+  color: #232323;
+  font-size: 30rpx;
+}
+.list_head_R{
+  float: right;
+  color: #232323;
+  font-size: 24rpx;
+}
+.list_head_R>view:nth-child(1){
+  margin-right: 15rpx;
+}
+.list_head_R>view{
+  display: inline-block;
+}
+.list_head_R_one>text{
+  color: #e50012;
+}
+.list_head_R_two>text{
+  display: inline-block;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 100%;
+  border: 1rpx solid #232323;
+  margin-right: 5rpx;
+  vertical-align: middle;
+}
+.allSel{
+  background-color: #e50012;
+  border-color: #e50012 !important;
+}
+.take_list{
+  clear: both;
+}
+.take_list_cont{
+  margin: 10rpx 0rpx;
+}
+.take_list_cont>view{
+  width: 74rpx;
+  height: 74rpx;
+  border: 1px solid #232323;
+  margin-right:25rpx;
+  margin-top:17rpx;
+  margin-bottom: 17rpx;  
+  overflow: hidden;
+  border-radius: 15rpx;
+  color: #232323;
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 74rpx;
+  float: left;
+}
+.lastView{
+  margin-right: 0 !important;
+}
+/*已取*/
+.CantTake{
+  background-color: #4e4e4e;
+  color: white !important;
+  border-color: #4e4e4e !important;
+}
+.take_milk_btn{
+  width: 94%;
+  height: 72rpx;
+  background-color: #e50012;
+  color: white;
+  font-size: 30rpx;
+  line-height: 72rpx;
+  border-radius: 30rpx;
+  margin-top: 90rpx;
+}
+
+.QR_layer{
+  position: fixed;
+  width: 477rpx;
+  height: 484rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  top: 378rpx;
+  margin: auto;
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
+.QR_code{
+  display: block;
+  width: 191rpx;
+  height: 191rpx;
+  margin: 0 auto;
+  margin-top: 65rpx;
+}
+.QR_take_num{
+  color: #000000;
+  font-size: 30rpx;
+  margin-top: 23rpx;
+  text-align: center;
+}
+.QR_marked{
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 24rpx;
+  color: #858585;
+  margin-top: 17rpx;
+  line-height: 1.8;
+}
+.QR_close{
+  position: absolute;
+  top: 20rpx;
+  right: 31rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 100%;
+  border: 1rpx solid rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 30rpx;
+  line-height: 38rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*已选*/
+.selectedView{
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEoAAABKCAYAAAAc0MJxAAAEP0lEQVR4nO2cT2gTaRiHn8y2LoiiB/FPt7iyVVDQi6tUKXoRoXrQupsuggc9iJeesgf1YFHwZA9iccWDiAreIrYL6sGDiqigbF2J/xBd3YVKQBCVBtrtKr89TKVpk06+JDP5ZtJ54D00mXm/93vSeTMZZr6EKMoMoGMs1gNNY6/VIzlgEPgT6AN+B0YLtlJh7BC8FGiaxkvBT5O95P/xjeBYCAoNSxwbc1IgKpZUXNYEUckQFBXWSApIyG3SfwHNATXLqPMW+MEBOoklefEd8IuDewoQ401HQvA38L3tSkLOPwnBCPCt7UpCzmhCY99+Md44tguICrEoQ2JRhsSiDIlFGRKLMmR6iEqnx3/ifvwIa9eWnaK+Rc2cCffvQzI5/tqcOdBR/q+2Bh/LChfz58OdO7BsWeF7V6+Wny8E13v8j6VLpWxWRTl8uKKc9SdqzRoplysu6fLlivPWl6hNm4oLkqRHj6rKXT+iOjunlvT+vTR7dixK+/ZNLUmSVqyoeozoizp40FtSe7sv40RbVE+Pt6SuLt/Giq6oM2e8JfX2+jpeNEVduuQt6coV38eMlqhEQrpxw1vS06eBjB0dUbNmSQ8fekv69EmaO3cai2pqkl698pYkSatWBVZD+EUtXy69e1da0rZtgdZRuajt26UjR6StW4MrcN06aXi4tKRUKvAPrDJRvb0TCz13zv/i2ttLC5Kk06cDl1S5qGIMDEiLF/tT2M6dZpKuX6+JJH9FSdLQkLRlS3VFdXWZSXrxomaSKhd186b3JPbvr6yg7m4zSbmcNG9eBEQtWCB9+eI9mYsXy8t5/LiZJElavbqmkioXBe7XcSkyGfeybKlc58+bS0omay6pOlEgnTpVemIjI97nOP395pIOHLAiqXpRID1/bjbJQ4cm7tfQIN2+bS7p7FlrkvwR1dxsPtl0eny/TMZ8v1u3rEryRxSYn/dI0t277jmXKa9fS45TJ6KgvIZsyvCwtGiRdUkC+Xtr4ps3sGSJb+lobYUHD/zLVwX+3nuwebN/uXbtCo0kAP8vs+zdW/0h191t/VALrkflRzpduaQLF6xLCb5H5ZPNwsKF5e1z7x60tQVSTrUEJ2rlSnj82Hz7wUFoaYHRwocvw0BwN5I9eQKplNm2nz+7/0khlQQE0Mwnx7VrpftSW5v1HmSnmedHY6P04cPUknbvti4hHKJAam0tLunoUesCwiUKpD17Jl7sO3HC+uTLido+XbVxI2zYAM+eQV9fzYb1g/gxNEPq+z5zH4lFGRKLMiQWZUgsypBYlCEOMGS7iAgw6gBZ21VEgKwDZGxXEQH+cIB+21VEgP54WaTSvAVaHNyF7361XEyYSQH/5i/d1mP7UkYIo+ern8mLAZ4MQXFhid80xWKAX+NnxctLJid7Saj4cTkDd0m3HcCPuMuXNQbTAqzzH27DHsBdsDRNkQVL/wfHexWCwYNr1gAAAABJRU5ErkJggg==') center center no-repeat;
+  background-size: 100% 100%;
+  border-color: #e50012 !important;
+}

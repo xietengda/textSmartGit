@@ -1,0 +1,175 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:0}}"/>
+
+  <!--未登陆-->
+  <view wx:if="{{login == false}}" class='my_head div_float'>
+    <image src='../../images/head_img.png'/>
+    <view class='my_head_msg'>
+      <navigator url='../login/login'  hover-class="none">
+      <view>立即登录</view>
+      </navigator>
+      <view>登录获取更多权益</view>
+    </view>
+    <text class='my_head_right'>></text>
+  </view>
+  
+  <!--已登录-->
+  <view wx:elif="{{login}}" class='my_head my_head2 div_float'>
+    <image src='../../images/head_img.png'/>
+    
+    <view class='head_login'>
+      <navigator url='../editPerson/editPerson' hover-class='none'>
+        <view class='head_name'>奶牛先生<text class='editIcon'></text></view>
+        <view class='head_phone'><text class='phoneIcon'></text><view>13333333333</view></view>
+      </navigator>
+    </view>
+
+    <view class='h_login_R'>
+      <navigator url='../signIn/signIn' hover-class='none'>
+        <view class='signIcon'></view>
+        <view>签到有好礼</view>
+      </navigator>
+    </view>
+    
+  </view>
+
+  <view class='my_head_sub div_float'>
+    <view class='my_head_sub_list'>
+        <view class='blue_text'>0<text>人</text></view>
+        <view>家庭成员</view>
+    </view>
+    <view class='my_head_sub_list'>
+        <view class='red_text'>0<text>分</text></view>
+        <view>积分</view>
+    </view>
+    <view class='my_head_sub_list'>
+        <view class='yellow_text'>0<text>张</text></view>
+        <view>优惠券</view>
+    </view>
+    <view class='my_head_sub_list' catchtap='scannerCode'>
+        <view class='pay_ment'></view>
+        <view>支付</view>
+    </view>
+  </view>
+
+  <view class='my_head_combo'>
+    <view class='my_head_combo_L div_float'>
+      <text class='my_head_combo_L_icon'></text>
+      <view>套餐订单</view>
+    </view>
+    <view class='my_head_combo_R div_float'>
+      <navigator url='../comboList/comboList' hover-class='none'>
+        <button>去订奶</button>
+      </navigator>
+      <navigator url='../checkCombo/checkCombo' hover-class='none'>
+        <button>查看订奶套餐</button>
+      </navigator>
+    </view>
+  </view>
+
+  <view class='my_order'>
+    <navigator url='../order/order' hover-class='none'>
+      <view class='my_order_list'>
+        <view class='all_order'></view>
+        <view>全部订单</view>
+      </view>
+    </navigator>
+    <navigator url='../order/order' hover-class='none'>
+      <view class='my_order_list'>
+        <view class='non_pay_order'></view>
+        <view>待支付</view>
+      </view>
+    </navigator>
+    <navigator url='../order/order' hover-class='none'>
+      <view class='my_order_list'>
+        <view class='non_delivery_order'></view>
+        <view>待配送</view>
+      </view>
+    </navigator>
+    <navigator url='../order/order' hover-class='none'>
+      <view class='my_order_list'>
+        <view class='non_get_order'></view>
+        <view>待取货</view>
+      </view>
+    </navigator>
+    <navigator url='../order/order' hover-class='none'>
+      <view class='my_order_list'>
+        <view class='non_comment_order'></view>
+        <view>待评价</view>
+      </view>
+    </navigator>
+  </view>
+
+  <view class='my_other_use div_float'>
+    <view class='my_other_use_list'>
+      <navigator url='../addManagement/addManagement'  hover-class='none'>
+        <view class='add_icon'></view>
+        <view>收货地址</view>
+      </navigator>
+    </view>
+    <view class='my_other_use_list'  hover-class='none'>
+      <navigator url='../scoreDetail/scoreDetail' hover-class='none'>
+        <view class='int_icon'></view>
+        <view>积分明细</view>
+      </navigator>
+    </view>
+    <view class='my_other_use_list'  hover-class='none'>
+      <navigator url='../myDiscount/myDiscount' hover-class='none'>
+        <view class='dis_icon'></view>
+        <view>优惠券</view>
+      </navigator>
+    </view>
+    <view class='my_other_use_list'  hover-class='none'> 
+      <navigator url='../collect/collect' hover-class='none'>
+        <view class='col_sel'></view>
+        <view>我的收藏</view>
+      </navigator>
+    </view>
+    <view class='my_other_use_list'>
+      <navigator url='../leaveWrods/leaveWrods'  hover-class='none'>
+        <view class='ser_icon'></view>
+        <view>客户服务</view>
+      </navigator>
+    </view>
+    <view class='my_other_use_list'>
+      <navigator url='../community/community' hover-class='none'>
+        <view class='hudon_sel'></view>
+        <view>互动区</view>
+      </navigator>
+    </view>
+    <view class='my_other_use_list'>
+      <navigator url='../information/information' hover-class='none'>
+        <view class='meg_sel'></view>
+        <view>站内信</view>
+      </navigator>
+    </view>
+    <view class='my_other_use_list'>
+      <navigator url='../recommend/recommend' hover-class='none'>
+        <view class='rec_sel'></view>
+        <view>推荐有礼</view>
+      </navigator>
+    </view>
+    <view class='my_other_use_list'>
+      <navigator  url='../help/help' hover-class='none'>
+        <view class='hel_sel'></view>
+        <view>帮助</view>
+      </navigator>
+    </view>
+    <view class='my_other_use_list'>
+      <navigator url='../about/about' hover-class='none'>
+        <view class='abo_sel'></view>
+        <view>关于平台</view>
+      </navigator>
+    </view>
+    <view class='my_other_use_list'>
+      <navigator>
+        <view class='exit_sel'></view>
+        <view>退出登录</view>
+      </navigator>
+    </view>
+  </view>
+
+
+</view>

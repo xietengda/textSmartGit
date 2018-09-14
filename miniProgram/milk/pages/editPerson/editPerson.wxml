@@ -1,0 +1,80 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='ed_person'> 
+      <view class='ed_person_list'>
+          <view class='ed_person_til'>个人信息</view>
+          <view class='ed_p_list_cont'>
+            <view class='ed_p_list_cont_view list_headImg_view div_float'>
+              <view class='p_list_L'>头像</view>
+              <view class='p_list_R'>
+                <image catchtap='changeHeadImg' src='{{headImg}}'/>
+                <text class='right_arrow'></text>
+              </view>
+            </view>
+            <view class='ed_p_list_cont_view div_float'>
+              <view class='p_list_L'>昵称</view>
+              <view class='p_list_R'>
+                <input type='text' value='美少女战士' placeholder='请输入昵称'  placeholder-class='list_R_p' data-type="nickName" bindfocus='inputFocus' bindblur='inputBlur' class='{{InType == "nickName" ? "inputFoucs" : ""}}'/>
+                <text class='right_arrow'></text>
+              </view>
+            </view>
+            <view class='ed_p_list_cont_view div_float'>
+              <view class='p_list_L'>收货地址</view>
+              <view class='p_list_R'>
+                <text>水电路541弄4号</text>
+                <text class='right_arrow'></text>
+              </view>
+            </view>
+            <view class='ed_p_list_cont_view div_float'>
+              <view class='p_list_L'>手机号码</view>
+              <view class='p_list_R'>
+                <input type='number' value='15913566504' placeholder='请输入手机号'  placeholder-class='list_R_p' data-type="phone" bindfocus='inputFocus' bindblur='inputBlur' class='{{InType == "phone" ? "inputFoucs" : ""}}' focus='{{phone_focus}}'/>
+                <text class='right_arrow'></text>
+              </view>
+            </view>
+            <view class='ed_p_list_cont_view div_float'>
+              <view class='p_list_L'>性别</view>
+              <view class='p_list_R'>
+                <input type='text' value='男' placeholder='请输入性别'  placeholder-class='list_R_p' data-type="sex" bindfocus='inputFocus' bindblur='inputBlur' class='{{InType == "sex" ? "inputFoucs" : ""}}'/>
+                <text class='right_arrow'></text>
+              </view>
+            </view>
+            <view class='ed_p_list_cont_view div_float'>
+              <view class='p_list_L'>生日</view>
+              <view class='p_list_R div_float'>
+               <picker mode="date" value="{{birthDay}}" start="1970-01-01"  bindchange="bindDateChange">
+                <view class="picker">
+                  <text>{{birthDay}}</text>
+                </view>
+                </picker>
+                <text class='right_arrow birthRigt'></text>
+              </view>
+            </view>
+            <view class='ed_p_list_cont_view div_float'>
+              <view class='p_list_L'>家庭成员</view>
+              <view class='p_list_R'>
+                <input type='number' value='3' placeholder='请输入家庭成员'  placeholder-class='list_R_p' data-type="num" bindfocus='inputFocus' bindblur='inputBlur' class='{{InType == "num" ? "inputFoucs" : ""}}'/>
+                <text class='right_arrow'></text>
+              </view>
+            </view>
+          </view>
+      </view>
+      <view class='ed_person_list'>
+          <view class='ed_person_til'>账户安全</view>
+          <view class='ed_p_list_cont'>
+            <navigator url='../amendPwd/amendPwd' hover-class='none'>
+              <view class='ed_p_list_cont_view div_float'>
+                <view class='p_list_L'>修改密码</view>
+                <view class='p_list_R'>
+                  <text></text>
+                  <text class='right_arrow'></text>
+                </view>
+              </view>
+            </navigator>
+          </view>
+      </view>
+  </view>
+</view>

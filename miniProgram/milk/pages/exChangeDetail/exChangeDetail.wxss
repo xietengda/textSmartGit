@@ -1,0 +1,100 @@
+@import "../../template/template.wxss";
+
+.banner_view{
+  position: relative;
+}
+.ex_banner{
+  width: 100%;
+  height: 523rpx;
+  margin-top: 5rpx;
+}
+.ex_banner image{
+  width: 100%;
+  height: 100%;
+}
+.ban_dost{
+  position: absolute;
+  bottom: 10rpx;
+  width: 100%;
+  font-size: 0;
+  -webkit-text-size-adjust: none;
+  text-align: center;
+}
+.ban_dost>text{
+  display: inline-block;
+  width: 14rpx;
+  height: 5rpx;
+  border-radius: 50rpx;
+  margin: 0 10rpx;
+  background-color: #ccc;
+  border: 1rpx solid #ccc;
+
+}
+.ban_dost_sel{
+  background-color: #057161 !important;
+  width: 23rpx !important;
+  border-color: #057161 !important;
+}
+.pro_msg{
+  background-color: white;
+  padding: 1rpx 3% 20rpx 3%;
+}
+.pro_til{
+  color: #333;
+  font-size: 24rpx;
+  margin-top: 50rpx;
+}
+.pro_subTil{
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 30rpx
+}
+.pro_price{
+  color: #333;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+}
+.pro_price>text{
+  color: #e50012;
+}
+.pro_deta_msg{
+  margin-top: 10rpx;
+  padding: 0 3%;
+  background-color: white;
+  padding-top: 1rpx;
+  padding-bottom: 20rpx;
+}
+.pro_deta_msg_til{
+  line-height: 1.5;
+  color: #666;
+  font-size: 28rpx;
+  margin-top: 29rpx;
+  padding-bottom: 20rpx;
+}
+.pro_deta_msg_con{
+  text-align: center;
+  padding-bottom: 110rpx;
+}
+.pro_deta_msg_con>image{
+  width: 100%;
+  height: 280rpx;
+  margin-bottom: 10rpx;
+}
+.pro_deta_btm{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 105rpx;
+  background-color: white;
+  border-top: 1rpx solid #e5e5e5;
+}
+.pro_deta_btm button{
+  width: 95%;
+  height:69rpx;
+  margin-top: 20rpx;
+  background-color: #2f9833;
+  color: white;
+  font-size: 24rpx;
+  border-radius: 50rpx;
+  line-height: 69rpx;
+}

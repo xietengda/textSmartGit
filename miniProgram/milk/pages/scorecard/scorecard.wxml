@@ -1,0 +1,26 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='sco_head'>
+    <view class='sco_head_list div_flaot'>
+        <view>输入积分卡号：</view>
+        <input type='text' />
+    </view>
+    <view class='sco_head_list div_flaot'>
+        <view>输入积分密码：</view>
+        <input type='password' />
+    </view>
+    <view class='sco_head_carme'>
+      <view class='sco_head_sub_carme div_float' catchtap='scanCode'>
+          <image src='../../images/take_icon.png'/>
+          <view>扫描积分卡条形码</view>
+      </view>
+    </view>
+    <button class='sco_btn'>确认提交</button>
+  </view>
+  
+  <template is="picture_adver"  data="{{sco_list:sco_list}}"/>
+
+</view>

@@ -1,0 +1,34 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con myDis_cont'>
+  <template is="all_head" data="{{type:1}}"/>
+  
+  <view class='exList_head'>
+    <template is="t_search_input" data="{{seaTye:2,searchText:searchText}}"/>
+    
+    <scroll-view scroll-x class='exList_class' scroll-into-view='M{{select-1}}'>
+      <block wx:for="{{exList}}" wx:for-item="exList"  wx:key="exList">
+        <view id="M{{index}}" data-id='{{index}}' catchtap='clickType' class='{{select == index ? "exList_class_sel":""}}'>分类{{exList}}</view>
+      </block>
+    </scroll-view>
+  </view>
+
+  
+  <block wx:for="{{exListCont}}" wx:for-item="exListCont" wx:key="exCont">
+    <scroll-view scroll-y class='exList_cont {{select == index ? "":"divHide"}}'>
+      <block wx:for="{{exListCont.a}}" wx:for-item="exCont" wx:key="exListCont"> 
+        <navigator hover-class='none'>
+          <view class='exList_cont_list div_float'>
+            <image class='cont_list_img' src='../../images/timeLimt.png' />
+            <view class='cont_list_msg'>
+              <view class='list_msg_til'>香满楼酸牛奶180克草莓味3盒</view>
+              <view class='list_msg_newP'>3000积分+52.2元</view>
+              <view class='list_msg_oldP'>市场参考价：326元</view>
+            </view>
+          </view>
+        </navigator>
+      </block> 
+    </scroll-view>
+  </block>
+
+</view>

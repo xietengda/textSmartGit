@@ -1,0 +1,37 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}"/>
+
+  <view class='about_head'>
+    <image src='../../images/fotter1.png'/>
+  </view>
+
+  <view class='about_cont'>
+    <navigator url='../aboutTwo/aboutTwo'  hover-class='none'>
+      <view class='about_list'>
+        <view>关于香满楼</view>
+        <view class='right_arrow'></view>
+      </view>
+    </navigator>
+    <navigator url='../aboutTwo/aboutTwo'  hover-class='none'>
+      <view class='about_list'>
+        <view>关于香满楼</view>
+        <view class='right_arrow'></view>
+      </view>
+    </navigator>
+    <navigator url='../aboutTwo/aboutTwo'  hover-class='none'>
+      <view class='about_list'>
+        <view>关于香满楼</view>
+        <view class='right_arrow'></view>
+      </view>
+    </navigator>
+    <navigator hover-class='none'>
+      <view class='about_list'>
+        <view>版本信息</view>
+        <view class='right_arrow'></view>
+      </view>
+    </navigator>
+  </view>
+
+</view>
