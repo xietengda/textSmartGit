@@ -15,7 +15,7 @@
 		</div>
 
 		<!--轮播图-->
-		<swiper class="banner" autoplay circular previous-margin="55rpx" next-margin="25rpx">
+		<swiper class="banner" autoplay circular previous-margin="50rpx" next-margin="50rpx">
 			<swiper-item v-for='item in bannerList' :key="bannerList">
 				<image :src="item" />
 			</swiper-item>
@@ -284,9 +284,11 @@
 		width: 670rpx;
 	}
 	
-	.banner swiper-item img {
-		width: 670rpx;
-		height: 386rpx;
+	.banner swiper-item image {
+		width: 95%;
+		height: 100%;
+		margin:0 auto;
+		display:block;
 	}
 	
 	.menuView{
