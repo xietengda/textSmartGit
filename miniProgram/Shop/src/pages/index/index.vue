@@ -7,7 +7,8 @@
 				<div class="headText">首页</div>
 			</div>
 		</div> 
-
+ 
+ 
 
 		<!--轮播图-->
 		<swiper class="banner" autoplay circular previous-margin="50rpx" next-margin="50rpx">
