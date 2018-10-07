@@ -1,13 +1,8 @@
 <template>
 	<div class="container CnTop">
 
-		<div class="head">
-			<div class="headSub">
-				<div class="back backIcon" @click="goBack"></div>
-				<div class="headText">首页</div>
-			</div>
-		</div> 
- 
+		<!--公共头部-->
+		<allHeand :headTil='headTil':hiddenBack='hiddenBack' />
  
 
 		<!--轮播图-->
@@ -58,24 +53,19 @@
 		</div>
 		
 		
-		<!--语言选择框-->
-		<div class="language" v-show="showLan">
-			<div class="lanSub">
-				<div class="div_float"><span class="japan"></span><div>日本語</div></div>
-				<div class="div_float"><span class="korea"></span><div>한국어.</div></div>
-				<div class="div_float"><span class="china"></span><div>简体中文</div></div>
-			</div>
-		</div>
 
 	</div>
 </template>
 
 <script>
+	import allHeand from '../../components/allHead'
 	import comList from '../../components/comList'
 	
 	export default {
 		data() {
 			return {
+				headTil:'首页',//头部标题
+				hiddenBack:true,//隐藏返回按钮
 				bannerList: [
 					'../../../static/img/banner.png',
 					'../../../static/img/banner.png',
@@ -94,6 +84,7 @@
 
 		components: {
 			comList,
+			allHeand
 		},
 
 		methods: {

@@ -1,5 +1,7 @@
 {
   "pages": [
+  	"pages/shopCart/main",
+    "pages/cargoList/main",
     "pages/index/main"
   ],
   "window": {
@@ -19,13 +21,13 @@
         "selectedIconPath": "static/img/home_sel.png"
       },
       {
-        "pagePath": "pages/index/main",
+        "pagePath": "pages/cargoList/main",
         "text": "全部商品",
         "iconPath": "static/img/all_pro.png",
         "selectedIconPath": "static/img/all_pro_sel.png"
       },
       {
-        "pagePath": "pages/index/main",
+        "pagePath": "pages/shopCart/main",
         "text": "购物车",
         "iconPath": "static/img/shop_cart.png",
         "selectedIconPath": "static/img/shop_cart_sel.png"
