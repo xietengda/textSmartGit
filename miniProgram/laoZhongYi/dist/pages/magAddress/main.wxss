@@ -1,0 +1,115 @@
+
+.setView ._div ._span.data-v-44850448 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 10rpx;
+  margin-top: -3rpx;
+}
+.setView ._div.data-v-44850448 {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 24rpx;
+  color: #666666;
+}
+.setView.data-v-44850448 {
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 0;
+  padding: 0 2%;
+  text-align: right;
+}
+.addBtm .list.data-v-44850448 {
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  color: #333333;
+  font-size: 28rpx;
+  margin-bottom: 24rpx;
+  background-color: #F7F7F7;
+}
+.addBtm .add.data-v-44850448 {
+  color: #5B0E12;
+}
+.addBtm.data-v-44850448 {
+  position: fixed;
+  bottom: 0;
+  width: 96%;
+  padding: 0 2%;
+  background-color: white;
+  padding-top: 20rpx;
+  z-index: 3;
+}
+.list .L .cb_sel.data-v-44850448 {
+  width: 39rpx !important;
+}
+.Msg .btm.data-v-44850448 {
+  color: #666666;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+  line-height: 35rpx;
+}
+.Msg .top.data-v-44850448 {
+  font-size: 0;
+}
+.addView .list .default.data-v-44850448 {
+  width: 56rpx;
+  height: 28rpx;
+  text-align: center;
+  line-height: 28rpx;
+  border: 2rpx solid #5b0e12;
+  color: #5B0E12;
+  font-size: 20rpx;
+  padding: 3rpx 8rpx;
+  margin-left: 27rpx;
+}
+.addView .list  .phone.data-v-44850448 {
+  color: #666666;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-left: 44rpx;
+}
+.addView .list  .name.data-v-44850448 {
+  color: #333333;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.addView .list  .top ._span.data-v-44850448 {
+  display: inline-block;
+  vertical-align: middle;
+}
+.addView .list .Msg.data-v-44850448 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 85%;
+  margin-left: 20rpx;
+  line-height: 40rpx;
+}
+.addView .list .L ._span.data-v-44850448 {
+  width: 28rpx;
+  height: 28rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.addView .list .L.data-v-44850448 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50rpx;
+  line-height: 130rpx;
+}
+.sub.data-v-44850448 {
+  height: 130rpx;
+  line-height: 130rpx;
+  border-bottom: 2rpx solid #E5E5E5;
+  padding: 0 2%;
+  font-size: 0;
+}
+.addView .list.data-v-44850448 {
+  margin-bottom: 20rpx;
+  background-color: white;
+}
+.addView.data-v-44850448 {
+  padding-bottom: 470rpx;
+  background-color: #F7F7F7;
+}

@@ -1,0 +1,32 @@
+<template name="8dca5726">
+  <view class="_div data-v-0d3e8a12 container">
+    <view class="_div data-v-0d3e8a12 inputView">
+      <view class="_div data-v-0d3e8a12 list"><label class="_label data-v-0d3e8a12">联系人：</label> <input type="text" placeholder="请填写收货人姓名" placeholder-class="placeClass" class="_input data-v-0d3e8a12" /></view>
+      <view class="_div data-v-0d3e8a12 list"><label class="_label data-v-0d3e8a12">手机号码：</label> <input type="text" placeholder="请填写收货人手机号码" placeholder-class="placeClass" class="_input data-v-0d3e8a12" /></view>
+      <view class="_div data-v-0d3e8a12 list"><label class="_label data-v-0d3e8a12">所在地区：</label>
+        <view class="_div data-v-0d3e8a12 R">
+          <view class="_div data-v-0d3e8a12 sList">
+            {{province[pIndex]}}<label class="_span data-v-0d3e8a12 arr_g"></label>
+            <picker bindchange="handleProxy" value="{{pIndex}}" range="{{province}}" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_picker data-v-0d3e8a12">
+              <view class="_view data-v-0d3e8a12 picker"></view>
+            </picker>
+          </view>
+          <view class="_div data-v-0d3e8a12 sList">
+            {{city[cIndex]}}<label class="_span data-v-0d3e8a12 arr_g"></label>
+            <picker bindchange="handleProxy" value="{{cIndex}}" range="{{city}}" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_picker data-v-0d3e8a12">
+              <view class="_view data-v-0d3e8a12 picker"></view>
+            </picker>
+          </view>
+          <view class="_div data-v-0d3e8a12 sList">
+            {{sanjak[sIndex]}}<label class="_span data-v-0d3e8a12 arr_g"></label>
+            <picker bindchange="handleProxy" value="{{sIndex}}" range="{{sanjak}}" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_picker data-v-0d3e8a12">
+              <view class="_view data-v-0d3e8a12 picker"></view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class="_div data-v-0d3e8a12 list"><label class="_label data-v-0d3e8a12">详细地址：</label> <input type="text" placeholder="请输入街道、楼牌号等" placeholder-class="placeClass" class="_input data-v-0d3e8a12" /></view>
+      <view class="_div data-v-0d3e8a12 subBtn">保存地址</view>
+    </view>
+  </view>
+</template>

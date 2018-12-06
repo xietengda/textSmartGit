@@ -1,0 +1,1 @@
+<import src="/pages/selType/selType.vue.wxml" /><template is="5c7621ed" data="{{ ...$root['0'], $root }}"/>

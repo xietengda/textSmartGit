@@ -1,0 +1,22 @@
+<template name="5c7621ed">
+  <view class="_div data-v-9ecc50dc container">
+    <view class="_div data-v-9ecc50dc selView">
+      <view class="_div data-v-9ecc50dc list">
+        <view class="_div data-v-9ecc50dc L returnIcon"></view>
+        <view class="_div data-v-9ecc50dc Msg">
+          <view class="_div data-v-9ecc50dc til">退货退款</view>
+          <view class="_div data-v-9ecc50dc subTil">已收到货，需要退已收到货物</view>
+        </view>
+        <view class="_div data-v-9ecc50dc R"><label class="_span data-v-9ecc50dc arr_g"></label></view>
+      </view>
+      <view class="_div data-v-9ecc50dc list">
+        <view class="_div data-v-9ecc50dc L changeIcon"></view>
+        <view class="_div data-v-9ecc50dc Msg">
+          <view class="_div data-v-9ecc50dc til">换货</view>
+          <view class="_div data-v-9ecc50dc subTil">对已收到的商品不满意，与卖家协商换货</view>
+        </view>
+        <view class="_div data-v-9ecc50dc R"><label class="_span data-v-9ecc50dc arr_g"></label></view>
+      </view>
+    </view>
+  </view>
+</template>

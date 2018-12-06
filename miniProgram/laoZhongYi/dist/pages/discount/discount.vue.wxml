@@ -1,0 +1,15 @@
+<template name="ab6430c6">
+  <view class="_div data-v-4b4f1448 container">
+    <view class="_div data-v-4b4f1448 disView">
+      <view class="_div data-v-4b4f1448 list" wx:key="item.id" key="{{item.id}}" wx:for="{{disList}}" wx:for-index="key" wx:for-item="item">
+        <view class="_div data-v-4b4f1448 L"><label class="_span data-v-4b4f1448">¥100</label></view>
+        <view class="_div data-v-4b4f1448 Msg">
+          <view class="_div data-v-4b4f1448">指定商品</view>
+          <view class="_div data-v-4b4f1448">满198可用</view>
+          <view class="_div data-v-4b4f1448">使用日期：2018.09.30-2018.11.01</view>
+        </view>
+        <view class="_div data-v-4b4f1448 R"><label class="_span data-v-4b4f1448">立即使用</label></view>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,55 @@
+<template name="d4685c06">
+  <view class="_div data-v-8eec0630 container">
+    <view class="_div data-v-8eec0630 headView">
+      <image src="/static/img/me.png" class="_img data-v-8eec0630"></image>
+      <view class="_div data-v-8eec0630 userName">myself</view>
+      <view class="_div data-v-8eec0630 userInter"><label class="_span data-v-8eec0630 coll_w"></label>330积分</view>
+    </view>
+    <view class="_div data-v-8eec0630 orderView">
+      <view class="_div data-v-8eec0630 odrHead div_float">
+        <view class="_div data-v-8eec0630 L">我的订单</view>
+        <view class="_div data-v-8eec0630 R">查看全部订单></view>
+      </view>
+      <view class="_div data-v-8eec0630 odrCn">
+        <view class="_div data-v-8eec0630 list">
+          <view class="_div data-v-8eec0630 sub">
+            <view class="_div data-v-8eec0630 dfk"></view>
+            <view class="_div data-v-8eec0630 til">待付款</view>
+          </view>
+        </view>
+        <view class="_div data-v-8eec0630 list">
+          <view class="_div data-v-8eec0630 sub">
+            <view class="_div data-v-8eec0630 dfh"></view>
+            <view class="_div data-v-8eec0630 til">待发货</view>
+          </view>
+        </view>
+        <view class="_div data-v-8eec0630 list">
+          <view class="_div data-v-8eec0630 sub">
+            <view class="_div data-v-8eec0630 dsh"></view>
+            <view class="_div data-v-8eec0630 til">待收货</view>
+          </view>
+        </view>
+        <view class="_div data-v-8eec0630 list">
+          <view class="_div data-v-8eec0630 sub">
+            <view class="_div data-v-8eec0630 ywc"></view>
+            <view class="_div data-v-8eec0630 til">已完成</view>
+          </view>
+        </view>
+      </view>
+      <view class="_div data-v-8eec0630 btmView">
+        <view class="_div data-v-8eec0630 bl div_float">
+          <view class="_div data-v-8eec0630 L"><label class="_span data-v-8eec0630 yhq"></label>我的优惠券</view>
+          <view class="_div data-v-8eec0630 R"><label class="_span data-v-8eec0630 arr_g"></label></view>
+        </view>
+        <view class="_div data-v-8eec0630 bl div_float">
+          <view class="_div data-v-8eec0630 L"><label class="_span data-v-8eec0630 dz"></label>我的地址</view>
+          <view class="_div data-v-8eec0630 R"><label class="_span data-v-8eec0630 arr_g"></label></view>
+        </view>
+        <view class="_div data-v-8eec0630 bl div_float">
+          <view class="_div data-v-8eec0630 L"><label class="_span data-v-8eec0630 dh"></label>我的地址</view>
+          <view class="_div data-v-8eec0630 R"><label class="_span data-v-8eec0630 arr_g"></label></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

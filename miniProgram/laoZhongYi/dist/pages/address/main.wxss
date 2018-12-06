@@ -1,0 +1,67 @@
+
+.sList .picker.data-v-0d3e8a12 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.subBtn.data-v-0d3e8a12 {
+  width: 96%;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  background-color: #5b0e12;
+  border-radius: 8rpx;
+  color: white;
+  margin: 0 auto;
+  margin-top: 44rpx;
+}
+.inputView .list .R>._div>._span.data-v-0d3e8a12 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 10rpx;
+  height: 16rpx;
+  transform: rotate(90deg);
+  margin-left: 10rpx;
+}
+.inputView .list .R>._div.data-v-0d3e8a12 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 33.33%;
+  font-size: 24rpx;
+  color: #666666;
+  position: relative;
+}
+.inputView .list .R.data-v-0d3e8a12 {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 93rpx;
+  width: 75%;
+}
+.inputView .list ._input.data-v-0d3e8a12 {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 93rpx;
+  width: 65%;
+  font-size: 28rpx;
+  color: #232323;
+}
+.inputView .list ._label.data-v-0d3e8a12 {
+  color: #333333;
+  font-size: 28rpx;
+  display: inline-block;
+  vertical-align: middle;
+  width: 20%;
+  font-weight: bold;
+}
+.inputView .list.data-v-0d3e8a12 {
+  height: 93rpx;
+  line-height: 93rpx;
+  font-size: 0;
+  padding: 0 2%;
+  border-bottom: 2rpx solid #E5E5E5;
+}
+.inputView.data-v-0d3e8a12 {
+  margin-top: 20rpx;
+}

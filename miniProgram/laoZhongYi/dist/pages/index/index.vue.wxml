@@ -1,0 +1,5 @@
+<template name="3de877ae">
+  <view class="_div data-v-630bd5e4 container">
+    <view class="_div data-v-630bd5e4 seaView"><label class="_span data-v-630bd5e4 seaIcon"></label>请输入商品名称 </view>
+  </view>
+</template>

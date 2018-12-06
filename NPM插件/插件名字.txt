@@ -1,0 +1,26 @@
+vue 生成图片 npm install --save html2canvas plupload
+
+vue 裁剪图片  vue-quick-cropper
+
+//导入mini-ui
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.css'
+Vue.use(Mint);
+
+//导入滚动选择器
+import AwesomePicker from 'vue-awesome-picker';
+Vue.use(AwesomePicker);
+
+
+//导入cookies
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+
+//导入手机控制台
+//import VConsole from 'vconsole/dist/vconsole.min.js' //import vconsole
+//let vConsole = new VConsole() // 初始化
+
+
+//更改微信标题
+import VueWechatTitle from 'vue-wechat-title'; 
+Vue.use(VueWechatTitle)

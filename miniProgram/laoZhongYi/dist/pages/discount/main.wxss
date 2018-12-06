@@ -1,0 +1,38 @@
+
+.disView .list .R.data-v-4b4f1448 {
+  width: 25%;
+  color: #333333;
+  font-size: 28rpx;
+  text-align: center;
+  font-weight: bold;
+}
+.disView .list .Msg.data-v-4b4f1448 {
+  width: 54%;
+  padding-right: 26rpx;
+  color: #999999;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  border-right: 2rpx solid #E5E5E5;
+  text-align: right;
+}
+.disView .list .L.data-v-4b4f1448 {
+  width: 15%;
+  text-align: center;
+  color: #333333;
+  font-size: 40rpx;
+}
+.disView .list>._div.data-v-4b4f1448 {
+  display: inline-block;
+  vertical-align: middle;
+}
+.disView .list.data-v-4b4f1448 {
+  height: 144rpx;
+  line-height: 144rpx;
+  font-size: 0;
+  border-radius: 8rpx;
+  border: solid 2rpx #5b0e12;
+  margin-bottom: 24rpx;
+}
+.disView.data-v-4b4f1448 {
+  padding: 0 2%;
+}

@@ -1,0 +1,94 @@
+
+.orderCn .list .btm  .btmView>._div.data-v-0c844906 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 140rpx;
+  height: 64rpx;
+  border-radius: 8rpx;
+  border: solid 2rpx #5b0e12;
+  color: #5b0e12;
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 64rpx;
+}
+.orderCn .list .btm  .btmView.data-v-0c844906 {
+  text-align: right;
+}
+.orderCn .list .btm .price ._span.data-v-0c844906 {
+  color: #333333;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.orderCn .list .btm .price.data-v-0c844906 {
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: right;
+  color: #666666;
+  font-size: 24rpx;
+  letter-spacing: 4rpx;
+}
+.orderCn .list .oMsg .proTil.data-v-0c844906 {
+  display: inline-block;
+  vertical-align: top;
+  width: 75%;
+  color: #333333;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  margin-top: 30rpx;
+}
+.orderCn .list .oMsg ._img.data-v-0c844906 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 120rpx;
+  height: 120rpx;
+  border: 2rpx solid #e5e5e5;
+  margin-right: 24rpx;
+}
+.orderCn .list .oMsg.data-v-0c844906 {
+  min-height: 185rpx;
+  line-height: 185rpx;
+  font-size: 0;
+  border-bottom: 2rpx solid #E5E5E5;
+}
+.orderCn .list .til.data-v-0c844906 {
+  height: 79rpx;
+  line-height: 79rpx;
+  font-size: 24rpx;
+  color: #333333;
+  border-bottom: 2rpx solid #E5E5E5;
+}
+.orderCn .list.data-v-0c844906 {
+  background-color: white;
+  padding: 0 2%;
+  border-bottom: 2rpx solid #E5E5E5;
+  margin-bottom: 20rpx;
+  padding-bottom: 32rpx;
+}
+.orderCn.data-v-0c844906 {
+  background-color: #F7F7F7;
+}
+.orderHead>._div .sel.data-v-0c844906 {
+  color: #5B0E12;
+  border-bottom: 2rpx solid #5B0E12;
+}
+.orderHead>._div ._span.data-v-0c844906 {
+  padding: 0 5rpx;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 68rpx;
+}
+.orderHead>._div.data-v-0c844906 {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 82rpx;
+  color: #333333;
+  font-size: 28rpx;
+  width: 20%;
+  text-align: center;
+}
+.orderHead.data-v-0c844906 {
+  height: 86rpx;
+  line-height: 86rpx;
+  padding: 0 2%;
+  border-bottom: 2rpx solid #E5E5E5;
+}

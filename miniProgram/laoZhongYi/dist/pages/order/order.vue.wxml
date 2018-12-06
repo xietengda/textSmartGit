@@ -1,0 +1,44 @@
+<template name="1f15f821">
+  <view class="_div data-v-0c844906 container">
+    <view class="_div data-v-0c844906 orderHead">
+      <view class="_div data-v-0c844906"><label class="_span data-v-0c844906 {{[oState == 0 ? 'sel' : '']}}">全部</label></view>
+      <view class="_div data-v-0c844906"><label class="_span data-v-0c844906">待付款</label></view>
+      <view class="_div data-v-0c844906"><label class="_span data-v-0c844906">待收货</label></view>
+      <view class="_div data-v-0c844906"><label class="_span data-v-0c844906">已完成</label></view>
+      <view class="_div data-v-0c844906"><label class="_span data-v-0c844906">退款/售后</label></view>
+    </view>
+    <view class="_div data-v-0c844906 orderCn">
+      <view class="_div data-v-0c844906 list">
+        <view class="_div data-v-0c844906 til">待付款</view>
+        <view class="_div data-v-0c844906 oMsg">
+          <image src="/static/img/list1.png" class="_img data-v-0c844906"></image>
+          <view class="_div data-v-0c844906 proTil">呼唤晒后修复精华焕新版</view>
+        </view>
+        <view class="_div data-v-0c844906 btm">
+          <view class="_div data-v-0c844906 price">共1件商品，实付款<label class="_span data-v-0c844906">¥680.00</label></view>
+          <view class="_div data-v-0c844906 btmView">
+            <view class="_div data-v-0c844906">去付款</view>
+          </view>
+        </view>
+      </view>
+      <view class="_div data-v-0c844906 list">
+        <view class="_div data-v-0c844906 til">待收货</view>
+        <view class="_div data-v-0c844906 oMsg">
+          <image src="/static/img/list1.png" class="_img data-v-0c844906"></image>
+          <view class="_div data-v-0c844906 proTil">呼唤晒后修复精华焕新版</view>
+        </view>
+        <view class="_div data-v-0c844906 oMsg">
+          <image src="/static/img/list1.png" class="_img data-v-0c844906"></image>
+          <image src="/static/img/list1.png" class="_img data-v-0c844906"></image>
+        </view>
+        <view class="_div data-v-0c844906 btm">
+          <view class="_div data-v-0c844906 price">共1件商品，实付款<label class="_span data-v-0c844906">¥680.00</label></view>
+          <view class="_div data-v-0c844906 btmView">
+            <view class="_div data-v-0c844906">查看订单</view>
+            <view class="_div data-v-0c844906">售后进度</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
