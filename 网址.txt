@@ -1,0 +1,55 @@
+项目地址：\\192.168.0.8\Share\项目资料\谢腾达
+
+ID:	wxdf029137adb57a11
+
+less css的
+
+stylus  
+
+hotcss  自动转换rem
+
+iSlider iSlider是一个表现出众，无任何插件依赖的手机平台javascript滑动组件。它能够处理任何元素，例如图片或者DOM元素。
+
+
+scrollReveal.js – 页面滚动显示动画JS
+jquery.countup.min.js -- 数字滚动插件countUP
+
+
+
+腾讯地图开发密匙
+Key名称:pangdaMap
+
+开发者Key:BZTBZ-HCXKJ-WHQFQ-KHS7U-MUWES-YRBLT
+
+
+
+
+香满楼
+AppID(小程序ID):wx2a3279de1c6b6dca
+AppSecret(小程序密钥):e591bdde66a785683cdf33e65c497bd5
+
+
+
+http://mpvue.com/mpvue/
+
+
+
+项目管理：http://gitlab.vchengnet.com/root/xiangmanlo_Server
+
+
+设置局域网 ip访问  C:\Windows\System32\drivers\etc
+
+
+helpyou接口文档：http://doc.vchengnet.com/web/#/3?page_id=5
+
+微信测试账号https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
+
+录音H5  FTP地址
+http://record.h5.vchengnet.com  账号tengda  密码tengda
+
+本地服务器启动 wampserver
+
+
+
+
+
