@@ -1,0 +1,14 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='use_can' wx:if="{{disList.length != 0}}">
+    <template is="discount_temp" data="{{disList:disList}}"/>
+  </view>
+
+  <view class='use_not'>
+    <template is="discount_temp" data="{{disList:disList2}}"/>
+  </view>
+
+</view>

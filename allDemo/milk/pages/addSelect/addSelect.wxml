@@ -1,0 +1,25 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='add_sel_cont'>
+    <block wx:for="{{addList}}" wx:key="addList">
+      <view class='sel_list div_float'>
+        <view class='sel_list_L checkbox {{item.def_addr == 1? "checkboxSel" : ""}}'  catchtap='selectAdd' data-id='{{item.address_id}}'></view>
+        <view class='sel_list_M'>
+          <view class='sel_list_M_one'>{{item.consignee}}<text>{{item.mobile}}</text></view>  
+          <view class='sel_list_M_two'>{{item.address_short_name}}</view>  
+        </view>
+        <view class='sel_list_R' catchtap='edit' data-id='{{item.address_id}}'><text class='grayEditIcon'></text>编辑</view>
+      </view>
+    </block>
+  </view>
+
+  <view class='add_addr_btm {{isIphoneX?"ix_btm":""}}'>
+    <navigator url='../addAddress/addAddress' hover-class='none'>
+      <button class='add_addrBtn'>新增地址</button>
+    </navigator>
+  </view>
+
+</view>

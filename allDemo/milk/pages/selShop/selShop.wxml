@@ -1,0 +1,47 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+  
+  <view class='selShop_head div_float'>
+    <view class='sel_city divHide'>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          {{array[index]}}<text class='right_arrow'></text>
+        </view>
+      </picker> 
+    </view>
+    <input type='text' bindconfirm="searchSubmit" name='diqu' placeholder='小区/写字楼/学校 等' />
+    <view class='searchIcon'></view>
+  </view>
+
+  <view class='selShop_adr div_float'>
+    <view class='selShop_L ellipsis_one'>
+      <view>当前地址</view>
+      <view>{{position}}</view>
+    </view>
+    <view class='selShop_R' catchtap='dingwei'>
+      <text class='redAddrIcon'></text>重新定位
+    </view>
+  </view>
+
+  <view class='selShop_cont'>
+    <block wx:for="{{selShopList}}" wx:for-item="selShop" wx:for-index="selShopIndex" wx:key="selShop">
+      <view class='selShop_adr_list div_float'  catchtap='clickAdr' data-index="{{selShopIndex}}"> 
+        <image class='selShop_img' src='{{selShop.logo}}' />
+        <view class='selShop_m'>
+            <view class='selShop_m_til'>{{selShop.shop_name}}</view> 
+            <view class='selShop_m_time'><text class='phoneIcon'></text>营业时间：{{selShop.open_time}}</view> 
+            <view class='selShop_m_adr'><text class='allgray_adr'></text>{{selShop.address}}</view> 
+        </view>
+        <view class='selShop_cont_R'>
+          <view class='selShop_cont_R_one'>
+            <text class='{{selShop.sel == 1 ? "checkboxSel" : "checkbox"}}'></text>{{selShop.sel == 1 ? "已选" : "可选"}}
+          </view>
+          <view class='selShop_cont_R_two'>距离<text>{{selShop.juli}}m</text></view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+</view>

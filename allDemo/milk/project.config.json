@@ -1,0 +1,367 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": false,
+		"uglifyFileName": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.3.0",
+	"appid": "wx2a3279de1c6b6dca",
+	"projectname": "%E9%A6%99%E6%BB%A1%E6%A5%BC%EF%BC%88%E7%94%A8%E6%88%B7%EF%BC%89",
+	"scripts": {
+		"beforeCompile": "",
+		"beforePreview": "",
+		"beforeUpload": ""
+	},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 53,
+			"list": [
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "列表页",
+					"pathName": "pages/allPro/allPro",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "套餐详情页",
+					"pathName": "pages/proDetails/proDetails",
+					"query": "goodsId=1&proType=2"
+				},
+				{
+					"id": 3,
+					"name": "签到",
+					"pathName": "pages/signIn/signIn",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/login/login",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "会员中心",
+					"pathName": "pages/mySelf/mySelf",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "会员编辑",
+					"pathName": "pages/editPerson/editPerson",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的订单页面",
+					"pathName": "pages/order/order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "购物车",
+					"pathName": "pages/shopCart/shopCart",
+					"query": ""
+				},
+				{
+					"id": 9,
+					"name": "测试",
+					"pathName": "pages/complain/complain",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "积分详细",
+					"pathName": "pages/scoreDetail/scoreDetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "优惠券",
+					"pathName": "pages/myDiscount/myDiscount",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的收藏",
+					"pathName": "pages/collect/collect",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "收货地址",
+					"pathName": "pages/addManagement/addManagement",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "积分商城",
+					"pathName": "pages/score/score",
+					"query": ""
+				},
+				{
+					"id": 15,
+					"name": "积分商城详情",
+					"pathName": "pages/exChangeDetail/exChangeDetail",
+					"query": "goodsId=1"
+				},
+				{
+					"id": -1,
+					"name": "积分商城列表页面",
+					"pathName": "pages/exChangeList/exChangeList",
+					"query": ""
+				},
+				{
+					"id": 17,
+					"name": "支付确认页",
+					"pathName": "pages/payment/payment",
+					"query": "id=170"
+				},
+				{
+					"id": -1,
+					"name": "套餐",
+					"pathName": "pages/proDetails/proDetails",
+					"query": "proType=2&goodsId=1"
+				},
+				{
+					"id": -1,
+					"name": "积分提交确认",
+					"pathName": "pages/exChangePay/exChangePay",
+					"query": "goodsId=1"
+				},
+				{
+					"id": -1,
+					"name": "地址",
+					"pathName": "pages/selShop/selShop",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "添加地址",
+					"pathName": "pages/addAddress/addAddress",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "选择地址",
+					"pathName": "pages/addSelect/addSelect",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "选择地址",
+					"pathName": "pages/addAddress/addAddress",
+					"query": "addressid=4"
+				},
+				{
+					"id": -1,
+					"name": "站内信",
+					"pathName": "pages/information/information",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "帮助",
+					"pathName": "pages/help/help",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "套餐",
+					"pathName": "pages/comboList/comboList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "秒杀列表",
+					"pathName": "pages/rushBuy/rushBuy",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "优惠券列表",
+					"pathName": "pages/getDiscount/getDiscount",
+					"query": ""
+				},
+				{
+					"id": 29,
+					"name": "详情页",
+					"pathName": "pages/proDetails/proDetails",
+					"query": "goodsId=22"
+				},
+				{
+					"id": -1,
+					"name": "抢购页",
+					"pathName": "pages/rushBuy/rushBuy",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "抢购页",
+					"pathName": "pages/takeMilk/takeMilk",
+					"query": ""
+				},
+				{
+					"id": 32,
+					"name": "互动三级",
+					"pathName": "pages/communityThird/communityThird",
+					"query": "aId=1"
+				},
+				{
+					"id": -1,
+					"name": "修改密码",
+					"pathName": "pages/amendPwd/amendPwd",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "套餐页",
+					"pathName": "pages/comboList/comboList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "pages/orderDetail/orderDetail",
+					"query": "id=36"
+				},
+				{
+					"id": -1,
+					"name": "订单列表",
+					"pathName": "pages/order/order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单套餐页",
+					"pathName": "pages/checkCombo/checkCombo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "商品评价",
+					"pathName": "pages/oEvaluate/oEvaluate",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "积分订单",
+					"pathName": "pages/scoreOrder/scoreOrder",
+					"query": ""
+				},
+				{
+					"id": 40,
+					"name": "取奶",
+					"pathName": "pages/takeMilk/takeMilk",
+					"query": "order_id=145"
+				},
+				{
+					"id": 41,
+					"name": "积分详情测试提交",
+					"pathName": "pages/exChangeDetail/exChangeDetail",
+					"query": "goodsId=15"
+				},
+				{
+					"id": -1,
+					"name": "转盘",
+					"pathName": "pages/turntable/turntable",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "抽奖",
+					"pathName": "pages/turntable/turntable",
+					"query": ""
+				},
+				{
+					"id": 44,
+					"name": "我的优惠券",
+					"pathName": "pages/myDiscount/myDiscount",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "查看积分",
+					"pathName": "pages/scoreDetail/scoreDetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "选择门店",
+					"pathName": "pages/selShop/selShop",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "联系客服",
+					"pathName": "pages/leaveWrods/leaveWrods",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "二维码",
+					"pathName": "pages/recommend/recommend",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "社区2",
+					"pathName": "pages/community2/community",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "社区",
+					"pathName": "pages/community/community",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "关于我们",
+					"pathName": "pages/about/about",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "套餐订单详情",
+					"pathName": "pages/orderDetail/orderDetail",
+					"query": "id=512"
+				},
+				{
+					"id": -1,
+					"name": "领取优惠券",
+					"pathName": "pages/getDiscount/getDiscount"
+				}
+			]
+		}
+	}
+}

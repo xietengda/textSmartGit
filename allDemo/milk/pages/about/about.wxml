@@ -1,0 +1,22 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='about_head'>
+    <view wx:for="{{ad}}" wx:key='ad' class='ad_y'>
+      <image bindtap="navTap" data-type="{{item.type}}" data-cat_id="{{item.cat_id}}" src='{{item.ad_code}}' />
+    </view>
+  </view>
+
+  <view class='about_cont'>
+    <view wx:for='{{helpList}}' wx:key='{{helpList}}'>
+      <view catchtap='detail' data-id='{{item.article_id}}' class='about_list'>
+        <view>{{item.title}}</view>
+        <view class='right_arrow'></view>
+      </view>
+    </view>
+  </view>
+
+
+</view>

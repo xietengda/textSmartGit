@@ -1,0 +1,56 @@
+@import "../../template/template.wxss";
+
+.rushHead {
+  height: 70rpx;
+  line-height: 65rpx;
+  margin-bottom: 10rpx;
+  background-color: white;
+}
+
+.rushHead>view {
+  display: inline-block;
+  text-align: center;
+  color: #232323;
+  font-size: 28rpx;
+  width: 50%;
+}
+
+.rushHead .sel {
+  border-bottom: 2rpx solid #e50012;
+}
+
+.timeLimt_list_time_view {
+  line-height: 38rpx;
+}
+
+.timeLimt_list_time_view>.timeLimt_list_time {
+  position: initial;
+}
+
+.r_time {
+  height: 60rpx;
+  text-align: center;
+  line-height: 50rpx;
+  margin-bottom: 10rpx;
+  background-color: white;
+}
+
+.r_time>view {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.r_time>view>view {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5rpx;
+}
+
+.r_time>view>view:nth-child(1), .r_time>view>view:nth-child(3) {
+  border: 1px solid #c5c5c5;
+  width: 130rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+

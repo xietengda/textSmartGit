@@ -1,0 +1,98 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+
+  <view class='turnCont'>
+      <view class='trunView'>
+          <view class="canvas-container">
+              <view  animation="{{animationData}}" class="canvas-content">
+                <view class="canvas-line">
+                  <view class="canvas-litem" wx:for="{{awardsList}}" wx:key="unique" style="-webkit-transform: rotate({{item.lineTurn}});transform: rotate({{item.lineTurn}})"></view>
+                </view>
+
+                <view class="canvas-list">
+                  <view class="canvas-item" wx:for="{{awardsList}}" wx:key="unique">
+                      <view class="canvas-item-text" style="-webkit-transform: rotate({{item.turn}});transform: rotate({{item.turn}})">
+                        <text wx:if="{{item.award != ''}}">{{item.award}}</text>
+                        <image class='canvas-item-img' wx:else src='{{item.img}}'/>
+                      </view>
+                  </view>
+                </view>
+
+              </view>
+
+              <view class='canvas-btn-view'>
+                <view bindtap="getLottery" class="canvas-btn {{btnDisabled}}">
+                  <text>点击\n抽奖</text>
+                </view>		
+              </view>		
+            </view>
+      </view>
+  </view>
+
+  <view class='trunBtmBg'></view>
+  
+  <view class='trunBtmRule'>
+    <view class='trunExpend'>每次抽奖消耗<text>{{jifen}}</text>积分</view>
+    <view class='trunRule' catchtap='showLayer'>活动规矩</view>
+    <view class='trunList'>
+       <view class='luckCont' wx:for='{{list}}' wx:key='list'>
+        <view>{{item.name}}抽中{{item.prize}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='trunLayer' hidden='{{layerHide}}'>
+    <view class='trunLayer_close' catchtap='showLayer'>×</view>
+    <view class='trunLayer_til'>活动规则</view>
+    <view class='trunLayer_subTil'>活动说明：<text>此活动为概率中奖，奖品数量有限，祝好运!</text></view>
+    <view class='trunLayer_subTil'>活动时间：<text>2018年5月14日至2018年7月19日</text></view>
+    <view class='trunLayer_cont'>惊喜一：IPHONEX</view>
+    <view class='trunLayer_cont'>惊喜二：**品牌家电</view>
+    <view class='trunLayer_cont'>惊喜三：香满楼一月牛奶套餐</view>
+    <view class='trunLayer_cont'>惊喜四：酸奶一箱</view>
+    <view class='trunLayer_cont'>-----------------------------------------------</view>
+    <view class='trunLayer_cont'>【重要声明】</view>
+    <view class='trunLayer_cont'>1、实物奖品将在活动结束后5-10工作日安排发货，请耐心等待</view>
+    <view class='trunLayer_cont'>2、***********</view>
+    <view class='trunLayer_cont'>3、********</view>
+    <view class='trunLayer_cont'>4、******</view>
+  </view>
+
+  <view class='acquireLayer' hidden='{{aqrHide}}'>  
+   <view class='sub'>
+    <view class='close' catchtap='closeAqr'>×</view>
+    <view class='til'>恭喜中奖</view>
+    <view class='subTil'>您抽中了{{prize}}</view>
+    <form  bindsubmit="formSubmit">
+      <input type='text' name="userName" placeholder='填写您的姓名'/>
+      <input type='number' name="phone" placeholder='填写您的电话'/>
+      <input type='text' name="address" placeholder='填写您的收货地址'/>
+      <button formType="submit">提交</button>
+    </form>
+   </view>
+  </view>
+
+
+	<!--未中奖提示框-->
+  <view class='acquireLayer  weiZJView'  hidden='{{wzjHide}}'>  
+   <view class='sub'>
+    <view class='close' catchtap='closeWZJ'>×</view>
+    <view class="wzjImg weiZJ"></view>
+    <view class='til'>谢谢参与，再接再厉哦~</view>
+   </view>
+  </view>
+  
+  <!--中积分提示框-->
+  <view class='acquireLayer  weiZJView  zjView' hidden='{{zjfHide}}'>  
+   <view class='sub'>
+    <view class='close' catchtap='closeZj'>×</view>
+    <view class="wzjImg zjjf"></view>
+    <view class='zjTil'>已抽中“500积分”</view>
+    <view class="zjSub">奖品已发放到你的帐户,快去查看吧</view>
+   </view>
+  </view>
+
+</view> 

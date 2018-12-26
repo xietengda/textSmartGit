@@ -1,0 +1,14 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con myDis_cont {{isIphoneX?"cont_ix ix_btm":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+  <template is="discount_temp" data="{{disList:disList,getDiscount:getDiscount,isIphoneX:isIphoneX}}" />
+  <view class='dis_btn_view {{isIphoneX?"ix_btm":""}}'>
+    <navigator url='../myDiscount/myDiscount' hover-class='none'>
+      <button class='dis_btn'>我的优惠券
+        <text>>></text>
+      </button>
+    </navigator>
+  </view>
+
+</view>

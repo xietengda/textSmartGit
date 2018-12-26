@@ -1,0 +1,21 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+
+  <view class='inforDe_cont'>
+    <view class='inforDeta_head'>
+      <view class='inforDeta_head_L div_float'>
+        <view class='inforDeta_head_til'>{{data.title}}</view>
+        <view class='inforDeta_head_date'>{{data.receive_time}}</view>
+      </view>
+      <button class='inforDeta_head_R' catchtap='delete' data-id='{{data.l_id}}'>删除</button>
+    </view>
+
+    <view class='inforDe_describe'>
+      {{data.message}}
+    </view>
+  </view>
+
+</view>

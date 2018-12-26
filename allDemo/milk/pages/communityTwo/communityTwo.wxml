@@ -1,0 +1,10 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <scroll-view scroll-y  class='com_two_cont'>
+      <template is="commEssay"  data="{{essayList:essayList}}"/>
+  </scroll-view>
+
+</view>

@@ -1,0 +1,70 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con myDis_cont {isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='payMent_head addressBg div_float' catchtap='selectAddr'>
+    <view class='payMent_head_L'>
+      <view>{{def_addr.consignee}}
+        <text>{{def_addr.mobile}}</text>
+      </view>
+      <view>{{def_addr.province_name}}{{def_addr.city_name}}{{def_addr.district_name}}{{def_addr.address}}</view>
+    </view>
+    <view class='payMent_head_R right_arrow'></view>
+  </view>
+
+  <view class='pay_pro div_float'>
+    <image class='pay_pro_img' src='{{goods_list[0].goods_thumb}}' />
+    <view class='pay_pro_M'>
+      <view class='pay_pro_til'>{{goods_list[0].goods_name}}</view>
+      <view class='pay_pro_subTil'>{{goods_list[0].goods_attr}}</view>
+    </view>
+    <view class='pay_pro_R'>
+      <view class='pay_pro_score'>{{goods_list[0].exchange_integral}}</view>
+      <view class='pay_pro_num'>x{{goods_list[0].goods_number}}</view>
+    </view>
+  </view>
+
+  <view class='payMent_btm div_float'>
+    <view class='payMent_btm_L'>提取方式</view>
+    <view wx:for="{{shipping_list}}" wx:key="listindex" class='payMent_btm_R div_float'>
+      <view class='payMent_R_radio'>
+        <text class='{{item.selected == "checked" ? "checkboxSel":"checkbox"}}' data-id="{{item.shipping_id}}" data-index="{{index}}" catchtap='getTypeFun'></text>{{item.shipping_name}}
+      </view>
+    </view>
+  </view>
+  <view class='payMent_btm div_float' wx:if='{{ziti_shop}}'>
+    <view class='payMent_btm_L'>附近发货门店</view>
+    <navigator url='../selShop/selShop' hover-class='none'>
+      <view class='payMent_btm_R_other div_float'>
+        <view class='payMent_btm_R_other_L'>{{selShop.shop_name}} 距离：
+          <view class='coloeRed'>{{selShop.juli}}
+            <text>M</text>
+          </view>
+        </view>
+        <view class='payMent_btm_R_arrow right_arrow'></view>
+      </view>
+    </navigator>
+  </view>
+
+
+  <view class='payMent_btm div_float'>
+    <view class='payMent_btm_L'>订单备注</view>
+    <navigator url='../orderRemark/orderRemark' hover-class='none'>
+      <view class='payMent_btm_R_other div_float'>
+        <view class='payMent_btm_R_other_L'>{{bz}}</view>
+        <view class='payMent_btm_R_arrow right_arrow'></view>
+      </view>
+    </navigator>
+  </view>
+
+  <view class='payMent_practical_price'>
+    <view>实际金额：
+      <text>¥0.00</text>
+    </view>
+    <view>（消耗{{goods_list[0].exchange_integral}}积分+运费：{{freight}}）</view>
+  </view>
+
+  <button class='payMent_btn' catchtap='payMent'>兑换支付</button>
+
+</view>

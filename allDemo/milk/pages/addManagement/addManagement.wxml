@@ -1,0 +1,31 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con  {{isIphoneX?"cont_ix ix_btm":""}}' >
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack,back:back}}" />
+
+  <view class='add_cont'> 
+    <block wx:for="{{addList}}" wx:key="addList">
+      <view class='cont_list'> 
+        <view class='cont_list_one div_float'>
+          <view class='cont_list_one_L'>{{item.consignee}}<text>{{item.mobile}}</text></view>
+          <navigator url='../addAddress/addAddress?addId={{item.address_id}}' hover-class='none'>
+             <view class='cont_list_one_R'><text class='grayEditIcon'></text>编辑</view>
+          </navigator>
+        </view>
+        <view class='cont_list_two'>{{item.address_short_name}}</view>
+        <view class='cont_list_third div_float'>
+          <view wx:if='{{item.def_addr == 1}}' class='cont_list_third_L'><text  class='setDefault'></text>默认地址</view>
+          <view bindtap='setDefault' data-address_id="{{item.address_id}}" wx:else class='cont_list_third_L'>设为默认地址</view>
+          <view bindtap='deleteAddress' data-address_id="{{item.address_id}}" class='cont_list_third_R'><text class='del_icon_gray'></text>删除</view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class='add_addr_btm {{isIphoneX?"ix_btm":""}}'>
+    <navigator url='../addAddress/addAddress' hover-class='none'>
+      <button class='add_addrBtn'>新增地址</button>
+    </navigator>
+  </view>
+
+</view>

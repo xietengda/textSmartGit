@@ -1,0 +1,35 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con myDis_cont {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='exList_head'>
+    <template is="t_search_input" data="{{seaTye:2,searchText:searchText}}" />
+
+    <scroll-view scroll-x class='exList_class' scroll-into-view='M{{select}}'>
+      <block wx:for="{{exList}}" wx:for-item="exList" wx:key="exList">
+        <view id="M{{exList.id}}" data-id='{{exList.id}}' catchtap='clickType' class='{{exList.class}}'>{{exList.name}}</view>
+      </block>
+    </scroll-view>
+  </view>
+
+
+
+  <scroll-view scroll-y  class='exList_cont {{isIphoneX?"ix_c_cn":""}}'>
+    <block wx:for="{{exListCont}}" wx:for-item="exListCont" wx:key="exCont">
+      <navigator url="/pages/exChangeDetail/exChangeDetail?goodsId={{exListCont.goods_id}}" hover-class='none'>
+        <view class='exList_cont_list div_float'>
+          <image class='cont_list_img' src='{{exListCont.goods_thumb}}' />
+          <view class='cont_list_msg'>
+            <view class='list_msg_til'>{{exListCont.goods_name}}</view>
+            <view class='list_msg_newP'>{{exListCont.exchange_integral}}积分</view>
+            <view class='list_msg_oldP'>市场参考价：{{exListCont.market_price}}元</view>
+          </view>
+          <view class='cBtn' data-goods_id="{{exListCont.goods_id}}" catchtap='goPay'>积分兑换</view>
+        </view>
+      </navigator>
+    </block>
+  </scroll-view>
+
+
+</view>

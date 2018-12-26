@@ -1,0 +1,25 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='reg_cont'>
+      <view class='reg_cont_list'>
+        <view>手机号：</view>
+        <input type='text' placeholder='请填写手机号码' placeholder-class='pColor'/>
+        <button>获取验证码</button>
+      </view>
+      <view class='reg_cont_list'>
+        <view>验证码:</view>
+        <input type='text' placeholder='请输入验证码' placeholder-class='pColor'/>
+      </view>
+      <view class='reg_cont_list'>
+        <view>新密码：</view>
+        <input type='password' placeholder='请输入字母、数字或符号'  placeholder-class='pColor'/>
+      </view>
+
+
+      <button class='reg_btn'>确定</button>
+  </view>
+
+</view>

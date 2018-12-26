@@ -1,0 +1,61 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:0,isIphoneX:isIphoneX}}" />
+
+  <view class='scrore_head'>
+    <view wx:for="{{ad1}}" wx:key='ad1' class='ad_y'>
+      <image bindtap="navTap" data-type="{{item.type}}" data-cat_id="{{item.cat_id}}" src='{{item.ad_code}}' />
+    </view>
+    <view class='score_head_menu div_float'>
+      <navigator url='../signIn/signIn' hover-class='none'>
+        <view class='score_menu_list'>
+          <view class='score_menu_list_icon makeMoney '></view>
+          <view>赚积分</view>
+        </view>
+      </navigator>
+      <navigator url='../scoreDetail/scoreDetail' hover-class='none'>
+        <view class='score_menu_list'>
+          <view class='score_menu_list_icon checkScore'></view>
+          <view>查积分</view>
+        </view>
+      </navigator>
+      <navigator url='../exChangeList/exChangeList' hover-class='none'>
+        <view class='score_menu_list'>
+          <view class='score_menu_list_icon classify'></view>
+          <view>产品分类</view>
+        </view>
+      </navigator>
+      <navigator url='../scoreOrder/scoreOrder' hover-class='none'>
+        <view class='score_menu_list'>
+          <view class='score_menu_list_icon orderList icon_s'></view>
+          <view>积分订单</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+  <view class='score_cont'>
+    <view class='score_cont_til'>
+      <template is="home_sub_til" data="{{type:4}}" />
+    </view>
+    <view wx:for="{{ad2}}" wx:key='ad2' class='ad_y'>
+      <image bindtap="navTap" data-type="{{item.type}}" data-cat_id="{{item.cat_id}}" src='{{item.ad_code}}' />
+    </view>
+    <view class='score_cont_list div_float'>
+      <block wx:for="{{scorePro}}" wx:for-item="scorePro" wx:for-index="sIndex" wx:key="scoreKey">
+        <view class='score_pro {{sIndex%2 == 0 ? "score_pro_right":""}}'>
+          <navigator url='../exChangeDetail/exChangeDetail?goodsId={{scorePro.goods_id}}' hover-class='none'>
+            <image class='score_pro_img' src='{{scorePro.goods_thumb}}' />
+            <view class='score_pro_til ellipsis_one'>{{scorePro.goods_name}}</view>
+            <view class='score_pro_price'>{{scorePro.exchange_integral}}积分</view>
+            <view class='score_pro_oldPri'>市场参考价：{{scorePro.market_price}}元</view>
+            <button class='score_pro_buy'>点击兑换</button>
+          </navigator>
+        </view>
+      </block>
+    </view>
+  </view>
+
+
+</view>

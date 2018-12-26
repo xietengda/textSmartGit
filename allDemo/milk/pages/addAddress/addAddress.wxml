@@ -1,0 +1,45 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}" />
+  <form bindsubmit="formSubmit">
+    <view class='add_adr'>
+      <view class='add_adr_list'>
+        <view>联系人</view>
+        <input type='text' placeholder-class="phcolor" name="name" value="{{name}}" placeholder='姓名' />
+      </view>
+      <view class='add_adr_list_sex'>
+        <view>性别</view>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <view wx:for="{{items}}" wx:key='i'>
+            <label class="radio {{item.checked}}">
+              <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+            </label>
+          </view>
+        </radio-group>
+      </view>
+      <view class='add_adr_list'>
+        <view>电话</view>
+        <input type='number' placeholder-class="phcolor" name="tel" value="{{mobile}}" placeholder='手机号码' />
+      </view>
+      <view class='add_adr_list_adrs' bindtap='selAddress'>
+        <view>地址</view>
+        <view class='list_adrs_view'>
+          <view>{{selAddres}}</view>
+        </view>
+        <view class='add_adr_right right_arrow' bindtap='selAddress'></view>
+      </view>
+      <view class='add_adr_list'>
+        <view>门牌号</view>
+        <input type='text' placeholder-class="phcolor" name="address" value="{{address}}" placeholder='例：E座803室' />
+      </view>
+      <view class='add_adr_default'>
+        <view>是否设为默认地址</view>
+        <view class="body-view">
+            <switch checked='{{switchT}}' bindchange="switchChange"/>
+        </view>
+      </view>
+      <button formType="submit" class='add_adr_btn'>保存</button>
+    </view>
+  </form>
+</view>

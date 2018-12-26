@@ -1,0 +1,90 @@
+@import "../../template/template.wxss";
+
+.nodisplay {
+  display: none;
+}
+
+.ed_person_list {
+  margin-bottom: 20rpx;
+}
+
+.ed_person_til {
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 32rpx;
+  color: #666;
+  padding-left: 30rpx;
+}
+
+.ed_p_list_cont {
+  background-color: white;
+}
+
+.ed_p_list_cont>navigator {
+  display: block;
+}
+
+.ed_p_list_cont_view {
+  height: 90rpx;
+  line-height: 90rpx;
+  padding: 0rpx 30rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+
+.list_headImg_view {
+  height: 140rpx;
+  line-height: 140rpx;
+}
+
+.list_headImg_view>.p_list_R {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p_list_L {
+  float: left;
+  font-size: 30rpx;
+  color: #232323;
+}
+
+.p_list_R {
+  height: 100%;
+  float: right;
+  color: #a9a9a9;
+  font-size: 30rpx;
+}
+
+.p_list_R>image {
+  width: 85rpx;
+  height: 85rpx;
+  border-radius: 100%;
+}
+
+.p_list_R>text:nth-child(2) {
+  width: 15rpx;
+  height: 18rpx;
+  display: inline-block;
+  margin-left: 25rpx;
+}
+
+.p_list_R>picker {
+  float: left;
+}
+
+.p_list_R>input {
+  float: left;
+  margin-top: 20rpx;
+  text-align: right;
+  width: 200rpx;
+}
+
+.inputFoucs {
+  border: 1px solid #e5e5e5;
+  text-align: left !important;
+}
+
+.list_R_p {
+  color: #a9a9a9;
+}

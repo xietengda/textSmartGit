@@ -1,0 +1,72 @@
+@import "../../template/template.wxss";
+
+.add_sel_cont{
+  margin-top: 20rpx;
+  padding: 0 3%;
+  background-color: white;
+}
+.add_sel_cont>view:last-child{
+  border: none;
+}
+.sel_list{
+  height: 117rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.sel_list_L{
+  float: left;
+  width:44rpx;
+  height: 44rpx;
+  border-radius: 100%; 
+  margin-top: 35rpx;
+}
+.sel_list_M{
+  float: left;
+  margin-left: 20rpx;
+}
+.sel_list_M_one{
+  color: #232323;
+  font-size: 28rpx;
+  margin-top: 15rpx;
+}
+.sel_list_M_one>text{
+  margin-left: 20rpx;
+}
+.sel_list_M_two{
+  color: #555555;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+.sel_list_R{
+  float: right;
+  color: #535353;
+  font-size: 24rpx;
+  margin-top: 15rpx;
+}
+.sel_list_R>text{
+  display: inline-block;
+  width: 26rpx;
+  height: 26rpx;
+  vertical-align: sub;
+  margin-right: 10rpx;
+}
+.add_addr_btm{
+  position: fixed;
+  width: 100%;
+  height: 78rpx;
+  bottom: 0;
+  text-align: center;
+  background-color: white;
+  padding-top: 10rpx;
+  padding-bottom: 25rpx;
+}
+.add_addr_btm>navigator{
+  display: block;
+}
+.add_addrBtn{
+  width: 90%;
+  border-radius: 30rpx;
+  line-height: 78rpx;
+  font-size: 34rpx;
+  color: white;
+  background-color: #e50012;
+}

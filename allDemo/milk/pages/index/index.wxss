@@ -1,0 +1,409 @@
+@import "../../template/template.wxss";
+
+page {
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+}
+
+.index_ban {
+  width: 100%;
+  height: 445rpx;
+  position: relative;
+}
+
+.banner_swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.banner_swiper swiper-item>image {
+  width: 100%;
+  height: 100%;
+}
+
+.index_ban>text {
+  display: inline-block;
+  position: absolute;
+  width: 80rpx;
+  height: 80rpx;
+  top: 225rpx;
+  font-size: 50rpx;
+  color: #434343;
+}
+
+.ban_prev {
+  left: 5rpx;
+}
+
+.ban_next {
+  right: 5rpx;
+  transform: rotate(180deg);
+}
+
+.add_search_view {
+  position: absolute;
+  top: 10rpx;
+  width: 100%;
+}
+
+.add_search_view>view {
+  padding: 5rpx 30rpx;
+  height: 45rpx;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  line-height: 45rpx;
+  font-size: 28rpx;
+  border-radius: 50rpx;
+}
+
+.add_view>image {
+  width: 45rpx;
+  height: 45rpx;
+  float: left;
+  margin-right: 10rpx;
+}
+
+.add_search_view>view>navigator>image {
+  width: 45rpx;
+  height: 45rpx;
+  float: left;
+  margin-right: 10rpx;
+}
+
+.add_view {
+  float: left;
+  margin-left: 30rpx;
+}
+
+.search_view {
+  float: right;
+  margin-right: 30rpx;
+}
+
+.class_view {
+  padding-bottom: 30rpx;
+  background-color: white;
+}
+
+.class_view>view {
+  float: left;
+  width: 20%;
+  text-align: center;
+  font-size: 0;
+}
+
+.class_list {
+  /* width:90rpx; */
+  text-align: center;
+  margin-top: 30rpx;
+  display: inline-block;
+}
+
+.class_list>image {
+  width: 85rpx;
+  height: 85rpx;
+}
+
+.class_list>text {
+  display: inherit;
+  font-size: 26rpx;
+  color: #434343;
+  margin-top: 8rpx;
+}
+
+.discount_div {
+  background-color: white;
+}
+
+.buy_milk {
+  background-color: white;
+  padding-bottom: 20rpx;
+}
+
+.buy_milk>.ad_y>image {
+  width: 100%;
+  height: 235rpx;
+}
+
+.buy_milk_cont {
+  width: 95%;
+  height: 377rpx;
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0;
+  border-top: 2rpx solid #e5e5e5;
+}
+
+.buy_milk_list {
+  width: 356rpx;
+  height: 350rpx;
+  margin-top: 15rpx;
+  /* border: 2rpx solid #f62736; */
+  text-align: center;
+  font-size: 0;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  /* margin-right: 15rpx; */
+  vertical-align: middle;
+  border-right: 2rpx solid #e5e5e5;
+}
+
+.buy_milk_list .til {
+  color: #232323;
+  font-size: 28rpx;
+  line-height: 56rpx;
+  font-weight: bold;
+}
+
+.buy_milk_list .subTil {
+  font-size: 22rpx;
+  color: #232323;
+  line-height: 22rpx;
+}
+
+.buy_milk_list>image {
+  width: 175rpx;
+  height: 175rpx;
+  margin-top: 36rpx;
+}
+
+.buy_milk_list .price {
+  color: #232323;
+  font-size: 22rpx;
+  margin-top: 10rpx;
+}
+
+.buy_milk_list .price>view {
+  color: #e70012;
+  font-size: 28rpx;
+  display: inline-block;
+}
+
+.buy_milk_list .price>view>text {
+  font-size: 16rpx;
+}
+
+.time_limit {
+  margin-top: 20rpx;
+  background-color: white;
+  padding-bottom: 20rpx;
+  position: relative;
+}
+
+.time_limit>navigator {
+  float: right;
+  color: #989898;
+  font-size: 24rpx;
+  margin-right: 30rpx;
+}
+
+.index_timeLimt {
+  border: 3rpx solid #e70012;
+  width: 95%;
+  height: 470rpx;
+  margin: 0 auto;
+  padding-left: 15rpx;
+  margin-top: 15rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 20rpx;
+}
+
+.timeLimt_list {
+  width: 355rpx;
+  height: 420rpx;
+  margin-top: 15rpx;
+  border-right: 1rpx solid #e5e5e5;
+  text-align: center;
+  display: inline-block;
+  font-size: 0;
+}
+
+.index_timeLimt>view:last-child {
+  border-right: none;
+}
+
+.timeLimt_list>image {
+  width: 205rpx;
+  height: 195rpx;
+  margin-top: 25rpx;
+}
+
+.timeLimt_til {
+  color: #353535;
+  font-size: 24rpx;
+  margin-top: 1rpx;
+}
+
+.timeLimt_til>text {
+  display: block;
+}
+
+.timeLimt_price {
+  font-size: 18rpx;
+  color: #353535;
+  margin-top: 15rpx;
+}
+
+.timeLimt_price>text {
+  font-size: 26rpx;
+  color: #ff3338;
+  font-weight: bold;
+}
+
+.timeLimt_add {
+  width: 184rpx;
+  height: 52rpx;
+  background-color: #e70012;
+  color: white;
+  font-size: 24rpx;
+  border-radius: 50rpx;
+  margin-top: 10rpx;
+  line-height: 52rpx;
+}
+
+.ClassMilk_view {
+  margin-top: 20rpx;
+  background-color: white;
+}
+
+.ClassMilk_til {
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.ClassMilk_til>image {
+  float: left;
+  width: 30rpx;
+  height: 40rpx;
+  margin-left: 30rpx;
+  margin-top: 12rpx;
+}
+
+.ClassMilk_til>text:nth-child(2) {
+  float: left;
+  color: #353535;
+  font-size: 32rpx;
+  margin-left: 20rpx;
+}
+
+.ClassMilk_til>navigator {
+  float: right;
+  color: #989898;
+  font-size: 28rpx;
+  margin-right: 30rpx;
+}
+
+.ClassMilk_view>image {
+  width: 100%;
+  height: 260rpx;
+  display: block;
+  margin: 0 auto;
+}
+
+.ClassMilk_list {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 20rpx;
+}
+
+.milkList {
+  width: 48%;
+  height: 220rpx;
+}
+
+.milkList>image {
+  float: left;
+  width: 140rpx;
+  height: 198rpx;
+  margin-top: 15px;
+}
+
+.milkList_msg {
+  width: 50%;
+  height: 100%;
+  margin-left: 20rpx;
+  float: left;
+  font-size: 0;
+  -webkit-text-size-adjust: none;
+}
+
+.milkList_msg>text {
+  display: inline-block;
+}
+
+.milkList_til {
+  color: #353535;
+  font-size: 26rpx;
+  font-weight: bold;
+  margin-top: 25rpx;
+  height: 75rpx;
+}
+
+.milkList_ml {
+  color: #4e4d4d;
+  font-size: 26rpx;
+  margin-top: 5rpx;
+}
+
+.milkList_price label {
+  font-size: 26rpx;
+}
+
+.milkList_price {
+  color: #3e403f;
+  font-size: 18rpx;
+  margin-top: 5rpx;
+}
+
+.milkList_price text {
+  font-size: 26rpx;
+  color: #e70012;
+  font-weight: bold;
+}
+
+.milkList_msg>button {
+  width: 150rpx;
+  height: 50rpx;
+  background-color: #e70012;
+  color: white;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 50rpx;
+  font-size: 22rpx;
+  margin-top: 10rpx;
+  padding: 0 !important;
+}
+
+.milkList_msg>button::after {
+  border: none;
+  padding: 0 !important;
+}
+
+.home_fotter {
+  margin-top: 10rpx;
+  background-color: white;
+  text-align: center;
+  padding-top: 20rpx;
+}
+
+.home_fotter>image {
+  width: 100%;
+  height: 240rpx;
+  margin-bottom: 10rpx;
+}
+
+.text_l {
+  width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

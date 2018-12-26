@@ -1,0 +1,58 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <template is="t_search_input" data="{{seaTye:1}}" />
+
+  <view class='comList_head'>
+    <text catchtap='switch' data-id='1' class='{{class1}}'>固定套餐</text>
+    <text catchtap='switch' data-id='2' class='{{class2}}'>自由组合套餐</text>
+  </view>
+
+  <view class='comList_cont'>
+    <scroll-view wx:if="{{comboList.length != 0}}"  scroll-y bindscrolltolower='bindscrolltolower' enable-back-to-top='true' scrollTop='0'>
+      <block wx:for="{{comboList}}" wx:key="combo">
+        <view class='comList_cont_list'>
+          <view class='cont_list_til'>订单号：
+            <text>{{item.order_sn}}</text>
+            <text class='list_price'><text>{{item.format_total_fee}}</text></text>
+          </view>
+          <view class='cont_list_two div_float'>
+            <view class='cont_list_two_L'>
+              <view>状态：
+                <text>{{item.status_name}}</text>
+              </view>
+              <view>已取：
+                <text>{{item.get_num}}支</text>
+              </view>
+            </view>
+            <view class='cont_list_two_R'>
+              <button catchtap='seeorder' data-status='{{item.status}}' data-orderid='{{item.order_id}}'>查看订单</button>
+              <navigator url='../takeMilk/takeMilk' hover-class='none'></navigator>
+            </view>
+          </view>
+          <view class='cont_list_third'>
+            <view class='list_third_one div_float'>
+              <image class='list_third_one_img' src='{{item.ext_info.logo}}' />
+              <view class='list_third_one_til'>{{item.goods_list[0].goods_name}}</view>
+              <view class='list_third_one_total'>共
+                <text>{{item.ext_info.select_num}}</text>支</view>
+            </view>
+            <view class='list_third_two'>
+              <block wx:for="{{item.goods_list[0].package_goods_list}}" wx:for-item="subList" wx:key="subList">
+                <view class='list_third_two_list div_float' wx:if='{{subList.goods_number != 0}}'>
+                  <view class='third_two_list_L ellipsis_one'>{{subList.g1}}{{subList.g2}}</view>
+                  <view class='third_two_list_R'>剩余
+                    <text>{{ subList.goods_number - subList.get_number}}</text>支</view>
+                  <view class='third_two_list_M'>x{{subList.g3}}</view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+</view>

@@ -1,0 +1,22 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+  <form bindsubmit="formSubmit">
+    <view class='add_adr'>
+      <view class='add_adr_list'>
+        <view>原密码：</view>
+        <input type='password' name="old_password" placeholder-class="phcolor" placeholder='请输入字母、数字或符号' />
+      </view>
+      <view class='add_adr_list'>
+        <view>密码：</view>
+        <input type='password' name='password1' placeholder-class="phcolor" placeholder='请输入字母、数字或符号' />
+      </view>
+      <view class='add_adr_list'>
+        <view>确认密码：</view>
+        <input type='password' name='password2' placeholder-class="phcolor" placeholder='请输入字母、数字或符号' />
+      </view>
+      <button formType="submit" class='add_adr_btn amen_pwd_btn'>确认修改</button>
+    </view>
+  </form>
+</view>

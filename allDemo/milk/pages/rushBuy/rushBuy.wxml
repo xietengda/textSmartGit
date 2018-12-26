@@ -1,0 +1,39 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con  {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <template is="t_search_input" />
+
+  <view class='rushHead'>
+    <view class='{{timeType == 1?"sel":""}}' catchtap='timeType' data-type='1'>限时抢购</view>
+    <view class='{{timeType == 0?"sel":""}}' catchtap='timeType'  data-type='0'>即将开始</view>
+  </view>
+
+  <view wx:if='{{mslist.length != 0}}' wx:for='{{mslist}}' wx:key='k'>
+    <view class='r_time'>
+      <view class='sub div_float'>
+        <view></view>
+        <view class='timeLimt_list_time_view'>
+          <view class='timeLimt_list_time'>
+            <label wx:if="{{item.time_open == 1}}">仅剩</label>
+            <label wx:else>距开始</label>
+            <text>{{item.end_time_str[0]}}</text>天
+            <text>{{item.end_time_str[1]}}</text>小时
+            <text>{{item.end_time_str[2]}}</text>分
+            <text>{{item.end_time_str[3]}}</text>秒
+          </view>
+        </view>
+        <view></view>
+      </view>
+    </view>
+
+    <view class='resh_view_div'>
+      <template is="proShow" data="{{showType:1,reshList:item.goods_list,TimeType:item.time_open}}" />
+    </view>
+  </view>
+  <view wx:if='{{mslist.length == 0}}' class='orderNull'>
+    <view class='icon nullOrder'></view>
+    <view class='til'>没有相关商品</view>
+  </view>
+</view>

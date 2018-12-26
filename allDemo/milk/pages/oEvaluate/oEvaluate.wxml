@@ -1,0 +1,29 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='o_eval_head div_float'>
+    <image src='{{goods.goods_img}}' />
+    <text>{{goods.goods_name}}</text>
+  </view>
+
+  <view class='o_eval_cont'>
+    <form bindsubmit="formSubmit">
+      <view class='o_eval_star'>
+        <view>“{{evalText}}”</view>
+        <view class='o_eval_star_list'>
+          <block wx:for='{{starList}}' wx:for-item="starList" wx:for-index="s_index" wx:key="starList">
+            <text class='{{starList ? "star_sel" : "star_no"}}' bindtap='star_click' data-index='{{s_index}}'></text>
+          </block>
+        </view>
+      </view>
+      <textarea placeholder='味道如何，请留下您的评价' name='content' placeholder-class="o_evla_ph"></textarea>
+      <view class='o_eval_photo_view'>
+        <template is="uploadPhoto" data="{{uploadType:1,photo_data:photo_data}}" />
+        <button formType="submit" class='o_evla_sub'>提交</button>
+      </view>
+    </form>
+  </view>
+
+</view>

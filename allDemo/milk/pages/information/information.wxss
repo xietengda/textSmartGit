@@ -1,0 +1,34 @@
+@import "../../template/template.wxss";
+
+navigator{
+  display: block;
+}
+.infor_cont{
+  background-color: white;
+  position: fixed;
+  top: 150rpx;
+  bottom: 0;
+}
+.infor_cont_list{
+  height: 116rpx;
+  padding: 0rpx 10rpx 0rpx 30rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.infor_lit_L{
+  float: left;
+}
+.infor_til{
+  color: #353535;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+}
+.infor_date{
+  color: #7D7D7D;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+.infor_lit_R{
+  float: right;
+  color: #7D7D7D;
+  line-height: 116rpx;
+}

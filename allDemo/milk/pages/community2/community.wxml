@@ -1,0 +1,11 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con  {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='com_btm'>
+    <view class='com_btm_til'>{{name}}</view>
+    <template is="commEssay" data="{{essayList:essayList}}" />
+  </view>
+
+</view>

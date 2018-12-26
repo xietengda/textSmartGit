@@ -1,0 +1,78 @@
+@import "../../template/template.wxss";
+
+page{
+  background-color: white;
+}
+.reg_cont{
+  padding-top: 60rpx;
+}
+.reg_cont_list{
+  width: 90%;
+  height: 98rpx;
+  margin: 0 auto;
+  line-height: 98rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.reg_cont_list>view{
+  color: #323232;
+  font-size: 30rpx;
+  float: left;
+  width: 170rpx;
+}
+.reg_cont_list>input{
+  float: left;
+  min-width: 45%;
+  font-size: 26rpx;
+  margin-top:25rpx;
+  max-width:40%;
+}
+.reg_cont_list>button{
+  float: right;
+  width: 180rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+  color: #979797;
+  background-color: #eee;
+}
+.reg_cont_list>button::after{
+  border: none;
+}
+.reg_regulations{
+  width: 90%;
+  height: 60rpx;
+  margin: 0 auto;
+  line-height: 60rpx;
+  position: relative;
+}
+.reg_regulations>checkbox{
+  width: 100rpx;
+}
+.reg_regulations>checkbox .wx-checkbox-input{
+   width: 28rpx; /* 背景的宽 */
+   height: 28rpx; /* 背景的高 */
+}
+.reg_regulations>text{
+  color: #999;
+  font-size: 24rpx;
+  position: absolute;
+  left: 50rpx;
+  margin: 0 auto;
+  top: 0;
+  bottom: 0;
+  line-height: 68rpx;
+}
+.reg_btn{
+  width: 90%;
+  height: 82rpx;
+  background-color: #e50012;
+  border-radius: 30rpx;
+  color: white;
+  font-size: 30rpx;
+  margin-top: 50rpx;
+}
+.pColor{
+  color: #bbbbbb;
+}

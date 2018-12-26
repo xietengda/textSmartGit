@@ -1,0 +1,61 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}' catchtouchmove="{{touchMove}}">
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='com_one'>
+    <view class='com_one_til'>{{title}}</view>
+    <view class='com_one_date'>
+      <text>{{author}}</text>
+      <text>{{addTime}}</text>
+    </view>
+    <view>
+      <rich-text nodes="{{content}}"></rich-text>
+    </view>
+  </view> 
+
+  <view class='com_comment {{isIphoneX?"ix_btm":""}}'>
+    <view class='com_comment_til'>最新跟帖</view>
+    <view class='com_comment_cont'>
+      <block wx:for="{{commentList}}" wx:key="comment">
+        <view class='comment_cont_list div_float'>
+          <image class='comment_cont_img' src='{{item.headimg}}' />
+          <view class='comment_cont_msg'>
+            <view class='comment_cont_name'>{{item.nickname}}</view>
+            <view class='comment_cont_date'>{{item.time}}</view>
+            <view class='comment_cont_text'>{{item.content}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class='com_btm div_float {{isIphoneX?"ix_btm":""}}'>
+    <view class='com_btm_list'>
+      <view class='browse'></view>
+      <view>{{clickNum}}</view>
+    </view>
+    <view class='com_btm_list' catchtap='likeFun'>
+      <view class='approval'></view>
+      <view>{{praiseNum}}</view>
+    </view>
+    <view class='com_btm_list' catchtap='clickComment'>
+      <view class='commentIcon'></view>
+      <view>评论</view>
+    </view>
+    <view class='com_btm_list'>
+      <view class='share'></view>
+      <view>分享</view>
+      <button class='cShareBtn' open-type="share" type="primary" hover-class="other-button-hover"></button>
+    </view>
+  </view>
+
+  <view class='com_comment_frame {{isIphoneX?"ix_com_top":""}}' hidden='{{commentF}}'>
+    <textarea placeholder='请输入评论' placeholder-class='commentPla' bindinput="commentCont"></textarea>
+    <view class='com_comment_frame_btm div_float'>
+      <button catchtap='exitCom'>取消</button>
+      <button catchtap='comment'>提交评论</button>
+    </view>
+  </view>
+
+</view>
