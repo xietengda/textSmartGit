@@ -3,7 +3,7 @@
 			<!--地址-->
 			<div class="adrMsg div_float">
 				<div class="L"><span class="adrIcon"></span></div>
-				<div class="R" @click="selAddress">
+				<div class="R" :data-adr-id='adrMsg.address_id' @click="selAddress">
 					<div class="sub">
 						<div><span>{{adrMsg.consignee}}</span>{{adrMsg.mobile}}</div>
 						<div>{{adrMsg.province_name}}{{adrMsg.city_name}}{{adrMsg.district_name}}{{adrMsg.address}}</div>
@@ -18,7 +18,7 @@
 					<img :src="item.goods_thumb" />
 					<div class="Msg">
 						<div class="til">{{item.goods_name}}</div>
-						<div class="ml" v-if='item.goods_attr'>规格：{{item.goods_attr}}</div>
+						<div class="ml" v-if='item.goods_attr'>{{item.goods_attr}}</div>
 						<div class="price">¥{{item.goods_price}}</div>
 					</div>
 					<div class="num">x{{item.goods_number}}</div>
@@ -38,7 +38,8 @@
 				</div>
 				<div class="div_float">
 					<div class="L">商城活动</div>
-					<div class="R">满150.00减5 ></div>
+					<div class="R" v-if="orderTotal.discount_name != '' && orderTotal.discount_name != null ">{{orderTotal.discount_name}}</div>
+					<div class="R" v-else>无活动</div>
 				</div>
 				<div class="div_float">
 					<div class="L">优惠券</div>
@@ -63,11 +64,11 @@
     		</div>
     		<div class="div_float">
     			<div class="L">减免</div>
-    			<div class="R">-¥0.00</div>
+    			<div class="R">-{{orderTotal.discount_formated}}</div>
     		</div>
     		<div class="div_float">
     			<div class="L">优惠券</div>
-    			<div class="R">-{{orderTotal.discount_formated}}</div>
+    			<div class="R">-{{discountMoney}}</div>
     		</div>
     	</div>
     	
@@ -97,6 +98,7 @@ export default {
      	disList:[],//可用优惠券列表
      	hasBouns:false,//是否使用优惠券
      	selDisText:'选择优惠券',//选中的优惠券
+     	discountMoney:'¥0.00',//优惠券优惠金额
      	remark:'',//备注信息
     }
   },
@@ -155,8 +157,8 @@ export default {
 					   		for(var x in bounsList){
 					   			if(parseInt(bounsList[x].bonus_id) == parseInt(wx.getStorageSync('selDisId'))){
 					   				console.log(bounsList[x])
-					   				//设置优惠券
-					   				that.orderTotal.discount_formated = bounsList[x].bonus_money_formated;
+					   				//设置优惠券优惠金额
+					   				that.discountMoney = bounsList[x].bonus_money_formated;
 					   				//计算总额度
 					   				var count = (that.orderTotal.amount - bounsList[x].type_money).toFixed(2);
 					   				that.orderTotal.amount_formated = '¥'+count;
@@ -177,9 +179,9 @@ export default {
   		})
   	},
   	//点击选择地址
-  	selAddress(){
+  	selAddress(e){
   		wx.navigateTo({
-  			url:'/pages/selAddress/main'
+  			url:'/pages/selAddress/main?adrId='+e.currentTarget.dataset.adrId
   		})
   	},
   	//提交订单
@@ -231,12 +233,14 @@ export default {
   		}
   		
   		//出现加载动画
-  		wx.showLoading();
+  		wx.showLoading({
+  			mask:true
+  		});
   		
-  		console.log(sign);
+  		console.log('提交商品信息',wx.getStorageSync('userId'),that.proArr,JSON.stringify(sign),that.adrMsg.address_id);
   		that.Request.submitOrder(wx.getStorageSync('userId'),that.proArr,JSON.stringify(sign),that.adrMsg.address_id)
   			.then(res =>{
-  				console.log(res)
+  				console.log('提交订单返回',res)
   				if(res.code == 200){
   					//隐藏加载动画
   					wx.hideLoading();
@@ -254,13 +258,42 @@ export default {
 				  		key: 'selDisId'
 				  	});
 				  	
+				  	//删除发票信息
+				  	wx.removeStorage({
+				  		key: 'invoice'
+				  	});
+				  	
 				  	this.selDisText = '选择优惠券';
+				  	
+				  	var payMent = JSON.parse(res.data.payment.prepay);
+				  	
+				  	console.log('支付信息',payMent)
+				  	
+				  	//调用微信支付
+				  	wx.requestPayment({
+						  timeStamp: payMent.timeStamp.toString(),
+						  nonceStr: payMent.nonceStr,
+						  package: payMent.package,
+						  signType: 'MD5',
+						  paySign: payMent.paySign,
+						  success:(res)=>{ 
+						  	console.log(res);
+						  	//跳转支付完成页面
+						  	wx.navigateTo({
+						  		url:'/pages/payMentFinish/main'
+						  	})
+						  },
+						  fail:(res)=>{ 
+						  	//返回支付退回购物车
+						  	wx.navigateBack();
+						  }
+						})
+				  	
   					
-  					console.log(res)
   				}
   			})
   			.catch(res =>{
-  				console.log(res)
+  				console.log('出错',res)
   			})
   		
   		
@@ -307,6 +340,8 @@ export default {
 		   			}
 		   		}
 		   	}
+	   	}else{
+	   		
 	   	}
 	   	
   	})
@@ -330,7 +365,20 @@ export default {
   		key: 'selDisId'
   	});
   	
+  	//删除发票信息
+  	wx.removeStorage({
+  		key: 'invoice'
+  	});
+  	
+  	//删除选中地址信息
+  	wx.removeStorage({
+  		key: 'adrId'
+  	});
+  	
+  	
+  	
   	this.selDisText = '选择优惠券';
+  	this.discountMoney = '¥0.00'
   }
 }
 </script>

@@ -16,24 +16,33 @@
 					 		<div class="sub" data-od-state='2' @click="skipOrder">
 					 			<div class="dfk"></div>
 					 			<div class="til">待付款</div>
+					 			<div class="num" :class="[userInfo.pay_count >9 ?'num2':'']" v-if='userInfo.pay_count != 0' >{{userInfo.pay_count}}</div>
 					 		</div>
 					</div>
 					<div class="list">
 					 		<div class="sub" data-od-state='3' @click="skipOrder">
 					 			<div class="dfh"></div>
 					 			<div class="til">待发货</div>
+					 			<div class="num" :class="[userInfo.ship_count >9 ?'num2':'']" v-if='userInfo.ship_count != 0'>{{userInfo.ship_count}}</div>
 					 		</div>
 					</div>
 					<div class="list">
 					 		<div class="sub" data-od-state='4' @click="skipOrder">
 					 			<div class="dsh"></div>
 					 			<div class="til">待收货</div>
+					 			<div class="num" :class="[userInfo.shipped_count >9 ?'num2':'']" v-if='userInfo.shipped_count != 0'>{{userInfo.shipped_count}}</div>
 					 		</div>
 					</div>
 					<div class="list">
 					 		<div class="sub" data-od-state='5' @click="skipOrder">
 					 			<div class="ywc"></div>
 					 			<div class="til">已完成</div>
+					 		</div>
+					</div>
+					<div class="list">
+					 		<div class="sub" @click="skipRefund">
+					 			<div class="tksh"></div>
+					 			<div class="til">退款/售后</div>
 					 		</div>
 					</div>
 				</div>
@@ -54,15 +63,19 @@
 						<div class="bl div_float">
 							<div class="L"><span class="dh"></span>联系客服</div>
 							<div class="R"><span class="arr_g"></span></div>
-							 <button open-type='contact'></button>
+							<button open-type='contact' size="mini" :session-from="concatText"></button>
 						</div>
 				</div>
 			</div>
+			
+			<!--公共底部-->
+			<!--<allFooter :selType='4' :shopNum='carLength'/>-->
     
   </div>
 </template>
 
 <script>
+import allFooter from '../../components/footer'
 
 export default {
   data () {
@@ -71,16 +84,30 @@ export default {
 			util: this.$util.util.prototype, //工具类
 			userMsg:'',//用户信息
 			integral:'',//用户积分
+			userInfo:{
+				ship_count:0,
+				pay_count:0,
+				shipped_count:0
+			},//获取的用户资料，
+			carLength:0,//购物车数量
+			concatText:'',//客服信息
     }
   },
 
-  components: {
-    
+ 	components: {
+    allFooter
   },
+  computed:{
+	    isIphonex(){
+	        return this.$store.getters.isIphonex;
+	    },
+	},
 
   methods: {
     //跳转订单列表
     skipOrder(e){
+    	//将订单状态存进本地
+  		wx.setStorageSync('odState',e.currentTarget.dataset.odState);
     	wx.navigateTo({
     		url:'/pages/order/main?odState='+e.currentTarget.dataset.odState
     	})
@@ -93,18 +120,96 @@ export default {
     			console.log(res)
     			if(res.code  == 200){
     				that.integral = that.util.conJson(res.data.integral);
+    				that.userInfo = that.util.conJson(res.data);
+    				
+    				var userMsg = wx.getStorageSync('userMsg');
+   					//配置第三方客服信息
+			   		var customer_info = {
+						    "email": res.data.email, //邮箱
+						    "ip": "192.168.1.1", //IP
+						    "description": "描述",
+						    "organization_id": 1, //所属公司ID
+						    "tags": "标签1,标签2", //标签 已英文号分割
+						    "owner_id": 1, //客户负责人ID
+						    "owner_group_id": 1, //客户负责组ID
+						    "level": "normal", // 等级
+						    "cellphones": [["", res.data.mobile_phone]], //数组 [[电话ID, 电话文本]]
+						    "other_emails": [["", "13100000002@udesk.cn"]], //数组 [[邮箱ID, 邮箱]]
+						    "custom_fields": {
+						        "TextField_1": "普通文本内容",
+						    }
+						}
+			   		
+			   		var nick_name = userMsg.nickName;// 客户昵称
+						var avatar = userMsg.avatarUrl; // 客户头像
+						
+						var note_info = {
+						    "title": "测试标题",
+						    "custom_fields": {
+						        "TextField_1": "普通文本内容",
+						    }
+						}
+						
+						
+						var customer_info_str = JSON.stringify(customer_info);
+						var note_info_str = JSON.stringify(note_info);
+						
+						that.concatText = "udesk|"+nick_name+"|"+avatar+"| customer^"+customer_info_str+"| note^"+note_info_str;	
+   					
+    				
     			}
     		})
     		.catch(res =>{
     			console.log(res)
     		})
-    }
+    },
+    //跳转售后
+    skipRefund(){
+    	wx.navigateTo({
+    		url:'/pages/refunList/main'
+    	})
+    },
+    //获取购车商品
+		getShopCartFun() {
+			var that = this;
+			//加载动画
+			wx.showLoading();
+			that.Request.getShopCart(wx.getStorageSync('userId'))
+				.then(res => {
+					//隐藏加载动画
+					wx.hideLoading();
+					if(res.code == 200){
+						var goodsList = res.data.supplier_list[0].goods_list;
+						var signLength = 0;
+						for(var x in goodsList){
+							signLength = parseInt(goodsList[x].goods_number) + signLength;
+						}
+						//购物车数量
+						wx.setTabBarBadge({
+						  index: 2,
+						  text: signLength.toString()
+						})
+					}
+				})
+		},
   },
 
   async onShow(){
-   		await this.util.checkLogin();
-   		this.userMsg = wx.getStorageSync('userMsg');
-   		this.getUserInfoFun();
+  		var that = this;
+  		
+  		this.userMsg = wx.getStorageSync('userMsg');
+  		
+   		await this.util.checkLogin()
+   			.then(res =>{
+   				if(wx.getStorageSync('userMsg') != null && wx.getStorageSync('userMsg') != ''){
+   					this.getUserInfoFun();
+   					this.getShopCartFun();
+   					
+   				}
+   			})
+   		
+   		
+   		
   }
 }
 </script>
@@ -152,6 +257,23 @@ export default {
 		margin-top: 20rpx;
 		background-color: white;
 	}
+	.odrCn .list .sub .num{
+		position: absolute;
+		width: 35rpx;
+		height: 35rpx;
+		line-height: 35rpx;
+		background-color: #5b0e12;
+		text-align: center;
+		font-size: 24rpx;
+		color: white;
+		border-radius: 100%;
+		right: -10rpx;
+		top: -10rpx;
+	}
+	.odrCn .list .sub .num2{
+		padding: 0 5rpx;
+		border-radius: 30rpx;
+	}
 	.odrCn .list .sub>div:nth-child(1){
 		width: 71rpx;
 		height: 61rpx;
@@ -164,9 +286,10 @@ export default {
 		line-height: 50rpx;
 		font-size: 28rpx;
 		color: #666666;
+		position: relative;
 	}
 	.odrCn .list{
-		width: 25%;
+		width: 20%;
 		height: 100%;
 		text-align: center;
 		display: inline-block;
@@ -271,6 +394,13 @@ export default {
 		width: 32rpx !important;
 		height: 30rpx  !important;
 		background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAgCAYAAAB3j6rJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkEyNjQ3QTc1RDY3NTExRTg5MzM3QTdDNUQxMjk4NjNCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkEyNjQ3QTc2RDY3NTExRTg5MzM3QTdDNUQxMjk4NjNCIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QTI2NDdBNzNENjc1MTFFODkzMzdBN0M1RDEyOTg2M0IiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QTI2NDdBNzRENjc1MTFFODkzMzdBN0M1RDEyOTg2M0IiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7bhgBVAAADLUlEQVR42ryXe2iNYRzHz17TmGuuzR9yK7KIpqG5/DGWJPwhY4oJ57iUa6jhGO0ft8lE3kyOco+VI0QtSdL+mGFyza1kOTUZpuaW729933p6e9+95z17Xk99Os85e97n+e73+z3f93nSwuFwyKXNBWPATXA/FFAzTbP103D421jwBMTATnAd7AEZoQCbXUgRuA2yQTpoAT3BOnD4fwkREcdAD9DIxQdK9BiNRWBl0ELywRHQDdwAI8EJkABREAeZTFF2UEJ6gUtMQR0opgCrSX8Fo9QdXAX9ghCymgs0gVKbCFVMmGMG8xntQtL5mcEUuLUqcJ797bqjYt81fTzGR7mTOoAS3ULegu/8vsBjvKToJPuLdQs5BbqATqC/x3gZN5P9l0GkxuRniUfupTayWLR7gxAS4+SGx47YDDqCShavdiE1yo7Z4RKVLBZqSKmpQHbNfvCVv21xGNsALrK/ge4biJDH4CD7y8AMh/FbuXPEAB/o9BK7jxwFr2j31xwWEhGjwC8a4FNdYgyHhQqVwj3jImY466Q3eKZDjNPBqI41IAtN4/vH3sQER4NmvjQ/gQk2h44y3TXJmJ/h8ru45znFQZe7iJEjwV9+l+PDAVDGwi5lGnN5xJDx0/0KsczrLt1UdtQchzHvua3fsK42gm18kUp674Fa8AcM4q4765RKw+O9Mg+846ktpti7fdxEUA5+0mvkzDILTALjwBLwgmIXgocgJ1kh1iLjwQdOIv/NLpdxm0BfMADMZjSsdgVMAbvBD0axGhQkK8RaJEeJjIT/uMtOEUP83MY8cisYBj5yrguRSKQgWSFqZGQHdGXxxlPctg28spxmlEVMvuFjggRDHqehibB61offZqWykWImGylMUMRXQRMjIhewQylGJ9NPjdhbM985U5UL2Fra/VIf88hxozPr6rLRDld+xAuYGN8X2n0FeA3WgLQ2no2A9exX4v5b3x4haqoKKUCMbAjYR0+p5lV1KFNXRg8p566p5aWt9UEd7RYYwXCvok9I2PO49Yt58m/hbVI+74D5iEZCpxBpv5maCjpwLlMmx4rn4BvF5tFrTPXhfwIMAMUGvryeYFT6AAAAAElFTkSuQmCC');
+	}
+	
+	.tksh{
+		width: 56rpx  !important;
+		height: 64rpx  !important;
+		background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAABICAYAAACuukaYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkNFNDJCMUY0MEVGQTExRTlCM0ZBRDEwNDgwQTUxMjJEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkNFNDJCMUY1MEVGQTExRTlCM0ZBRDEwNDgwQTUxMjJEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Q0U0MkIxRjIwRUZBMTFFOUIzRkFEMTA0ODBBNTEyMkQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Q0U0MkIxRjMwRUZBMTFFOUIzRkFEMTA0ODBBNTEyMkQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz66htj2AAAG3klEQVR42uxb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') no-repeat;
+		background-size: 100% 100%;
 	}
 	
 </style>

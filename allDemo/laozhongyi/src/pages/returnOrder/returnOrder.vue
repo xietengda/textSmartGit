@@ -2,75 +2,145 @@
   <div class="container">
 			<div class="odHead">
 				<div class="sub">
-					<div class="til">退款成功</div>
-					<div class="time">2018-10-10  17：21：11</div>
+					<div v-if="odState == 1 ">
+						<div class="til" v-if='rechange == 0'>买家申请退货</div>
+						<div class="til" v-else>买家申请换货</div>
+						<div class="time">{{reFundMsg.add_time_format}}</div>
+					</div>
+					<div v-if="odState == 4 || odState == 5">
+						<div class="til" >商家已同意</div>
+						<div class="time">{{reFundMsg.supplier_agree_time}}</div>
+					</div>
+					
+					<div  v-if="odState == 2">
+						<div class="til">买家退回商品</div>
+						<div class="time">{{reFundMsg.buy_shipping_time}}</div>
+					</div>
+					
+					<div v-if="odState == 7">
+						<div class="til">商家收货</div>
+						<div class="time">{{reFundMsg.receive_time}}</div>
+					</div>
+					
+					<div v-if="odState == 12 && isFund == 0">
+						<div class="til">退款退货完成</div>
+						<div class="time">{{reFundMsg.refund_end_time}}</div>
+					</div>
+					
+					<div  v-if='odState == 15'>
+						<div class="til">换货完成</div>
+						<div class="time">{{reFundMsg.refund_time}}</div>
+					</div>
+					
+					<!--换货，商家收货-->
+					<div  v-if='odState == 13'>
+						<div class="til">商家收货，并发出货物</div>
+						<div class="time">{{reFundMsg.rechange_time}}</div>
+					</div>
+					
+					<!--换货，买家签收-->
+					<div  v-if='odState == 14'>
+						<div class="til">换货完成</div>
+						<div class="time">{{reFundMsg.rechange_receive_time}}</div>
+					</div>
+					
+					
+					<!--仅退款-->
+					<!--申请退款-->
+					<div  v-if='odState == 10'>
+						<div class="til">买家申请退款</div>
+						<div class="time">{{reFundMsg.add_time_format}}</div>
+					</div>
+					<!--卖家同意退款-->
+					<div  v-if='odState == 11 && isFund == 1'>
+						<div class="til">卖家同意退款</div>
+						<div class="time">{{reFundMsg.agree_refund_time}}</div>
+					</div>
+					<!--退款完成-->
+					<div v-if="odState == 12 && isFund == 1">
+						<div class="til">退款完成</div>
+						<div class="time">{{reFundMsg.refund_end_time}}</div>
+					</div>
+					
+					<div>
+						
+					</div>
+					
 				</div>
 			</div>
 			
-			<div class="rePrice div_float">
+			<div class="rePrice div_float" v-if="rechange != 1">
 				<div class="L">退款总金额</div>
-				<div class="R">¥680.00</div>
+				<div class="R">{{reFundMsg.refund_amount}}</div>
 			</div>
 			
-			<!--三个状态-->
-			<div class="reProgress">
+			
+			
+			<!--五个状态  (商家已发货)-->
+			<div class="reProTwo" v-if='isFund == 0'>
 				<div class="til">退款进度</div>
 				<div class="proCn">
 					<div class="line">
-						<div><span></span></div>
-						<div><span></span></div>
-						<div><span class="gouSel"></span></div>
+						<div><span :class="[odState == 1 || odState == 10 ? 'gouSel':'']"></span></div>
+						<div><span :class="[odState == 4 ? 'gouSel':'']"></span></div>
+						<div><span :class="[odState == 2 ? 'gouSel':'']"></span></div>
+						<div><span :class="[odState == 7 || odState == 13 ? 'gouSel':'']"></span></div>
+						<div><span :class="[odState == 12 || odState == 14 ? 'gouSel':'']"></span></div>
 						<div class="lineView"></div>
 					</div>
 					<div class="subCn">
 						<div>
-							<div class="til">卖家退款</div>
-							<div class="subtil">2018-10-10 17：12</div>
+							<!--设置换货 还是退货-->
+							<div class="til" v-if='rechange == 0'>买家申请退货</div>
+							<div class="til" v-else>买家申请换货</div>
+							<div class="subtil">{{reFundMsg.add_time_format}}</div>
 						</div>
 						<div>
 							<div class="til">商家已同意</div>
-							<div class="subtil">2018-10-10 17：12</div>
+							<div class="subtil" v-if="reFundMsg.supplier_agree_time != ''">{{reFundMsg.supplier_agree_time}}</div>
 						</div>
 						<div>
-							<div class="til">退款成功</div>
-							<div class="subtil">2018-10-10 17：12</div>
+							<div class="til">买家退回商品</div>
+							<div class="subtil" v-if="reFundMsg.buy_shipping_time != ''">{{reFundMsg.buy_shipping_time}}</div>
+						</div>
+						<div>
+							<div class="til">商家收货</div>
+							<div class="subtil" v-if="reFundMsg.receive_time !=''  && rechange == 0">{{reFundMsg.receive_time}}</div>
+							<!--换货，商家收货时间-->
+							<div class="subtil" v-else>{{reFundMsg.rechange_time}}</div>
+						</div>
+						<div>
+							<div class="til" v-if='rechange == 1'>换货完成</div>
+							<div class="til" v-else>退款退货完成</div>
+							<div class="subtil" v-if="reFundMsg.refund_end_time != '' && rechange == 0">{{reFundMsg.refund_end_time}}</div>
+							<div class="subtil" v-else>{{reFundMsg.rechange_receive_time}}</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			
-			<!--五个状态-->
-			<div class="reProTwo">
+			<!--三个状态 (商家未发货状态)-->
+			<div class="reProgress" v-if='isFund == 1 && rechange != 1'>
 				<div class="til">退款进度</div>
 				<div class="proCn">
 					<div class="line">
-						<div><span></span></div>
-						<div><span></span></div>
-						<div><span class="gouSel"></span></div>
-						<div><span></span></div>
-						<div><span></span></div>
+						<div><span :class="[odState == 10  ? 'gouSel':'']"></span></div>
+						<div><span :class="[odState == 11  ? 'gouSel':'']"></span></div>
+						<div><span :class="[odState == 12  ? 'gouSel':'']"></span></div>
 						<div class="lineView"></div>
 					</div>
 					<div class="subCn">
 						<div>
-							<div class="til">卖家退款</div>
-							<div class="subtil">2018-10-10 17：12</div>
+							<div class="til">买家申请退款</div>
+							<div class="subtil">{{reFundMsg.add_time_format}}</div>
 						</div>
 						<div>
 							<div class="til">商家已同意</div>
-							<div class="subtil">2018-10-10 17：12</div>
+							<div class="subtil">{{reFundMsg.agree_refund_time}}</div>
 						</div>
 						<div>
 							<div class="til">退款成功</div>
-							<div class="subtil">2018-10-10 17：12</div>
-						</div>
-						<div>
-							<div class="til">退款成功</div>
-							<div class="subtil">2018-10-10 17：12</div>
-						</div>
-						<div>
-							<div class="til">退款成功</div>
-							<div class="subtil">2018-10-10 17：12</div>
+							<div class="subtil">{{reFundMsg.refund_end_time}}</div>
 						</div>
 					</div>
 				</div>
@@ -78,18 +148,16 @@
 			
     
     	<!--物流信息-->
-    	<div class="exView">
+    	<div class="exView" v-if="odState == 4 || odState == 5">
     		<div class="exTil">物流信息</div>
     		<div class="exCn">
     			<div class="list">
     				<label>物流公司</label>
-    				<div class="sel">
-    					请选择<span class="downIcon"></span>
-    				</div>
+    				<input type="text" v-model.lazy="shipName" placeholder="请输入快递公司" placeholder-class="placeClass" />
     			</div>
     			<div class="list">
     				<label>物流公司</label>
-    				<input type="text" placeholder="请输入快递单号" placeholder-class="placeClass" />
+    				<input type="text" v-model.lazy="shipNumber" placeholder="请输入快递单号" placeholder-class="placeClass" />
     			</div>
     		</div>
     	</div>
@@ -100,30 +168,42 @@
     		<div class="reTil">退款信息</div>
     		<div class="reCn">
     			<div class="list div_float" v-for='(item,key) in reList' :key='item.id'>
-    				<img src="../../../static/img/list1.png" />
+    				<img :src="item.goods_thumb" />
     				<div class="R">
-    						<div class="til">呼唤晒后修复精华焕新版</div>
-	    					<div class="ml">规格：15ml</div>
+    						<div class="til">{{item.goods_name}}</div>
+	    					<div class="ml" v-if="item.goods_attr">{{item.goods_attr}}</div>
     				</div>
-    				<div class="num">×1</div>
+    				<div class="num">×{{item.back_goods_number}}</div>
     			</div>
     		</div>
     	</div>
     	
+    	<!--买家退款信息-->
+    	<div class="reCausee buyer" v-if='odState == 2 || odState == 7 || odState == 12'>
+    		<div class="til">退货物流信息：</div>
+    		<div>退货快递公司：{{reFundMsg.buyer_shipping_name}}</div>
+    		<div>退货快递单号：{{reFundMsg.buyer_invoice_no}}</div>
+    	</div>
+    	
     	<!--退款原因-->
     	<div class="reCausee">
-    		<div>退款原因：7天无理由退货</div>
-    		<div>退换说明：没有</div>
-    		<div>退款金额：￥600.00</div>
-    		<div>申请件数：3</div>
-    		<div>下单时间：2018-10-10  17:12</div>
-    		<div>退款编号：13238047</div>
+    		<div>退款原因：{{reFundMsg.suggest_reason}}</div>
+    		<div>退换说明：{{reFundMsg.suggest_remark}}</div>
+    		<div v-if="rechange != 1">退款金额：{{reFundMsg.refund_amount}}</div>
+    		<div>申请件数：{{reFundMsg.reFundNum}}</div>
+    		<div>下单时间：{{reFundMsg.add_time}}</div>
+    		<div>退款单号：{{reFundMsg.back_sn}}</div>
     	</div>
     	
     	<!--底部-->
     	<div class="odBtm">
-    		<div class="verify">确认</div>
-    		<div class="service">联系客服</div>
+    		<div class="verify"  v-if="odState == 4" @click="submitShipNum">确认</div>
+    		<div class="service">联系客服 <button open-type='contact'></button></div>
+    	</div>
+    	
+    	<!--返回个人中心图标-->
+    	<div class="goMe" v-show="showMe" @click="goToMe">
+    		<img src="../../../dist/static/img/me_sel.png" />
     	</div>
     
   </div>
@@ -134,7 +214,17 @@
 export default {
   data () {
     return {
-     reList:[1,1,1]
+    	Request: this.$api.api.prototype, //请求头
+			util: this.$util.util.prototype, //工具类
+			isFund:0,//售后类型  0：退货  1：退货退款
+			rechange:0,// 1：换货  否则不是
+      reList:[],//商品列表
+      orderId:'',//订单id
+      reFundMsg:'',//退款信息
+      odState:0,//订单状态
+      shipName:"",//物流公司名字
+      shipNumber:'',//物流单号
+      showMe:true,//显示返回个人中心图标
     }
   },
 
@@ -143,16 +233,137 @@ export default {
   },
 
   methods: {
-  	
+  	getDetailFun(){
+  		var that = this;
+  		wx.showLoading();
+  		that.Request.getRefundDetail(wx.getStorageSync('userId'),that.orderId)	
+  			.then(res =>{
+  				console.log(res)
+  				wx.hideLoading();
+  				if(res.code == 200){
+  					var signNum = 0;
+  					for(var x in res.data.goods_list){
+  						res.data.goods_list[x].goods_thumb = that.Request.getUrl() + res.data.goods_list[x].goods_thumb;
+  						signNum = parseInt(signNum) + parseInt(res.data.goods_list[x].back_goods_number);
+  					}
+  					//商品
+  					that.reList = that.util.conJson(res.data.goods_list);
+  					
+  					//售后类型  （0:退货   1：退款）
+  					that.isFund = parseInt(res.data.is_refund);
+  					
+  					//是否换货类型  （ 1：换货  否则其他不是）
+  					that.rechange = parseInt(res.data.rechange);
+  					
+  					//商品数量
+  					res.data.reFundNum = signNum; 
+  					
+  					//退款信息
+  					that.reFundMsg = that.util.conJson(res.data);
+  					
+  					that.odState = that.util.conJson(res.data.show_time_tips);
+  				}
+  			})
+  			.catch(err =>{
+  				console.log(err)
+  			})
+  	},
+  	//提交物流单号
+  	submitShipNum(){
+  		let that  = this;
+  		
+  		let shipName = that.shipName;
+  		let shipNum = that.shipNumber;
+  		
+  		if(shipName == ""){
+  			wx.showToast({
+  				title:'请输入快递公司名称',
+  				icon:'none'
+  			})
+  			return;
+  		}
+  		
+  		if(shipNum == ""){
+  			wx.showToast({
+  				title:'请输入快递单号',
+  				icon:'none'
+  			})
+  			return;
+  		}
+  
+  		wx.showLoading();
+  		
+  		that.Request.refundLogistics(wx.getStorageSync('userId'),that.orderId,shipName,shipNum)
+  			.then(res =>{
+  				console.log(res)
+  				if(res.code == 200){
+  					wx.hideLoading();
+  					that.getDetailFun();
+  				}
+  			})
+  			.catch(err =>{
+  				console.log(res)
+  			})
+  	},
+//	回到个人中心
+		goToMe(){
+			wx.removeStorageSync('showMe');
+			wx.switchTab({
+			  url: '/pages/me/main'
+			});
+		}
   },
 
-  created () {
-   
+  async onShow(){
+  	var that = this;
+  	this.page = 1;
+  	this.orderId = this.$root.$mp.query.orderId;
+  	await this.util.checkLogin()
+  		.then(res =>{
+  			that.getDetailFun();
+  		})
+  		
+  	//判断是否显示个人中心图标
+  	if(wx.getStorageSync('showMe')){
+  		this.showMe = true;
+  	}else{
+  		this.showMe = false;
+  	}
+  		
+  },
+  onUnload(){
+  	this.isFund = 0;//售后类型  0：退货  1：退货退款
+		this.rechange = 0;// 1：换货  否则不是
+	  this.reList = [];//商品列表
+	  this.orderId = '';//订单id
+	  this.reFundMsg = '';//退款信息
+	  this.odState = 0;//订单状态
+	  this.shipName = '';//物流公司名字
+	  this.shipNumber = '';//物流单号
   }
 }
 </script>
 
 <style scoped>
+	.goMe{
+		position: fixed;
+		width: 80rpx;
+		height: 80rpx;
+		line-height: 70rpx;
+		border: 2rpx solid #7F1313;
+		right: 20rpx;
+		bottom: 250rpx;
+		background-color: white;
+		opacity: 0.8;
+		border-radius: 100%;
+		text-align: center;
+	}
+	.goMe img{
+		width: 50rpx;
+		height: 50rpx;
+		display: inline-block;
+		vertical-align: middle;
+	}
 	.odBtm>div{
 		display: inline-block;
 		vertical-align: middle;
@@ -165,6 +376,16 @@ export default {
 		border: 2rpx solid #666;
 		border-radius: 8rpx;
 		margin: 0 10rpx;
+		position: relative;
+	}
+	.odBtm button{
+		position: absolute;
+		z-index: 2;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
 	}
 	.odBtm{
 		height: 98rpx;
@@ -191,6 +412,12 @@ export default {
 		background-color: white;
 		padding: 0 2%;
 		padding-bottom: 120rpx;
+	}
+	.buyer{
+		padding-bottom: 0;
+	}
+	.buyer .til{
+		font-size: 26rpx;
 	}
 	.reMsg .reCn .list .num{
 		position: absolute;

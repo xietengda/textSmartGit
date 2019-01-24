@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			
-			<div class="seaCn div_float" :class="[isFixed ? 'pdgTop':'']">
+			<div class="seaCn div_float" :class="[isFixed ? 'pdgTop':'',proList.length == 1?'seaCnWhite':'']">
 				<div class="div_float"  v-if="proList.length != 0">
 					<div class="sList" v-for="(item,index) in proList" :key='item.id'>
 						<div class="sub"  :class="[index % 2 == 0 ?'rBorder':'']" :data-goods-id='item.goods_id' @click="skipDetail">
@@ -52,6 +52,7 @@
 						</div>
 					</div>
 				</div>
+				
 				
 				<div class='noProduct' v-else>
 				    <div class='nullCart'>
@@ -74,10 +75,10 @@ export default {
       cdt_one:[{name:''}],//条件2  选项1
       c_one:0,
       cdt_two:[{attr_value:''}],//条件2  选项2
-      c_two:0,
+      c_two:0, 
       cdt_third:[{attr_value:''}],//条件2  选项3
       c_third:0,
-      proList:[1,1,1,1],
+      proList:[],
       ctOne:'add_time',// 第一个条件，1:时间 2:销量 3:价格
       hideCnTwo:false,//是否隐藏第二个条件
       page:1,//页码
@@ -98,10 +99,15 @@ export default {
     cdtOneChange(e){
     	console.log(e);
     	this.c_one = e.mp.detail.value;
-    	console.log()
     	
     	//设置分类id
     	this.clsId = this.cdt_one[this.c_one].id;
+    	
+    	//重置2.3条件
+    	this.c_two = 0;
+    	this.c_third = 0;
+    	this.attr2 = '';
+    	this.attr3 = '';
     	
     	//设置页码回到第一页
 			this.page = 1;
@@ -113,6 +119,10 @@ export default {
     cdtTwoChange(e){
     	var sIndex = e.mp.detail.value;
     	this.c_two = sIndex;
+    	
+    	//重置3条件
+    	this.c_third = 0;
+    	this.attr3 = '';
     	
     	//设置选中属性
     	if(sIndex >= 1){
@@ -164,7 +174,12 @@ export default {
     },
     //获取商品列表
     getProductFun(){
-    	var that = this; //  376 441  458
+    	var that = this; 
+    	//加载动画
+    	wx.showLoading({
+    		mask:true
+    	});
+    	
     	//设置2，3属性
     	var signAttr = '';
     	if(that.attr2 != '' && that.attr3 != '' ){
@@ -175,83 +190,116 @@ export default {
     		signAttr = that.attr3;
     	}
     	
-    	that.Request.getProduct(that.seaText,that.clsId,that.page,that.ctOne,signAttr)
+    	var paixu  = 'desc';
+    	
+    	//如果选择的是价格，按照升序排序
+    	if(that.ctOne == 'shop_price'){
+    		paixu = 'asc';
+    	}
+    	
+    	that.Request.getProduct(that.seaText,that.clsId,that.page,that.ctOne,signAttr,paixu)
     		.then(res =>{
     			console.log(res)
     			if(res.code == 200){
     				
-    				//只有（page == 1）才重新渲染条件2
-    				if(that.page == 1 && res.data.list.length != 0){
-    					//设置条件2的第一个选项
-	    				if(res.data.childcat){
-	    					that.cdt_one = that.util.conJson(res.data.childcat);
-	    					
-	    					//设置选中的那个
-	    					for(let x in res.data.childcat){
-	    						if(res.data.childcat[x].id == that.clsId){
-	    							//设置选中小下标
-	    							that.c_one = x;
-	    							
-	    						}
-	    					}
+    				//设置条件2的第一个选项
+    				if(res.data.childcat){
+    					console.log('1111',res.data.childcat)
+    					that.cdt_one = that.util.conJson(res.data.childcat);
+    					
+    					//设置选中的那个
+    					for(let x in res.data.childcat){
+    						if(res.data.childcat[x].id == that.clsId){
+    							//设置选中小下标
+    							that.c_one = x;
+    						}
+    					}
+    				}
+    				
+    				if(res.data.filter_attr_list){
+    					var attList1 = res.data.filter_attr_list[0].attr_list
+	    				//设置条件2的第二个选项
+	    				if(attList1 != undefined){
+	    					that.cdt_two = that.util.conJson(attList1);
 	    				}
 	    				
-	    				if(res.data.filter_attr_list){
-	    					var attList1 = res.data.filter_attr_list[0].attr_list
-		    				//设置条件2的第二个选项
-		    				if(attList1 != undefined){
-		    					that.cdt_two = that.util.conJson(attList1);
-		    				}
-		    				
-		    				if(res.data.filter_attr_list[1]){
-		    					var attList2 = res.data.filter_attr_list[1].attr_list
-			    				//设置条件2的第三个选项
-			    				if(attList2 != undefined){
-			    					that.cdt_third = that.util.conJson(attList2);
-			    				}
-		    				}else{
-		    					var sign = [{
-		    						attr_value:'暂无分类'
-		    					}]
-		    					that.cdt_third = sign;
+	    				if(res.data.filter_attr_list[1]){
+	    					var attList2 = res.data.filter_attr_list[1].attr_list
+		    				//设置条件2的第三个选项
+		    				if(attList2 != undefined){
+		    					that.cdt_third = that.util.conJson(attList2);
 		    				}
 	    				}else{
-	    					var sign = [{
-	    						attr_value:'暂无分类'
+	    					var sign3 = [{
+	    						attr_value:'全部肌肤需求'
 	    					}]
-	    					that.cdt_two = sign;
-		    				that.cdt_third = sign;
+	    					that.cdt_third = sign3;
 	    				}
     				}else{
-    					var sign1 = [{
-    						name:'暂无分类'
+    					var sign2 = [{
+    						attr_value:'全部产品分类'
     					}]
-    					var sign = [{
-    						attr_value:'暂无分类'
+    					var sign3 = [{
+    						attr_value:'全部肌肤需求'
     					}]
-    					that.cdt_one = sign1;
-    					that.cdt_two = sign;
-	    				that.cdt_third = sign;
+    					that.cdt_two = sign2;
+	    				that.cdt_third = sign3;
     				}
     				
-    				var goodsList = that.util.conJson(res.data.list);
     				
-    				for(let y in goodsList){
-    					goodsList[y].goods_thumb = that.Request.getUrl() + goodsList[y].goods_thumb;
-    				}
+    				if(res.data.list.length != 0){
+    					
+    					//只有（page == 1）才重新渲染条件2
+	    				if(that.page == 1 && res.data.list.length != 0){
+	    					
+	    				}else{
+	    					var sign2 = [{
+	    						attr_value:'全部产品分类'
+	    					}]
+	    					var sign3 = [{
+	    						attr_value:'全部肌肤需求'
+	    					}]
+	    					that.cdt_two = sign2;
+		    				that.cdt_third = sign3;
+	    				}
+    					
+    					var goodsList = that.util.conJson(res.data.list);
     				
-    				if(that.page != 1 && that.page != 'end'){
-							that.proList =  that.proList.concat(goodsList);	
+	    				for(let y in goodsList){
+	    					goodsList[y].goods_thumb = that.Request.getUrl() + goodsList[y].goods_thumb;
+	    				}
+	    				
+	    				if(that.page != 1 && that.page != 'end'){
+								that.proList =  that.proList.concat(goodsList);	
+	    				}else{
+	    					that.proList = goodsList;
+	    				}
+	    				
+	    				
+	    				if(parseInt(res.data.pager.page) < parseInt(res.data.pager.page_count)){
+	    					that.page = parseInt(that.page) + 1;
+	    				}else{
+	    					that.page = 'end'
+	    				}
+	    				
+	    				console.log('进')
+	    				
     				}else{
-    					that.proList = goodsList;
+    					that.proList = [];
+    					var sign2 = [{
+    						attr_value:'全部产品分类'
+    					}]
+    					var sign3 = [{
+    						attr_value:'全部肌肤需求'
+    					}]
+    					that.cdt_two = sign2;
+	    				that.cdt_third = sign3;
     				}
     				
-    				if(parseInt(res.data.pager.page) < parseInt(res.data.pager.page_count)){
-    					that.page = parseInt(that.page) + 1;
-    				}else{
-    					that.page = 'end'
-    				}
-    				
+    				//隐藏加载
+    				setTimeout(function(){
+    					wx.hideLoading();
+    				},1000)
     			}
     		})
     		.catch(res =>{
@@ -260,13 +308,31 @@ export default {
     },
     //跳转搜索页
     skipSearch(){
-    	wx.navigateBack();
+    	
+    	//如果是有搜索关键字就返回上一页，如果没有就跳转到搜索页面
+    	if(wx.getStorageSync('seaText') != '' && wx.getStorageSync('seaText') != undefined){
+    		wx.navigateBack();
+    	}else{
+    		wx.navigateTo({
+    			url:'/pages/search/main'
+    		})
+    	}
     }
   },
 
   onLoad(){
   	console.log(this.$root.$mp.query)
   	this.page = 1;
+  	
+  	this.proList = [];
+  	
+  	
+  	this.cdt_one = [{name:''}];//条件2  选项1
+	  this.c_one = 0;
+	  this.cdt_two = [{attr_value:''}];//条件2  选项2
+	  this.c_two = 0;
+	  this.cdt_third = [{attr_value:''}];//条件2  选项3
+	  this.c_third = 0;
   	
   	this.clsId = this.$root.$mp.query.clsId;
   	
@@ -276,6 +342,8 @@ export default {
 	  	if(this.clsId == 0){
 	  		//隐藏第二个条件
 	  		this.hideCnTwo = true;
+	  	}else{
+	  		this.hideCnTwo = false;
 	  	}
 	  	
 	  	this.seaText = '';
@@ -295,13 +363,6 @@ export default {
 	  	this.clsId = 0;
 	  	this.getProductFun();
   	}
-  	
-  	
-  	
-  	
-  	
-  	
-  	
     
   },
   onReachBottom(){
@@ -330,6 +391,18 @@ export default {
 		      	that.page = 1;
 		      	that.getProductFun();
 		    },500);
+		},
+		onUnload(){
+			wx.removeStorageSync('seaTil');
+			wx.removeStorageSync('selClass');
+			
+			this.ctOne = 'add_time';// 第一个条件，1:时间 2:销量 3:价格
+      this.hideCnTwo = false;//是否隐藏第二个条件
+      this.page = 1,//页码
+      this.clsId = "";//分类id
+      this.attr2 = "";//第2个属性
+      this.attr3 = "";//第3个属性
+			this.isFixed = false;
 		}
 }
 </script>
@@ -367,10 +440,12 @@ export default {
 	}
 	.seaCn .sList .price{
 		margin-top: 22rpx;
+		padding: 0 20rpx;
 	}
 	.seaCn .sList .til{
 		color: #333333;
 		font-size: 28rpx;
+		padding: 0 20rpx;
 	}
 	.seaCn .sList img{
 		width: 345rpx;
@@ -384,15 +459,27 @@ export default {
 		/*margin: 0 auto;*/
 		/*border: 1px solid red;*/
 	}
+	.seaCn .sList:last-child .sub{
+		border: none;
+	}
 	.seaCn .sList{
-		float: left;
+		display: inline-block;
+		vertical-align: top;
 		width: 50%;
+		height: 455rpx;
 		padding: 10rpx 0;
 		margin-bottom: 20rpx;
 		background-color: white;
 	}
-	.seaCn{
+	.seaCn>div{
 		background-color: #F7F7F7;
+	}
+	.seaCn{
+		padding-bottom: 100rpx;
+		font-size: 0;
+	}
+	.seaCnWhite{
+		background-color: white;
 	}
 	.condiTion_2 .list  .picker{
 		position: absolute;
@@ -426,7 +513,7 @@ export default {
 	.condiTion_2 .list>div{
 		display: inline-block;
 		vertical-align: middle;
-		padding: 0 20rpx;
+		width: 92%;
 		height: 72rpx;
 		line-height: 72rpx;
 		background-color: #f2f2f2;
@@ -455,7 +542,7 @@ export default {
 		display: inline-block;
 		vertical-align: top;
 		padding: 0 10rpx;
-		line-height: 85rpx;
+		line-height: 86rpx;
 		color: #333333;
 		font-size: 32rpx;
 	}

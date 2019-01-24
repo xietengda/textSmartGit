@@ -1,42 +1,45 @@
 <template>
 	<div class="container">
 		<div class="inputView">
-			<div class="list">
-				<label>联系人：</label>
-				<input type="text" v-model="userName" placeholder="请填写收货人姓名" placeholder-class="placeClass" />
-			</div>
-			<div class="list">
-				<label>手机号码：</label>
-				<input type="text" v-model="userPhone" placeholder="请填写收货人手机号码" placeholder-class="placeClass" />
-			</div>
-			<div class="list">
-				<label>所在地区：</label>
-				<div class="R">
-					<div class="sList">
-						{{province[pIndex].region_name}}<span class="arr_g"></span>
-						<picker @change="provinceChange" :value="pIndex" :range="province" :range-key="'region_name'">
-							<view class="picker"> </view>
-						</picker>
-					</div>
-					<div class="sList">
-						{{city[cIndex].region_name}}<span class="arr_g"></span>
-						<picker @change="cityChange" :value="cIndex" :range="city" :range-key="'region_name'">
-							<view class="picker"> </view>
-						</picker>
-					</div>
-					<div class="sList">
-						{{county[sIndex].region_name}}<span class="arr_g"></span>
-						<picker @change="sanjakChange" :value="sIndex" :range="county" :range-key="'region_name'">
-							<view class="picker"> </view>
-						</picker>
+			<form @submit="saveAddFun">
+				<div class="list">
+					<label>联系人：</label>
+					<input  type="text" :value="userName" name="userName" @input="inputName" placeholder="请填写收货人姓名"  />
+				</div>
+				<div class="list">
+					<label>手机号码：</label>
+					<!--<input  v-model.lazy="userPhone"  type="number" placeholder="请填写收货人手机号码" />--> <!--placeholder-class="placeClass" -->
+					<input  type="number" :value="userPhone" name="userPhone" @input="inputPhone" placeholder="请填写收货人手机号码"  />
+				</div>
+				<div class="list">
+					<label>所在地区：</label>
+					<div class="R">
+						<div class="sList">
+							{{province[pIndex].region_name}}<span class="arr_g"></span>
+							<picker @change="provinceChange" :value="pIndex" :range="province" :range-key="'region_name'">
+								<view class="picker"> </view>
+							</picker>
+						</div>
+						<div class="sList">
+							{{city[cIndex].region_name}}<span class="arr_g"></span>
+							<picker @change="cityChange" :value="cIndex" :range="city" :range-key="'region_name'">
+								<view class="picker"> </view>
+							</picker>
+						</div>
+						<div class="sList">
+							{{county[sIndex].region_name}}<span class="arr_g"></span>
+							<picker @change="sanjakChange" :value="sIndex" :range="county" :range-key="'region_name'">
+								<view class="picker"> </view>
+							</picker>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="list">
-				<label>详细地址：</label>
-				<input type="text" v-model="addDetail" placeholder="请输入街道、楼牌号等" placeholder-class="placeClass" />
-			</div>
-			<div class="subBtn" @click="saveAddFun">保存地址</div>
+				<div class="list">
+					<label>详细地址：</label>
+					<input type="text"   :value="addDetail"  name="addDetail" @input="inputAdr" placeholder="请输入街道、楼牌号等" placeholder-class="placeClass" />
+				</div>
+				<button class="subBtn" ref='submitDom' form-type='submit'>保存地址</button>
+			</form>
 		</div>
 
 	</div>
@@ -76,8 +79,15 @@
 			//省份选择
 			provinceChange(e) {
 				this.pIndex = e.mp.detail.value;
+				
+				this.userName = wx.getStorageSync('tempName'); //联系人
+				this.userPhone = wx.getStorageSync('tempPhone'); //手机号码
+				this.addDetail = wx.getStorageSync('tempAdr'); //详细地址
+				
 				//加载
-				wx.showLoading();
+				wx.showLoading({
+					mask:true
+				});
 
 				//设置市区  恢复初始值
 				this.cIndex = 0;
@@ -90,8 +100,10 @@
 				if(this.pIndex == 0) {
 					return;
 				}
+				
+				var AllPCR = wx.getStorageSync('AllPCR');
 
-				var city = this.AllPCR[parseInt(this.pIndex) - 1].city;
+				var city = AllPCR[parseInt(this.pIndex) - 1].city;
 				var pArr = [];
 
 				for(let x in city) {
@@ -102,6 +114,8 @@
 					}
 					pArr.push(pSign);
 				}
+				
+				
 
 				let pSign = {
 					parent_id: '',
@@ -116,8 +130,15 @@
 			//城市选择
 			cityChange(e) {
 				//加载
-				wx.showLoading();
+				wx.showLoading({
+					mask:true
+				});
 				this.cIndex = e.mp.detail.value;
+				
+				
+				this.userName = wx.getStorageSync('tempName'); //联系人
+				this.userPhone = wx.getStorageSync('tempPhone'); //手机号码
+				this.addDetail = wx.getStorageSync('tempAdr'); //详细地址
 
 				setTimeout(function() {
 					wx.hideLoading();
@@ -128,8 +149,10 @@
 				}
 				//设置区  恢复初始值
 				this.sIndex = 0;
+				
+				var AllPCR = wx.getStorageSync('AllPCR');
 
-				var county = this.AllPCR[parseInt(this.pIndex) - 1].city[parseInt(this.cIndex) - 1].district;
+				var county = AllPCR[parseInt(this.pIndex) - 1].city[parseInt(this.cIndex) - 1].district;
 				var pArr = [];
 
 				for(let x in county) {
@@ -154,7 +177,16 @@
 			//区域选择
 			sanjakChange(e) {
 				//加载
-				wx.showLoading();
+				wx.showLoading({
+					mask:true
+				});
+				
+				this.userName = wx.getStorageSync('tempName'); //联系人
+				this.userPhone = wx.getStorageSync('tempPhone'); //手机号码
+				this.addDetail = wx.getStorageSync('tempAdr'); //详细地址
+				
+				
+				
 				this.sIndex = e.mp.detail.value;
 				setTimeout(function() {
 					wx.hideLoading();
@@ -185,16 +217,20 @@
 							}
 
 							pArr.unshift(pSign);
-							that.AllPCR = that.util.conJson(allList);
+							//将全省分信息存进本地
+							wx.setStorageSync('AllPCR',that.util.conJson(allList));
 							that.province = that.util.conJson(pArr);
 						}
 					})
 			},
 			//提交地址
-			saveAddFun() {
+			saveAddFun(e) {
 				var that = this;
+				
+				console.log(e)
+				var subMsg = e.mp.detail.value;
 
-				if(this.userName == '') {
+				if(subMsg.userName == '') {
 					wx.showToast({
 						title: '请输入联系人',
 						icon: 'none',
@@ -203,7 +239,7 @@
 					return;
 				}
 
-				if(this.userPhone == '') {
+				if(subMsg.userPhone == '') {
 					wx.showToast({
 						title: '请输入手机号码',
 						icon: 'none',
@@ -211,7 +247,7 @@
 					})
 					return;
 				} else {
-					if(!this.util.isMobile(this.userPhone) && !this.util.isTel(this.userPhone)) {
+					if(!this.util.isMobile(subMsg.userPhone) && !this.util.isTel(subMsg.userPhone)) {
 						wx.showToast({
 							title: '手机号码有误',
 							icon: 'none',
@@ -234,10 +270,14 @@
 				var cId = that.city[that.cIndex].region_id;
 				var sId = that.county[that.sIndex].region_id;
 
-				that.Request.updateAddress(wx.getStorageSync('userId'), that.addressId, pId, cId, sId, that.addDetail, that.userName, that.userPhone)
+				that.Request.updateAddress(wx.getStorageSync('userId'), that.addressId, pId, cId, sId, subMsg.addDetail, subMsg.userName, subMsg.userPhone)
 					.then(res => {
 						if(res.code == 200) {
 							wx.navigateBack();
+							//清除缓存信息
+							wx.removeStorageSync('tempName');
+							wx.removeStorageSync('tempPhone');
+							wx.removeStorageSync('tempAdr');
 						}
 					})
 			},
@@ -308,12 +348,29 @@
 					.catch(res => {
 						console.log(res)
 					})
+			},
+			//输入联系人
+			inputName(e){
+				//存进本地
+				wx.setStorageSync('tempName',e.target.value);
+			},
+			//输入电话号码
+			inputPhone(e){
+				//存进本地
+				wx.setStorageSync('tempPhone',e.target.value);
+			},
+			//输入详细地址
+			inputAdr(e){
+				//存进本地
+				wx.setStorageSync('tempAdr',e.target.value);
 			}
 		},
 
 		onShow() {
 			//加载动画
-			wx.showLoading();
+			wx.showLoading({
+				mask:true
+			});
 			this.getPCRFun().then(res => {
 
 				var addressId = this.$root.$mp.query.addressId;
@@ -339,6 +396,14 @@
 			this.userPhone =  ''; //手机号码
 			this.addDetail = ''; //详细地址
 			this.addressId =  ''; //地址id
+			
+			
+			//清除缓存信息
+			wx.removeStorageSync('tempName');
+			wx.removeStorageSync('tempPhone');
+			wx.removeStorageSync('tempAdr');
+			
+			wx.removeStorageSync('AllPCR');
 		}
 	}
 </script>

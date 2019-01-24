@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<div class="video">
-			<video src="../../../static/video/s11.mp4"   controls></video>
+			<video src="https://img.niuyg.com//e23Ckw7D66.mp4"   controls></video>
 		</div>
 		<div class="videoMsg">
 			<div class="tiltle eli_two">申请国外大学时，portfolio需要什麼需求文字最多到第二行超出省略</div>

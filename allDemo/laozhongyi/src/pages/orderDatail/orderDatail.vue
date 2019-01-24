@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :class="[isIphonex ? 'containerIx':'']"> 
 			<div class="sub">
 				<div class="odHead">
 					<div class="sub">
@@ -25,6 +25,7 @@
 	    				<img :src="item.goods_thumb" />
 	    				<div class="R">
 	    						<div class="til">{{item.goods_name}}</div>
+	    						<div class="arrt">{{item.goods_attr}}</div>
 		    					<div class="ml">数量：{{item.goods_number}}</div>
 	    				</div>
 	    				<div class="num">{{item.formated_goods_price}}</div>
@@ -40,7 +41,7 @@
 	    	
 	    	<!--付款方式-->
 	    	<div class="payType">
-	    		<div>付款方式：{{payMsg.pay_desc}}</div>
+	    		<div v-if="odState != 2">付款方式：在线支付</div>
 	    		<div>配送方式：{{orderMsg.shipping_name}}</div>
 	    	</div>
 	    	
@@ -62,22 +63,18 @@
 	    	</div>
 	    	
 				<!--物流信息-->    	
-	    	<div class="express" v-if="orderMsg.status == 3 || orderMsg.status == 4">
+	    	<div class="express" v-if="orderMsg.status == 4 || orderMsg.status == 5">
 	    		<div class="head" @click="openExpress">
 	    			<div class="L">
 	    				<div class="til">物流信息</div>
-	    				<div>运单号：申通快递   910025412684155</div>
+	    				<div>运单号：{{delivery.shipping_name}}   {{delivery.invoice_no}}</div>
 	    			</div>
 	    			<div class="R arr_g" :class="[showExpress ? 'expOpen':'']"></div>
 	    		</div>
 	    		<div class="expressCn" v-if="showExpress">
-	    			<div>
-	    				<div>仓库已发货，快递揽件中</div>
-	    				<div>2018-10-13 10：41：33</div>
-	    			</div>
-	    			<div>
-	    				<div>仓库已发货，快递揽件中</div>
-	    				<div>2018-10-13 10：41：33</div>
+	    			<div v-for="(item,key) in delivery.wms_list">
+	    				<div>{{item.context}}</div>
+	    				<div>{{item.ftime}}</div>
 	    			</div>
 	    		</div>
 	    	</div>
@@ -93,8 +90,9 @@
 	    			<div class="R">{{orderMsg.formated_shipping_fee}}</div>
 	    		</div>
 	    		<div class="div_float">
-	    			<div class="L">减免</div>
-	    			<div class="R">-¥0.00</div>
+	    			<div class="L" v-if="orderMsg.discount_name == null">减免</div>
+	    			<div class="L" v-else>{{orderMsg.discount_name}}</div>
+	    			<div class="R">-{{orderMsg.formated_discount}}</div>
 	    		</div>
 	    		<div class="div_float">
 	    			<div class="L">优惠券</div>
@@ -104,18 +102,21 @@
 	    	
 	    	<!--实付-->
 	    	<div class="payment">
-	    		<div>需付款：<span>{{orderMsg.formated_order_amount}}</span></div>
+	    		<!--状态等于2（未付款）-->
+	    		<div v-if='orderMsg.status == 2 || orderMsg.status == 6'>需付款：<span>{{orderMsg.formated_order_amount}}</span></div>
+	    		<!--已付款-->
+	    		<div v-else>实付款：<span>{{orderMsg.formated_total_fee}}</span></div>
 	    	</div>
 	    	
 	    	
 	    	<!--待付款-->
-	    	<div class="odBtm div">
-	    		<div v-if='odState == 2 || odState == 3 || odState == 6'>联系客服 <button open-type='contact'></button></div>
+	    	<div class="odBtm div" :class="[isIphonex ? 'odBtmIx':'']">
+	    		<div v-if='odState == 2 || odState == 3 || odState == 4  || odState == 5 || odState == 6'>联系客服 <button open-type='contact'  size="mini" :session-from="concatText"></button></div>
 	    		<div v-if='odState == 2' @click="cancelOrderFun">取消订单</div>
-	    		<div v-if='odState == 2' class="sel" >去支付</div>
-	    		<div v-if='odState == 3' class="sel">退款</div>
+	    		<div v-if='odState == 2' class="sel" @click="payOrder">去支付</div>
+	    		<div v-if='odState == 3 || odState == 4 || odState == 5' class="sel" @click="refundFun">申请售后</div>
 	    		<div v-if='odState == 6' @click="delOrderFun">删除订单</div>
-	    		<div v-if='odState == 8'>确认</div>
+	    		<div v-if='odState == 4' @click="confirmPro">确认收货</div>
 	    	</div>
 				
 			</div>
@@ -139,12 +140,19 @@ export default {
      	goodList:[],//商品列表
      	payMsg:'',//付款信息
      	invoiceMsg:'',//发票信息 
+     	delivery:'',//物流信息
+     	concatText:'',//客服信息
     }
   },
 
   components: {
     
   },
+  computed:{
+	    isIphonex(){
+	        return this.$store.getters.isIphonex;
+	    },
+	},
 
   methods: {
   	//展开物流信息
@@ -156,9 +164,9 @@ export default {
   		this.showExpress = sign;
   	},
   	//获取订单详情
-  	getOrderDetial(){
+  	async getOrderDetial(){
   		var that = this; 
-  		that.Request.orderDetail(wx.getStorageSync('userId'),that.orderId)
+  		await that.Request.orderDetail(wx.getStorageSync('userId'),that.orderId)
   			.then(res =>{
   				console.log(res)
   				if(res.code == 200){
@@ -199,36 +207,203 @@ export default {
   				console.log(res)
   			})
   	},
-  	//取消订单
-  	cancelOrderFun(){
-  		var that  = this;
-  		that.Request.cancelOrder(wx.getStorageSync('userId'),that.orderId)
+  	//获取物流信息
+  	deliveryDetailFun(){
+  		var that = this;
+  		that.Request.deliveryDetail(that.orderId)
   			.then(res =>{
   				console.log(res)
   				if(res.code == 200){
-  						this.getOrderDetial();
+  					that.delivery = that.util.conJson(res.data);
   				}
   			})
+  			.catch(err =>{
+  				console.log(err)
+  			})
+  	},
+  	//取消订单
+  	cancelOrderFun(){
+  		var that  = this;
+  		wx.showModal({
+		  content: '是否取消订单',
+			  success(res) {
+			    if (res.confirm) {
+			      	that.Request.cancelOrder(wx.getStorageSync('userId'),that.orderId)
+				  			.then(res =>{
+				  				if(res.code == 200){
+				  					that.getOrderDetial();
+				  					
+				  					//将这次操作缓存本地，告知列表要刷新列表
+							  		wx.setStorageSync('isOperate',true);
+				  				}
+				  			})
+			    }
+			  }
+			})
+  		
   	},
   	//删除订单
   	delOrderFun(){
   		var that = this;
-  		that.Request.delOrder(wx.getStorageSync('userId'),that.orderId)
+  		wx.showModal({
+		  content: '是否删除订单',
+			  success(res) {
+			    if (res.confirm) {
+			      	that.Request.delOrder(wx.getStorageSync('userId'),that.orderId)
+				  			.then(res =>{
+				  				if(res.code == 200){
+				  					wx.navigateBack();
+				  					//将这次操作缓存本地，告知列表要刷新列表
+						  			wx.setStorageSync('isOperate',true);
+				  				}
+				  			})
+			    }
+			  }
+			})
+  	},
+  	//点击退款
+  	refundFun(){
+  		
+  		//未发货 ：退款
+  		//已发货： 退款退货
+  		//已收货：退款退货  换货
+  		//back_type  => 4 退款  2 换货  1 退货退款
+  		
+  		//如果是待发货直接退款
+  		if(this.odState == 3){
+  			wx.navigateTo({
+	  			url:"/pages/salesReturn/main?orderId="+this.orderId+'&refundType=4'
+	  		})
+  		}
+  		//待收货 
+  		else if(this.odState == 4){
+  			wx.navigateTo({
+	  			url:"/pages/salesReturn/main?orderId="+this.orderId+'&refundType=1'
+	  		})
+  		}
+  		//如果是 已完成  选择售后方式
+  		else if(this.odState == 5){
+  			wx.navigateTo({
+	  			url:"/pages/selType/main?orderId="+this.orderId
+	  		})
+  		}
+  		
+  		
+  	},
+  	//点击支付
+  	payOrder(e){
+  		var that = this;
+  		var orderId = that.orderId;
+  		that.Request.repetitionPay(wx.getStorageSync('userId'),orderId)
   			.then(res =>{
-  				console.log(res)
-  				if(res.code == 200){
-  					wx.navigateBack();
-  				}
+  					var payMent = JSON.parse(res.data.payment.prepay);
+				  	//调用微信支付
+				  	wx.requestPayment({
+						  timeStamp: payMent.timeStamp.toString(),
+						  nonceStr: payMent.nonceStr,
+						  package: payMent.package,
+						  signType: 'MD5',
+						  paySign: payMent.paySign,
+						  success:(res)=>{ 
+						  	//跳转支付完成页面
+						  	wx.navigateTo({
+						  		url:'/pages/payMentFinish/main'
+						  	})
+						  }
+						})
   			})
-  			.catch(err =>{
-  				console.log(err);
-  			})
-  	}
+  	},
+  	//确认收货
+  	confirmPro(e){
+  		var that = this;
+  		var orderId = that.orderId;
+  		wx.showModal({
+		  content: '是否确认收货',
+			  success(res) {
+			    if (res.confirm) {
+			      	that.Request.comfirmGetPro(wx.getStorageSync('userId'),orderId)
+				  			.then(res =>{
+				  				if(res.code  == 200){
+				  					that.getOrderDetial();
+				  					//如果是待收货状态，就获取物流信息
+							  		if(that.odState == 4){
+							  			that.deliveryDetailFun();
+							  			
+							  			//将这次操作缓存本地，告知列表要刷新列表
+							  			wx.setStorageSync('isOperate',true);
+							  		}
+				  				}
+				  			})
+			    }
+			  }
+			})
+  		
+  	},
+  	//获取会员信息
+    getUserInfoFun(){
+    	var that = this;
+    	that.Request.getUserInfo(wx.getStorageSync('userId'))
+    		.then(res =>{
+    			console.log(res)
+    			if(res.code  == 200){
+    				
+    				var userMsg = wx.getStorageSync('userMsg');
+   					//配置第三方客服信息
+			   		var customer_info = {
+						    "email": res.data.email, //邮箱
+						    "ip": "192.168.1.1", //IP
+						    "description": "描述",
+						    "organization_id": 1, //所属公司ID
+						    "tags": "标签1,标签2", //标签 已英文号分割
+						    "owner_id": 1, //客户负责人ID
+						    "owner_group_id": 1, //客户负责组ID
+						    "level": "normal", // 等级
+						    "cellphones": [["", res.data.mobile_phone]], //数组 [[电话ID, 电话文本]]
+						    "other_emails": [["", "13100000002@udesk.cn"]], //数组 [[邮箱ID, 邮箱]]
+						    "custom_fields": {
+						        "TextField_1": "普通文本内容",
+						    }
+						}
+			   		
+			   		var nick_name = userMsg.nickName;// 客户昵称
+						var avatar = userMsg.avatarUrl; // 客户头像
+						
+						var note_info = {
+						    "title": "测试标题",
+						    "custom_fields": {
+						        "TextField_1": "普通文本内容",
+						    }
+						}
+						
+						
+						var customer_info_str = JSON.stringify(customer_info);
+						var note_info_str = JSON.stringify(note_info);
+						
+						that.concatText = "udesk|"+nick_name+"|"+avatar+"| customer^"+customer_info_str+"| note^"+note_info_str;	
+   					
+    				
+    			}
+    		})
+    		.catch(res =>{
+    			console.log(res)
+    		})
+    },
   },
 
   onShow () {
+  	var that = this;
   	this.orderId = this.$root.$mp.query.orderId;
-  	this.getOrderDetial();
+  	wx.showLoading();
+  	this.getOrderDetial()
+	  	.then(res =>{
+	  		wx.hideLoading();
+	  		//如果是待收货状态，就获取物流信息
+	  		if(that.odState == 4){
+	  			that.deliveryDetailFun();
+	  		}
+	  		
+	  		that.getUserInfoFun();
+	  	})
   }
 }
 </script>
@@ -402,7 +577,14 @@ export default {
 		position: fixed;
 		background-color: white;
 		border-top: 2rpx solid #E5E5E5;
-		position: relative;
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		background-color: white;
+		z-index: 3;
+	}
+	.odBtmIx{
+		padding-bottom: 68rpx;
 	}
 	.odBtm button{
 		position: absolute;
@@ -427,14 +609,14 @@ export default {
 		line-height: 40rpx;
 	}
 	.reMsg .reCn .list .R .ml{
-		margin-top: 46rpx;
+		margin-top: 5rpx;
 	}
 	.reMsg .reCn .list .R{
 		display: inline-block;
 		vertical-align: middle;
 		width: 60%;
 		line-height: 40rpx;
-		height: 120rpx;
+		/*height: 120rpx;*/
 		color: #333333;
 		font-size: 24rpx;
 		margin-left: 25rpx;
@@ -496,5 +678,8 @@ export default {
 	}
 	.container{
 		padding-bottom: 100rpx;
+	}
+	.containerIx{
+		padding-bottom: 168rpx;
 	}
 </style>

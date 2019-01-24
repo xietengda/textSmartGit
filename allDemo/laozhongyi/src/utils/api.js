@@ -13,13 +13,43 @@ class api {
 	
 	
 	//登录
-	login(code,encryptedData,iv){
+	xcxLogin_phone(code,encryptedData,iv){
 		let data ={
 			code,
 			encryptedData,
 			iv
 		};
+		return requestAll.getRequest(apiUrl + 'passport/xcxLogin_phone', data);
+	}
+	
+	//登录
+	login(code,encryptedData,iv,phone){
+		let data ={
+			code,
+			encryptedData,
+			iv,
+			phone
+		};
 		return requestAll.getRequest(apiUrl + 'passport/xcxLogin', data);
+	}
+	
+	
+	//获取验证码登陆  //send_type  1为注册 2为找回密码 3为绑定手机 4为手机验证码快捷登录
+	getCode(mobile_phone,send_type = 4){
+		let data ={
+			mobile_phone,
+			send_type
+		};
+		return requestAll.getRequest(apiUrl + 'passport/sendMessage', data);
+	}
+	
+	//验证码登陆
+	codeLogin(mobile_phone,mobile_code){
+		let data ={
+			mobile_phone,
+			mobile_code
+		};
+		return requestAll.getRequest(apiUrl + 'passport/login_mobile_info', data);
 	}
 	
 	//验证sessionkey
@@ -196,7 +226,7 @@ class api {
 	}
 	
 	//提交订单
-	submitOrder(user_id,sel_goods,supplier,address_id,pay_id = '1',flow_type = '0'){
+	submitOrder(user_id,sel_goods,supplier,address_id,pay_id = '17',flow_type = '0'){
 		let data = {
 			user_id,
 			sel_goods,
@@ -277,6 +307,91 @@ class api {
 		}
 		return requestAll.postRequest(apiUrl + 'goods/get_bonus', data);
 	}
+	
+	//获取退款商品信息
+	getRefundMsg(user_id,order_id){
+		let data = {
+			user_id,
+			order_id
+		}
+		return requestAll.postRequest(apiUrl + 'user/ToCreateUserBackOrder', data);
+	}
+	
+	//提交申请退款申请
+	refundSubmit(user_id,order_id,back_type,tui_goods_number,tui_goods_price,back_reason,back_postscript,back_imgs){
+		let data = {
+			user_id,
+			order_id,
+			back_type,
+			tui_goods_number,
+			tui_goods_price,
+			back_reason,
+			back_postscript,
+			back_imgs,
+		}
+		return requestAll.postRequest(apiUrl + 'user/apply_back_order', data);
+	}
+	
+	
+	//获取退款商品列表
+	getRefundList(user_id,page,page_size = 10){
+		let data = {
+			user_id,
+			page,
+			page_size
+		}
+		return requestAll.postRequest(apiUrl + 'user/refundList', data);
+	}
+	
+	//获取退款订单详情
+	getRefundDetail(user_id,back_id){
+		let data = {
+			user_id,
+			back_id,
+		}
+		return requestAll.postRequest(apiUrl + 'user/refundDetails', data);
+	}
+	
+	//寄回商品物流信息提交
+	refundLogistics(user_id,back_id,shipping_name,invoice_no){
+		let data = {
+			user_id,
+			back_id,
+			shipping_name,
+			invoice_no
+		}
+		return requestAll.postRequest(apiUrl + 'user/UserRefundLogistics', data);
+	}
+	
+	
+	//获取物流信息
+	deliveryDetail(order_id){
+		let data = {
+			order_id
+		}
+		return requestAll.postRequest(apiUrl + 'user/delivery_history', data);
+	}
+	
+	
+	//重新支付
+	repetitionPay(user_id,order_id){
+		let data = {
+			user_id,
+			order_id
+		}
+		return requestAll.postRequest(apiUrl + 'payment/repay', data);
+	}
+	
+	
+	//确认收货
+	comfirmGetPro(user_id,order_id){
+		let data = {
+			user_id,
+			order_id
+		}
+		return requestAll.getRequest(apiUrl + 'user/arrivedUserOrder', data);
+	}
+	
 }
 
 export default {

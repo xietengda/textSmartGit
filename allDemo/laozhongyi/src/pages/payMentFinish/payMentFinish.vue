@@ -40,7 +40,7 @@ export default {
   methods: {
     //跳转订单列表
     skipOrder(e){
-    	wx.navigateTo({
+    	wx.reLaunch({
     		url:'/pages/order/main?odState=0'
     	})
     },

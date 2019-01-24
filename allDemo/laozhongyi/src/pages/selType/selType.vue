@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 			<div class="selView">
-				<div class="list">
+				<div class="list" @click="skipRefund">
 					<div class="L returnIcon"></div>
 					<div class="Msg">
 						<div class="til">退货退款</div>
@@ -9,7 +9,7 @@
 					</div>
 					<div class="R"><span class="arr_g"></span></div>
 				</div>
-				<div class="list">
+				<div class="list" @click="skipChange">
 					<div class="L changeIcon"></div>
 					<div class="Msg">
 						<div class="til">换货</div>
@@ -27,7 +27,7 @@
 export default {
   data () {
     return {
-     
+     orderId:'',//订单id
     }
   },
 
@@ -36,11 +36,21 @@ export default {
   },
 
   methods: {
-  	
+  	//退货
+  	skipRefund(){
+  		wx.navigateTo({
+  			url:'/pages/salesReturn/main?orderId='+this.orderId
+  		})
+  	},
+  	//换货
+  	skipChange(){
+  		wx.navigateTo({
+  			url:'/pages/salesChange/main?orderId='+this.orderId
+  		})
+  	}
   },
-
-  created () {
-   
+  onShow(){
+   this.orderId = this.$root.$mp.query.orderId;
   }
 }
 </script>

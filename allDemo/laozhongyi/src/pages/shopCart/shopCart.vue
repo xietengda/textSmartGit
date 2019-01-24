@@ -12,16 +12,16 @@
 				</div>
 			</div>
 	
-			<div class="cartView">
+			<div class="cartView" ><!-- :class="[isIphonex ? 'cartViewBtm':'']"-->
 				<div class="proListView">
 					<!--商品-->
 					<div class="proList" v-for="(item,key) in cartList" :key="item.id">
-						<div class="L"><span class="cb_no" :class="[item.sel ? 'cb_sel':'']" @click="selChange" :data-sel-index='key'></span></div>
+						<div class="L" @click="selChange" :data-sel-index='key'><span class="cb_no" :class="[item.sel ? 'cb_sel':'']"></span></div>
 						<div class="M">
 							<img :src="item.goods_thumb" />
 							<div class="Msg">
 								<div class="til">{{item.goods_name}}</div>
-								<div class="ml" v-if="item.goods_attr">规格：{{item.goods_attr}}</div>
+								<div class="ml" v-if="item.goods_attr">{{item.goods_attr}}</div>
 								<div class="price">¥{{item.market_price}}</div>
 							</div>
 						</div>
@@ -35,12 +35,12 @@
 			</div>
 	
 			<!--底部-->
-			<div class="cartBtm div_float">
+			<div class="cartBtm div_float" > <!--:class="[isIphonex ? 'cartBtmIX':'']"-->
 				<div class="R" v-if="!editBtn">
 					<div class="rl">
 						<div>总计：¥{{countPrice}}</div>
 						<div class="freight">运费：¥0.00</div>
-						<div>全场满128包邮</div>
+						<div>全场满98包邮</div>
 					</div>
 					<div class="rr" @click="butBillFun">结算（{{countToatl}}）</div>
 				</div>
@@ -60,13 +60,14 @@
 			</div>
 		</div>
 		
-		
+		<!--公共底部-->
+		<!--<allFooter :selType='3'  :shopNum='proLength'/>-->
 
 	</div>
 </template>
 
 <script>
-	
+	import allFooter from '../../components/footer'
 	
 	export default {
 		data() {
@@ -76,16 +77,22 @@
 				cartList: [],//购物车列表
 				allSel: false,//全选
 				editBtn: false,
-				countPrice: 0.00,//总价格
-				countToatl: 0.00,//总数量
+				countPrice: '0.00',//总价格
+				countToatl: '0.00',//总数量
 				recId:'',//购物车id
+				adrLegnth:0,//收货地址长度
+				proLength:0,//购物车数量
 			} 
 		},
 
 		components: {
-
+		    allFooter
 		},
-
+	  	computed:{
+		    isIphonex(){
+		        return this.$store.getters.isIphonex;
+		    },
+		},
 		methods: {
 			selChange: function(e) {
 				var selIndex = e.currentTarget.dataset.selIndex;
@@ -142,19 +149,24 @@
 				var cartList = this.cartList;
 				var signNum = cartList[cIndex].goods_number;
 			
+				var signProLength = that.proLength;
 
 				if(cType == 'cut' && signNum != 1) {
 					signNum = parseInt(signNum) - 1;
+					signProLength = parseInt(signProLength) - 1;
 				} else if(cType == 'add') {
 					signNum = parseInt(signNum) + 1;
+					signProLength = parseInt(signProLength) + 1;
 				}
 				
 				
 				//加载动画
-				wx.showLoading();
+				wx.showLoading({
+					mask:true
+				});
 				
 				//提交后台记录更改数量
-				await that.Request.cagCartNum(wx.getStorageSync('userId'),that.recId,cartList[cIndex].goods_id,signNum)
+				await that.Request.cagCartNum(wx.getStorageSync('userId'),cartList[cIndex].rec_id,cartList[cIndex].goods_id,signNum)
 					.then(res =>{
 						console.log(res)
 						//关闭加载
@@ -166,6 +178,16 @@
 							//计算总价
 							that.allCount();
 							that.cartList = cartList;
+							
+							//设置购物车数量
+							that.proLength = signProLength;
+							
+							//购物车数量
+							wx.setTabBarBadge({
+							  index: 2,
+							  text: signProLength.toString()
+							})
+							
 						}else{
 							wx.showToast({
 								title:res.message,
@@ -207,22 +229,53 @@
 			//获取购车商品
 			getShopCartFun() {
 				var that = this;
+				//加载动画
+				wx.showLoading();
 				that.Request.getShopCart(wx.getStorageSync('userId'))
 					.then(res => {
+						//隐藏加载动画
+						wx.hideLoading();
 						console.log(res);
 						if(res.code == 200){
-							var goodsList = res.data.supplier_list[0].goods_list;
-							for(var x in goodsList){
-								goodsList[x].goods_thumb = that.Request.getUrl()+ goodsList[x].goods_thumb;
-								//设置未选中
-								goodsList[x].sel = false;
+							if(res.data.supplier_list.length != 0){
+								var goodsList = res.data.supplier_list[0].goods_list;
+								var signLength = 0;
+								for(var x in goodsList){
+									goodsList[x].goods_thumb = that.Request.getUrl()+ goodsList[x].goods_thumb;
+									//设置未选中
+									goodsList[x].sel = false;
+									
+									signLength = parseInt(goodsList[x].goods_number) + signLength;
+								}
+								
+								//设置购物车数量
+								that.proLength = signLength;
+								
+								//购物车数量
+								wx.setTabBarBadge({
+								  index: 2,
+								  text: signLength.toString()
+								})
+								
+								//设置未全选
+								that.allSel = false;
+								//设置购物车列表
+								that.cartList = that.util.conJson(goodsList);
+								//设置购物车id
+								that.recId = res.data.supplier_list[0].goods_list[0].rec_id;
+								
+								
+							}else{
+								//设置购物车列表
+								that.cartList = [];
+								//购物车数量
+								wx.setTabBarBadge({
+								  index: 2,
+								  text: '0'
+								})
+								//设置购物车数量
+								that.proLength = 0;
 							}
-							//设置未全选
-							that.allSel = false;
-							//设置购物车列表
-							that.cartList = that.util.conJson(goodsList);
-							//设置购物车id
-							that.recId = res.data.supplier_list[0].goods_list[0].rec_id;
 							
 						}
 					})
@@ -233,11 +286,13 @@
 				var cartList = that.cartList;
 				var signArr = [];
 				var surplusArr = [];
+				var signLength = 0;
 				for(var x in cartList){
 					if(cartList[x].sel){
 						signArr.push(cartList[x].rec_id);
 					}else{
-						surplusArr.push(cartList[x])
+						surplusArr.push(cartList[x]);
+						signLength = parseInt(signLength) + parseInt(cartList[x].goods_number)
 					}
 				}
 				
@@ -250,21 +305,35 @@
 				}
 				
 				
+				wx.showModal({
+				  title: '',
+				  content: '是否删除商品',
+				  success(res) {
+				    if (res.confirm) {
+				      that.Request.delShopCart(wx.getStorageSync('userId'),signArr)
+						.then(res =>{
+							console.log(res)
+							if(res.code == 200){
+								wx.showToast({
+									title:'删除成功'
+								});
+								//刷新购物车列表
+								that.cartList = surplusArr;
+								
+								//重新计算价格
+								that.allCount();
+								
+								//购物车数量
+								wx.setTabBarBadge({
+								  index: 2,
+								  text: signLength.toString()
+								})
+							}
+						})
+				    }
+				  }
+				})
 				
-				that.Request.delShopCart(wx.getStorageSync('userId'),signArr)
-					.then(res =>{
-						console.log(res)
-						if(res.code == 200){
-							wx.showToast({
-								title:'删除成功'
-							});
-							//刷新购物车列表
-							that.cartList = surplusArr;
-						}
-					})
-					.catch(res =>{
-						console.log(res)
-					})
 				
 			},
 			//结算
@@ -288,16 +357,50 @@
 				
 				console.log(signArr)
 				
-				//跳转结算页
-				wx.navigateTo({
-					url:'/pages/submitOrder/main?selPro='+signArr
-				})
+				//判断是否有收货地址
+				if(that.adrLegnth  != 0){
+					//跳转结算页
+					wx.navigateTo({
+						url:'/pages/submitOrder/main?selPro='+signArr
+					})
+				}else{
+					//否则跳转添加收货地址
+					wx.showToast({
+						title:'请先添加收货地址',
+						icon:'none'
+					})
+					setTimeout(function(){
+						//跳转地址管理页面
+						wx.navigateTo({
+							url:'/pages/magAddress/main'
+						})
+					},1000)
+				}
 				
-			}
+				
+				
+				
+			},
+			//获取收货地址
+		    addressListFun(){
+		    	var that = this;
+		    	that.Request.addressList(wx.getStorageSync('userId'),1)
+		    		.then(res =>{
+		    			console.log(res);
+		    			if(res.code == 200){
+		    				that.adrLegnth = res.data.list.length;
+		    			}
+		    		})
+		    },
 		},
 		async onShow() {
-			await this.util.checkLogin();
-			this.getShopCartFun();
+			await this.util.checkLogin()
+			.then(res =>{
+				this.getShopCartFun();
+				this.countToatl = 0;
+				this.addressListFun();
+			});
+			
 		}
 	}
 </script>
@@ -374,6 +477,10 @@
 		width: 100%;
 		background-color: white;
 		border-top: 2rpx solid #E5E5E5;
+		z-index: 2;
+	}
+	.cartBtmIX{
+		bottom: 180rpx;
 	}
 	
 	.cartBtm .R {
@@ -498,9 +605,12 @@
 		border-bottom: 2rpx solid #E5E5E5;
 		position: relative;
 	}
-	
 	.cartView {
 		padding: 0 2%;
+		/*padding-bottom: 250rpx;*/
+	}
+	.cartViewBtm{
+		padding-bottom: 318rpx;
 	}
 	
 	

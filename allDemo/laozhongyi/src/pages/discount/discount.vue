@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-			<div class="disView">
-				<div class="list" v-for='(item,key) in disList' :key='item.id'>
+			<div class="disView" >
+				<div class="til">{{canList.cat_name}}</div>
+				<div class="list" v-for='(item,key) in canList.list' :key='item.id'>
 					<div class="L">
 						<span>¥{{item.type_money}}</span>
 					</div>
@@ -16,6 +17,31 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="disView">
+				<div class="til">{{usedList.cat_name}}</div>
+				<div class="list" v-for='(item,key) in usedList.list' :key='item.id'>
+					<div class="L">
+						<span>¥{{item.type_money}}</span>
+					</div>
+					<div class="Msg">
+						<div>{{item.type_name}}</div>
+						<div>满{{item.min_goods_amount}}可用</div>
+						<div>使用日期：{{item.use_startdate}}</div>
+						<div>{{item.use_enddate}}</div>
+					</div>
+					<div class="R">
+						<span>{{item.status}}</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class='noProduct' :hidden="true">
+			    <div class='nullCart'>
+			      <div class='nullIcon nullOrder'></div>
+			      <div class='nullText'>暂无优惠券</div>
+			    </div>
+			</div>
     
   </div>
 </template>
@@ -27,7 +53,9 @@ export default {
     return {
     	Request: this.$api.api.prototype, //请求头
 			util: this.$util.util.prototype, //工具类 
-      disList:[],
+     	canList:[],//可以使用
+     	overdueList:[],//过期的
+     	usedList:[],//已使用
       page:1,
     }
   },
@@ -43,21 +71,9 @@ export default {
   			.then(res =>{
   				console.log(res)
   				if(res.code == 200){
-  					
-  					var bounsList = that.util.conJson(res.data.list);
-  					
-  					if(that.page != 1 && that.page != 'end'){
-  						that.disList = that.disList.concat(bounsList);
-  					}else{
-  						that.disList = bounsList;
-  					}
-  					
-  					if(res.data.pager.page < res.data.pager.page_count){
-  						that.page = parseInt(that.page) + 1;
-  					}else{
-  						that.page = 'end'
-  					}
-  					
+  					that.canList = that.util.conJson(res.data.bonus_can);
+  					that.overdueList = that.util.conJson(res.data.bonus_overdue);
+  					that.usedList = that.util.conJson(res.data.bonus_used);
   				}
   			})
   			.catch(res =>{
@@ -117,6 +133,12 @@ export default {
 		border-radius: 8rpx;
 		border: solid 2rpx #5b0e12;
 		margin-bottom: 24rpx;
+	}
+	.disView .til{
+		font-weight: bold;
+		color: #323232;
+		font-size: 34rpx;
+		line-height: 80rpx;
 	}
 	.disView{
 		padding: 0 2%;

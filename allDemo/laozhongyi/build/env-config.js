@@ -27,7 +27,7 @@ const ENV_LIST = [
         envName: 'dev',
         dirName: 'dev',
         proUrl:'',
-        baseUrl: 'http://lzy.vchengmu.com/',
+        baseUrl: 'https://lzy.vchengmu.com/',
         assetsPublicPath:'/'
     },
     {

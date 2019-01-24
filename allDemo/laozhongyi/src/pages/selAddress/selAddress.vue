@@ -2,9 +2,9 @@
   <div class="container">
     	<div scroll-y class="addView">
     		<div class="list" v-for='(item,index) in adrList' :key='item.id'>
-    			<div class="sub">
+    			<div class="sub" :data-s-index='index'  :data-s-id='item.address_id' @click="selAddres">
     				<div class="L">
-	    				<span class="cb_no" :class="[item.sel ?'cb_sel':'']" :data-s-index='index' :data-s-id='item.address_id' @click="selAddres"></span>
+	    				<span class="cb_no" :class="[item.sel ?'cb_sel':'']" ></span>
 	    			</div>
 	    			<div class="Msg">
 	    				<div class="top">
@@ -19,6 +19,11 @@
     	</div>
     	
     	
+    	<!--底部操作-->
+    	<div class="addBtm">
+    		<div class="list add" @click="addAddress">新增收货地址</div>
+    	</div>
+    	
   </div>
 </template>
 
@@ -31,6 +36,7 @@ export default {
 			util: this.$util.util.prototype, //工具类
       adrList:[],
       page:1,//页码
+      addresId:'',//已选中地址
     }
   },
 
@@ -66,7 +72,11 @@ export default {
     			console.log(res);
     			if(res.code == 200){
     				for(var x in res.data.list){
-    					res.data.list[x].sel = false;
+    					if(that.addresId == res.data.list[x].address_id){
+    						res.data.list[x].sel = true;
+    					}else{
+    						res.data.list[x].sel = false;
+    					}
     				}
     				var signArr = that.util.conJson(res.data.list);
     				
@@ -84,10 +94,17 @@ export default {
     			}
     		})
     },
+    //点击增加新地址
+    addAddress(){
+    	wx.navigateTo({
+    		url:'/pages/address/main'
+    	})
+    },
   },
 
   onShow () {
   	this.page = 1;
+  	this.addresId = this.$root.$mp.query.adrId;
    	this.addressListFun();
   },
   onReachBottom(){
@@ -201,5 +218,29 @@ export default {
 	}
 	.addView{
 		background-color: #F7F7F7;
+	}
+	.addBtm .list{
+		height: 72rpx;
+		line-height: 72rpx;
+		text-align: center;
+		color: #333333;
+		font-size: 28rpx;
+		margin-bottom: 24rpx;
+		background-color: #F7F7F7;
+	}
+	.addBtm .add{
+		color: #5B0E12;
+	}
+	.addBtm{
+		position: fixed;
+		bottom: 0;
+		width: 96%;
+		padding: 0 2%;
+		background-color: white;
+		padding-top: 20rpx;
+		z-index: 3;
+	}
+	.container{
+		padding-bottom: 120rpx;
 	}
 </style>

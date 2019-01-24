@@ -20,6 +20,7 @@
 		"pages/address/main",
 		"pages/login/main",
 		"pages/search/main",
+		"pages/refunList/main",
 		"pages/seaResult/main",
 		"pages/me/main"
 	], 

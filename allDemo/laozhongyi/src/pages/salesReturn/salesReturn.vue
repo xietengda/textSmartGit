@@ -2,11 +2,13 @@
 	<div class="container">
 		<div class="sub">
 			<div class="saHead">
-				<div class="sub">
-					<img src="../../../static/img/list1.png" />
+				<div class="sub" v-for="(item,key) in goodList" :key='item.id'>
+					<img :src="item.goods_thumb" />
 					<div class="Msg">
-						<div class="til">呼唤晒后修复精华焕新版</div>
-						<div class="price">¥600.00</div>
+						<div class="til">{{item.goods_name}}</div>
+						<div class="attr"v-if="item.goods_attr">{{item.goods_attr}}</div>
+						<div class="price">{{item.format_goods_price}}</div>
+						<div class="num">x{{item.goods_number}}</div>
 					</div>
 				</div>
 			</div>
@@ -16,21 +18,21 @@
 					<div class="L">退款原因</div>
 					<div class="R">
 						<div class="sel">
-							{{cause[cIndex]}}<span class="downIcon"></span>
-							<picker  @change="causeChange" :value="cIndex" :range="cause">
-						    <view class="picker"></view>
-						  </picker>
+							{{cause[cIndex].reason_name}}<span class="downIcon"></span>
+							<picker @change="causeChange" :value="cIndex" :range="cause" :range-key="'reason_name'">
+								<view class="picker"></view>
+							</picker>
 						</div>
 						<span class="arr_g"></span>
 					</div>
 				</div>
 				<div class="saTil div_float">
-					<label>退款金额：</label><span class="price">¥600.00</span>
+					<label>退款金额：</label><span class="price">¥{{tuiTotal}}</span>
 				</div>
-				<div class="saRemark">最多￥600.00，含发货邮费￥0.00</div>
+				<input class="saRemark" v-model.lazy="shipMoney" type="digit"  :placeholder="returnMark"/>
 				<div class="saInput">
 					<label>退款说明：</label>
-					<input type="text" placeholder="选填" placeholder-class="placeClass" />
+					<input type="text" v-model.lazy="retrunRemark" placeholder="选填" placeholder-class="placeClass" />
 				</div>
 			</div>
 
@@ -47,9 +49,9 @@
 					<div>（最多6张）</div>
 				</div>
 			</div>
-			
+
 			<!--说明-->
-			<div class="returnRemark">
+			<div class="returnRemark" :class="[isIphonex ? 'returnRemarkIx':'']">
 				<div class="rTil"><span class="issueIcon"></span>退货须知：</div>
 				<div class="rCn">
 					<div>申请前请务必联系商城客服进行沟通，方可通过申请</div>
@@ -60,102 +62,240 @@
 					<div>*未按系统提示拒收包裹或寄回产品并填写运单号，将视为自动取消退货申请。</div>
 				</div>
 			</div>
-			
-			
+
 			<!--提交申请-->
-			<div class="subBtn">
-				<div>提交申请</div>
+			<div class="subBtn" :class="[isIphonex ? 'subBtnIx':'']">
+				<div @click="refundSubmitFun">提交申请</div>
 			</div>
 
 		</div>
-
+ 
 	</div>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				util: this.$util.util.prototype, //工具类
-				diyImg: [], //上传图片
-				cause:['七天无理由退货','一毛钱不要退货'],
-				cIndex:0,
-			}
-		},
-
-		components: {
-
-		},
-
-		methods: {
-			
-			//更改退款原因
-			causeChange(e){
-				this.cIndex = e.mp.detail.value;
-			},
-			//添加相片
-			addPhoto() {
-				var that = this;
-				var oldArr = that.diyImg;
-				wx.chooseImage({
-					count: 6, // 默认9
-					sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-					success: function(res) {
-						// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-						var tempFilePaths = res.tempFilePaths;
-
-						if((oldArr.length + tempFilePaths.length) > 6) {
-							wx.showToast({
-								title: '最多上传6张',
-								icon: 'none'
-							})
-						}
-
-						for(var x in tempFilePaths) {
-							if(oldArr.length < 6) {
-								oldArr.push(tempFilePaths[x])
-							}
-						}
-
-						that.diyImg = that.util.converJSON(oldArr);
-
-					}
-				})
-			},
-			//删除照片
-			delPhoto(e) {
-				var that = this;
-				var oldArr = that.diyImg;
-				var newArr = [];
-				var sIndex = e.currentTarget.dataset.sIndex;
-				for(var x in oldArr) {
-					if(x != sIndex) {
-						newArr.push(oldArr[x]);
-					}
-				}
-				that.diyImg = that.util.converJSON(newArr);
-			},
-			//预览图片
-			previewPhoto(e) {
-				var sIndex = e.currentTarget.dataset.sIndex;
-				var that = this;
-				var diyImg = that.diyImg;
-				wx.previewImage({
-					current: diyImg[sIndex], // 当前显示图片的http链接
-					urls: diyImg // 需要预览的图片http链接列表
-				})
-			},
-		},
-
-		created() {
-
+export default {
+	data() {
+		return {
+			Request: this.$api.api.prototype, //请求头
+			util: this.$util.util.prototype, //工具类
+			diyImg: [], //上传图片
+			cause: [{reason_name:''}],//退款原因
+			cIndex: 0,//选中退款原因下标
+			orderId:'',//订单id
+			goodList:'',//商品信息
+			tuiTotal:'',//退款总金额
+			backType:'',//退款类型
+			tuiNumber:'',//退款数量
+			retrunRemark:'',//退款描述
+			returnMark:'',//退款input描述
+			shipMoney:'',//输入退款金额
+			refundType:1,//1:退款退款 4:退款
+			shippingTotal:'',//运费
 		}
+	},
+
+	components: {
+
+	},
+	computed:{
+	    isIphonex(){
+	        return this.$store.getters.isIphonex;
+	    },
+	},
+
+	methods: {
+
+		//更改退款原因
+		causeChange(e) {
+			this.cIndex = e.mp.detail.value;
+		},
+		//添加相片
+		addPhoto() {
+			var that = this;
+			var oldArr = that.diyImg;
+			wx.chooseImage({
+				count: 6, // 默认9
+				sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+				sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+				success: function(res) {
+					// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+					var tempFilePaths = res.tempFilePaths;
+
+					if((oldArr.length + tempFilePaths.length) > 6) {
+						wx.showToast({
+							title: '最多上传6张',
+							icon: 'none'
+						})
+					}
+
+					for(var x in tempFilePaths) {
+						if(oldArr.length < 6) {
+							oldArr.push(tempFilePaths[x])
+						}
+					}
+
+					that.diyImg = oldArr;
+
+				}
+			})
+		},
+		//删除照片
+		delPhoto(e) {
+			var that = this;
+			var oldArr = that.diyImg;
+			var newArr = [];
+			var sIndex = e.currentTarget.dataset.sIndex;
+			for(var x in oldArr) {
+				if(x != sIndex) {
+					newArr.push(oldArr[x]);
+				}
+			}
+			that.diyImg = newArr;
+		},
+		//预览图片
+		previewPhoto(e) {
+			var sIndex = e.currentTarget.dataset.sIndex;
+			var that = this;
+			var diyImg = that.diyImg;
+			wx.previewImage({
+				current: diyImg[sIndex], // 当前显示图片的http链接
+				urls: diyImg // 需要预览的图片http链接列表
+			})
+		},
+		//获取订单详情
+	  	getRefundMsgFun(){
+	  		var that = this; 
+	  		that.Request.getRefundMsg(wx.getStorageSync('userId'),that.orderId)
+	  			.then(res =>{
+	  				console.log(res)
+	  				if(res.code == 200){
+	  					
+	  					for(let x in res.data.goods_list){
+	  						res.data.goods_list[x].goods_thumb = that.Request.getUrl() + res.data.goods_list[x].goods_thumb;
+	  					}
+	  					//设置商品信息
+	  					that.goodList = that.util.conJson(res.data.goods_list);
+	  					
+	  					//设置退款原因
+	  					that.cause = that.util.conJson(res.data.reason_list);
+	  					
+	  					//退款总金额
+						that.tuiTotal = that.util.conJson(parseFloat(res.data.tui_goods_subtotal)) + that.util.conJson(parseFloat(res.data.tui_shipping_fee));
+						
+						//退款数量
+						that.tuiNumber = that.util.conJson(res.data.tui_goods_number);
+						
+						//退款类型
+						that.backType = that.util.conJson(res.data.back_type);
+						
+						//退款input placehodel
+						that.returnMark = '请输入退款金额，最多'+that.tuiTotal+'，含发货邮费¥'+res.data.tui_shipping_fee;
+						
+						//设置邮费
+						that.shippingTotal = that.util.conJson(res.data.tui_shipping_fee);
+						
+	  				}
+	  			})
+	  			.catch(res =>{
+	  				console.log(res)
+	  			})
+	  	},
+	  	//提交退款订单
+	  	refundSubmitFun(){
+	  		var that = this;
+	  		var shipMoney = that.shipMoney;
+	  		
+	  		//退款总金额
+			var tuiTotal = that.tuiTotal
+	  		
+	  		if(shipMoney == 0){
+	  			wx.showToast({
+	  				title:'请输入退款金额，最多'+that.tuiTotal+'，含发货运费¥'+that.shippingTotal,
+	  				icon:'none',
+				 	duration: 2000
+	  			})
+	  			return; 
+	  		}
+	  		
+	  		if(shipMoney > tuiTotal){
+	  			wx.showToast({
+	  				title:'退款金额不能大于订单金额',
+	  				icon:'none',
+				 	duration: 2000
+	  			})
+	  			return; 
+	  		}
+	  		
+	  		
+	  		if(that.diyImg.length == 0){
+	  			wx.showToast({
+	  				title:'至少上传一张凭证',
+	  				icon:'none',
+				 	duration: 2000
+	  			})
+	  			return; 
+	  		}
+	  		
+			wx.showLoading({
+			  title: '请稍后',
+			  mask:true
+			})
+			that.Request.refundSubmit(wx.getStorageSync('userId'),that.orderId,that.refundType,that.tuiNumber,shipMoney,that.cause[that.cIndex].reason_id,that.retrunRemark,JSON.stringify(that.diyImg))
+  			.then(res =>{
+  				console.log(res)
+  				if(res.code == 200){
+				 	wx.hideLoading();
+				 	//设置显示个人中心图标
+				 	wx.setStorageSync('showMe',true);
+				 	//跳转订单详情
+  					wx.reLaunch({
+					  url:'/pages/returnOrder/main?orderId='+res.data.back_id
+					})
+  				}else{
+  					wx.showToast({
+  						title:res.message,
+  						icon:'none',
+					 	duration: 2000
+  					})
+  				}
+  			})
+  			.catch(err =>{
+  				console.log(res)
+  			})
+	  	}
+	},
+
+	async onLoad() {
+		this.orderId = this.$root.$mp.query.orderId;
+		
+		console.log(this.$root.$mp.query.refundType)
+		
+		//判断是否有refunType  如果有就是退款退货
+		if(this.$root.$mp.query.refundType != undefined && this.$root.$mp.query.refundType != null){
+			this.refundType = this.$root.$mp.query.refundType;
+		}else{
+			this.refundType = 1;
+		}
+		
+		await this.util.checkLogin()
+	  		.then(res =>{
+	  			this.getRefundMsgFun();
+	  		})
+	},
+	onUnload(){
+		this.diyImg =  []; //上传图片
+		this.cause = [{reason_name:''}];//退款原因
+		this.cIndex =  0;//选中退款原因下标
+		this.retrunRemark = '';//退款描述
+		this.shipMoney = '';//退款金额
+		this.goodList = '';//商品信息
 	}
+}
 </script>
 
 <style scoped>
-	.subBtn>div{
+	.subBtn>div {
 		width: 96%;
 		height: 80rpx;
 		line-height: 80rpx;
@@ -166,7 +306,8 @@
 		background-color: #5B0E12;
 		border-radius: 8rpx;
 	}
-	.subBtn{
+	
+	.subBtn {
 		height: 90rpx;
 		line-height: 90rpx;
 		position: fixed;
@@ -175,31 +316,43 @@
 		bottom: 0;
 		text-align: center;
 		font-size: 0;
+		z-index: 2;
 	}
-	.returnRemark .rCn{
+	.subBtnIx{
+		padding-bottom: 68rpx;
+	}
+	
+	.returnRemark .rCn {
 		color: #666666;
 		font-size: 20rpx;
 		line-height: 40rpx;
 		padding: 0 4%;
 		padding-bottom: 100rpx;
 	}
-	.returnRemark .rTil span{
+	
+	.returnRemark .rTil span {
 		display: inline-block;
 		vertical-align: middle;
 		width: 28rpx;
 		height: 28rpx;
 		margin-top: -5rpx;
 	}
-	.returnRemark .rTil{
+	
+	.returnRemark .rTil {
 		height: 50rpx;
 		line-height: 50rpx;
 		color: #333333;
 		font-size: 24rpx;
 	}
-	.returnRemark{
+	
+	.returnRemark {
 		padding: 0 2%;
 		background-color: white;
 	}
+	.returnRemarkIx{
+		padding-bottom: 100rpx;
+	}
+	
 	.photoTil span {
 		color: #999999;
 		font-size: 24rpx;
@@ -316,13 +469,15 @@
 		width: 15rpx;
 		height: 18rpx;
 	}
-	.saView .saTil .R .sel .picker{
+	
+	.saView .saTil .R .sel .picker {
 		position: absolute;
 		width: 100%;
 		height: 100%;
 		left: 0;
 		top: 0;
 	}
+	
 	.saView .saTil .R .sel {
 		color: #666666;
 		font-size: 24rpx;
@@ -358,7 +513,13 @@
 		background-color: white;
 		margin-top: 20rpx;
 	}
-	
+	.saHead .sub .Msg .num{
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		color: #666666;
+		font-size: 24rpx;
+	}
 	.saHead .sub .Msg .price {
 		position: absolute;
 		bottom: 0;
@@ -375,8 +536,12 @@
 		height: 168rpx;
 		position: relative;
 		color: #333333;
-		font-size: 28rpx;
+		font-size: 26rpx;
 		line-height: 40rpx;
+		position: relative;
+	}
+	.saHead .sub .Msg  .til{
+		font-size: 28rpx;
 	}
 	
 	.saHead .sub img {
@@ -394,10 +559,14 @@
 		height: 168rpx;
 		line-height: 168rpx;
 		width: 100%;
+		padding-bottom:35rpx;
+		border-bottom: 2rpx solid #E5E5E5;
 	}
-	
+	.saHead>div:last-child{
+		border: none;
+	}
 	.saHead {
-		height: 232rpx;
+		/*height: 232rpx;*/
 		line-height: 232rpx;
 		padding: 0 2%;
 		background-color: white;

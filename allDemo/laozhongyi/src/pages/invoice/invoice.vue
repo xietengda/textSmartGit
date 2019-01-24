@@ -24,13 +24,13 @@
 					<div class="inputView">
 						<!--个人-->
 						<div class="subView" v-if="invoType == 1">
-							<input type="text" v-model.lazy="psEmail" placeholder="请填写电子邮箱" placeholder-class="placeClass" />
+							<input type="text"  :value="psEmail" placeholder="请填写电子邮箱" placeholder-class="placeClass"  @input='psEmailChange'/>
 						</div>
 						<!--单位-->
 						<div class="subView" v-if="invoType == 2">
 							<input type="text" v-model.lazy="unName" placeholder="请填写单位名称" placeholder-class="placeClass" />
 							<input type="text" v-model.lazy="unNum" placeholder="请填写纳税人识别号" placeholder-class="placeClass" />
-							<input type="text" v-model.lazy="unEmail" placeholder="请填写电子邮箱" placeholder-class="placeClass" />
+							<input type="text" :value="unEmail"  placeholder="请填写电子邮箱" placeholder-class="placeClass" @input="unEmailChange" />
 						</div>
 					</div>
 				</div>
@@ -69,6 +69,14 @@ export default {
     //选择发票类型
     selInvoice(e){
     	this.invoType =e.currentTarget.dataset.invoice;
+    },
+    //改变个人邮箱地址
+    psEmailChange(e){
+    	this.psEmail = e.target.value;
+    },
+    //改变单位邮箱
+     unEmailChange(e){
+    	this.unEmail = e.target.value;
     },
     //点击OK按钮
     okBtnFun(){
@@ -137,9 +145,34 @@ export default {
     	
     }
   },
-
-  created () {
-   
+  onShow(){
+  	var that = this;
+  	
+  	//判断本地是否存在发票信息
+  	if(wx.getStorageSync('invoice') != null && wx.getStorageSync('invoice') != undefined){
+  		var invoice = wx.getStorageSync('invoice');
+  		//个人
+  		if(invoice.type == 'individual'){
+  			//设置显示选中个人
+  			that.selType = 2;//是否开票 1：不开，2：电子票
+	    	that.invoType = 1;//1：个人发票，2：单位
+	    	that.psEmail = invoice.email;
+  		}else{
+  			//设置显示选中个人
+  			that.selType = 2;//是否开票 1：不开，2：电子票
+	    	that.invoType = 2;//1：个人发票，2：单位
+	    	that.unNum = invoice.unNum;//税号
+		    that.unName = invoice.unName;//单位名称
+		    that.unEmail = invoice.unEmail;//单位邮箱
+  		}
+  	}
+  	
+  },
+  onUnload(){
+    this.psEmail = '';//个人邮箱
+    this.unNum = '';//税号
+    this.unName = '';//单位名称
+    this.unEmail = '';//单位邮箱
   }
 }
 </script>

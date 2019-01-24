@@ -53,6 +53,7 @@ export default {
     //点击热门搜索
     hotSearch(e){
     	wx.setStorageSync('seaText',e.currentTarget.dataset.seaText);
+    	this.seaText = e.currentTarget.dataset.seaText;
     	wx.navigateTo({
     		url:'/pages/seaResult/main'
     	})
@@ -75,6 +76,10 @@ export default {
 
   onShow() {
    this.getHotSearchFun();
+  },
+  onUnload(){
+  	this.seaText = '';
+  	wx.removeStorageSync('seaText')
   }
 }
 </script>

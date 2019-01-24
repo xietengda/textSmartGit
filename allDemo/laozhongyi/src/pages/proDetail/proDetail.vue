@@ -84,7 +84,7 @@
 					<div>
 						<div class="seIcon"></div>
 						<div>客服</div>
-						<button open-type='contact'></button>
+						<button open-type='contact' size="mini" :session-from="concatText"></button>
 					</div>
 					<div @click="goShopCart">
 						<div class="cartIcon"></div>
@@ -96,8 +96,8 @@
 					</div>
 				</div>
 				<div class="R">
-					<div @click="addCartFun">加入购物车</div>
-					<div>立即购买</div>
+					<div @click="cartFun">加入购物车</div>
+					<div @click="buyFun">立即购买</div>
 				</div>
 			</div>
 			
@@ -108,7 +108,7 @@
 						<div class="close"><span class="closeIcon" @click="showDisFun"></span></div>
 						<div class="til">优惠券</div>
 						 <div class="disCn div_float">
-						 	<div v-for="(item,key) in disList" :key='item.id' :data-dis-id='item.type_id' @click="getDiscount">
+						 	<div v-for="(item,key) in disList" :key='item.id'>
 						 		<div class="cnSub div_float">
 						 			<div class="L">
 							 			<div class="lSub">
@@ -116,7 +116,10 @@
 							 				<div>{{item.type_name}}</div>
 							 			</div>
 							 		</div>
-							 		<div class="R"><span>领取</span></div>
+							 		
+							 		<div class="R"   :data-dis-id='item.type_id' @click="getDiscount" v-if="item.get_count  == 0 && item.is_end != 1"><span>领取</span></div>
+							 		<div class="R none"  v-else-if='item.is_end == 1'><span>已领完</span></div>
+							 		<div class="R none"  v-else-if='item.get_count > 0'><span>已领取</span></div>
 						 		</div>
 						 	</div>
 						 </div>
@@ -141,11 +144,14 @@ export default {
     	disList:[],//优惠券
     	showDis:false,//是否显示优惠券
     	shouPro:false,//是否显示商品参数
-    	proMsg:'',//商品信息
+    	proMsg:'',//商品信息  
     	proSize:false,//商品规格
     	selSiseId:false,//选中商品id
     	selSizeName:'暂无选择',//选中商品名称
     	selCount:1,//选择件数
+    	selType:'cart',//cart 加入购物车， buy 立即购买
+    	adrLength:0,//收货地址
+    	concatText:'',//客服信息
     }
   },
 	computed: {
@@ -203,10 +209,14 @@ export default {
     //获取商品详情
     proDetailFun(){
     	var that = this;
+    	//加载动画
+    	wx.showLoading();
     	that.Request.getProDetail(that.goodsId,wx.getStorageSync('userId'))
     		.then(res =>{
     			console.log(res);
     			if(res.code == 200){
+    				//关闭加载动画
+    				wx.hideLoading();
     				
     				//商品相册
     				for(var x  in res.data.goods_gallery){
@@ -256,7 +266,7 @@ export default {
     		//如果有属性的情况下要选择属性才可以加入购物车
 	    	if(!that.selSiseId){
 	    		wx.showToast({
-					  title: '请选择商品',
+					  title: '请选择属性',
 					  icon:'none'
 					});
 					return;
@@ -281,63 +291,225 @@ export default {
 	    	}
     	}
     	
+    	//如果是立即购买  设置 quick 为 1
+    	if(that.selType  == 'buy'){
+    		sign.quick = 1;
+    	}
     	
-    	that.Request.addShopCart(wx.getStorageSync('userId'),JSON.stringify(sign))
+    	
+    	await that.Request.addShopCart(wx.getStorageSync('userId'),JSON.stringify(sign))
     		.then(res =>{
     			if(res.code == 200){
-    				wx.showToast({
-						  title: '加入购物车成功'
-						});
+    				console.log(res)
+						
+						if(that.selType  == 'cart'){
+							wx.showToast({
+							  title: '加入购物车成功',
+							  duration:2000
+							});
+						}else{
+
+							//跳转提交订单页面
+							var signArr = [];
+							//循环返回来的购物车列表，找到对应的商品
+							var goodsList = res.data.supplier_list["0"].goods_list
+							
+							for(let x in goodsList){
+								if(goodsList[x].goods_id == that.goodsId){
+									signArr = [parseInt(goodsList[x].rec_id)];
+								}
+							}
+
+							wx.navigateTo({
+								url:'/pages/submitOrder/main?selPro='+signArr
+							})
+						}
+						
     			}else{
     				wx.showToast({
 						  title: res.message,
-						  icon:'none'
+						  icon:'none',
+						  duration:2000
 						});
     			}
     		})
-    	
     },
     //领取优惠券
-    getDiscount(e){
+    async getDiscount(e){
     	var that = this;
     	var disId = e.currentTarget.dataset.disId;
     	console.log(disId)
-    	that.Request.getDiscount(wx.getStorageSync('userId'),disId)
+    	
+    	await that.util.checkLogin()
     		.then(res =>{
-    			console.log(res)
+    			that.Request.getDiscount(wx.getStorageSync('userId'),disId)
+		    		.then(res =>{
+		    			console.log(res)
+		    			if(res.code == 200){
+		    				wx.showToast({
+		    					title:'领取成功'
+		    				})
+		    				//隐藏优惠券弹框
+		    				//that.showDis = false;
+		    			}else{
+		    				wx.showToast({
+		    					title:res.message,
+		    					icon:'none',
+						  		duration:2000
+		    				})
+		    				//隐藏优惠券弹框
+		    				//that.showDis = false;
+		    			}
+		    		})
+    		})
+    	
+    	
+    },
+    //点击加入购物车
+    cartFun(){
+    	var that  = this;
+    	//设置类型是购买
+    	that.selType = 'cart';
+    	that.addCartFun();
+    },
+    //立刻购买
+    async buyFun(){
+    	var that  = this;
+    	//设置类型是购买
+    	that.selType = 'buy';
+    	
+    	await that.util.checkLogin()
+    		.then(res =>{
+    			//判断是否有收货地址
+		    	if(that.adrLength != 0){
+		    		that.addCartFun();
+		    	}else{
+		    		wx.showToast({
+		    			title:'请添加收货地址',
+		    			icon:'none'
+		    		});
+		    		setTimeout(function(){
+		    			wx.navigateTo({
+		    				url:'/pages/address/main'
+		    			})
+		    		},1000)
+		    	}
+    		})
+    },
+     //获取收货地址
+    addressListFun(){
+    	var that = this;
+    	that.Request.addressList(wx.getStorageSync('userId'),1)
+    		.then(res =>{
+    			console.log(res);
     			if(res.code == 200){
-    				wx.showToast({
-    					title:'领取成功'
-    				})
-    				//隐藏优惠券弹框
-    				that.showDis = false;
+    				//设置地址长度
+    				that.adrLength  = res.data.list.length;
     			}else{
-    				wx.showToast({
-    					title:res.message,
-    					icon:'none'
-    				})
-    				//隐藏优惠券弹框
-    				that.showDis = false;
+    				//设置地址长度
+    				that.adrLength = 0;
     			}
     		})
-    		.catch(err =>{
-    			console.log(err)
+    },
+    //获取会员信息
+    getUserInfoFun(){
+    	var that = this;
+    	that.Request.getUserInfo(wx.getStorageSync('userId'))
+    		.then(res =>{
+    			console.log(res)
+    			if(res.code  == 200){
+    				
+    				var userMsg = wx.getStorageSync('userMsg');
+   					//配置第三方客服信息
+			   		var customer_info = {
+						    "email": res.data.email, //邮箱
+						    "ip": "192.168.1.1", //IP
+						    "description": "描述",
+						    "organization_id": 1, //所属公司ID
+						    "tags": "标签1,标签2", //标签 已英文号分割
+						    "owner_id": 1, //客户负责人ID
+						    "owner_group_id": 1, //客户负责组ID
+						    "level": "normal", // 等级
+						    "cellphones": [["", res.data.mobile_phone]], //数组 [[电话ID, 电话文本]]
+						    "other_emails": [["", "13100000002@udesk.cn"]], //数组 [[邮箱ID, 邮箱]]
+						    "custom_fields": {
+						        "TextField_1": "普通文本内容",
+						    }
+						}
+			   		
+			   		var nick_name = userMsg.nickName;// 客户昵称
+						var avatar = userMsg.avatarUrl; // 客户头像
+						
+						var note_info = {
+						    "title": "测试标题",
+						    "custom_fields": {
+						        "TextField_1": "普通文本内容",
+						    }
+						}
+						
+						
+						var customer_info_str = JSON.stringify(customer_info);
+						var note_info_str = JSON.stringify(note_info);
+						
+						that.concatText = "udesk|"+nick_name+"|"+avatar+"| customer^"+customer_info_str+"| note^"+note_info_str;	
+   					
+    				
+    			}
     		})
-    }
+    		.catch(res =>{
+    			console.log(res)
+    		})
+    },
   },
 
-  onLoad(){
+  onShow(){
   	console.log(this.$Request);
+  	var that = this;
    	this.goodsId = this.$root.$mp.query.goodsId;
    	
-   	//获取商品
-   	this.proDetailFun();
+   	//检查session是否过期 
+		wx.checkSession({
+		  success(res) {
+		    //判断用户信息是否为空
+		    if(wx.getStorageSync('userMsg') == '' || wx.getStorageSync('userMsg') == undefined){
+		    	//未登录默认是0
+		    	wx.setStorageSync('userId', 0);
+		    }
+		    //获取商品
+		   	that.proDetailFun();
+		   	//获取地址长度
+		   	that.addressListFun();
+		   	
+		   	that.getUserInfoFun();
+		   	
+		  },
+		  fail(err) {
+		    //未登录默认是0
+	    	wx.setStorageSync('userId', 0);
+	    	
+	    	//获取商品
+		   	that.proDetailFun();
+		   	//获取地址长度
+		   	that.addressListFun();
+		  }
+		});
+		
+		
   },
   onUnload(){
   		this.proSize = false;//商品规格
     	this.selSiseId = false;//选中商品id
     	this.selSizeName = '暂无选择';//选中商品名称
+    	this.proMsg = '';//商品信息  
+    	this.bannerList = [];//轮播图
+    	this.shouPro = false;//参数是否展开
 
+  },
+  onShareAppMessage(){
+  	return {
+      title: '自定义转发标题',
+      path: '/pages/proDetail/main?goodsId='+this.goodsId
+    }
   }
 }
 </script>
@@ -393,6 +565,9 @@ export default {
 		color: white;
 		font-size: 24rpx;
 		text-align: center;
+	}
+	.cnSub .none span{
+		background-color: #6B6B6B;
 	}
 	.discount .til{
 		height: 60rpx;
@@ -727,7 +902,7 @@ export default {
 	}
 	.pageTion{
 		position: absolute;
-		bottom: 20rpx;
+		bottom: 50rpx;
 		width: 100%;
 		text-align: center;
 	}
@@ -737,11 +912,11 @@ export default {
 		width: 24rpx;
 		height: 24rpx;
 		border-radius: 100%;
-		border: solid 2rpx #666666;
+		border: solid 2rpx #5b0e12;
 		margin: 0 10rpx;
 	}
 	.pageTion  .sel{
-		background-color: #666666;
+		background-color: #5b0e12;
 	}
 	.container{
 		background-color: #F7F7F7;

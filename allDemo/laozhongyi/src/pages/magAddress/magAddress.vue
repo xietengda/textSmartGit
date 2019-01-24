@@ -6,7 +6,7 @@
     				<div class="L">
 	    				<span class="cb_no" :class="[item.sel ?'cb_sel':'']" :data-s-index='index' @click="selAddres"></span>
 	    			</div>
-	    			<div class="Msg">
+	    			<div class="Msg" :data-s-index='index' @click="selAddres">
 	    				<div class="top">
 	    					<span class="name">{{item.consignee}}</span>
 	    					<span class="phone">{{item.mobile}}</span>
@@ -54,11 +54,17 @@ export default {
     	var adrList = this.adrList;
     	var sIndex = e.currentTarget.dataset.sIndex;
     	
-    	for(var x in adrList){
-    		adrList[x].sel = false;
-    	}
+    	//先判断当前是否选中
+	    if(adrList[sIndex].sel){
+	    	adrList[sIndex].sel = false;
+	    }else{
+	    	for(var x in adrList){
+    			adrList[x].sel = false;
+    		}
+    		adrList[sIndex].sel = true;
+	    }
     	
-    	adrList[sIndex].sel = true;
+    
     	this.adrList = adrList;
     },
     //获取收货地址
@@ -177,14 +183,24 @@ export default {
     		return;
     	}
     	
-    	that.Request.removeAddress(wx.getStorageSync('userId'),addressId)
-    		.then(res =>{
-    			console.log(res)
-    			if(res.code == 200){
-    				that.page = 1;
-    				that.addressListFun();
-    			}
-    		})
+    	wx.showModal({
+			  title: '',
+			  content: '是否删除选中地址？',
+			  success(res) {
+			    if (res.confirm) {
+			      that.Request.removeAddress(wx.getStorageSync('userId'),addressId)
+			    		.then(res =>{
+			    			console.log(res)
+			    			if(res.code == 200){
+			    				that.page = 1;
+			    				that.addressListFun();
+			    			}
+			    		})
+			    }
+			  }
+			})
+    	
+    	
     	
     }
   },
@@ -313,5 +329,9 @@ export default {
 	}
 	.addView{
 		background-color: #F7F7F7;
+		height: 100%;
+	}
+	.container{
+		padding-bottom: 300rpx;
 	}
 </style>
