@@ -1,10 +1,8 @@
 import React from 'react';
 
-
+import { BrowserRouter as Router, Route ,Link} from "react-router-dom";
 import Api from '../util/api';
 
-
-const logo = require('../assets/images/logo.svg');
 
 require('../assets/css/Home.css');
 
@@ -19,7 +17,7 @@ class Home extends React.Component{
 
 
     }
-
+    //获取列表
     requestData=()=>{
         var that = this;
         
@@ -32,6 +30,7 @@ class Home extends React.Component{
             })
     }
 
+
     componentWillMount(){
         this.requestData();
     }
@@ -42,15 +41,23 @@ class Home extends React.Component{
         return(
             <div className="Home div_float">
                 
-                <div className='list'>
-
-                    <div className='sub'>
-                        <img alt='' src={logo}/>
-                        <div className='til'>标题</div>
-                        <div className='price'>价格</div>
-                    </div>
-
-                </div>
+                {
+                    this.state.list.map((value,key)=>{
+                        return (
+                            <div key={key}>
+                                <Link to={`/Pcontent/${value.goods_id}`}>
+                                    <div className='list'  data-goods-id={value.goods_id}>
+                                            <div className='sub'>
+                                                <img alt='' src={value.thumbnail}/>
+                                                <div className='til'>{value.goods_name}</div>
+                                                <div className='price'>¥{value.price}</div>
+                                            </div>
+                                    </div>
+                                </Link>
+                            </div>
+                        )
+                    })
+                }
 
             </div>
         )

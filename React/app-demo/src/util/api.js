@@ -27,8 +27,18 @@ const api= {
 				lat,
 				lng
 			}
-			return requestAll.postRequest(apiUrl + '/portal/index/goods_recommend', data);
+			return requestAll.postRequest(apiUrl + 'portal/index/goods_recommend', data);
 	},
+
+	//商家详情
+	shopDetail(session,language,goods_id){
+		let data = {
+			session,
+			language,
+			goods_id
+		}
+		return requestAll.postRequest(apiUrl + 'goods/list/detail', data);
+},
   	
 }
  
