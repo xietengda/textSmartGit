@@ -31,8 +31,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env,
- 			//添加下面代码
-      'process.env.BASE_URL': '\"' + process.env.BASE_URL + '\"'
+       //添加下面代码
+       'process.env.BASE_URL': '\"' + process.env.BASE_URL + '\"'
     }),
     new UglifyJsPlugin({
       uglifyOptions: {

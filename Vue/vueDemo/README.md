@@ -1,4 +1,4 @@
-# vuedemo
+# study_app
 
 > A Vue.js project
 

@@ -5,12 +5,13 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    //启动页
-		{
-			path: '/',
-			name: 'index',
-			component: resolve => require(['../page/index/index.vue'], resolve),
-			meta: {title: ''}
-		},
+    {
+      path: '/',
+      name: 'homePage',
+      component: resolve => require(['../pages/homePage/homePage.vue'], resolve),
+      meta: {
+        title: ''
+      },
+    }
   ]
 })
