@@ -1,0 +1,12 @@
+{
+    "dev":{
+        "IMG_DOMAIN": " ",
+        "API_DOMAIN": " ",
+        "MESSAGE_ROOM":" "
+    },
+    "prod":{
+        "IMG_DOMAIN": " ",
+        "API_DOMAIN": " ",
+        "MESSAGE_ROOM":" "
+    }
+}
