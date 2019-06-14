@@ -1,0 +1,35 @@
+@mixin bg-image($url){
+    background: url($url + "@2x.png") 0 0 /100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    {
+        background: url($url + "@3x.png")  0 0 /100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+}
+
+@mixin bg-image-no($url){
+    background-image: url($url + "@2x.png");
+    background-repeat: no-repeat;
+    @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    {
+        background-image: url($url + "@3x.png");
+        background-repeat: no-repeat;
+    }
+    
+}
+
+@mixin bg-image-import($url){
+    background: url($url + "@2x.png") 0 0 /100% 100% !important;
+    background-repeat: no-repeat;
+    @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    {
+        background: url($url + "@3x.png")  0 0 /100% 100% !important;
+        background-repeat: no-repeat;
+    }
+    
+}
+  
