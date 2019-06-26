@@ -1,0 +1,42 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='payFin_head'>
+    <icon type="success" size="35" />
+    <view>支付成功</view>
+    <view>您可以在会员中心进行查看订单等操作</view>
+  </view>
+
+  <view class='payFin_head_btn'>
+    <navigator url='../mySelf/mySelf' open-type='switchTab' hover-class='none'>
+      <view>返回会员中心</view>
+    </navigator>
+    <navigator url='../allPro/allPro' open-type='switchTab' hover-class='none'>
+      <view>继续购买</view>
+    </navigator>
+    <navigator url='{{url}}' hover-class='none'>
+      <view>查看我的订单</view>
+    </navigator>
+  </view>
+
+  <view wx:if='{{order.shipping_ziti.pickup_cn && order.extension_code !="package_buy"}}' class='payFin_QRcode'>
+    <view class='payFin_QRcode_til'>
+      <text class='pwdIcon'></text>取货时需出示提货码或条形码</view>
+    <image src='{{img}}' />
+    <view class='payFin_QRcode_num'>{{order.shipping_ziti.pickup_cn}}</view>
+  </view>
+
+  <view class='payFin_btm'>
+    <view wx:for="{{ad}}" wx:key='ad' class='ad_y'>
+      <image bindtap="navTap" data-type="{{item.type}}" data-cat_id="{{item.cat_id}}" src='{{item.ad_code}}' />
+    </view>
+  </view>
+
+  <template is="recommend_product" data="{{recomList:cartList}}" />
+
+  <template is="sizeSel" data="{{type:layerHide,goods:sizePrt,sizePrice:sizePrice,butTotal:butTotal,selectAttr:selArrText}}" />
+  <template is="black_layer" data="{{type:layerHide}}" />
+
+</view>

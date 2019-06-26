@@ -1,0 +1,41 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='login_head'>
+    <form bindsubmit="formSubmit">
+      <view class='head_input'>
+        <text>账号：</text>
+        <input type='text' name="username" placeholder='手机号码' />
+      </view>
+      <view class='head_input'>
+        <text>密码：</text>
+        <input type='password' name="password" placeholder='请输入密码' />
+      </view>
+      <view class='forget_pwd'>
+        <navigator url='../forgetPwd/forgetPwd' hover-class='none'>
+          忘记密码
+        </navigator>
+      </view>
+      <button formType="submit"  class='login_btn'>登录</button>
+      <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo" class='rapid_login'>快速登录</button>
+    </form>
+  </view>
+
+  <view class='login_btm'>
+    <view class='login_btm_list'>
+      <view>还没有账号？</view>
+      <navigator url='../register/register' hover-class='none'>
+        <button>立即注册</button>
+      </navigator>
+    </view>
+    <view class='login_btm_list'>
+      <view>加盟我们的大家庭</view>
+      <navigator url='/pages/leaveWrods2/leaveWrods2' hover-class='none'>
+        <button>加盟申请</button>
+      </navigator>
+    </view>
+  </view>
+
+</view>

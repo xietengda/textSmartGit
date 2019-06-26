@@ -1,0 +1,22 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con  {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+  <form bindsubmit="formSubmit">
+    <view class='sco_head'>
+      <view class='sco_head_list div_flaot'>
+        <view>输入优惠券卡号：</view>
+        <input type='text' name='card' value='{{code}}' />
+      </view>
+      <view class='sco_head_carme'>
+        <view class='sco_head_sub_carme div_float' catchtap='scanCode'>
+          <image src='../../images/take_icon.png' />
+          <view>扫描优惠券卡条形码</view>
+        </view>
+      </view>
+      <button class='sco_btn' formType="submit">确认提交</button>
+    </view>
+  </form>
+  <template is="picture_adver" data="{{sco_list:sco_list}}" />
+
+</view>

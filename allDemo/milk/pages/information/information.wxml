@@ -1,0 +1,20 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <scroll-view scroll-y class='infor_cont' bindscrolltolower="scrolltolower">
+    <block wx:for="{{inforList}}" wx:for-item="inforList"  wx:key="inforKey">
+      <navigator url='../inforDetail/inforDetail?id={{inforList.l_id}}' hover-class='none'>
+        <view class='infor_cont_list'>
+          <view class='infor_lit_L div_float'>
+            <view class='infor_til'>{{inforList.title}}</view>
+            <view class='infor_date'>{{inforList.receive_time}}</view>
+          </view>
+          <view class='infor_lit_R'>〉</view>
+        </view>
+      </navigator>
+    </block>
+  </scroll-view>
+
+</view>

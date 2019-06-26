@@ -1,0 +1,27 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con  {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='com_banner'>
+    <swiper class='banner_swiper' indicator-dots="true" bindchange="banChange" indicator-color="rgba(0,0,0,.6)" indicator-active-color="#E50012" autoplay='TRUE'>
+      <block wx:for="{{bannerList}}" wx:for-item="banner" wx:key="banner">
+        <swiper-item>
+          <image bindtap="navTap" data-type="{{banner.type}}" data-cat_id="{{banner.cat_id}}" src="{{banner.ad_code}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <view class='com_class'>
+    <view wx:for="{{ad2}}" wx:key='ad' wx:for-index="idx">
+      <image bindtap="articleTap" data-name="{{category[idx].name}}"  data-id="{{idx}}" src='{{item.ad_code}}' />
+    </view>
+  </view>
+
+  <view class='com_btm'>
+    <view class='com_btm_til'>精选推荐</view>
+    <template is="commEssay" data="{{essayList:essayList}}" />
+  </view>
+
+</view>

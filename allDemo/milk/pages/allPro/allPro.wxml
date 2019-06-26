@@ -1,0 +1,32 @@
+<import src="../../template/template.wxml" />
+
+<view class=' {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:0,isIphoneX:isIphoneX}}" />
+  <view class='guding'  style='{{isIphoneX ? "top:163rpx !important" : ""}}'>
+    <template is="t_search_input" data="{{searchText:searchText}}" />
+
+    <view class='all_P_head'>
+      <view class='all_P_head_one'>
+        <text class='{{conditionOne =="" ? "all_P_head_one_sel" : ""}}' data-con-num="" catchtap='conditionOneChange'>全部商品</text>
+        <text class='{{conditionOne =="1" ? "all_P_head_one_sel" : ""}}' data-con-num="1" catchtap='conditionOneChange'>爆款推荐</text>
+        <text class='{{conditionOne =="2" ? "all_P_head_one_sel" : ""}}' data-con-num="2" catchtap='conditionOneChange'>新品上市</text>
+      </view>
+      <scroll-view class='all_P_head_two' scroll-x style="width: 100%">
+        <view wx:for="{{categoryList}}" wx:key="item" class="{{item.class}}" data-con-num='{{item.id}}' catchtap='conditionTwoChange'>{{item.name}}</view>
+      </scroll-view>
+    </view>
+  </view>
+  <view class='guding2' style='padding-top:{{height2}}rpx;height:{{height}}px'>
+    <scroll-view wx:if="{{reshList.length != 0}}" class='all_P_head_cont' scroll-y bindscrolltolower='onReachBottom' scroll-top='{{top}}' style='height:70%'>
+      <template is="proShow" data="{{showType:2,reshList:reshList}}" />
+    </scroll-view>
+
+    <view wx:else class='orderNull'>
+      <view class='icon nullOrder'></view>
+      <view class='til'>没有相关产品</view>
+    </view>
+  </view>
+  <template is="sizeSel" data="{{type:layerHide,goods:sizePrt,sizePrice:sizePrice,butTotal:butTotal,selectAttr:selArrText}}" />
+  <template is="black_layer" data="{{type:layerHide}}" />
+
+</view>

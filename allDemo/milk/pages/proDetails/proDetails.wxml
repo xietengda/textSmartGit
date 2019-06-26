@@ -1,0 +1,215 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con  {{isIphoneX?"cont_ix ix_btm":""}}' catchtouchmove='{{touchmove}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <!--轮播图-->
+  <view class='pro_det_head'>
+    <swiper class='pro_det_banner' bindchange="bannerChange">
+      <block wx:for="{{imgUrls}}" wx:key="pro_de_ban">
+        <swiper-item>
+          <image mode="widthFix" src="{{item}}" />
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <view class='det_banner_dot'>
+      <block wx:for="{{imgUrls}}" wx:for-index="dotIndex" wx:key="Ban_dot">
+        <text class='{{dotIndex == current? "det_banner_dot_ative" : " "}}'></text>
+      </block>
+    </view>
+  </view>
+
+  <!--标题信息-->
+  <view class='pro_tit div_float'>
+    <view class='pro_tit_L'>
+      <view class='pro_tit_L_one'>{{goods.goods_name}}</view>
+      <view class='pro_tit_L_tow'>商城价￥
+        <text>{{goods.market_price}}</text>
+        <text wx:if="{{goods.dw}}" class='dw'>/{{goods.dw}}</text>
+      </view>
+    </view>
+    <view class='pro_tit_R' catchtap='shareFun'>
+      <view class='pro_tit_R_one share'></view>
+      <view class='pro_tit_R_two'>分享</view>
+      <button class='shareBtn' open-type="share" type="primary" hover-class="other-button-hover"></button>
+    </view>
+    <view class='pro_tit_btm div_float'>
+      <view class='pro_tit_btm_L'>会员专享:￥
+        <text>{{goods.shop_price}}</text>
+        <text wx:if="{{goods.dw}}" class='dw'>/{{goods.dw}}</text>
+      </view>
+      <view class='pro_tit_btm_R' wx:if='{{proType != 2}}'>
+        <text>{{goods.comment_count}}</text>人评价
+      </view>
+    </view>
+  </view>
+
+  <!--满减-->
+  <view class='pro_discount'>
+    <block wx:for="{{disCount}}" wx:key="disCount">
+      <view>
+        <text>{{item.act_type}}</text>{{item.act_name}}</view>
+    </block>
+  </view>
+
+  <!--领取优惠券-->
+  <view class='pro_dis_coupon'>
+    <template is="get_discount" data="{{discountList:discountList}}" />
+  </view>
+
+  <!--商品介绍-->
+  <view class='pro_introduce'>
+    <view class='pro_introduce_til'>
+      <text class='{{proIntIndex == 1 ? "pro_introduce_til_sel" : ""}}' data-index="1" bindtap='proIntChange'>商品介绍</text>
+      <text class='{{proIntIndex == 2 ? "pro_introduce_til_sel" : ""}}' data-index="2" bindtap='proIntChange' wx:if='{{proType != 2}}'>商品评价</text>
+    </view>
+    <view class='pro_introduce_cont'>
+      <!--商品详情-->
+      <view class='pro_intr_cont_one {{proIntIndex == "1" ? "":"divHide"}}'>
+        <rich-text  nodes="{{goods.goods_desc}}" ></rich-text>
+      </view>
+      <!--商品评价-->
+      <view class='pro_intr_cont_two {{proIntIndex == "2" ? "":"divHide"}}'>
+        <block wx:for="{{comment_list}}" wx:key="comList">
+          <view class='comment_list'>
+            <view class='com_list_head div_float'>
+              <view class='list_head_name'>{{item.user_name}}</view>
+              <view class='list_head_star'>
+                <block wx:for="{{item.comment_rank - 0}}" wx:key="score1">
+                  <text class='star_y'></text>
+                </block>
+                <block wx:for="{{5 - item.comment_rank}}" wx:key="score2">
+                  <text class='star_no'></text>
+                </block>
+              </view>
+              <view class='list_head_date'>{{item.add_time_str}}</view>
+            </view>
+            <view class='com_list_one'>{{item.content}}</view>
+            <view class='com_list_two'>
+              <block wx:for="{{item.shaidan_imgs}}" wx:for-item="img" wx:key="img">
+                <image catchtap='preview' class='{{index % 4 == 0 ? "com_list_two_last" : ""}}' data-src='{{img.image}}' src='{{img.image}}' />
+              </block>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!--底部-->
+  <view class='pro_deta_btm div_float {{isIphoneX?"ix_btm":""}}'>
+    <!--正常商品商品-->
+    <view class='pro_deta_btm_for_routine {{proType == 1 ? "" : "divHide"}}'>
+      <view class='pro_deta_btm_two' bindtap='toIndex'>
+        <view class='pro_btn_collect detail_index'></view>
+        <view>首页</view>
+      </view>
+      <view class='pro_deta_btm_two ' bindtap='toCart'>
+        <view class='pro_btn_collect  detail_buy'></view>
+        <view>购物车</view>
+      </view>
+      <view class='pro_deta_btm_two' bindtap='collectChange'>
+        <view class='pro_btn_collect {{collect == 0 ? "collect_gary" : "star_sel"}}'></view>
+        <view>收藏</view>
+      </view>
+      <view class='pro_deta_btm_three'>
+        <button data-type="cart" catchtap='clickType'>加入购物车</button>
+        <button data-type="buy" catchtap='clickType'>立即购买</button>
+      </view>
+    </view>
+    <!--套餐商品-->
+    <view class='pro_deta_btm_for_combo {{proType == 2 ? "" : "divHide"}}'>
+
+      <view class='pro_deta_btm_two' bindtap='toIndex'>
+        <view class='pro_btn_collect detail_index'></view>
+        <view>首页</view>
+      </view>
+      <view class='pro_deta_btm_two ' bindtap='toCart'>
+        <view class='pro_btn_collect  detail_buy'></view>
+        <view>购物车</view>
+      </view>
+      <view wx:if="{{goods.diy == 1}}" class='combo_btn'>
+        <button wx:if="{{comboType == 0}}" catchtap='clickCombo' style='background-color:#FF9600;'>选购套餐</button>
+        <button wx:else catchtap='finishCombo' style='background-color:#FF9600;'>完成选购</button>
+        <button data-type="pack" data-diy='1' catchtap='clickType'>立即下单</button>
+      </view>
+      <view wx:else class='combo_btn'>
+        <button wx:if="{{comboType == 0}}" catchtap='clickCombo' style='background-color:#FF9600;'>查看套餐内容</button>
+        <button wx:else catchtap='finishCombo' style='background-color:#FF9600;'>查看套餐内容</button>
+        <button data-type="pack" data-diy='0' catchtap='clickType'>立即下单</button>
+      </view>
+    </view>
+  </view>
+
+  <!--常规商品选择规格弹层-->
+  <view class='pro_size {{showLayer ? "" : "divHide"}} {{isIphoneX?"ix_combo":""}}'>
+    <view class='pro_size_head'>
+      <image src='{{goods.goods_img}}' />
+      <view class='pro_size_head_msg'>
+        <view>{{goods.format_shop_price}}</view>
+        <view>{{selectAttr}}</view>
+      </view>
+    </view>
+    <view class='pro_size_cont'>
+      <block wx:for="{{sizeList}}" wx:for-item="size1" wx:for-index="sizeIndex" wx:key="sizeList">
+        <view class='pro_size_list'>
+          <view>{{size1.name}}</view>
+          <view>
+            <block wx:for="{{size1.values}}" wx:for-item="size2" wx:for-index="sizeListIndex" wx:key="sizeList_list">
+              <text class='{{size2.sel == 1 ? "pro_size_list_sel" : " "}}' data-size-index="{{size2.id}}" data-size-list-index="{{size1.attr_id}}" catchtap='selSize'>{{size2.label}}</text>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class='buy_toal'>
+      <view>购买数量</view>
+      <view class='buy_input div_float'>
+        <text data-num-type="cut" catchtap='changeNum' class='{{butTotal>1 ? "buy_input_click" : " "}}'>-</text>
+        <input type='number' value='{{butTotal}}'   bindinput="manualChange"/>
+        <text data-num-type="add" catchtap='changeNum' class='buy_input_click'>+</text>
+      </view>
+    </view>
+    <button class='size_btn {{isIphoneX?"ix_combo":""}}' catchtap='sizeBtn'>确定</button>
+  </view>
+
+  <!--套餐商品选择弹层-->
+  <view class='pro_size_combo {{comboLayer ? " " : "divHide"}} {{isIphoneX?"ix_combo":""}}'>
+    <view class='size_combo_list'>
+      <view wx:if="{{goods.diy == 1}}" class='combo_list_head div_float'>
+        <view class='combo_head_L'>{{goods.goods_name}}
+          <text>(共可选{{goods.select_num}}瓶)</text>
+        </view>
+        <view class='combo_head_R'>剩余
+          <text>{{goods.can_select_num}}</text>瓶</view>
+      </view>
+      <view wx:else class='combo_list_head div_float'>
+        <view class='combo_head_L'>{{goods.goods_name}}</view>
+        <view class='combo_head_R'>一共
+          <text>{{goods.select_num}}</text>瓶</view>
+      </view>
+      <view class='combo_list_cont'>
+        <block wx:for="{{selectgoods}}" wx:for-index="combo2Index" wx:key="combo2">
+          <view class='combo_list_cont_view div_float'>
+            <view class='combo_list_cont_L ellipsis_one'>
+              <view>{{item.g1}}
+                <text>{{item.g2}}</text>
+              </view>
+            </view>
+            <view wx:if="{{goods.diy == 1}}" class='combo_list_cont_R'>
+              <text data-type="cut" data-goods_id="{{item.goods_id}}" data-product_id="{{item.product_id}}" data-id='{{combo2Index}}' catchtap='comboChange' class='{{combo2.num> 0 ? "combo_list_cont_R_sel" : " "}}'>-</text>
+              <input type='Number'  value='{{item.c_num}}' disabled='true'/>
+              <text data-type="add" data-goods_id="{{item.goods_id}}" data-product_id="{{item.product_id}}" data-id='{{combo2Index}}' catchtap='comboChange' class='combo_list_cont_R_sel'>+</text>
+            </view>
+            <view wx:else class='combo_list_cont_R'>
+              <input type='Number' disabled='ture' value='{{item.g3}}' />
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <template is="black_layer" data="{{type:layerType}}" />
+</view>

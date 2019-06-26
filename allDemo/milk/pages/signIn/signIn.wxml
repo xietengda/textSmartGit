@@ -1,0 +1,33 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='sign_head'>
+    <view wx:if="{{signBtn > 0}}" class='sign_btn'>已签到</view>
+    <view wx:else class='sign_btn' catchtap='signBtnFun'>签到</view>
+    <view class='sign_describe'>每天签到可领1-10积分</view>
+    <button catchtap='toFun'>积分抽奖</button>
+  </view>
+
+  <view class='sign_cont'>
+    <view class='sign_record'>
+      <view class='sign_record_con'>
+        <block wx:for="{{signList}}" wx:for-item="signList" wx:key="signList">
+          <view class='sign_record_list'>
+            <view wx:if="{{signList.points != 0 }}" class='intView'>+{{signList.points}}</view>
+            <view wx:else class='sign_state'>未签到</view>
+            <view class='sign_icon'></view>
+            <view class='sign_date'>{{signList.date_format}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class='sign_record_line'>
+      <view></view>
+    </view>
+  </view>
+
+  <template is="picture_adver" data="{{sco_list:ad}}" />
+
+</view>

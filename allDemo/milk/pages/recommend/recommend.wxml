@@ -1,0 +1,13 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='re_cont bg'>
+    <view class='QR_view'>
+      <image class="QRcode" src='{{imgSrc}}' catchtap='checkCode' />
+    </view>
+    <view class='saveBtn' catchtap='savePic' wx:if='{{canCreate}}'>{{name}}</view>
+  </view>
+  <canvas style="width: 375px;height: 604px;position:fixed;top:9999px" canvas-id="mycanvas" />
+</view>

@@ -1,0 +1,27 @@
+@import "../../template/template.wxss";
+
+.orRemark_head{
+  width: 100%;
+  background-color: white;
+  padding: 20rpx 0rpx;
+}
+.orRemark_textarea{
+  width: 88%;
+  padding: 3% 4%;
+  height: 200rpx;
+  border-radius: 20rpx;
+  background-color: #e8e8e8;
+  margin: 0 auto;
+  font-size: 28rpx;
+  color: #232323;
+}
+.orRemark_btn{
+  width: 95%;
+  height:82rpx;
+  color: white;
+  font-size: 36rpx;
+  line-height: 82rpx;
+  background-color: #e50012;
+  border-radius: 30rpx; 
+  margin-top: 30rpx;
+}

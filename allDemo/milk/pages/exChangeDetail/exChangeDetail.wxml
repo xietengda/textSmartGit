@@ -1,0 +1,37 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix ix_btm":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='banner_view'>
+    <swiper class='ex_banner' bindchange="bannerChange">
+      <block wx:for="{{data.img_list}}" wx:for-item="banner" wx:key="banner">
+        <swiper-item>
+          <image src="{{banner.img_original}}" class="slide-image"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='ban_dost'>
+      <block wx:for="{{data.img_list}}" wx:for-item="bannerDots" wx:for-index="DotsIndex" wx:key="bannerDots">
+        <text class='{{DotsIndex == bannerIndex ? "ban_dost_sel" : ""}}'></text>
+      </block>
+    </view>
+  </view>
+  
+  <view class='pro_msg'>
+    <view class='pro_til'>{{data.goods_name}}</view>
+    <view class='pro_subTil'>可用积分兑换</view>
+    <view class='pro_price'><text>{{data.exchange_integral}}</text>积分</view>
+  </view>
+
+  <view class='pro_deta_msg'>
+    <view class='pro_deta_msg_til'>
+    <rich-text nodes="{{data.goods_desc}}"></rich-text>
+    </view>
+  </view>
+  
+  <view class='pro_deta_btm'> 
+    <button data-goods_id='{{data.goods_id}}' catchtap='exChangeBtn'>立即兑换</button>
+  </view>
+
+</view>

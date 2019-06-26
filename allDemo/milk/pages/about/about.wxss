@@ -1,0 +1,47 @@
+@import "../../template/template.wxss";
+
+.about_head {
+  width: 100%;
+  height: 184rpx;
+  margin: 0 auto;
+  margin-top: 30rpx;
+}
+
+.ad_y>image {
+  width: 100%;
+  height: 183rpx;
+}
+
+.about_cont {
+  margin-top: 20rpx;
+}
+
+.about_cont navigator {
+  display: block;
+}
+
+.about_list {
+  padding: 0 4%;
+  height: 62rpx;
+  background-color: white;
+  font-size: 28rpx;
+  color: #353535;
+  line-height: 62rpx;
+  position: relative;
+  margin-bottom: 20rpx;
+}
+
+.about_list>view:nth-child(2) {
+  position: absolute;
+  right: 4%;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  width: 15rpx;
+  height: 30rpx;
+}
+
+.ad_y {
+  justify-content: center;
+  display: flex;
+}

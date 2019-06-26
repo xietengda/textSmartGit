@@ -1,0 +1,100 @@
+{
+  "pages": [
+   
+    "pages/index/index",
+    "pages/rushBuy/rushBuy",
+    "pages/useDiscount/useDiscount",
+    "pages/turntable/turntable",
+    "pages/takeMilk/takeMilk",
+    "pages/signIn/signIn",
+    "pages/selShop/selShop",
+    "pages/scoreOrderDetail/scoreOrderDetail",
+    "pages/scoreOrder/scoreOrder",
+    "pages/scoreDetail/scoreDetail", 
+    "pages/paymentFin/paymentFin",
+    "pages/payment/payment",
+    "pages/orderRemark/orderRemark",
+    "pages/orderDetail/orderDetail",
+    "pages/oEvaluate/oEvaluate",
+    "pages/inforDetail/inforDetail",
+    "pages/forgetPwd/forgetPwd",
+    "pages/exChangeList/exChangeList",
+    "pages/exChangeDetail/exChangeDetail",
+    "pages/editPerson/editPerson",
+    "pages/complain/complain",
+    "pages/amendPwd/amendPwd",
+    "pages/addSelect/addSelect",
+    "pages/communityTwo/communityTwo", 
+    "pages/communityThird/communityThird",
+    "pages/myDiscount/myDiscount",
+    "pages/mySelf/mySelf",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/score/score",
+    "pages/leaveWrods/leaveWrods",
+    "pages/leaveWrods2/leaveWrods2",
+    "pages/checkCombo/checkCombo",
+    "pages/comboList/comboList",
+    "pages/proDetails/proDetails",
+    "pages/shopCart/shopCart",
+    "pages/order/order",
+    "pages/allPro/allPro",
+    "pages/recommend/recommend",
+    "pages/addManagement/addManagement",
+    "pages/help/help",
+    "pages/search/search",
+    "pages/addAddress/addAddress",
+    "pages/aboutTwo/aboutTwo",
+    "pages/about/about",
+    "pages/community/community",
+    "pages/exChangePay/exChangePay",
+    "pages/information/information",
+    "pages/getDiscount/getDiscount",
+    "pages/collect/collect",
+    "pages/scorecard/scorecard",
+    "pages/scorecard2/scorecard",
+    "pages/community2/community"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#353535",
+    "selectedColor": "#FF2424",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_sel.png"
+      },
+      {
+        "pagePath": "pages/allPro/allPro",
+        "text": "全部商品",
+        "iconPath": "images/all_pro.png",
+        "selectedIconPath": "images/all_pro_sel.png"
+      },
+      {
+        "pagePath": "pages/score/score",
+        "text": "积分商城",
+        "iconPath": "images/int.png",
+        "selectedIconPath": "images/int_sel.png"
+      },
+      {
+        "pagePath": "pages/shopCart/shopCart",
+        "text": "购物车",
+        "iconPath": "images/shop_cart.png",
+        "selectedIconPath": "images/shop_cart_sel.png"
+      },
+      {
+        "pagePath": "pages/mySelf/mySelf",
+        "text": "个人中心",
+        "iconPath": "images/me.png",
+        "selectedIconPath": "images/me_sel.png"
+      }
+    ]
+  }
+}

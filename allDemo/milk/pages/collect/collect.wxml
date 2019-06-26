@@ -1,0 +1,31 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con  {{isIphoneX?"cont_ix":""}}' >
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+  
+  <view class='col_cont div_float'>
+    <block wx:for="{{colList}}" wx:for-item="colList" wx:for-index="colIndex" wx:key="colList">
+      <view class='col_cont_list {{colIndex % 2 == 0 ? "col_odd" : " "}}'>
+        <navigator url='../proDetails/proDetails?goodsId={{colList.goods_id}}' hover-class='none'>
+          <image src='{{colList.thumb}}'/>
+        </navigator>
+        <view class='col_cont_til ellipsis_one'>{{colList.goods_name}}</view>
+        <view class='col_cont_btm div_float'>
+          <view class='col_cont_btm_l'>¥<text>{{colList.shop_price}}</text></view>
+          <view class='col_cont_btm_R div_float'>
+            <view class='col_del del_icon' data-rec_id='{{colList.rec_id}}' catchtap='delCollect'></view>
+            <!-- <navigator url='../proDetails/proDetails?goodsId={{colList.goods_id}}' hover-class='none'> -->
+              <view class='col_add_cart' data-goodsid='{{colList.goods_id}}'  catchtap='addCart'>加入购物车</view>
+            <!-- </navigator> -->
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+   <template is="sizeSel" data="{{type:layerHide,goods:sizePrt,sizePrice:sizePrice,butTotal:butTotal,selectAttr:selArrText}}" />
+  <template is="black_layer" data="{{type:layerHide}}" />
+
+  
+
+</view>

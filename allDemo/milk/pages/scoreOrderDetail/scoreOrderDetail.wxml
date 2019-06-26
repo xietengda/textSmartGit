@@ -1,0 +1,80 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='order_de_head'>
+    <view>订单号：
+      <text>{{order_info.order_sn}}</text>
+    </view>
+    <view>状态：
+      <text class='order_de_sta'>{{order_info.status_name}}</text>
+    </view>
+
+    <view wx:if='{{shipping_ziti.address}}'>自提店铺名称：
+      <text>{{shipping_ziti.shop_name}}</text>
+    </view>
+    <view wx:if='{{shipping_ziti.address}}'>自提联系电话：
+      <text>{{shipping_ziti.phone}}</text>
+    </view>
+    <view wx:if='{{shipping_ziti.address}}'>自提地址：
+      <text>{{shipping_ziti.address}}</text>
+    </view>
+
+
+    <view wx:if='{{!shipping_ziti.address}}'>收货地址：
+      <text>{{order_info.address}}</text>
+    </view>
+    <view wx:if='{{!shipping_ziti.address}}'>收货人：
+      <text>{{order_info.consignee}}   {{order_info.mobile}}</text>
+    </view>
+
+    <view>订单备注：
+      <text>{{order_info.message}}</text>
+    </view>
+    <view>下单时间：
+      <text>{{order_info.add_time}}</text>
+    </view>
+  </view>
+
+  <view class='order_de_cont'>
+    <view wx:if="{{shipping_ziti.pickup_cn}}" class='order_de_cont_til div_float'>
+      <text class='MilkIcon'></text>
+      <view>{{shipping_ziti.shop_name}}</view>
+    </view>
+    <view class='order_de_cont_cont'>
+      <block wx:for="{{goods_list}}" wx:key="proList">
+        <!-- <navigator url='../proDetails/proDetails?goodsId={{item.goods_id}}' hover-class='none'> -->
+          <view class='cont_cont_list div_float'>
+            <image class='cont_cont_img' src='{{item.goods_thumb}}' />
+            <view class='cont_cont_M'>
+              <view>{{item.goods_name}}</view>
+              <view>x{{item.goods_number}}</view>
+            </view>
+          </view>
+        <!-- </navigator> -->
+      </block>
+    </view>
+  </view>
+
+  <view class='order_de_btn'>
+    <view class='order_de_btn_list'>
+      <text>配送费</text>
+      <text>{{order_info.formated_shipping_fee}}</text>
+    </view>
+    <view class='order_de_btn_list'>
+      <text>消费积分</text>
+      <text>-{{order_info.integral}}</text>
+    </view>
+    <view class='order_de_btn_list_other'>
+      <text>实付金额：</text>
+      <text>{{order_info.formated_total_fee}}</text>
+    </view>
+  </view>
+
+  <view class='order_de_btm_two'>
+    <button wx:if="{{shipping_ziti.pickup_cn}}" catchtap='checkCode' data-code='{{shipping_ziti.pickup_cn}}' class='order_de_btm_two_btn'>查看取货码</button>
+    <button wx:if="{{order_info	.pay_status == 0	}}" catchtap='repay' class='order_de_btm_two_btn'>重新支付</button>
+  </view>
+  <template is="QRCode" data="{{...QRCode}}"></template>
+</view>

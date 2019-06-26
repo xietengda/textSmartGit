@@ -1,0 +1,26 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con myDis_cont {{isIphoneX?"cont_ix ix_btm":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='discount_head'>
+    <view class='{{disSta == "0" ? "discount_head_sel": ""}}' data-dis-sta='0' catchtap='changeState'>全部</view>
+    <view class='{{disSta == "1" ? "discount_head_sel": ""}}' data-dis-sta='1' catchtap='changeState'>未使用</view>
+    <view class='{{disSta == "3" ? "discount_head_sel": ""}}' data-dis-sta='3' catchtap='changeState'>已使用</view>
+    <view class='{{disSta == "2" ? "discount_head_sel": ""}}' data-dis-sta='2' catchtap='changeState'>已过期</view>
+  </view>
+
+  <scroll-view scroll-y class='dis_cont'>
+    <template is="discount_temp" data="{{disList:disList}}" />
+  </scroll-view>
+  <view class='dis_btn_view {{isIphoneX?"ix_btm":""}}'>
+
+    <button class='dis_btn half' catchtap='getDiscount'>领取优惠券
+      <text>>></text>
+    </button>
+    <button class='dis_btn half right' catchtap='exchangeDiscount'>兑换优惠券
+      <text>>></text>
+    </button>
+
+  </view>
+</view>

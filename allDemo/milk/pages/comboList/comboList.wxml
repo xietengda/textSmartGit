@@ -1,0 +1,17 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+    <template is="t_search_input" />
+
+    <view class='comList_head'>
+        <text catchtap='tap1' class='{{class1}}'>固定套餐</text>
+        <text catchtap='tap2' class='{{class2}}'>自由组合套餐</text>
+    </view>
+
+    <view class='comList_cont'>
+        <template is="proShow" data="{{showType:3,reshList:reshList}}" />
+    </view>
+
+</view>

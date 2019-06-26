@@ -1,0 +1,61 @@
+@import "../../template/template.wxss";
+
+.sco_head{
+  background-color: white;
+  width: 100%;
+  padding-top: 80rpx;
+  padding-bottom: 50rpx;
+}
+.sco_head_list{
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 1rpx solid #e5e5e5;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.sco_head_list>view{
+  float: left;
+  font-size: 30rpx;
+  color: #323232;
+}
+.sco_head_list>input{
+  float: left;
+  width: 60%;
+  height: 50%;
+  margin-top: 20rpx;
+  font-size: 30rpx;
+}
+.sco_head_carme{
+  text-align: right;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 0;
+  -webkit-text-size-adjust: none;
+  margin-top: 35rpx;
+}
+.sco_head_sub_carme{
+  display: inline-block;
+}
+.sco_head_sub_carme>image{
+  float: left;
+  width: 50rpx;
+  height: 40rpx;
+}
+.sco_head_sub_carme>view{
+  float: left;
+  color: #232323;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+}
+.sco_btn{
+  width: 90%;
+  margin: 0 auto;
+  height: 87rpx;
+  line-height: 87rpx;
+  color: white;
+  font-size: 34rpx;
+  border-radius: 30rpx;
+  background-color: #e50012;
+  margin-top: 30rpx;
+}
+

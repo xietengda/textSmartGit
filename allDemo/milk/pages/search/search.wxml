@@ -1,0 +1,31 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con'>
+  <template is="all_head" data="{{type:1}}" />
+  <template is="t_search_input" data="{{searchText:searchText}}" />
+
+  <view class='search_cont'>
+    <view class='searchList'>
+      <view class='searchList_til'>
+        <view>搜索历史</view>
+        <text class='del_icon_gray' catchtap='delhistory'></text>
+      </view>
+      <view class='list_cont div_float'>
+        <block wx:for="{{historyList}}" wx:key="hList">
+          <text catchtap='gjz' data-value='{{item}}'>{{item}}</text>
+        </block>
+      </view>
+    </view>
+
+    <view class='searchList'>
+      <view class='searchList_til'>
+        <view>热门搜索</view>
+      </view>
+      <view class='list_cont div_float'>
+        <block wx:for="{{hotList}}" wx:key="hList">
+          <text catchtap='gjz' data-value='{{item}}'>{{item}}</text>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

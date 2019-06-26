@@ -1,0 +1,20 @@
+{
+    "arrList":[
+        {"img":"../../assets/img/reward/Ironvoice@2x.png","til":"铁嗓子","unit":"幅","price":88},
+        {"img":"../../assets/img/reward/nodoame@2x.png","til":"润喉糖","unit":"颗","price":10},
+        {"img":"../../assets/img/reward/praise@2x.png","til":"赞","unit":"个","price":1},
+        {"img":"../../assets/img/reward/pen@2x.png","til":"钢笔","unit":"支","price":18},
+        {"img":"../../assets/img/reward/pennant@2x.png","til":"锦旗","unit":"幅","price":9},
+        {"img":"../../assets/img/reward/microphone@2x.png","til":"金话筒","unit":"支","price":68},
+        {"img":"../../assets/img/reward/bamboo@2x.png","til":"文竹","unit":"棵","price":48},
+        {"img":"../../assets/img/reward/fan@2x.png","til":"学富五车","unit":"辆","price":88},
+        {"img":"../../assets/img/reward/drumsticks@2x.png","til":"鸡腿","unit":"个","price":5},
+        {"img":"../../assets/img/reward/love@2x.png","til":"爱心","unit":"个","price":3},
+        {"img":"../../assets/img/reward/bixin@2x.png","til":"黑凤梨","unit":"个","price":52},
+        {"img":"../../assets/img/reward/lily@2x.png","til":"百合花","unit":"朵","price":8},
+        {"img":"../../assets/img/reward/cattle@2x.png","til":"牛气冲天","unit":"个","price":66},
+        {"img":"../../assets/img/reward/diamonds@2x.png","til":"砖石","unit":"颗","price":128},
+        {"img":"../../assets/img/reward/pearl@2x.png","til":"夜明珠","unit":"颗","price":98},
+        {"img":"../../assets/img/reward/coffee@2x.png","til":"咖啡","unit":"杯'","price":78}
+    ]
+}

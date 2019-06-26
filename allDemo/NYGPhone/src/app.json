@@ -1,0 +1,25 @@
+{
+	"pages": [	
+		"pages/index/main",	
+		"pages/recomAlbum/main",
+		"pages/albumVideo/main",
+		"pages/videoCollect/main",
+		"pages/overseasCollect/main",
+		"pages/message/main",
+		"pages/searchResult/main",  
+		"pages/search/main",   
+		"pages/overseasDetail/main",  
+		"pages/videoDetail/main",
+		"pages/aboutUs/main",
+		"pages/overseasInfo/main",
+		"pages/video/main",
+		"pages/me/main",
+		"pages/login/main"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "牛油果视频",
+		"navigationBarTextStyle": "black"
+	}
+}

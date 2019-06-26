@@ -1,0 +1,359 @@
+<!--头部-->
+<template name="all_head">
+  <view class='index_head {{isIphoneX?"head_ix":""}}'>
+    <view class='head_logo'></view>
+    <navigator open-type='navigateBack' wx:if="{{!ngBack}}">
+      <view wx:if="{{type==1}}" class='headIconView div_float'>
+        <text class='left_arrow backIcon'></text>
+        <text>返回</text>
+      </view>
+    </navigator>
+    <navigator wx:else catchtap='ngBack'>
+      <view class='headIconView div_float'>
+        <text class='left_arrow backIcon'></text>
+        <text>返回{{back?back:''}}</text>
+      </view>
+    </navigator>
+  </view>
+</template>
+<!--领取优惠券 旧的-->
+<!-- <template name="get_discount">
+  <scroll-view scroll-x class='index_discount'>
+    <block wx:for="{{discountList}}" wx:for-item="discount" wx:key="discountList">
+      <navigator url='../getDiscount/getDiscount' hover-class="none">
+        <view class='index_discount_list div_float'>
+          <text>￥</text>
+          <view class='discount_list_L'>
+            <text>{{discount.type_money}}</text>
+          </view>
+          <view class='discount_list_R'>
+            <text>{{discount.type_name}}</text>
+            <text>点击领取<text class='disRIcon'></text></text>
+          </view>
+        </view>
+      </navigator>
+    </block>
+  </scroll-view>
+</template> -->
+
+<!--领取优惠券  （新的）-->
+<template name="get_discount">
+  <scroll-view scroll-x class='index_discount'>
+    <block wx:for="{{discountList}}" wx:for-item="discount" wx:key="discountList">
+      <navigator url='../getDiscount/getDiscount' hover-class="none">
+        <image src='{{discount.bonus_code}}' />
+      </navigator>
+    </block>
+  </scroll-view>
+</template>
+
+
+
+
+
+<!--搜索 null:全部 1:订单 2:兑换-->
+<template name="t_search_input">
+  <form bindsubmit="searchBtn">
+    <view class='t_search_view'>
+      <input type='text' wx:if="{{seaTye == null}}" value='{{searchText}}' name='search' placeholder='搜索香满楼产品' placeholder-class='search_pla' bindblur='searchBlur' />
+      <input type='text' wx:elif="{{seaTye == 1}}" value='{{searchText}}' name='search' placeholder='搜索相关关键字' placeholder-class='search_pla' bindblur='searchBlur' />
+      <input type='text' wx:elif="{{seaTye == 2}}" value='{{searchText}}' name='search' placeholder='搜索兑换产品' placeholder-class='search_pla' bindblur='searchBlur' />
+      <view class='input_bg searchIcon'></view>
+      <button class='t_search_btn' formType="submit">搜索</button>
+    </view>
+  </form>
+</template>
+
+<!--黑色遮罩层-->
+<template name="black_layer">
+  <view class='black_layer {{type ? "": "divHide"}}' catchtap='clickLayer'></view>
+</template>
+
+<!--商品二级标题-->
+<template name="home_sub_til">
+  <view wx:if="{{type==1}}" class='action_div div_float'>
+    <image src='../../images/discounts.png' />
+    <text>领取优惠</text>
+  </view>
+  <view wx:if="{{type==2}}" class='action_div action_div2 div_float'>
+    <image src='../../images/milk.png' />
+    <text>订奶套餐</text>
+    <navigator style="float:right;color:#989898;font-size:24rpx;margin-right:30rpx;margin-top:8px;">
+      <text catchtap='goToComList'>更多>></text>
+    </navigator>
+  </view>
+  <view wx:if="{{type==3}}" class='action_div action_div3 div_float'>
+    <image src='../../images/purchase.png' />
+    <text>限时抢购</text>
+    <navigator style="float:right;color:#989898;font-size:24rpx;margin-right:30rpx;margin-top:8px;">
+      <text id='{{item1.type}}' catchtap='navigatorCategory'>更多>></text>
+    </navigator>
+  </view>
+  <view wx:if="{{type==4}}" class='action_div action_div3 div_float'>
+    <image src='../../images/hot.png' />
+    <text>热门推荐</text>
+  </view>
+</template>
+
+
+<!--商品展示（抢购、全部商品）showType:1.抢购2.全部商品3.套餐列表-->
+<template name="proShow">
+  <block wx:if='{{reshList}}' wx:for="{{reshList}}" wx:for-item="reshList" wx:key="reshList">
+    <view class='resh_view div_float {{showType != 1 ? "resh_view_other" : " "}}'>
+      <view class='resh_view_L {{showType == 1?"resh_view_L_1":""}}'>
+        <navigator wx:if="{{showType == 1 || showType == 2}}" url='../proDetails/proDetails?goodsId={{reshList.goods_id}}' hover-class='none'>
+          <image mode="widthFix" src="{{reshList.goods_thumb}}" />
+        </navigator>
+
+        <image mode="widthFix" wx:elif="{{showType == 3}}" src="{{reshList.image}}" />
+
+      </view>
+      <view class='resh_view_R' catchtap='toDetail' data-id='{{reshList.goods_id}}'>
+        <view class='resh_til {{showType != 1 ? "resh_til_other" : " "}}'>{{reshList.goods_name}}</view>
+        <view class='resh_subTil'>{{reshList.attr_name}}</view>
+        <view class='resh_subView div_float {{showType != 1 ? "resh_subView_other" : "resh_subView_other_other resh_two"}}'>
+          <view class='resh_subView_L'>
+            <view class='resh_oldPrice'>原价:¥
+              <text>{{reshList.market_price}}</text>
+            </view>
+            <view class='resh_newPrice'>抢购价:¥
+              <text wx:if="{{showType == 3}}">{{reshList.shop_price}}</text>
+              <text wx:elif="{{showType == 2}}">{{reshList.shop_price}}<text wx:if="{{reshList.dw}}" class='dw'>/{{reshList.dw}}</text></text>
+              <text wx:else>{{reshList.goods_price}}</text>
+            </view>
+          </view>
+          <view style="text-align:center;" wx:if="{{showType != 2}}" class='resh_subView_R float {{showType != 1 ? "" : "resh_subView_R_other"}} {{showType == 1?"reshR2":""}} '>
+            <text wx:if="{{showType == 1 && TimeType == 1}}" data-goodsid='{{reshList.goods_id}}' data-attr_value="{{reshList.attr_value}}" catchtap="addToCart">立即抢购</text>
+            <text wx:elif="{{showType == 1 && TimeType == 0}}" data-goodsid='{{reshList.goods_id}}' data-attr_value="{{reshList.attr_value}}">即将开抢</text>
+            <text wx:if="{{showType == 3}}" data-goodsid='{{reshList.act_id}}' catchtap="todetail">查看详情</text>
+          </view>
+        </view>
+
+        <view wx:if="{{showType == 2}}" class='proAddCartAll'>
+          <view class='proAddCart'>
+            <text class='subView_clo  {{reshList.is_collected == 1 ?"col_sel_w":"col_no"}}' wx:if="{{showType == 2}}" data-goodsid='{{reshList.goods_id}}' catchtap="sc"></text>
+            <text wx:if="{{showType == 2}}" data-goodsid='{{reshList.goods_id}}' catchtap="addCart">加入购物车</text>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </block>
+</template>
+
+<!--上传图片 uploadType：1、评价2、投诉 -->
+<template name="uploadPhoto">
+  <view class='o_eval_photo_list div_float'>
+    <block wx:for="{{photo_data}}" wx:for-item="photoList" wx:for-index="p_index" wx:key="{{photoList}}">
+      <view class='ev_photo_list' bindtap='lookPhoto' data-list-arr="{{photo_data}}" data-list-index="{{photo_data[p_index]}}">
+        <image src='{{photoList}}' />
+        <text catchtap='delPhoto' data-photo-index="{{p_index}}">×</text>
+      </view>
+    </block>
+    <view class='upLoad_icon' wx:if='{{photo_data.length == 0}}' bindtap='uploadPhoto'>
+      <image src='../../images/take_icon.png' />
+      <view wx:if="{{uploadType == 1}}">点击上传图片</view>
+      <view wx:else>点击上传凭证</view>
+    </view>
+  </view>
+</template>
+
+<!--图片广告 积分,签到-->
+<template name="picture_adver">
+  <view class='sco_cont'>
+    <block wx:for="{{sco_list}}" wx:for-item="scoList" wx:key="scoList">
+      <image bindtap="navTap" data-type="{{scoList.type}}" data-cat_id="{{scoList.cat_id}}" src='{{scoList.ad_code}}' />
+    </block>
+  </view>
+</template>
+
+<!--优惠券列表-->
+<template name="discount_temp">
+  <view class='discount_vew {{isIphoneX?"ix_btm":""}}'>
+    <block wx:for="{{disList}}" wx:for-item="disList" wx:key='disKey'>
+      <view class='dis_cont_list listBg{{disList.bIndex}}'>
+        <view class='dis_list_L div_float'>
+          <view class='dis_list_L_one'>{{disList.type_money}}
+            <text>元</text>
+          </view>
+          <view class='dis_list_L_two'>
+            <view>{{disList.type_name}}</view>
+            <view>有效期{{disList.use_startdate}}至{{disList.use_enddate}}</view>
+          </view>
+        </view>
+        <view class='dis_list_R'>
+          <view wx:if="{{disList.is_used == '1' || disList.can_use == 1}}" data-bonus_id='{{disList.bonus_id}}' catchtap='use' class='dis_red'>
+            <view>立即</view>
+            <view>使用</view>
+          </view>
+          <view wx:elif="{{disList.is_used == '2'}}" class='dis_gray'>
+            <view>已经</view>
+            <view>过期</view>
+          </view>
+          <view wx:elif="{{disList.is_used == '3'}}" class='dis_gray'>
+            <view>已经</view>
+            <view>使用</view>
+          </view>
+          <view wx:elif="{{disList.is_used == '4'}}" class='dis_gray'>
+            <view>还未</view>
+            <view>启用</view>
+          </view>
+          <view wx:elif="{{disList.can_use == '0'}}" class='dis_gray'>
+            <view>不能</view>
+            <view>使用</view>
+          </view>
+          <view wx:elif="{{disList.no_get == '1'}}" class='dis_gray'>
+            <view>不能</view>
+            <view>领取</view>
+          </view>
+          <view wx:else class='dis_red' data-id='{{disList.type_id}}' catchtap='getOne'>
+            <view>立即</view>
+            <view>领取</view>
+          </view>
+        </view>
+        <view wx:if="{{disList.dis_type == '1' && getDiscount}}" class='dis_list_m'></view>
+        <view wx:if="{{disList.have == '1' }}" class='dis_list_m'></view>
+      </view>
+    </block>
+  </view>
+</template>
+
+<!--商品推荐-->
+<template name="recommend_product">
+  <view class='recom_pro'>
+    <view class='recom_til'>商品推荐</view>
+    <view class='recom_cont div_float'>
+      <block wx:for="{{recomList}}" wx:for-index='recomIndex' wx:for-item="recomList" wx:key="recommendKey">
+        <view bindtap='tapToDetail' data-goodsid='{{recomList.goods_id}}' class='recom_cont_list {{recomIndex % 2 == 0 ? "recom_cont_list_R":""}}'>
+          <image class='recom_list_img' src='{{recomList.goods_thumb}}' />
+          <view class='recom_list_til ellipsis_one'>{{recomList.goods_name}}</view>
+          <view class='recom_list_btm div_float'>
+            <view class='recom_list_price'>￥
+              <text>{{recomList.shop_price}}<text wx:if="{{reshList.dw}}" class='dw'>/箱</text></text>
+            </view>
+            <!-- <view class='recom_addCart redCart'></view> -->
+            <view class='recom_list_addCart' data-goodsid='{{recomList.goods_id}}' catchtap='addCart'>加入购物车</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</template>
+
+
+<!--社区文章-->
+<template name="commEssay">
+  <block wx:for="{{essayList}}" wx:key="essay">
+    <view class='comm_essay_cont'>
+      <view class='comm_essay_cont_list'>
+        <image class='comm_essay_img' src='{{item.file_url}}' catchtap='checkDetail' data-a-id='{{item.article_id}}' />
+        <view class="comm_essay_til ellipsis_one">{{item.title}}</view>
+        <view class='comm_essay_msg div_float'>
+          <view class='comm_essay_msg_L'>{{item.add_time}}</view>
+          <view class='comm_essay_msg_R div_float'>
+            <view class='comm_essay_msg_R_list div_float'>
+              <text class='share'></text>
+              <text>分享</text>
+              <button class='cShareBtn' open-type="share" type="primary" hover-class="other-button-hover"></button>
+            </view>
+            <view class='comm_essay_msg_R_list div_float'>
+              <text class='browse msg_R_listIcon_b'></text>
+              <text>{{item.click}}</text>
+            </view>
+            <view class='comm_essay_msg_R_list div_float'>
+              <text class='approval'></text>
+              <text>{{item.praise_num}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</template>
+
+
+<!--查看取货码弹层-->
+<template name="QRCode">
+  <view class='checkCode' hidden='{{hideCode}}'>
+    <view class='QR_layer'>
+      <image class='QR_code' src='{{img}}' />
+      <view class='QR_take_num'>提货码:{{code}}</view>
+      <view class='QR_marked'>请保管好您的二维码与取货码到店时把二维码交由商家扫描或者将取货码交由商家审核</view>
+      <view class='QR_close' catchtap='closeCode'>×</view>
+    </view>
+  </view>
+</template>
+
+
+<!--常规商品选择规格弹层(首页用的)-->
+<template name="sizeLayers">
+  <view class='pro_size {{type ? "": "divHide"}}'>
+    <view class='pro_size_head'>
+      <image src='{{goods.goods_thumb}}' />
+      <view class='pro_size_head_msg'>
+        <view>{{sizePrice}}</view>
+        <view>{{selectAttr}}</view>
+      </view>
+    </view>
+    <view class='pro_size_cont'>
+      <block wx:for="{{goods.properties}}" wx:for-item="size1" wx:for-index="sizeIndex" wx:key="sizeList">
+        <view class='pro_size_list'>
+          <view>{{size1.name}}</view>
+          <view>
+            <block wx:for="{{size1.values}}" wx:for-item="size2" wx:for-index="sizeListIndex" wx:key="sizeList_list">
+              <text class='{{size2.sel == 1 ? "pro_size_list_sel" : " "}}' data-c-one="{{goods.cIndexOne}}" data-c-two="{{goods.cIndexTwo}}" data-size-index="{{sizeIndex}}" data-size-list-index="{{sizeListIndex}}" catchtap='selSize'>{{size2.label}}</text>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class='buy_toal'>
+      <view>购买数量</view>
+      <view class='buy_input div_float'>
+        <text data-num-type="cut" data-goods-id="{{goods.goods_id}}" catchtap='changeNum' class='{{butTotal>1 ? "buy_input_click" : " "}}'>-</text>
+        <input type='number' value='{{butTotal}}' disabled="true" />
+        <text data-num-type="add" data-goods-id="{{goods.goods_id}}" catchtap='changeNum' class='buy_input_click'>+</text>
+      </view>
+    </view>
+    <button class='size_btn' catchtap='sizeBtn' data-c-one="{{goods.cIndexOne}}" data-c-two="{{goods.cIndexTwo}}">确定</button>
+  </view>
+
+</template>
+
+
+
+
+<!--常规商品选择规格弹层（推荐商品和商品列表使用）-->
+<template name="sizeSel">
+  <view class='pro_size {{type ? "": "divHide"}}'>
+    <view class='pro_size_head'>
+      <image src='{{goods.goods_thumb}}' />
+      <view class='pro_size_head_msg'>
+        <view>{{sizePrice}}</view>
+        <view>{{selectAttr}}</view>
+      </view>
+    </view>
+    <view class='pro_size_cont'>
+      <block wx:for="{{goods.properties}}" wx:for-item="size1" wx:for-index="index1" wx:key="sizeList">
+        <view class='pro_size_list'>
+          <view>{{size1.name}}</view>
+          <view>
+            <block wx:for="{{size1.values}}" wx:for-item="size2" wx:for-index="index2" wx:key="sizeList_list">
+              <text class='{{size2.sel == 1 ? "pro_size_list_sel" : " "}}' data-a='{{size2.sel}}' data-index-one='{{index1}}' data-index-two='{{index2}}' catchtap='selSize'>{{size2.label}}</text>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class='buy_toal'>
+      <view>购买数量</view>
+      <view class='buy_input div_float'>
+        <text data-num-type="cut" data-goods-id="{{goods.goods_id}}" catchtap='changeNum' class='{{butTotal>1 ? "buy_input_click" : " "}}'>-</text>
+        <input type='number' value='{{butTotal}}' bindinput="manualChange" />
+        <text data-num-type="add" data-goods-id="{{goods.goods_id}}" catchtap='changeNum' class='buy_input_click'>+</text>
+      </view>
+    </view>
+    <button class='size_btn' catchtap='sizeBtn'>确定</button>
+  </view>
+
+</template>

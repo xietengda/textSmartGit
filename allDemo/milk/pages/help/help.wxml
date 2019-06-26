@@ -1,0 +1,19 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='help_cont'>
+    <view class='help_til'>常见问题</view>
+    <view class='help_cont_list'>
+      <block wx:for="{{helpList}}" wx:key="{{help}}">
+        <view class='help_list' data-id='{{item.article_id}}' catchtap='detail'>
+          <view class='help_list_til' catchtap='openCont' data-c-id="{{item.article_id}}">{{item.title}}</view>
+          <view class='help_list_cont' hidden='{{item.hide}}'>{{item.mini_content}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+
+</view>

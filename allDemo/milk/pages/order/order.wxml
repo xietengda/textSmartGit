@@ -1,0 +1,91 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='order_head'>
+    <template is="t_search_input" data="{{seaTye:1,searchText:searchText}}" />
+    <view class='order_head_sta div_float'>
+      <view class='{{h_state == 0 ? "sta_sel":""}}' data-s-index="0" catchtap='changeState'>全部</view>
+      <view class='{{h_state == 1 ? "sta_sel":""}}' data-s-index="1" catchtap='changeState'>待支付</view>
+      <view class='{{h_state == 2 ? "sta_sel":""}}' data-s-index="2" catchtap='changeState'>待配送</view>
+      <view class='{{h_state == 3 ? "sta_sel":""}}' data-s-index="3" catchtap='changeState'>待取货</view>
+      <view class='{{h_state == 4 ? "sta_sel":""}}' data-s-index="4" catchtap='changeState'>待评价</view>
+    </view>
+  </view>
+
+  <scroll-view wx:if="{{orderList.length != 0}}" class='order_cont' scroll-y bindscrolltolower='bindscrolltolower' enable-back-to-top='true' scrollTop='{{scrollTop}}'>
+    <block wx:for="{{orderList}}" wx:for-index="orIndex" wx:for-item="orLlist" wx:key="orKey">
+      <view class='order_list'>
+        <view class='order_list_one div_float'>
+          <view class='order_list_one_L'>
+            <view>订单号：
+              <text>{{orLlist.order_sn}}</text>
+            </view>
+          </view>
+          <view class='order_list_one_R div_float'>
+            <view>
+              <navigator url='../complain/complain?id={{orLlist.order_id}}' hover-class='none'>
+                <text class='complaintIcon'></text>申述
+              </navigator>
+            </view>
+            <view catchtap='deleteOrder' data-id='{{orLlist.order_id}}'>
+              <text class='del_icon_gray' ></text>删除</view>
+          </view>
+        </view>
+        <view class='order_list_two div_float'>
+          <view class='order_list_two_L'>
+            <view>状态：
+              <text class='order_state'>{{orLlist.status_name}}</text>
+            </view>
+            <view>总价：
+              <text>{{orLlist.format_total_fee}}</text>
+            </view>
+          </view>
+          <view class='order_list_two_R'>
+            <navigator url='../payment/payment' hover-class='none' wx:if="{{orLlist.status == '2'}}">
+              <button class='order_list_R_btn' catchtap='pay' data-id='{{orLlist.order_id}}'>立即付款</button>
+            </navigator>
+            <!-- <button wx:elif="{{orLlist.state == 2}}" class='order_list_R_btn'>待配送</button> -->
+            <navigator hover-class='none' wx:elif="{{orLlist.status == '3'  }}">
+              <button class='order_list_R_btn' catchtap='code' data-code='{{orLlist.pickup_cn}}'>查看取货码</button>
+            </navigator>
+            <navigator url='../payment/payment' hover-class='none' wx:if="{{orLlist.status == '4'}}">
+              <button class='order_list_R_btn'>再来一单</button>
+            </navigator>
+          </view>
+        </view>
+        <view class='order_list_three'>
+          <navigator url='../orderDetail/orderDetail?id={{orLlist.order_id}}' hover-class='none'>
+            <view class='order_list_three_til'>
+              <text class='MilkIcon'></text>
+              <view wx:if='{{orLlist.shipping_id == 28}}'>自提：{{orLlist.ziti.shop_name}}</view>
+              <view wx:else>{{orLlist.address}}</view>
+            </view>
+            <view class='order_list_view'>
+              <block wx:for="{{orLlist.goods_list}}" wx:for-index="orIndex" wx:for-item="orLlist2" wx:key="orKey">
+                <view class='order_list_view_msg'>
+                  <image class='order_list_msg_img' src='{{orLlist2.goods_thumb}}' />
+                  <view class='list_view_msg_R'>
+                    <view class='list_view_msg_R_til'>{{orLlist2.goods_name}}</view>
+                    <view class='list_view_msg_R_num'>x{{orLlist2.goods_number}}</view>
+                    <view class='list_view_msg_R_price'>￥
+                      <text>{{orLlist2.goods_price}}</text>
+                    </view>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </navigator>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <view wx:else class='orderNull'>
+    <view class='icon nullOrder'></view>
+    <view class='til'>没有相关订单</view>
+  </view>
+
+  <template is="QRCode" data="{{...QRCode}}"></template>
+</view>

@@ -1,0 +1,177 @@
+cap1.Vue.set(vm.allSel,allSel); 第一个参数必须是object或者array
+
+2.组件之间怎样传数据，https://www.cnblogs.com/wisewrong/p/6266038.html
+
+3.所有内容必须被一个根节点包含
+
+4、ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。
+(用来获取dom节点) 
+   例如：<input ref="userInfo"/>
+   console.lo(this.$refs.userInfo)；
+
+5、安装插件是必须在 尾部加上 --save 
+   例如：npm install vue-resource --save
+   
+   --save将文件写入项目
+
+6.npm run build  打包项目后 静态文件路径报错时   打开config/index.js
+修改
+ build: {
+    // Template for index.html
+    index: path.resolve(__dirname, '../dist/index.html'),//启动页
+
+    // Paths
+    assetsRoot: path.resolve(__dirname, '../dist'),//打包地址
+    assetsSubDirectory: 'static', //静态文件
+    assetsPublicPath: './', //配置路径
+
+
+7.  vue-router跳转路由页面无法显示   
+
+打开router/index.js看路由配置，mode:' hash '  改这个配置即可
+
+8.// 带查询参数，变成/backend/order?selected=2
+this.$router.push({path: '/backend/order', query: {selected: "2"}});
+
+9.跨域请求代理与axios传参    打开config/index.js
+
+proxyTable: {
+      '/webUrl': {
+        target: 'http://121.41.130.58:9090',//设置你调用的接口域名和端口号 别忘了加http
+        changeOrigin: true,
+        pathRewrite: {
+          '^/webUrl': ''//这里理解成用‘/webUrl’代替target里面的地址，后面组件中我们掉接口时直接用webUrl代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/webUrl/user/add’即可
+        }
+      }
+    }
+
+*写完重启项目
+
+10.对外暴露接口 跟小程序不一样  
+Vue:
+export default { //看这行
+      postRequest: postRequest
+}
+
+MpVue:
+module.exports = {
+      postRequest: postRequest,
+}
+
+11.vue中class里面的funciton  要用逗号分开
+
+
+12.from表单的button用input写  可以回车触发
+
+
+13.测试号申请
+https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
+
+14.配置本地域名
+
+①.打开项目 /config/index.js    
+ev: {
+    host: 'www.recording.com', // 域名配置
+    port: 8080, // 端口
+}
+②测试号绑定域名
+https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
+ 一、JS接口安全域名修改
+ 二、网页授权获取用户基本信息
+
+授权注意：
+设置的授权回调域名要和回调地址域名一样redirect_uri
+例如  这是 encodeURIComponent('http://www.recording.com:8080/index');
+那么  公众号配置的	网页授权获取用户基本信息   域名就是   www.recording.com:8080
+
+
+15、定义路由 path和name要一致  不然页面没反应，也不报错
+
+16、decodeURIComponent() 函数可对 encodeURIComponent() 函数编码的 URI 进行解码。
+
+17、使用axios发送post请求，将JSON数据改为为form类型
+//将JSON数据改为为form类型
+import qs from 'qs'
+//转换
+qs.stringify(data)
+
+
+18、配置 微信config  JS接口安全域名  不可以加 http:// 或者 https://
+
+19、vue-cli 日期选择  vue2-datepick     https://www.npmjs.com/package/vue2-datepick
+
+
+20、vue项目打包后首页一片空白解决办法和具体原因总结
+
+21、移动端（微信等）使用 vConsole调试console
+
+https://blog.csdn.net/m0_37036014/article/details/80113635
+
+22.二级联动组件     vue-awesome-picker    
+
+23.日期联动组件  vue2-datepick
+
+24.打包后空白，路径错误，
+修改config/dev.env.js 
+build:{
+   assetsPublicPath: './',
+}
+
+还要修改 /build/utils.js   
+if (options.extract) {
+      return ExtractTextPlugin.extract({
+        use: loaders,
+        fallback: 'vue-style-loader',
+        publicPath:'../../'   //加这行--------
+      })
+ }
+
+25、vue 生成图片 npm install --save html2canvas plupload
+
+26、vue 裁剪图片  vue-quick-cropper
+
+27、禁止页面长按复制 e.preventDefault();
+
+28、px自动转rem    flexible.js
+
+29、本地 跑项目 wampserver
+
+
+
+
+
+
+
+
+
+
+
+在cmd里输入：vue init webpack vue_test(项目文件夹名)，回车，等待一小会儿，依次出现‘git’下的项
+
+安装的事项：Project name domo（项目）
+
+                ? Project description A  A Vue.js pro project
+                ? Author 庞马保 <保 <1262404505@qq.com>（个人>（个人账号）
+                ? Vue build (Use arrow keys)
+                ? Vue build standalone
+                ? Install vue-router? Yes   （路由）
+                ? Use ESLint to lint your code? Yes（代码规范和错误检查工具）
+                ? Pick an ESLint preset Standard
+                ? Set up unit tests Yes （设置单元测试）
+                ? Pick a test runner jest （单元测试运行器）
+                ? Setup e2e tests with Nightwatch? Yes（E2E测试）
+在cmd里  1).输入：cd vue_test（项目名），回车，进入到具体项目文件夹
+
+         2).输入：npm install，回车，等待一小会儿
+
+
+
+
+
+
+
+
+
+
+
+

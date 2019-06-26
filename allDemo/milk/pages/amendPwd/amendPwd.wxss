@@ -1,0 +1,10 @@
+@import "../../template/template.wxss";
+
+page{
+  background-color: white;
+}
+.amen_pwd_btn{
+  height: 86rpx;
+  line-height: 86rpx;
+  margin-top: 50rpx;
+}

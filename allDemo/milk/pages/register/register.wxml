@@ -1,0 +1,36 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+  
+  <form bindsubmit="formSubmit">
+    <view class='reg_cont'>
+      <view class='reg_cont_list'>
+        <view>手机号：</view>
+        <input type='text' name="phone" placeholder='请填写手机号码' placeholder-class='pColor' bindinput ='phone'  />
+        <button bindtap='getCode'>{{time}}</button>
+      </view>
+      <view class='reg_cont_list'>
+        <view>验证码:</view>
+        <input type='text' name="code" placeholder='请输入验证码' placeholder-class='pColor' />
+      </view>
+      <view class='reg_cont_list'>
+        <view>密码:</view>
+        <input type='password' name="password" placeholder='请输入字母、数字或符号' placeholder-class='pColor' />
+      </view>
+      <view class='reg_cont_list'>
+        <view>确认密码：</view>
+        <input type='password' name="cf_password" placeholder='请输入字母、数字或符号' placeholder-class='pColor' />
+      </view>
+
+      <view class='reg_regulations'>
+        <checkbox-group bindchange="checkboxChange">
+          <checkbox name="checkbox" value='checked'  checked/>
+          <text catchtap='showArticle'>我已阅读并接受《香满楼服务条款》</text>
+        </checkbox-group>
+      </view>
+
+      <button formType="submit" class='reg_btn'>{{button}}</button>
+    </view>
+  </form>
+</view>

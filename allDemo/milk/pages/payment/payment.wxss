@@ -1,0 +1,254 @@
+@import "../../template/template.wxss";
+
+navigator {
+  display: block;
+}
+
+.all_con {
+  padding-bottom: 30rpx;
+}
+
+.payMent_head {
+  width: 100%;
+  height: 135rpx;
+  background-color: white;
+  background-size: 100% 10rpx;
+  background-position: bottom;
+}
+
+.payMent_head_L {
+  float: left;
+  margin-left: 30rpx;
+  width: 90%;
+}
+
+.payMent_head_L>view:nth-child(1) {
+  color: #232323;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}
+
+.payMent_head_L>view:nth-child(1)>text {
+  margin-left: 20rpx;
+}
+
+.payMent_head_L>view:nth-child(2) {
+  color: #232323;
+  font-size: 26rpx;
+  margin-top: 20rpx;
+  overflow: hidden;
+  width: 700rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.payMent_head_R {
+  float: right;
+  width: 12rpx;
+  height: 24rpx;
+  margin-right: 30rpx;
+  margin-top: 55rpx;
+}
+
+.payMent_pro {
+  margin-top: 30rpx;
+}
+
+.payMent_pro_list {
+  width: 100%;
+  height: 168rpx;
+  background-color: white;
+  border-bottom: 1rpx solid #e5e5e5;
+  display: block;
+  position: relative;
+}
+
+.payMent_pro_img {
+  float: left;
+  width: 160rpx;
+  height: 160rpx;
+  margin-top: 2rpx;
+  margin-left: 30rpx;
+}
+
+.payMent_pro_msg {
+  float: left;
+  width: 65%;
+  margin-left: 30rpx;
+}
+
+.payMent_pro_til {
+  color: #353535;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+}
+
+.payMent_pro_subTil {
+  color: #232323;
+  font-size: 20rpx;
+  margin-top: 10rpx;
+}
+
+.payMent_pro_price {
+  float: left;
+  color: #e70012;
+  font-size: 24rpx;
+}
+
+.payMent_pro_num {
+  float: right;
+  color: #7d7d7d;
+  font-size: 24rpx;
+}
+
+.payMent_pro_btm {
+  margin-top: 25rpx;
+}
+
+.payMent_btm {
+  height: 75rpx;
+  padding: 0rpx 30rpx;
+  background-color: white;
+  margin-top: 10rpx;
+}
+
+.payMent_btm_L {
+  float: left;
+  color: #232323;
+  font-size: 28rpx;
+  line-height: 75rpx;
+}
+
+.payMent_btm>navigator {
+  float: right;
+}
+
+.payMent_btm_R {
+  float: right;
+  color: #353535;
+  font-size: 24rpx;
+  line-height: 68rpx;
+}
+
+.payMent_R_radio {
+  float: left;
+}
+
+.payMent_R_radio>text {
+  display: inline-block;
+  width: 38rpx;
+  height: 38rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+.payMent_btm_R>view:nth-child(1) {
+  margin-right: 40rpx;
+}
+
+.payMent_btm_R_other {
+  float: right;
+  line-height: 68rpx;
+}
+
+.xianzhi {
+  max-width: 350rpx;
+  max-height: 70rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  white-space: nowrap;
+}
+
+.payMent_btm_R_other input {
+  position: absolute;
+  line-height: 75rpx;
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 10rpx;
+  width: 300rpx;
+  text-align: right;
+}
+
+.scoreFoucs {
+  background-color: white;
+  text-align: right !important;
+}
+
+.getFoucs {
+  background-color: white;
+}
+
+.payMent_btm_R_other_L {
+  float: left;
+  color: #b9b9b9;
+  font-size: 24rpx;
+  position: relative;
+}
+
+.payMent_btm_R_other_L>view {
+  color: #e70012;
+  display: inline-block;
+}
+
+.coloeRed {
+  color: #e70012;
+}
+
+.payMent_btm_R_other_L>view>text {
+  font-size: 14rpx;
+}
+
+.payMent_btm_R_arrow {
+  float: left;
+  width: 13rpx;
+  height: 24rpx;
+  margin-left: 20rpx;
+  margin-top: 22rpx;
+}
+
+.payMent_practical_price {
+  padding: 0rpx 30rpx;
+  /*height: 86rpx;*/
+  height: auto;
+  background-color: white;
+  margin-top: 10rpx;
+  text-align: right;
+  padding-top: 1rpx;
+}
+
+.payMent_practical_price>view {
+  color: #232323;
+  font-size: 24rpx;
+  margin-top: 15rpx;
+}
+
+.payMent_practical_price>view>text {
+  color: #e70012;
+}
+
+.payMent_practical_price>view:nth-child(6) {
+  margin-top: 20rpx;
+  font-size: 30rpx;
+}
+
+.payMent_btn {
+  width: 95%;
+  height: 75rpx;
+  background-color: #2f9833;
+  color: white;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+  border-radius: 50rpx;
+  line-height: 75rpx;
+}
+
+.cs {
+  position: absolute;
+  font-size: 20rpx;
+  color: red;
+  width: 100%;
+  left: 220rpx;
+  bottom: 10rpx;
+}

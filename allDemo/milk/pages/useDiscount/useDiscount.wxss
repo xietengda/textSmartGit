@@ -1,0 +1,12 @@
+@import "../../template/template.wxss";
+
+.use_can{
+  margin-top: 10rpx;
+  background-color: white;
+  padding: 20rpx 0rpx;
+}
+.use_not{
+  margin-top: 20rpx;
+  background-color: white;
+  padding: 20rpx 0rpx;
+}

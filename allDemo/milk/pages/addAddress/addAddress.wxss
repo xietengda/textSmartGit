@@ -1,0 +1,105 @@
+@import "../../template/template.wxss";
+
+.wx-switch-input {
+  width: 42px !important;
+  height: 20px !important;
+}
+
+.wx-switch-input::before {
+  width: 41px !important;
+  height: 20px !important;
+}
+
+.wx-switch-input::after {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+switch{
+  float: right
+}
+
+radio {
+  display: none;
+}
+
+label.checked {
+  border-color: #e50012;
+  color: #e50012;
+}
+
+.add_adr_list_sex>text, .radio {
+  float: left;
+  width: 100rpx;
+  height: 40rpx;
+  border-radius: 50rpx;
+  text-align: center;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  color: #232323;
+  border: 1px solid #232323;
+  margin-top: 15rpx;
+  margin-right: 20rpx;
+}
+
+.sex_sel {
+  color: #e50012;
+  border-color: #e50012;
+}
+
+.add_adr_list_adrs {
+  height: 100rpx !important;
+  color: #212121;
+  position: relative;
+}
+
+.add_adr_list_adrs>view:nth-child(1) {
+  line-height: 100rpx !important;
+}
+
+.list_adrs_view {
+  float: left;
+  width: 65%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.list_adrs_view>view:nth-child(1) {
+  font-size: 24rpx;
+}
+
+.add_adr_right {
+  width: 15rpx;
+  height: 35rpx;
+  position: absolute;
+  right: 3%;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  color: #999;
+}
+
+.add_adr_default>view:nth-child(1) {
+  width: auto !important;
+}
+
+.add_adr_default {
+  font-size: 18rpx;
+  color: #353535;
+  line-height: 82rpx;
+}
+
+.add_adr_default>radio-group {
+  margin-left: 50rpx;
+  display: inline-block;
+}
+
+.add_adr_default>radio-group>radio {
+  margin-left: 30rpx;
+}
+
+radio .wx-radio-input.wx-radio-input-checked {
+  background: #e50012 !important;
+  border-color: #e50012 !important;
+}

@@ -1,0 +1,91 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack,back:back}}" />
+
+  <view class='payMent_head addressBg div_float' catchtap='selectAddr'>
+      <view class='payMent_head_L' >
+        <view>{{def_addr.consignee}}<text>{{def_addr.mobile}}</text></view> 
+        <view>{{def_addr.province_name}}{{def_addr.city_name}}{{def_addr.district_name}}{{def_addr.address}}</view>
+      </view>
+      <view class='payMent_head_R right_arrow'></view>
+  </view>
+
+  <view class='payMent_pro'>
+    <block wx:for='{{goods_list}}' wx:for-item="prduct" wx:for-index='productIndex' wx:key="productList">
+      <navigator url='../proDetails/proDetails?proType=1&goodsId={{prduct.goods_id}}' hover-class='none'>
+        <view class='payMent_pro_list div_float'>
+          <image class='payMent_pro_img' src='{{prduct.goods_thumb}}' />
+          <view class='payMent_pro_msg'>
+            <view class='payMent_pro_til'>{{prduct.goods_name}}</view>
+            <view class='payMent_pro_subTil'>{{prduct.goods_attr}}</view>
+            <view class='payMent_pro_btm div_float'>
+                <view class='payMent_pro_price'>￥{{prduct.goods_price}}</view>
+                <view class='payMent_pro_num'>x{{prduct.goods_number}}</view>
+            </view>
+          </view>
+          <text class='cs' wx:if='{{prduct.is_null}}'>{{tips}}</text>
+        </view>
+      </navigator>
+    </block>
+  </view>
+
+  <view class='payMent_btm div_float'>
+    <view class='payMent_btm_L'>提取方式</view>
+    <view wx:for="{{shipping_list}}" wx:key="listindex" wx:for-index='key' class='payMent_btm_R div_float'>
+      <view class='payMent_R_radio'>
+        <text class='{{item.selected == "checked" ? "checkboxSel":"checkbox"}}' data-shipping_id='{{item.shipping_id}}' data-index='{{key}}' catchtap='getTypeFun'></text>{{item.shipping_name}}
+      </view>
+    </view>
+  </view>
+  <view class='payMent_btm div_float'>
+    <view class='payMent_btm_L'>附近发货门店</view>
+    <navigator url='../selShop/selShop' hover-class='none'>
+      <view class='payMent_btm_R_other div_float'>
+        <view class='payMent_btm_R_other_L'>{{selShop.shop_name}}  距离：<view class='coloeRed'>{{selShop.juli}}<text>M</text></view></view>
+        <view class='payMent_btm_R_arrow right_arrow'></view>
+      </view>
+    </navigator>
+  </view>
+  <view class='payMent_btm div_float'>
+    <view class='payMent_btm_L'>使用积分抵扣</view>
+    <view class='payMent_btm_R_other div_float'>
+      <view class='payMent_btm_R_other_L'>总积分<text class='coloeRed'>{{order_info.integral}}</text> 可使用积分<view>{{order_info.max_use_integral}}</view></view>
+      <view class='payMent_btm_R_arrow'></view>
+      <input type='number' bindinput='changeInt' class='{{offsetScore != "" ? "scoreFoucs":""}} {{foucs ? "scoreFoucs":""}}'  bindfocus="bindfocus" bindblur="bindblur"  value="{{offsetScore}}"/>
+    </view>
+  </view>
+
+  <view class='payMent_btm div_float' wx:if='{{use_b == 1}}'>
+    <view class='payMent_btm_L'>可用优惠券</view>
+    <navigator url='../useDiscount/useDiscount' hover-class='none'>
+      <view class='payMent_btm_R_other div_float'>
+        <view wx:if='{{bounes}}' class='payMent_btm_R_other_L'>已使用<text class='coloeRed'>1</text>张,已抵扣¥<view>{{bounesDetail.type_money}}</view></view>
+        <view  wx:else class='payMent_btm_R_other_L'>可使用<text class='coloeRed'>{{bonus_num}}</text>张</view>
+        <view class='payMent_btm_R_arrow right_arrow'></view>
+      </view>
+    </navigator>
+  </view>
+
+  <view class='payMent_btm div_float'>
+    <view class='payMent_btm_L'>订单备注</view>
+    <navigator url='../orderRemark/orderRemark' hover-class='none'>
+      <view class='payMent_btm_R_other div_float '>
+        <view class='payMent_btm_R_other_L xianzhi'>{{bz}}</view>
+        <view class='payMent_btm_R_arrow right_arrow'></view>
+      </view>
+    </navigator>
+  </view> 
+
+  <view class='payMent_practical_price'>
+    <view>商品金额：<text>{{order_total.goods_price_formated}}</text></view>
+    <view>平台活动：<text>{{order_total.discount_formated}}</text></view>
+    <view>积分抵扣：<text>{{order_total.integral_formated}}</text></view>
+    <view>优惠券：<text>{{order_total.bonus_formated}}</text></view>
+    <view>运费：<text>￥{{freight}}元</text></view>
+    <view>实际金额：<text>{{order_total.amount_formated_a}}</text></view>
+  </view>
+
+  <button class='payMent_btn' catchtap='paymentFinish'>微信支付</button>
+
+</view>

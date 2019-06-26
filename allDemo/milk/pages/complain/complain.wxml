@@ -1,0 +1,24 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='com_cont'>
+    <view class='com_sub_cont'>
+      <view class='com_cont_til'>申诉类型</view>
+      <form bindsubmit="formSubmit">
+        <view class='com_cont_type div_float'>
+          <view class='{{appealType == 0?"com_cont_type_sel":""}}' catchtap='changeType' data-appeal-type="0">产品质量问题</view>
+          <view class='{{appealType == 1?"com_cont_type_sel":""}}' data-appeal-type="1" catchtap='changeType'>商家服务态度问题</view>
+          <view class='{{appealType == 2?"com_cont_type_sel":""}}' data-appeal-type="2" catchtap='changeType'>配送问题</view>
+          <view class='{{appealType == 3?"com_cont_type_sel":""}}' data-appeal-type="3" catchtap='changeType'>其他</view>
+        </view>
+        <textarea class='com_cont_textarea' placeholder-class="com_textare" name='content' placeholder='填写内容，字数限制300个字' maxlength='300'></textarea>
+        <view class='com_cont_photo' style='display:none'>
+          <template is="uploadPhoto" data="{{uploadType:2,photo_data:photo_data}}" />
+        </view>
+        <button formType="submit" class='com_cont_btn'>提交</button>
+      </form>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,108 @@
+@import "../../template/template.wxss";
+
+
+.sign_btn{
+  width: 225rpx;
+  height: 225rpx;
+  border-radius: 100%;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  color: white;
+  border: 10rpx solid #f78796;
+  text-align: center;
+  line-height: 225rpx;
+  background-color: #DC101F;
+  font-size:48rpx;
+}
+.sign_describe{
+  color: #868686;
+  font-size: 24rpx;
+  text-align: center;
+  margin-top: 30rpx;
+}
+.sign_head>button{
+  width:180rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 50rpx;
+  color: white;
+  font-size: 28rpx;
+  background-color: #e50012; 
+  margin-top: 30rpx;
+}
+.sign_cont{
+  position: relative;
+  height: 160rpx;
+  margin-top: 30rpx;
+}
+.sign_record{
+  width: 90%;
+  height: 120rpx;
+  margin: 0 auto;
+  position: absolute;
+  top: 20rpx;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}
+.sign_record_con{
+  display: flex;
+  justify-content: space-between;
+}
+.sign_record_list{
+  width: 80rpx;
+  text-align: center;
+  position: relative;
+}
+.intView{
+  width: 48rpx;
+  height: 55rpx;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAvCAYAAAB+OePrAAAC9klEQVRYhc3ZP4gUVxzA8c8NVl70LFxMIEVg1nRno61gAippgiSEFBKREAJCikRB8Q92gTQBIX+qNCkED1MFDAThckaDTa4RLYxzKMmdJ07h+S/FIZrizebWvdmd/TO3s19Y2Hnv99777tv583tvxpLNsT6YwC7swDa8gdewHuN4in+xiDu4hj8xg4fNHcVpUjjYuh7ENuID7MfOgrbj2acm/Ih3s/JnuIyzOI9H3Qw81sVMbsIRfJZ9L4slfIuv4zRZ6hQYFXT0EW7ilHIFZf2dws25Wv1Ap8B2M/kKfsCHJYt1YgqfxGnypLUibya34DfDFZSNNzNXq29prWiVnMBF4aqtgu24OFerTzQXNkuOCVM+OUyrHCYxNVerjzUKmiUPY+/QlfLZK/hg5cJ5FX9hQ0VSeTzGm3Ga3GvM5FGjJUjwOUaYyXHMK/8+WAZLeD3CbqMpSPDa3ZAcZfZEQgIwykxGqFdtUcDWSHjKjDIbI7yo2qKAdZFw+xllFiNcr9qigNkIv1ZtUcAvES4Ia49R5BkuRFgQREeRn+M0WWwkGGcqVWnPN6zkkzO4UplKPpfiNJnh5aT3aDUubTne+NIseRU/Dd8ll/NxmlxtHLQuxD7X5a7CGvIo8/ifVskFnByaTj4n4jS521yQt+7+Xlh3V8F0Nv5L5Ek+x0EhdR8mD3AwTpNVCU+7vaC/cWhNlVZzKE6Tf/IqOm1YnZMz9WvEd3GaTLWrLNpV+wKz5fqsYlbTRkAeRZLL2If7ZRm1cB/74jRZ7hRUJElIit8XhMtkGe/FaVKYdHcjSXiuf6zcpcan+KObwG4lCfvcp/vSWc1X+LHb4F4k4UtBdhDO4kQvDXqVfCH87dM9tmswrY/TpldJshNe77em2axdzxdgP5KEF0bv4EaX8Tey+IdFgXn0KwmpsCNb9EoryeLSfgcaRJKQ2u3RfoNhPqtfGGSQQSXhNt7OEVnIym8POkAZknALb1mZ0fns+FYZnZclyYro70oUhP8AEu+j49xkyCMAAAAASUVORK5CYII=') center center no-repeat;
+  background-size: 100% 100%;
+  color: white;
+  font-size: 24rpx;
+  margin: 0 auto;
+  position: absolute;
+  top: -15rpx;
+  left: 0;
+  right: 0;
+  line-height: 40rpx;
+}
+.sign_state{
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #232323;
+  width: 100%;
+  position: absolute;
+}
+.sign_icon{
+  width: 20rpx;
+  height: 20rpx;
+  background-color: white;
+  border: 1rpx solid #DC101F;
+  border-radius: 100%;
+  margin: 0 auto;
+  margin-top: 40rpx;
+}
+.sign_date{
+  font-size: 18rpx;
+  color: #232323;
+  margin-top: 24rpx;
+}
+
+.sign_record_line{
+  width: 90%;
+  height: 120rpx;
+  margin: 0 auto;
+  position: absolute;
+  top: 20rpx;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+.sign_record_line>view{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 50rpx;
+  border: 1.5px solid red;
+}

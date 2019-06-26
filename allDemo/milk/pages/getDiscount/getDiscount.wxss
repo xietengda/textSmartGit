@@ -1,0 +1,14 @@
+@import "../../template/template.wxss";
+
+.getDis_cont{
+  position: fixed;
+  top: 150rpx;
+  bottom: 0;
+}
+.dis_cont{
+  position: fixed;
+  top: 220rpx;
+  bottom: 0;
+  padding-bottom: 90rpx;
+  border: 1px solid red;
+}

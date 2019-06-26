@@ -1,0 +1,37 @@
+<import src="../../template/template.wxml" />
+
+<view class='all_con {{isIphoneX?"cont_ix":""}}'>
+  <template is="all_head" data="{{type:1,isIphoneX:isIphoneX,ngBack:ngBack}}" />
+
+  <view class='take_cont'>
+    <block wx:for="{{takeList}}" wx:for-item="item1" wx:for-index="index1" wx:key="takeList">
+      <view class='take_list'>
+        <view class='take_list_head div_float'>
+          <view class='list_head_L'>{{item1.name}}</view>
+          <view  class='list_head_R'>
+            <view class='list_head_R_one'>剩余<text>{{item1.s}}</text>瓶可取</view>
+            <view class='list_head_R_two' data-type-index="{{index1}}" catchtap='allSelect'><text class='{{item1.all ? "allSel":""}}'></text>全选</view>
+          </view>
+        </view>
+        <view class='take_list_cont div_float'>
+          <block wx:for="{{item1.subList}}" wx:for-item="item2" wx wx:for-index="index2" wx:key="subList">
+            <view wx:if="{{item2.sta == 0}}" class='CantTake'>已取</view>     
+            <view wx:elif="{{item2.sta != 0}}" class='{{item2.sta == 2 ? "selectedView" : ""}}  {{(index2+1)%7 == 0 ? "lastView" : ""}}' catchtap='clickPro' data-type-index="{{index1}}" data-cho-index="{{index2}}" >{{item2.sta == 1 ? "可选" : ""}}</view>
+          </block>
+        </view>
+      </view>
+    </block>
+
+    <button class='take_milk_btn' catchtap='takeMilk'>取奶</button>
+  </view>
+
+  <view class='QR_layer' hidden='{{layerType == false}}'>
+    <image class='QR_code' src='{{img}}' />
+    <view class='QR_take_num'>提货码:{{code}}</view>
+    <view class='QR_marked'>请保管好您的二维码与取货码到店时把二维码交由商家扫描或者将取货码交由商家审核</view>
+    <view class='QR_close' catchtap='QR_close'>×</view>
+  </view>
+
+  <template is="black_layer" data="{{type:layerType}}"/>
+
+</view>

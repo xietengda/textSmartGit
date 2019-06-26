@@ -1,0 +1,34 @@
+{
+  "pages": [
+  	"pages/index/main",
+    "pages/lifeCollect/main",
+  	"pages/login/main",
+   	"pages/cateDetail/main",
+  	"pages/searchResult/main",
+  	"pages/cate/main",
+ 	  "pages/language/main",
+  	"pages/praiseMe/main",
+  	"pages/pushMsg/main",
+  	"pages/getReply/main",
+  	"pages/message/main",
+  	"pages/attenMe/main",
+  	"pages/mePost/main",
+  	"pages/collectMsg/main",
+  	"pages/setUp/main",
+  	"pages/historyMsg/main",
+  	"pages/aboutUs/main",
+  	"pages/hisPost/main",
+  	"pages/addComment/main",
+  	"pages/postDetail/main",
+  	"pages/me/main",
+  	"pages/meFans/main",
+  	"pages/community/main",
+  	"pages/helpback/main",
+  	"pages/literary/main"
+  ],
+  "window": {
+  	"navigationBarTextStyle": "black",
+		"navigationStyle":"custom",
+		"navigationBarBackgroundColor": "#fff"
+  }
+}
