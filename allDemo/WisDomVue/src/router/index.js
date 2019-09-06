@@ -503,56 +503,56 @@ vueRouter.beforeEach((to, from, next) => {
   //参数携带数组
   let paraArr;
 
-  // 判断是否携带参数url
-  if(JSON.stringify(to.query) != "{}"){
-    //进入路由名称
-    pageUrl = to.fullPath.split('?')[0] || to.fullPath;
-    //参数携带数组
-    paraArr = to.query;
+  // // 判断是否携带参数url
+  // if(JSON.stringify(to.query) != "{}"){
+  //   //进入路由名称
+  //   pageUrl = to.fullPath.split('?')[0] || to.fullPath;
+  //   //参数携带数组
+  //   paraArr = to.query;
 
     
-    for(let x in paraArr){
-      //存入sessionStorage
-      sessionStorage.setItem(x,paraArr[x]);
-    }
-  }
+  //   for(let x in paraArr){
+  //     //存入sessionStorage
+  //     sessionStorage.setItem(x,paraArr[x]);
+  //   }
+  // }
   
-  code = util.util.prototype.getQueryString('code');
+  // code = util.util.prototype.getQueryString('code');
 
   
-  // 如果code不为空，就是已经登陆
-  if(code != null){
-  	//存储登录状态   （1小时过期）
-   	VueCookies.set('isLogin',true,60*60*1);
-  }
+  // // 如果code不为空，就是已经登陆
+  // if(code != null){
+  // 	//存储登录状态   （1小时过期）
+  //  	VueCookies.set('isLogin',true,60*60*1);
+  // }
   
-  //  第一次进入项目
-  let isLogin = VueCookies.get('isLogin');
+  // //  第一次进入项目
+  // let isLogin = VueCookies.get('isLogin');
   
-  //未登录，并且进入地址不是登录页
-  if (!isLogin && to.path != "/login") {
+  // //未登录，并且进入地址不是登录页
+  // if (!isLogin && to.path != "/login") {
 
-    if(pageUrl != undefined){
-      //这里存入的是已经去除了参数的地址，为了让微信环境配置签名可以通过
-      VueCookies.set("beforeLoginUrl", pageUrl,60*60*1); // 保存用户进入的url
-    }else{
-      //这里存入的是已经去除了参数的地址，为了让微信环境配置签名可以通过
-      VueCookies.set("beforeLoginUrl", to.path,60*60*1); // 保存用户进入的url
-    }
-    next("/login");
-    return false;
+  //   if(pageUrl != undefined){
+  //     //这里存入的是已经去除了参数的地址，为了让微信环境配置签名可以通过
+  //     VueCookies.set("beforeLoginUrl", pageUrl,60*60*1); // 保存用户进入的url
+  //   }else{
+  //     //这里存入的是已经去除了参数的地址，为了让微信环境配置签名可以通过
+  //     VueCookies.set("beforeLoginUrl", to.path,60*60*1); // 保存用户进入的url
+  //   }
+  //   next("/login");
+  //   return false;
 	   
-  } 
- 	//已登录，并且有code返回 
-  else if(isLogin && code != null && to.path == "/") {
-  	next("/login");
-	  return false;
-  }
-  //已经登录
-  else{
-    next(pageUrl);
-	  return false;
-  }
+  // } 
+ 	// //已登录，并且有code返回 
+  // else if(isLogin && code != null && to.path == "/") {
+  // 	next("/login");
+	 //  return false;
+  // }
+  // //已经登录
+  // else{
+  //   next(pageUrl);
+	 //  return false;
+  // }
   next();
  });
 

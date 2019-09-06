@@ -229,7 +229,14 @@ export default {
             loop: true,
             delay: 3000,
             observer: true, //修改swiper自己或子元素时，自动初始化swiper
-            observeParents: false //修改swiper的父元素时，自动初始化swiper
+            observeParents: false, //修改swiper的父元素时，自动初始化swiper
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 1000,
+                depth: 200,
+                modifier: 1,
+                slideShadows : false,
+            },
         });
 
         this.util.scrolleTop();
