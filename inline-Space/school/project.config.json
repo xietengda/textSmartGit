@@ -9,7 +9,7 @@
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-	"appid": "wxecbed1d0ffe6dc99",
+	"appid": "wxdf029137adb57a11",
 	"projectname": "morepage",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
@@ -22,13 +22,42 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"gamePlugin": {
 			"current": -1,
 			"list": []
+		},
+		"miniprogram": {
+			"current": 2,
+			"list": [
+				{
+					"id": 0,
+					"name": "跑腿",
+					"pathName": "pages/errand/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "跑腿列表",
+					"pathName": "pages/errandList/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发布消息",
+					"pathName": "pages/issueErrand/main",
+					"scene": null
+				}
+			]
 		}
 	}
 }
