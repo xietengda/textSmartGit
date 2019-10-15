@@ -6,7 +6,14 @@
     "pages/cateDetail/main",
     "pages/searchResult/main",
     "pages/errandList/main",
-    "pages/issueErrand/main"
+    "pages/issueErrand/main",
+    "pages/cart/main",
+    "pages/order/main",
+    "pages/orderDetail/main",
+    "pages/proDetail/main",
+    "pages/search/main",
+    "pages/shopCart/main",
+    "pages/submitOrder/main"
   ],
   "subPackages": [
     {
