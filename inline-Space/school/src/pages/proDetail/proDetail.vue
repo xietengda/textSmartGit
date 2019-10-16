@@ -4,12 +4,12 @@
 			<!--轮播图-->
 			<div class="bannerView">
 				<swiper class='banner' @change='bannerChange'>
-				    <swiper-item v-for='(item,key) in bannerList' :key='item.id'>
+				    <swiper-item v-for='(item,key) in bannerList' :key='key'>
 				      <img src="../../../static/images/list1.png" class="slide-image"/>
 				    </swiper-item>
 				</swiper>
 				<div class="pageTion">
-		    	<span v-for='(item,key) in bannerList' :key='item.id' :class="[bSel == key ? 'sel':'']"></span>
+		    	<span v-for='(item,key) in bannerList' :key='key' :class="[bSel == key ? 'sel':'']"></span>
 		    </div>
 			</div>
 			
@@ -101,7 +101,7 @@
 				</div>
 				<div class="R">
 					<div>加入购物车</div>
-					<div>立即购买</div>
+					<div @click="nowBuyPro">立即购买</div>
 				</div>
 			</div>
 			
@@ -112,7 +112,7 @@
 						<div class="close"><span class="closeIcon" @click="showDisFun"></span></div>
 						<div class="til">优惠券</div>
 						 <div class="disCn div_float">
-						 	<div v-for="(item,key) in disList" :key='item.id'>
+						 	<div v-for="(item,key) in disList" :key='key'>
 						 		<div class="cnSub div_float">
 						 			<div class="L">
 							 			<div class="lSub">
@@ -168,7 +168,13 @@ export default {
     		sign = false;
     	}
     	this.showDis = sign;
-    }
+	},
+	//点击立即购买
+	nowBuyPro(){
+		wx.navigateTo({
+			url: "/pages/submitOrder/main"
+		})
+	}
   },
 
   created () {

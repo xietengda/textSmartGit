@@ -3,35 +3,35 @@
 			<div class="headView">
 				<img src="../../../static/images/list1.png" />
 				<div class="userName">myself</div>
-				<div class="userInter"><span class="coll_w"></span>330积分</div>
+				<!-- <div class="userInter"><span class="coll_w"></span>330积分</div> -->
 			</div>
 			
 			<div class="orderView">
-				<div class="odrHead div_float">
+				<div class="odrHead div_float" @click="goToOrder(0)">
 					<div class="L">我的订单</div>
-					<div class="R">查看全部订单></div>
+					<div class="R"><span>查看全部订单</span><span class="arrow arr_g"></span></div>
 				</div>
 				<div class="odrCn">
 					<div class="list">
-					 		<div class="sub">
+					 		<div class="sub"  @click="goToOrder(1)">
 					 			<div class="dfk"></div>
 					 			<div class="til">待付款</div>
 					 		</div>
 					</div>
 					<div class="list">
-					 		<div class="sub">
+					 		<div class="sub"  @click="goToOrder(2)">
 					 			<div class="dfh"></div>
 					 			<div class="til">待发货</div>
 					 		</div>
 					</div>
-					<div class="list">
-					 		<div class="sub">
+					<div class="list" >
+					 		<div class="sub" @click="goToOrder(3)">
 					 			<div class="dsh"></div>
 					 			<div class="til">待收货</div>
 					 		</div>
 					</div>
-					<div class="list">
-					 		<div class="sub">
+					<div class="list" >
+					 		<div class="sub" @click="goToOrder(4)">
 					 			<div class="ywc"></div>
 					 			<div class="til">已完成</div>
 					 		</div>
@@ -71,7 +71,13 @@ export default {
   },
 
   methods: {
-    
+	//跳转订单列表
+	goToOrder(sType){
+		//0：全部 1：待付款 2：待发货 3：待收货 4：已完成
+		wx.navigateTo({
+			url: '/pages/order/main?orderType='+sType
+		})
+	}
   },
 
   created () {
@@ -143,7 +149,18 @@ export default {
 	.odrHead .R{
 		float: right;
 		color: #666666;
+		line-height: 92rpx;
+		font-size: 0;
+	}
+	.odrHead .R span{
+		display: inline-block;
+		vertical-align: middle;
 		font-size: 24rpx;
+	}
+	.odrHead .R .arrow{
+		width: 15rpx;
+		height: 25rpx;
+		margin-left: 10rpx;
 	}
 	.odrHead .L{
 		float: left;

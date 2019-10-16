@@ -9,11 +9,14 @@
     "pages/issueErrand/main",
     "pages/cart/main",
     "pages/order/main",
-    "pages/orderDetail/main",
     "pages/proDetail/main",
     "pages/search/main",
+    "pages/seaResult/main",
     "pages/shopCart/main",
-    "pages/submitOrder/main"
+    "pages/orderDatail/main",
+    "pages/submitOrder/main",
+    "pages/returnOrder/main",
+    "pages/salesReturn/main"
   ],
   "subPackages": [
     {
@@ -32,7 +35,7 @@
   "tabBar": {
     "color": "#333",
     "backgroundColor": "#fafafa",
-    "selectedColor": "#c5f0a4",
+    "selectedColor": "#207561",
     "borderStyle": "white",
 
     "list": [{
@@ -43,9 +46,15 @@
     }, {
       "text": "跑腿",
       "pagePath": "pages/errand/main",
+      "iconPath": "static/tabs/errand.png",
+      "selectedIconPath": "static/tabs/errand-sel.png"
+    }, {
+      "text": "购物车",
+      "pagePath": "pages/shopCart/main",
       "iconPath": "static/tabs/cart.png",
       "selectedIconPath": "static/tabs/cart-sel.png"
-    }, {
+    },
+    {
       "text": "我的",
       "pagePath": "pages/user/main",
       "iconPath": "static/tabs/me.png",

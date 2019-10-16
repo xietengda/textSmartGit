@@ -1,38 +1,58 @@
 <template>
   <div class="container">
 			<div class="orderHead">
-				<div><span :class="[oState == 0?'sel':'']">全部</span></div>
-				<div><span>待付款</span></div>
-				<div><span>待收货</span></div>
-				<div><span>已完成</span></div>
-				<div><span>退款/售后</span></div>
+				<div><span :class="[oState == 0?'sel':'']" data-s-type="0" @click="selOrderType">全部</span></div>
+				<div><span :class="[oState == 1?'sel':'']" data-s-type="1" @click="selOrderType">待付款</span></div>
+				<div><span :class="[oState == 2?'sel':'']" data-s-type="2" @click="selOrderType">待收货</span></div>
+				<div><span :class="[oState == 3?'sel':'']" data-s-type="3" @click="selOrderType">已完成</span></div>
+				<div><span :class="[oState == 4?'sel':'']" data-s-type="4" @click="selOrderType">退款/售后</span></div>
 			</div>
 			
 			
 			<div class="orderCn">
-				<div class="list">
-					<div class="til">待付款</div>
+				<div class="list" v-for="(order,idx1) in orderLlist" :key="idx1" @click="skipOrderDetail(order.id)">
+					<div class="til">
+						<span v-if="idx1 == 0">待付款</span>
+						<span v-else-if="idx1 == 1">待收货</span>
+						<span v-else-if="idx1 == 2">已完成</span>
+						<span v-else>退款/售后</span>
+					</div>
 					<div class="oMsg">
-						<img src="../../../static/images/list1.png" />
+						<img src="/static/images/list1.png" />
 						<div class="proTil">呼唤晒后修复精华焕新版</div>
 					</div>
 					<div class="btm">
 						<div class="price">共1件商品，实付款<span>¥680.00</span></div>
-						<div class="btmView">
-							<div>去付款</div>
+						<div>
+							<div class="btmView" v-if="idx1 == 0">
+								<div>去付款</div>
+							</div>
+
+							<div class="btmView" v-else-if="idx1 == 1">
+								<div>确认收货</div>
+								<div>联系客服</div>
+							</div>
+
+							<div class="btmView" v-else-if="idx1 == 2">
+								<div>联系客服</div>
+							</div>
+
+							<div class="btmView" v-else>
+								<div>联系客服</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				
-				<div class="list">
+				<!-- <div class="list" @click="skipOrderDetail(1)">
 					<div class="til">待收货</div>
 					<div class="oMsg">
-						<img src="../../../static/images/list1.png" />
+						<img src="/static/images/list1.png" />
 						<div class="proTil">呼唤晒后修复精华焕新版</div>
 					</div>
 					<div class="oMsg">
-						<img src="../../../static/images/list1.png" />
-						<img src="../../../static/images/list1.png" />
+						<img src="/static/images/list1.png" />
+						<img src="/static/images/list1.png" />
 					</div>
 					<div class="btm">
 						<div class="price">共1件商品，实付款<span>¥680.00</span></div>
@@ -41,7 +61,7 @@
 							<div>售后进度</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				
 			</div>
@@ -54,7 +74,8 @@
 export default {
   data () {
     return {
-      oState:0,//订单状态
+	  oState:0,//订单状态
+	  orderLlist:[1,1,1,11,1]
     }
   },
 
@@ -63,12 +84,22 @@ export default {
   },
 
   methods: {
-  	
+	  //跳转订单详情
+	  skipOrderDetail(orderId){
+		  wx.navigateTo({
+			  url: '/pages/orderDatail/main'
+		  })
+	  },
+	  //选择订单类型
+	  selOrderType(ele){
+			this.oState = ele.currentTarget.dataset.sType;
+	  }
   },
-
-  created () {
-   
-  }
+  onLoad(option){
+	  console.log(option)
+	this.oState = option.orderType;
+	//请求
+  },
 }
 </script>
 
@@ -84,6 +115,7 @@ export default {
 		font-size: 24rpx;
 		text-align: center;
 		line-height: 64rpx;
+		margin-left: 20rpx;
 	}
 	.orderCn .list .btm  .btmView{
 		text-align: right;

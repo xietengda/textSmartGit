@@ -95,7 +95,7 @@ export default {
 			//跳转搜索
 			goSearch(){
 				wx.navigateTo({
-					url:'/pages/searchResult/main'
+					url:'/pages/search/main'
 				})
 			},
 			//跳转生活合集

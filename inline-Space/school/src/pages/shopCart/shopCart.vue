@@ -56,7 +56,7 @@
 		data() {
 			return {
 				cartList: [{
-						img: '../../../static/images/list1.png',
+						img: '/static/images/list1.png',
 						til: '呼唤晒后修复精华焕新版',
 						ml: '15ml',
 						price: '6.9',
@@ -65,7 +65,7 @@
 						txtStyle: ''
 					},
 					{
-						img: '../../../static/images/list1.png',
+						img: '/static/images/list1.png',
 						til: '呼唤晒后修复精华焕新版',
 						ml: '15ml',
 						price: '6.9',
@@ -74,7 +74,7 @@
 						txtStyle: ''
 					},
 					{
-						img: '../../../static/images/list1.png',
+						img: '/static/images/list1.png',
 						til: '呼唤晒后修复精华焕新版',
 						ml: '15ml',
 						price: '6.9',

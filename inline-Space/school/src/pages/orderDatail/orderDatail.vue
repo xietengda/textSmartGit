@@ -11,7 +11,7 @@
 				<div class="L"><span class="adrIcon"></span></div>
 				<div class="R">
 					<div class="sub">
-						<div><span>张婕</span>15915804116</div>
+						<div><span>朱小姐</span>15915804116</div>
 						<div>广州市海珠区昌岗中路166号富盈国际大厦2505室</div>
 					</div>
 				</div>
@@ -20,8 +20,8 @@
     	<!--商品信息-->
     	<div class="reMsg">
     		<div class="reCn">
-    			<div class="list div_float" v-for='(item,key) in reList' :key='item.id'>
-    				<img src="../../../static/images/list1.png" />
+    			<div class="list div_float" v-for='(item,key) in reList' :key='key'>
+    				<img src="/static/images/list1.png" />
     				<div class="R">
     						<div class="til">呼唤晒后修复精华焕新版</div>
 	    					<div class="ml">数量：2</div>
@@ -102,7 +102,7 @@
     	
     	
     	<!--待付款-->
-    	<div class="odBtm div">
+    	<div class="odBtm div" :hidden="true">
     		<div>联系客服</div>
     		<div>取消订单</div>
     		<div class="sel">去支付</div>
@@ -111,11 +111,11 @@
     	<!--代发货-->
     	<div class="odBtm">
     		<div>联系客服</div>
-    		<div class="sel">退款</div>
+    		<div class="sel" @click="skipSalesRetrun">退款</div>
     	</div>
     	
     	<!--已取消-->
-    	<div class="odBtm">
+    	<div class="odBtm"  :hidden="true">
     		<div>删除订单</div>
     		<div class="sel">联系客服</div>
     	</div>
@@ -145,7 +145,13 @@ export default {
   			sign = false;
   		}
   		this.showExpress = sign;
-  	}
+	  },
+	  //跳转订单详情
+	  skipSalesRetrun(){
+		  wx.navigateTo({
+			  url: '/pages/salesReturn/main'
+		  })
+	  }
   },
 
   created () {
