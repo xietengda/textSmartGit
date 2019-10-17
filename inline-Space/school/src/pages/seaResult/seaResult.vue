@@ -91,7 +91,7 @@ export default {
 		text-decoration: line-through;
 	}
 	.seaCn .sList .rp{
-		color: #5b0e12;
+		color: #293462;
 		font-size: 36rpx;
 	}
 	.seaCn .sList .price{
@@ -125,8 +125,8 @@ export default {
 	}
 	
 	.condiTion_1 .list .sel{
-		color: #5b0e12 !important;
-		border-bottom: 4rpx solid #5b0e12;
+		color: #293462 !important;
+		border-bottom: 4rpx solid #293462;
 	}
 	.condiTion_1 .list span{
 		display: inline-block;

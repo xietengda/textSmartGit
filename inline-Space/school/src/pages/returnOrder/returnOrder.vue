@@ -178,8 +178,8 @@ export default {
 		border-top: 2rpx solid #E5E5E5;
 	}
 	.odBtm .service{
-		border-color: #5B0E12;
-		color: #5B0E12;
+		border-color: #293462;
+		color: #293462;
 	}
 	.reCausee>div{
 		color: #666666;
@@ -311,7 +311,7 @@ export default {
 		width: 18rpx;
 		height: 18rpx;
 		border-radius: 100%;
-		background-color: #5B0E12;
+		background-color: #293462;
 		position: absolute;
 		z-index: 3;
 		margin: auto;
@@ -360,7 +360,7 @@ export default {
 		margin: auto;
 		height: 8rpx;
 		width: 100%;
-		background-color: #5B0E12;
+		background-color: #293462;
 		left: 0;
 		top: 0;
 		bottom: 0;
@@ -416,7 +416,7 @@ export default {
 		width: 18rpx;
 		height: 18rpx;
 		border-radius: 100%;
-		background-color: #5B0E12;
+		background-color: #293462;
 		position: absolute;
 		z-index: 3;
 		margin: auto;
@@ -448,7 +448,7 @@ export default {
 		margin: auto;
 		height: 8rpx;
 		width: 100%;
-		background-color: #5B0E12;
+		background-color: #293462;
 		left: 0;
 		top: 0;
 		bottom: 0;
@@ -496,7 +496,7 @@ export default {
 	}
 	.rePrice .R{
 		float: right;
-		color: #5b0e12;
+		color: #293462;
 		font-size: 28rpx;
 	}
 	.rePrice .L{
@@ -527,7 +527,7 @@ export default {
 	.odHead{
 		height: 120rpx;
 		line-height: 120rpx;
-		background-color: #5b0e12;
+		background-color: #293462;
 		padding: 0 2%;
 	}
 	

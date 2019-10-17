@@ -118,7 +118,7 @@ export default {
 		vertical-align: middle;
 	}
 	.submitBtn>span:nth-child(1){
-		color: #5b0e12;
+		color: #293462;
 		font-size: 28rpx;
 		margin-right: 32rpx;
 	}
@@ -127,12 +127,12 @@ export default {
 		font-size: 28rpx;
 		width: 260rpx;
 		height: 98rpx;
-		background-color: #5B0E12;
+		background-color: #293462;
 		text-align: center;
 	}
 	.priceView>div .R{
 		float: right;
-		color: #5B0E12;
+		color: #293462;
 		font-weight: bold;
 	}
 	.priceView>div .L{
@@ -205,7 +205,7 @@ export default {
 		font-size: 24rpx;
 	}
 	.proList .top .Msg .price{
-		color: #5b0e12;
+		color: #293462;
 		margin-top: 30rpx;
 	}
 	.proList .top .Msg .ml{

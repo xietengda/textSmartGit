@@ -69,7 +69,7 @@ export default {
 		width: 100rpx;
 		height: 64rpx;
 		line-height: 64rpx;
-		background-color: #5B0E12;
+		background-color: #293462;
 		color: white;
 		text-align: center;
 		color: #fefefe;

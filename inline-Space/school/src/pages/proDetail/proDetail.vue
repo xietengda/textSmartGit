@@ -198,7 +198,7 @@ export default {
 		line-height: 116rpx;
 		margin: 0 auto;
 		border-radius: 28rpx;
-		border: solid 2rpx #5b0e12;
+		border: solid 2rpx #293462;
 	}
 	.cnSub .L{
 		float: left;
@@ -228,7 +228,7 @@ export default {
 		vertical-align: middle;
 		width: 120rpx;
 		height: 64rpx;
-		background-color: #5b0e12;
+		background-color: #293462;
 		border-radius: 8rpx;
 		line-height: 64rpx;
 		color: white;
@@ -319,19 +319,19 @@ export default {
 		width: 180rpx;
 		height: 80rpx;
 		border-radius: 8rpx;
-		border: solid 2rpx #5b0e12;
+		border: solid 2rpx #293462;
 		text-align: center;
 		line-height: 80rpx;
 		font-size: 28rpx;
 	}
 	.proBtm .R>div:nth-child(1){
-		color: #5B0E12;
+		color: #293462;
 		margin-right: 24rpx;
 		margin-left: 30rpx;
 	}
 	.proBtm .R>div:nth-child(2){
 		color: white;
-		background-color: #5B0E12;
+		background-color: #293462;
 	}
 	.detailView{
 		margin-top: 20rpx;
@@ -495,10 +495,10 @@ export default {
 	}
 	.disView .L span{
 		border-radius: 8rpx;
-		border: solid 2rpx #5b0e12;
+		border: solid 2rpx #293462;
 		height: 32rpx;
 		line-height: 32rpx;
-		color: #5B0E12;
+		color: #293462;
 		padding: 0 22rpx;
 		display: inline-block;
 		vertical-align: middle;
@@ -519,7 +519,7 @@ export default {
 		text-align: right;
 	}
 	.proTil .subTil .price{
-		color: #5b0e12;
+		color: #293462;
 		font-size: 24rpx;
 	}
 	.proTil .subTil span{

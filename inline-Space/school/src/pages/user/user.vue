@@ -211,7 +211,7 @@ export default {
 	.headView{
 		height: 320rpx;
 		width: 100%;
-		background-color: #5b0e12;
+		background-color: #293462;
 		padding-top: 0.01rpx;
 		position: relative;
 	}

@@ -204,7 +204,7 @@
 		color: white;
 		font-size: 24rpx;
 		line-height: 60rpx;
-		background-color: #5B0E12;
+		background-color: #293462;
 		text-align: center;
 		display: inline-block;
 		vertical-align: middle;
@@ -291,7 +291,7 @@
 	.cartBtm .rr {
 		width: 260rpx;
 		height: 118rpx;
-		background-color: #5B0E12;
+		background-color: #293462;
 		font-size: 26rpx;
 		color: white;
 		text-align: center;
@@ -325,7 +325,7 @@
 	}
 	
 	.proList .M .Msg .price {
-		color: #5b0e12;
+		color: #293462;
 		margin-top: 30rpx;
 	}
 	

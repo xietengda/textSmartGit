@@ -210,7 +210,7 @@ export default {
 		background-color: white;
 	}
 	.payment span{
-		color: #5b0e12;
+		color: #293462;
 		font-size: 36rpx;
 		font-weight: bold;
 	}
@@ -329,8 +329,8 @@ export default {
 		border-top: 2rpx solid #E5E5E5;
 	}
 	.odBtm .sel{
-		border-color: #5B0E12;
-		color: #5B0E12;
+		border-color: #293462;
+		color: #293462;
 	}
 
 	.reMsg .reCn .list .num{
@@ -402,7 +402,7 @@ export default {
 	.odHead{
 		height: 120rpx;
 		line-height: 120rpx;
-		background-color: #5b0e12;
+		background-color: #293462;
 		padding: 0 2%;
 	}
 	

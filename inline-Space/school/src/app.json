@@ -29,13 +29,13 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "校园",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#333",
     "backgroundColor": "#fafafa",
-    "selectedColor": "#207561",
+    "selectedColor": "#293462",
     "borderStyle": "white",
 
     "list": [{

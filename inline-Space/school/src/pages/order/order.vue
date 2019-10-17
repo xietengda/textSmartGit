@@ -110,8 +110,8 @@ export default {
 		width: 140rpx;
 		height: 64rpx;
 		border-radius: 8rpx;
-		border: solid 2rpx #5b0e12;		
-		color: #5b0e12;
+		border: solid 2rpx #293462;		
+		color: #293462;
 		font-size: 24rpx;
 		text-align: center;
 		line-height: 64rpx;
@@ -174,8 +174,8 @@ export default {
 		background-color: #F7F7F7;
 	}
 	.orderHead>div .sel{
-		color: #5B0E12;
-		border-bottom: 2rpx solid #5B0E12;
+		color: #293462;
+		border-bottom: 2rpx solid #293462;
 	}
 	.orderHead>div span{
 		padding: 0 5rpx;

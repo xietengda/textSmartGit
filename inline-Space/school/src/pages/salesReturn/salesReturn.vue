@@ -180,7 +180,7 @@
 		vertical-align: middle;
 		color: #fffefe;
 		font-size: 28rpx;
-		background-color: #5B0E12;
+		background-color: #293462;
 		border-radius: 8rpx;
 	}
 	.subBtn{
@@ -318,7 +318,7 @@
 	}
 	
 	.saView .price {
-		color: #5b0e12;
+		color: #293462;
 		font-size: 24rpx;
 	}
 	
@@ -380,7 +380,7 @@
 		position: absolute;
 		bottom: 0;
 		left: 0;
-		color: #5b0e12;
+		color: #293462;
 		font-size: 24rpx;
 	}
 	
