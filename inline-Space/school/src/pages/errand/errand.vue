@@ -60,7 +60,7 @@
       <div class="listCn">
         <div class="tilBox div_float">
           <div class="t_l"><text class="line"></text><text class="l_til">赚赏金</text><text class="subTil">人人都是赏金猎人</text></div>
-          <div class="t_r">查看全部赏金列表<text class="arrow  rArraw"></text></div>
+          <div class="t_r" @click="skipErrandList">查看全部赏金列表<text class="arrow  rArraw"></text></div>
         </div>
         <div class="listView">
             <issueListCom :issueList="issueArr"></issueListCom>
@@ -86,7 +86,12 @@ export default {
   },
 
   methods: {
-    
+    //跳转赏金列表
+    skipErrandList(){
+      wx.navigateTo({
+        url: '/pages/errandList/main'
+      })
+    }
   },
 
   created () {
@@ -97,7 +102,7 @@ export default {
 <style scoped lang="less">
 
   .headBox{
-    background-color: #c5f0a4;
+    background-color: #293462;
     width: 100%;
     padding-bottom: 30rpx;
     padding-top: 0.1rpx;
@@ -106,13 +111,13 @@ export default {
       line-height: 80rpx;
       font-size: 28rpx;
       color: #333;
-      border-bottom: 2rpx solid #c5f0a4;
+      border-bottom: 2rpx solid #293462;
       .dot{
         display: inline-block;
         vertical-align: middle;
         width: 10rpx;
         height: 10rpx;
-        background-color: #c5f0a4;
+        background-color: #293462;
         border-radius: 100%;
         margin: 0 20rpx;
       }
@@ -173,14 +178,14 @@ export default {
         .line{
           width: 8rpx;
           height: 30rpx;
-          background-color: #01d28e;
+          background-color: #293462;
           // margin-top: -22rpx;
           margin-top: 5rpx;
         }
         .l_til{
           margin-left: 14rpx;
           font-size: 34rpx;
-          color: #01d28e;
+          color: #293462;
         }
         .subTil{
           color:#666;

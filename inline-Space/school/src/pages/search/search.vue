@@ -9,7 +9,7 @@
 			<div class="hotSearch">
 				<div class="til">热门推荐</div>
 				<div class="hsCn">
-					<div class="list" v-for="(item,key) in hotSeaList" :key='item.id'>护肤</div>
+					<div class="list" v-for="(item,key) in hotSeaList" :key='key' @click="goSearchResult">护肤</div>
 				</div>
 			</div>
     
@@ -30,7 +30,12 @@ export default {
   },
 
   methods: {
-    
+    //跳转搜索结果
+	goSearchResult(){
+		wx.navigateTo({
+			url:'/pages/searchResult/main'
+		})
+	},
   },
 
   created () {

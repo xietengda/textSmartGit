@@ -55,7 +55,7 @@
 		<!--查询内容-->
 		<div class="searchCn">
 			<!--列表-->
-			<comList :comList="comList" />
+			<comList :comList="comList"  @skipDetail="skipDetail"/>
 		</div>
 		
 	</div>
@@ -186,6 +186,12 @@
 				that.showQcMenu = false;
 				//隐藏距离菜单
 				that.showJlMenu = false;
+			},
+			//点击推荐列表
+			skipDetail(){
+				wx.navigateTo({
+					url:'/pages/proDetail/main'
+				})
 			}
 			
 		},

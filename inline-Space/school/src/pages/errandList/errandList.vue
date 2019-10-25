@@ -69,7 +69,7 @@ export default {
       margin-top: 15rpx;
     }
     .sel{
-       background-color: #c5f0a4;
+       background-color: #293462;
       color: white;
     }
   }

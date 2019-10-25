@@ -15,7 +15,7 @@
 			
 			<!--标题-->
 			<div class="proTil">
-				<div class="til">粉黛自然塑形眉笔</div>
+				<div class="til">超级无敌蛇皮棒棒鸡</div>
 				<div class="subTil">
 					<div class="price">¥48<span>¥85</span></div>
 					<div>赠送积分：45</div>
@@ -67,11 +67,11 @@
 					<div class="btm" v-show="shouPro">
 						<div>
 							<div>品名：</div>
-							<div>粉黛自然塑眉笔</div>
+							<div>超级无敌蛇皮棒棒鸡</div>
 						</div>
 						<div>
 							<div>品名：</div>
-							<div>粉黛自然塑眉笔</div>
+							<div>超级无敌蛇皮棒棒鸡</div>
 						</div>
 					</div>
 				</div>
@@ -80,7 +80,7 @@
 			<!--商品详情-->
 			<div class="detailView">
 				<div class="til">商品介绍</div>
-				<div class="deCn"></div>
+				<div class="deCn">这是一个棒棒鸡这是一个棒棒鸡这是一个棒棒鸡这是一个棒棒鸡这是一个棒棒鸡这是一个棒棒鸡</div>
 			</div>
 			
 			<!--底部-->

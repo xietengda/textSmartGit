@@ -21,7 +21,7 @@
 			<!--滑动菜单-->
 			<swiper class="menu" circular @change='menuChange'>
 				<swiper-item v-for='(item,key1) in menuList' :key="key1" class='div_float'>
-					<div class="mList" v-for="(item,key2) in item" :key="key2" @click="goSearch">
+					<div class="mList" v-for="(item,key2) in item" :key="key2" @click="goSearchResult">
 						<img src="/static/images/cIcon.png" />
 						<div>取快递</div>
 					</div>
@@ -32,19 +32,7 @@
 				<div :class="[key1 == mPage ? 'sel':'']" v-for='(item,key1) in menuList' :key="key1"></div>
 			</div>
 		</div>
-		
-		<!--推荐-->
-		<div class="iCom div_float">
-			<div class="icList" @click="goLife">
-				<div>狠优惠</div>
-				<img src="/static/images/banner.png" />
-			</div>
-			<div class="icList" @click="goGeiao">
-				<div>有格调</div>
-				<img src="/static/images/banner.png" />
-			</div>
-		</div>
-		
+
 		<!--最新推荐-->
 		<div class="newCom">
 			<div class="ncTil div_float">
@@ -98,22 +86,16 @@ export default {
 					url:'/pages/search/main'
 				})
 			},
-			//跳转生活合集
-			goLife(){
+			//跳转搜索结果
+			goSearchResult(){
 				wx.navigateTo({
-					url:'/pages/lifeCollect/main'
-				})
-			},
-			//跳转格调没事
-			goGeiao(){
-				wx.navigateTo({
-					url:'/pages/cate/main'
+					url:'/pages/searchResult/main'
 				})
 			},
 			//点击推荐列表
 			skipDetail(){
 				wx.navigateTo({
-					url:'/pages/cateDetail/main'
+					url:'/pages/proDetail/main'
 				})
 			}
   },
@@ -280,11 +262,11 @@ export default {
 		position: relative;
 		padding-bottom: 10rpx;
 		padding: 0 5%;
+		border-bottom: 2rpx solid #E5E5E5;
 	}
 	
 	.menu {
 		height: 221rpx;
-		border-bottom: 2rpx solid #E5E5E5;
 	}
 	
 	.menu .mList {
@@ -324,26 +306,9 @@ export default {
 	}
 	
 	.menuView .page .sel {
-		background-color: #999;
+		background-color: #293462;
 	}
-	.iCom{
-		margin-top: 40rpx;
-		border-bottom: 2rpx solid #E5E5E5;
-		padding: 0 5%;
-		padding-bottom: 40rpx;
-	}
-	.iCom>div:nth-child(1){
-		float: left;
-	}
-	.iCom>div:nth-child(1)>div{
-		background-color: #ff4848;
-	}
-	.iCom>div:nth-child(2){
-		float: right;
-	}
-	.iCom>div:nth-child(2)>div{
-		background-color: #f68837;
-	}
+	
 	.icList{
 		width: 320rpx;
 		height: 216rpx;
@@ -394,7 +359,7 @@ export default {
 	
 	
 	.addIcon {
-		background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAYAAACFSPFPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkFBQzI5RDAzQUYyOTExRTg4NzdBQTRDODU3QzU0OTZGIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkFBQzI5RDA0QUYyOTExRTg4NzdBQTRDODU3QzU0OTZGIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QUFDMjlEMDFBRjI5MTFFODg3N0FBNEM4NTdDNTQ5NkYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QUFDMjlEMDJBRjI5MTFFODg3N0FBNEM4NTdDNTQ5NkYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz70O5/WAAADgUlEQVR42sSYaUhVQRTHbw8z28wsotUKWmxRKfJLSGliCxR9yIqwKIokW6UgaBXCrCgKW7CiEsoPYlEYhF9steiDWWCGbRQRiJhYtlBmZf+Bc+FwmLnvzvNZB35wn+c/5x5n3pw58yIce+sF5oBkMBn0B7HgD2gBL0E1qARvnC6ybFAKGkGHT26DfDAoXElMA1UeL/wEGkAzzY5O8xXs6GwiezWBH4BCsBKMB31ABOgJRoC5YBcooyT42GtgnG0S3cBNEegOyLCMo5anQMT5BdJsgjwUAQ51coZngUciobF+Bl5hgz6CSWHcBJdZ7B9gpJd4s5iR5CDBx4AFYA1YBBJAIMiYShb/tUk0RSSSatANBWfBK8POeQ+u0y402S2mX68TXGSCnYYgs0GrRZ3ZZIgzimm+SGccaGd1Q2d54kUqqaMgB6ygpcqnCsx1ZwzxzjHNHu44whx5moHTxQtOg4Eey7BV6HM0mijm/8ZrShP9sQ3EaM6iJjZwu8+ds0QkFK/RXGL+pfK/vqoZcID5yyy38lo2tlrjn8r8ats72zymM4JqjTuVUSHUlqcsvq7QVYBakKJqwgTmeCyEaWzZLlChsrUDonxImwcSwf0A9SOutQjhRPZ8N8Sqy3uaGC9hQFTMDs0yudYaYjI/2XO/YMm0sc+Rwt/OnvuG4WzSLbNqO7LAgAA1Rq4NF8J69pwaYgJ8Szdp/OWgBBQHxGGVIIT32NKtCjGZXPb8TNM3Jbm9T4Be6Np8IVZLeJIt0ynLRFazk/8JqBP+Gew7W+v+8S2rBbJ5Vt+j38y/zGciGT4qcCnzL9T1usc0gzJF4I0g2pCE6okXC/0+jS6W/ZOfQXfX0Rt8Z4OdIMdCB9WkIlqKdJqxQrolcF2JIV6513lX5KPnzbXoZRTHPTpEfmL3kILBIlC2IZA6Pk6AD4YEmqkTTPKobS+YPotvLW5q+xazzzPFbpPfjXQ6V6KpoKndcoPuSyZTF8IUen5HXZ/R9ospzAzj7aBS9MrDbAcZm2YLUzWqRsQcYhPgvBi8LsRERtPJ7cZpoEudtRX4bK69rj/8NvGc6kvIVuBzu+quNXxcfWcT4d2Y/N0l0kOfJfRlTphtuXhBjUG3RegquurXq0RR7utEk33Qx5kUVoung43XIlX8DotEdjv/yOI0tYizwfkPVkWz1EYz1Gj7qxS3vwIMAPbaft2jB6bfAAAAAElFTkSuQmCC');
+		background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAMAAACylgF9AAAAllBMVEUAAAApNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGIpNGI2HRc5AAAAMXRSTlMAaPbxmr59JkQM7KluVweGdFvZw7SSYlMyLCIdFxLUzq2Kg0A258mORgPfo5Q6409LPJK/kwAAAdtJREFUOMt9U+lisjAQjAlyVqpyKILgWbX3vP/LfewmXwLVdv5ks1kmuzNBDBGtnvOsbTNvshGPMUnOsJgemvuKUwaGOsdgSP9niY8eWVEG0S2tr34iAeyCUcmU6MNBonlGj+Mg8wJgL8YIOwCOaQeo6r7FBJC1iZ8AnEy8+S5X1c11sNTR2l7ceEsQPvOTLZpw8AboMa8KFk+aFVC01v1qx1eXyaI8EJvHOU9/fzE0H3SwFYw5zCUpIPslhqSTKAbmdqQZzW0amdHnO9r0miVD84AXHojSc816U5CpGKA1RHn7ITytTQi8iyEWdInTONA6rsbvgPhdzUZP4iw1jcwHplSPeNZGx3qxJXmuup/iYT8dcjHRnCmrPX4uFa2kQQVMKS7Gg5VAR+uRXXkFGiZyw/LVCEy7X2zlhXYrcjvS/xBZcaBoC6i0T0hAGDcQe2U4K2IAb5zLuVv2f2/eo0Nh3o9xqMF/SYP3noHZ1ry/LYGFmcH9JdGXvz/MItN5BrzSajqRVuXRT/dZu529ziHqQKo4eHdFm163s7XZDu4NLVXAcsvhuMi5egWX/MQ3gGlqTUcyPnYHnRUzFw9RxUDbO7lnt35BoAAZUokvfkVNQrEMfyFTUp6P49w/ks5LSyLy2hcAAAAASUVORK5CYII=');
 		background-size: 100% 100%
 	}
 </style>

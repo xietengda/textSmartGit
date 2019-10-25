@@ -70,7 +70,7 @@ export default {
           width: 80rpx;
           height: 50rpx;
           border-radius: 5rpx;
-          background-color: #207561;
+          background-color: #293462;
           text-align: center;
           line-height: 50rpx;
           color: white;

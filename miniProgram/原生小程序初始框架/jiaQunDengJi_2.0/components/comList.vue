@@ -1,15 +1,14 @@
 <template>
 	<div>
-		<div class="comList div_float" v-for="(item,key) in comList" :key='key' @click="goDetial">
-			<div class="L"><img  src="/static/images/list2.png" /></div>
+		<div class="comList div_float" v-for="item in comList" :key='comList' @click="goDetial">
+			<div class="L"><img  src="../../static/img/list2.png" /></div>
 			<div class="R">
 				<div class="cMsg">
 			 		<div class="til eli_one">小叮当寿司<span class="yh">惠</span></div>
 					<div class="subTil eli_one">リトルジングル寿司</div>
-					<div class="price">¥19.90</div>
-					<div class="price">全新产品</div>
-					<!-- <div class="addr div_float"><span class="sAddIcon"></span> </div> -->
-					<div class="distance">8.8折</div>
+					<div class="price">人均：80元丨日本料理</div>
+					<div class="addr div_float"><span class="sAddIcon"></span>广州市丨天河区 </div>
+					<div class="distance">2.4km</div>
 				</div>
 			</div>
 		</div>
