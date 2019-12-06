@@ -3,6 +3,9 @@
 
 import manba from './manba.js';
 
+import api from './api.js';
+const apis  = new api();
+
 class util {
 
 	//获取当天最晚的时间 （设置24小时过期） 
@@ -74,22 +77,94 @@ class util {
 		})
 	}
 
+	//显示提示
+	showToast(msg,type = 'none'){
+		wx.showToast({
+			title:msg,
+			icon:type,
+			duration: 2000
+		});
+	}
+
+	//显示确定弹窗
+	showModal(msg){
+		wx.showModal({
+			title: "",
+			content: msg,
+			showCancel:false,
+			success (res) {
+				if (res.confirm) {
+				}
+			}
+		})
+	}
 	
 	//转换json格式
 	converJSON(jsonString){
 		return  JSON.parse(JSON.stringify(jsonString))
 	}
 	
-	
+	//订阅模板消息
+	getTemplateMsg(url = ''){
+		var promise = new Promise((resolve, reject) => {
+			wx.getSystemInfo({
+			　　success: function ( infoRes ){
+					//判断SDK版本是否可以推送
+					if(parseFloat(infoRes.SDKVersion) >= 2.9){
+						apis.__proto__.getTemplateIds()
+							.then(res =>{
+							wx.requestSubscribeMessage({
+								tmplIds: res.data,
+								success (success) { 
+									resolve(true);
+								},
+								fail: function(err) {
+									console.log(err)
+									//特定页面需要强制提示
+									if(url.includes('activityDetail') || url.includes('applyOrder')){
+										//关闭了通知
+										wx.showModal({
+											title:'订阅消息',
+											content:'您关闭了“接收订阅信息”，请前往设置打开！',
+											confirmText:'去设置',
+											showCancel:false,
+											success: res => {
+												if (res.confirm) {
+												wx.openSetting({})
+												}
+											}
+										});
+										resolve(false);
+									}else{
+										resolve(true);
+									}
+								}
+							});
+						});
+					}else{
+						//特定页面出现提示提示框
+						if(url.includes('activityDetail') || url.includes('applyOrder')){
+							//微信版本低
+							wx.showModal({
+								title:'订阅消息',
+								content:'您的微信版本过低，无法接受订阅信息！',
+								confirmText:'确定',
+								showCancel:false,
+								success: res => {
+									resolve("versionLow");
+								}
+							});
+						}else{
+							resolve(true);
+						}
+					}
+			　　}
+			})
+				
+		});
 		
-	//去登录页面
-	goLogin() {
-		wx.navigateTo({
-			url: '../login/main'
-		})
-	}	
-	
-	
+		return promise;
+	}
 	
 	
 	//更改时间显示格式
@@ -132,6 +207,20 @@ class util {
 				return showTime;
 		
 //		})
+	}
+
+
+	//验证手机号码/电话号码/邮箱
+	isTel(a){
+		return /^(\d3,4|\d{3,4}-)?\d{7,8}$/.test(a);
+	}
+	
+	isMobile(a){
+		return /^1[3456789]\d{9}$/.test(a);
+	}
+	
+	isEmail(a){
+		return /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(a);
 	}
 		
 		
