@@ -1,9 +1,7 @@
 //和计算属性功能相同，基于多个状态生成新的状态
 
-//音乐对象
-export const bgm = state => state.bgm 
+//页面缓存
+export const keepAlive = state => state.keepAlive 
 
-//音乐是否播放
-export const bgPlay = state => state.bgPlay 
 
 

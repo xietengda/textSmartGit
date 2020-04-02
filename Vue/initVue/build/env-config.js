@@ -26,8 +26,8 @@ const ENV_LIST = [
         //开发环境
         envName: 'dev',
         dirName: 'dev',
-        proUrl:'gashapon.h5.vchengnet.com',
-        baseUrl: 'http://chj.h5.vchengnet.com/',
+        proUrl:'127.0.0.1',
+        baseUrl: 'https://appletvc.myoppo.com/',
         assetsPublicPath:'/'
     },
     {

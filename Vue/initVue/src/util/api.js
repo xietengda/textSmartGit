@@ -11,13 +11,11 @@ const api= {
 		return webUrl;
 	},
 
-	//获取 微信 授权地址   url:回调地址
-  	login(url){
-	  	let data = {
-	  		url
-	  	}
-	  	return requestAll.postRequest(apiUrl + '/api/gashapon/Login/crm_get_code', data);
-  	},
+	//模拟接口
+	getList(dataModel){
+		return requestAll.postRequest(apiUrl + 'api/v1/region/regionTreeByActivity',dataModel);
+	}
+
   	
 
 }
