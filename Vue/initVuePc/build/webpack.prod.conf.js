@@ -7,10 +7,18 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+
+function resolve(dir) {
+  return path.join(__dirname, '..', dir);
+}
+
+
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 const env = require('../config/prod.env')
 
@@ -30,6 +38,26 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   optimization: {
+    minimizer: [
+      // webpack4 使用的压缩插件，用来替代webpack3的 UglifyJsPlugin
+      new TerserPlugin({
+        terserOptions: {
+          warnings: false,
+          compress: {
+            drop_console: true, // 可选：false,生产移除 console.log
+            pure_funcs: ['console.log']
+          },
+          output: {
+            // 是否保留代码注释
+            comments: false
+          },
+          cache: true,
+          parallel: true,
+          // Must be set to true if using source-maps in production
+          sourceMap: process.env.NODE_ENV !== 'production'
+        }
+      })
+    ],
     splitChunks: {
       cacheGroups: {
         vendor: {
@@ -41,6 +69,12 @@ const webpackConfig = merge(baseWebpackConfig, {
           name: 'manifest',
           minChunks: Infinity
         },
+        elementui: {            
+          test: /node_modules[\\/]element-ui/,           
+          chunks: 'all',           
+          priority: 20,            
+          name: true          
+        }
       }
     },
   },
@@ -49,17 +83,19 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env,
        //添加下面代码
-       'process.env.BASE_URL': '\"' + process.env.BASE_URL + '\"'
+       'process.env.BASE_URL': '\"' + process.env.BASE_URL + '\"',
+       //添加下面代码
+       'process.env.HOST_ENVNAME': '\"' + process.env.HOST_ENVNAME + '\"'
     }),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings: false
-        }
-      },
-      sourceMap: config.build.productionSourceMap,
-      parallel: true
-    }),
+    // new UglifyJsPlugin({
+    //   uglifyOptions: {
+    //     compress: {
+    //       warnings: false
+    //     }
+    //   },
+    //   sourceMap: config.build.productionSourceMap,
+    //   parallel: true
+    // }),
     // extract css into its own file
     new MiniCssExtractPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css'),
@@ -79,20 +115,20 @@ const webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: config.build.index,
-      template: 'index.html',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: config.build.index,
+    //   template: 'index.html',
+    //   inject: true,
+    //   minify: {
+    //     removeComments: true,
+    //     collapseWhitespace: true,
+    //     removeAttributeQuotes: true
+    //     // more options:
+    //     // https://github.com/kangax/html-minifier#options-quick-reference
+    //   },
+    //   // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+    //   chunksSortMode: 'dependency'
+    // }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // enable scope hoisting
@@ -106,10 +142,26 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    // 插入dll json
+    new webpack.DllReferencePlugin({
+      context: path.join(__dirname),
+      manifest: require('../static/dll/vendor.dll.manifest.json')
+    }),
+    new HtmlWebpackPlugin({
+        template: 'index.html',
+    }),    
+    // 插入 dll js
+    new AddAssetHtmlPlugin([{ 
+      publicPath: config.build.assetsPublicPath + 'static/dll/',  // 注入到html中的路径
+      outputPath: 'static/dll/', // 输出文件目录
+      filepath: resolve('static/dll/*.js'), // 文件路径
+      includeSourcemap: false,
+      typeOfAsset: "js"
+    }])
   ]
 })
-
+// Gzip
 if (config.build.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
@@ -127,7 +179,7 @@ if (config.build.productionGzip) {
     })
   )
 }
-
+// Analyzer
 if (config.build.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())

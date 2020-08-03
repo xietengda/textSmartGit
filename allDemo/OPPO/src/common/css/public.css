@@ -1,0 +1,125 @@
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-appearance: none;
+	/*清除ios默认圆角*/
+	border-radius: 0;
+}
+
+html,
+body,
+#app {
+	height: 100%;
+	font-family: "微软雅黑";
+}
+
+.divHide {
+	display: none !important;
+}
+
+.div_float:after {
+	clear: both;
+	content: '';
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	display: block;
+}
+
+.inlineDom{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/* 标题 */
+.agentAll{
+	color: #333;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+
+
+
+/* 页码颜色 */
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+	background-color: #26B6BB !important;   /*进行修改背景和字体*/
+	color: #fff !important; 
+}
+.el-pagination.is-background .el-pager li:not(.disabled):hover{
+	color: #26B6BB !important; 
+}
+
+/* 时间选择器 */
+.el-range-editor--small.el-input__inner{
+	height: 33px !important;
+}
+
+/* 单选按钮 */
+.el-radio__input.is-checked .el-radio__inner{
+	color:#26B6BB !important;
+	background-color: #26B6BB !important;
+	border-color: #26B6BB !important;
+}
+.el-radio__input.is-checked+.el-radio__label{
+	color:#26B6BB !important;
+}
+
+/* 复选框 */
+.el-checkbox__input.is-checked+.el-checkbox__label{
+	color:#26B6BB !important;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner{
+	color:#26B6BB !important;
+	background-color: #26B6BB !important;
+	border-color: #26B6BB !important;
+}
+
+/* 操作 */
+.blueText{
+	color: #2396EB;
+	cursor: pointer;
+}
+.redText{
+	color: red;
+	cursor: pointer;
+}
+
+/* 弹窗的选择框样式 */
+.editAgentBox .inputBox .o_list{
+	height: 120px;
+}
+.editAgentBox .inputBox .i_list .r .selBox input{
+	width: 522px;
+}
+
+
+/*禁止长按*/
+ .forbid{
+	-webkit-touch-callout: none;
+	/*系统默认菜单被禁用*/
+	-webkit-user-select: none;
+	/*webkit浏览器*/
+	-khtml-user-select: none;
+	/*早期浏览器*/
+	-moz-user-select: none;
+	/*火狐*/
+	-ms-user-select: none;
+	/*IE10*/
+	user-select: none;
+}
+
+.content {
+	width: 95%;
+	margin: 0 auto;
+}
+
+ul li {
+	list-style-type: none;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

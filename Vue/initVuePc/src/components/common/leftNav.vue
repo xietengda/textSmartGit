@@ -4,28 +4,37 @@
             <el-row class="tac">
                 <el-col :span="24">
                     <ul>
-                        <li class="menu_item" v-for="(item,index) in leftNav" :key='item.id'>
-                            <div class="menu_one flex flex-y-center"
-                             @click="showMenu(index)"
-                             :class="item.checked?'parent_active':''">
-                                <img class="nav_left_icon" :src="item.imgPath" />
+                        <li class="menu_item"
+                            v-for="(item,index) in leftNav"
+                            :key='item.id'>
+                            <div
+                                class="menu_one flex flex-y-center"
+                                @click="showMenu(index)"
+                                :class="item.checked?'parent_active':''"
+                            >
+                                <img
+                                    class="nav_left_icon"
+                                    :src="item.imgPath"
+                                />
                                 <span>{{item.name}}</span>
-                                <img class="right_arrow"
-                                :class="{'roate':(item.checked && index!= 1 && index!= 6 && index!= 9)}"
-                                src="@/assets/images/tab_more_icon.png" />
+                                <img
+                                    class="right_arrow"
+                                    :class="{'roate':(item.checked && item.hasChilden)}"
+                                    src="@/assets/images/tab_more_icon.png"
+                                />
                             </div>
-                            <div class="menu_two" >
+                            <div class="menu_two">
                                 <el-collapse-transition>
-                                    <div class="" v-show="item.checked">
-                                        <router-link
-                                        class="menu_tow_item"
-                                        :class="{'menuActive':(item.url == routePath)}"
-                                        tag='div'
-                                        v-for='(childItem) in item.menuTwo'
-                                        :key='childItem.id' :to='childItem.url'>
-                                            <span v-if='(childItem.url == routePath)'></span>
-                                            {{childItem.name}}
-                                        </router-link>
+                                    <div v-show="item.checked" >
+                                        <div
+                                            class="menu_tow_item"
+                                            :class="{'menuActive':(item.url == routePath)}"
+                                            tag='div'
+                                            v-for='(childItem) in item.menuTwo'
+                                            :key='childItem.id'
+                                            @click='openPage(childItem.url)'>
+                                            <span v-if='(childItem.url == routePath)'></span>{{childItem.name}}
+                                        </div>
                                     </div>
                                 </el-collapse-transition>
                             </div>
@@ -37,227 +46,212 @@
     </div>
 </template>
 <script>
+import Cookies from 'js-cookie';
+import { setTimeout } from 'timers';
 export default {
-  data () {
+  data() {
     return {
-      leftNav: [
-        {
-          name: '我的工作单',
-          imgPath: require('@/assets/images/tab_publish_icon.png'),
-          url: '',
-          checked: false,
-          active: 1,
-          menuTwo: [
-            {name: '所有工单', url: '/'},
-            {name: '待接单', url: '/pageTwo'},
-            {name: '处理中', url: '/processing'},
-            {name: '等配件', url: '/waitParts'},
-            {name: '已完结', url: '/end'},
-            {name: '退单处理', url: '/chargeback'}
-          ]
-        },
-        {
-          name: '发布工单',
-          imgPath: require('@/assets/images/tab_publish_icon.png'),
-          url: '/publishOrder',
-          checked: false,
-          active: 3,
-          menuTwo: [
-            // {name: '上门安装单', url: '/'},
-            // {name: '上门维修单', url: '/'},
-            // {name: '批量下单', url: '/'}
-          ]
-        },
-        {
-          name: '发单产品',
-          checked: false,
-          imgPath: require('@/assets/images/tab_receipt_ico.png'),
-          url: '',
-          active: 4,
-          menuTwo: [
-            {name: '产品列表', url: '/productList'},
-            {name: '品牌列表', url: '/brandList'}
-          ]
-        },
-        {
-          name: '数据统计',
-          imgPath: require('@/assets/images/tab_date_icon.png'),
-          url: '',
-          checked: false,
-          active: 5,
-          menuTwo: [
-            {name: '金融数据分析', url: '/financeAnalyse'},
-            {name: '工单数据分析', url: '/orderAnalyse'}
-          ]
-        },
-        {
-          name: '子账户管理',
-          imgPath: require('@/assets/images/tab_people_ico.png'),
-          url: '',
-          checked: false,
-          active: 6,
-          menuTwo: [
-            {name: '子账户列表', url: '/accountList'},
-            {name: '子账户新增', url: '/addAccount'}
-          ]
-        },
-        {
-          name: '消费明细',
-          imgPath: require('@/assets/images/tab_consume_ico.png'),
-          url: '',
-          checked: false,
-          active: 7,
-          menuTwo: [
-            {name: '总流水明细', url: '/totalDetail'},
-            {name: '配件耗用明细', url: '/partsDetail'}
-          ]
-        },
-        {
-          name: '充值',
-          imgPath: require('@/assets/images/tab_invest_ico.png'),
-          url: '/recharge',
-          checked: false,
-          active: 8,
-          menuTwo: []
-        },
-        {
-          name: '我的钱包',
-          imgPath: require('@/assets/images/tab_wallet_ico.png'),
-          url: '',
-          checked: false,
-          active: 9,
-          menuTwo: [
-            {name: '账号总额', url: '/accountTotal'},
-            {name: '充值记录', url: '/rechargeRecode'},
-            {name: '每月账单', url: '/monthlyBill'},
-            {name: '冻结金额', url: '/frozenMoney'}
-          ]
-
-        },
-        {
-          name: '设置',
-          imgPath: require('@/assets/images/tab_setting_icon.png'),
-          url: '',
-          checked: false,
-          active: 10,
-          menuTwo: [
-            {name: '基本资料设置', url: '/basicSetup'},
-            {name: '收货地址管理', url: '/addressManage'},
-            {name: '密码设置', url: '/passSetup'}
-          ]
-        },
-        {
-          name: '公告通知',
-          checked: false,
-          active: 11,
-          imgPath: require('@/assets/images/tab_news_icon.png'),
-          url: '/notice',
-          menuTwo: []
-        }
-      ],
-      isShow: true
-    }
+      leftNav: [],
+      isShow: true,
+      menuList: [] //全部菜单
+    };
   },
   methods: {
-    showMenu (index) {
-      if (index === 1 || index === 6 || index === 9) {
+    //点击菜单
+    showMenu(index) {
+      if (!this.leftNav[index].hasChilden) {
         this.$router.push({
           path: this.leftNav[index].url
-        })
+        });
       }
-      this.leftNav[index].checked = !this.leftNav[index].checked
+
+      if (this.leftNav[index].checked) {
+        this.leftNav[index].checked = !this.leftNav[index].checked;
+      } else {
+        for (let x in this.leftNav) {
+          this.leftNav[x].checked = false;
+        }
+        this.leftNav[index].checked = !this.leftNav[index].checked;
+      }
+    },
+    //获取用户菜单
+    async getUserMenu() {
+      let that = this;
+      let userInfo = Cookies.get('userInfo') ? JSON.parse(Cookies.get('userInfo')) : {};
+      let subData = {
+        userId: userInfo.id || 0,
+        terminalType: 2
+      };
+      await that.$api.common.getUserHasMenu(subData).then(res => {
+        if (res.code == '000000') {
+          that.menuList = res.data;
+        } else {
+          that.$message.warning(res.mesg);
+        }
+      });
+
+      await that.getOneMenu(that.menuList).then(res => {
+        let oldList = that.menuList;
+        for (let x in res) {
+          for (let y in oldList) {
+            if (res[x].id == oldList[y].parentId && oldList[y].id != '103') {
+              let sign = {
+                id: oldList[y].id,
+                name: oldList[y].name,
+                url: oldList[y].href
+              };
+              //设置有二级菜单
+              res[x].hasChilden = true;
+              res[x].menuTwo.push(sign);
+            }
+          }
+        }
+
+        //设置菜单
+        that.leftNav = res;
+
+        that.checkSelPage();
+      });
+    },
+    //添加一级菜单
+    getOneMenu(allList) {
+      return new Promise((resolve, reject) => {
+        let role = Cookies.get('userRole');
+        let newMenu = [];
+        /**x菜单id缓存 */
+        let menuIdArr = [];
+        //先判断父级菜单
+        for (let x in allList) {
+          if (allList[x].parentId == '-1') {
+            let sign = {
+              id: allList[x].id,
+              name: allList[x].name,
+              url: allList[x].href,
+              imgPath: require('../../assets/images/' + allList[x].icon),
+              checked: false,
+              menuTwo: []
+            };
+            newMenu.push(sign);
+          }
+          menuIdArr.push(allList[x].id);
+        }
+        /**x将菜单id存入本地 */
+        Cookies.set('menuId', menuIdArr);
+        resolve(newMenu);
+      });
+    },
+
+    //设置打开页面选中样式
+    checkSelPage() {
+      //设置当前打开页面选中颜色
+      for (let x in this.leftNav) {
+        if (this.leftNav[x].url == this.routePath && this.leftNav[x].menuTwo.length == 0) {
+          this.leftNav[x].checked = true;
+        } else {
+          for (let y in this.leftNav[x].menuTwo) {
+            if (this.leftNav[x].menuTwo[y].url == this.routePath) {
+              this.leftNav[x].checked = true;
+            }
+          }
+        }
+      }
+    },
+    //点击二级菜单
+    openPage(pageUrl) {
+      // console.log('To Page =================>', pageUrl, this.$route);
+      if (this.$route.path !== pageUrl) {
+        this.$router.push({ path: `${pageUrl}` });
+      }
     }
   },
   computed: {
-    routePath () {
-      return this.$route.path
+    routePath() {
+      return this.$route.path;
     },
-    routeActive () {
-      return this.$route.meta.active
+    routeActive() {
+      return this.$route.meta.active;
     }
   },
-  created () {
+  created() {
+    //获取用户菜单
+    this.getUserMenu();
   },
-  mounted () {
-    this.leftNav.forEach((item, index) => {
-      if (item.active === this.$route.meta.active) {
-        item.checked = true
-      }
-    })
+  mounted() {
+    this.checkSelPage();
   }
-}
+};
 </script>
 <style lang="less" scoped>
-    @radius:8px;
-    .left_nav{
-        width: 220px;
-        min-width: 220px;
-        margin: 0 18px 50px 10px;
-        .el-scrollbar{
-            border-radius: @radius;
-            background: #004B85;
-        }
-        .menu_item{
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            line-height: 65px;
-            border-bottom: 1px solid #01589B;
-            cursor: pointer;
-            :last-child{
-                border-bottom: none;
-            }
-            .menu_one{
-                position: relative;
-                .nav_left_icon{
-                    width: 24px;
-                    height: 24px;
-                    margin-right: 12px;
-                    margin-left: 38px;
-                }
-                .right_arrow{
-                    position: absolute;
-                    right: 27px;
-                    top: 50%;
-                    margin-top: -12px;
-                    transform: rotate(0deg);
-                    transition: all 0.3s;
-                }
-                .roate{
-                    transform: rotate(-90deg);
-                }
-            }
-            .menu_one:hover{
-                background: #01589B;
-            }
-            .parent_active{
-              background: #01589B;
-            }
-        }
-        .menu_two{
-            background: #04406E;
-            .menu_tow_item{
-                position: relative;
-                border-bottom: 1px solid #01589B;
-                text-align: center;
-                font-weight: normal;
-                span{
-                    position: absolute;
-                    left: 0;
-                    top: 50%;
-                    margin-top: -16px;
-                    width: 4px;
-                    height: 32px;
-                    background: #fff;
-                    display: block;
-                }
-            }
-            .menu_tow_item:hover{
-                background: #004B85;
-            }
-            .menuActive{
-                font-weight: bold;
-            }
-        }
+@radius: 8px;
+.left_nav {
+  width: 220px;
+  min-width: 220px;
+  margin: 0 18px 50px 10px;
+  .el-scrollbar {
+    border-radius: @radius;
+    background: @themecolor;
+  }
+  .menu_item {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 65px;
+    border-bottom: 1px solid #29c9ce;
+    cursor: pointer;
+    :last-child {
+      border-bottom: none;
     }
+    .menu_one {
+      position: relative;
+      .nav_left_icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        margin-left: 38px;
+      }
+      .right_arrow {
+        position: absolute;
+        right: 27px;
+        top: 50%;
+        margin-top: -12px;
+        transform: rotate(0deg);
+        transition: all 0.3s;
+      }
+      .roate {
+        transform: rotate(-90deg);
+      }
+    }
+    .menu_one:hover {
+      background: #20b0b4;
+    }
+    .parent_active {
+      background: #199ca0;
+    }
+  }
+  .menu_two {
+    background: #148c91;
+    .menu_tow_item {
+      position: relative;
+      border-bottom: 1px solid #29c9ce;
+      text-align: center;
+      font-weight: normal;
+      span {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -16px;
+        width: 4px;
+        height: 32px;
+        background: #fff;
+        display: block;
+      }
+    }
+    .menu_tow_item:hover {
+      background: #20b0b4;
+    }
+    .menuActive {
+      font-weight: bold;
+    }
+  }
+}
 </style>

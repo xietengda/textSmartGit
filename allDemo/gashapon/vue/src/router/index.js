@@ -57,7 +57,6 @@ vueRouter.beforeEach((to, from, next) => {
 	   VueCookies.set("beforeLoginUrl", to.fullPath,60*60*1); // 保存用户进入的url
 	   next("/login");
 	   return false;
-	   
   } 
  	//已登录，并且有code返回 
   else if(isLogin && code != null && to.path == "/") {

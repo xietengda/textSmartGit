@@ -2,69 +2,50 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './vuex/store.js'
+// Vue.prototype.$store = store;
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-//转换rem的js
-import './util/flexible.js';
-
-//导入公共css
+// 导入公共css
 import './common/css/public.css'
 
-//导入vuex 
-import store from './vuex/store.js'
-Vue.prototype.$store = store;
+// 转换rem的js
+import './util/flexiblePC.js';
 
-//更改微信标题
+// 更改标题
 import VueWechatTitle from 'vue-wechat-title'; 
 Vue.use(VueWechatTitle)
 
-//导入swiper css
-import 'swiper/dist/css/swiper.css';
+// 表单验证
+const { Validator } = require('@/util/validator')
+Vue.prototype.$Validator = Validator
 
-//导入api接口
-import api from './util/api'
+// 导入api接口
+import api from './api/index.js'
 Vue.prototype.$api = api;
 
-//导入js-sdk
-import wx from 'weixin-js-sdk'
-Vue.prototype.$wx = wx;
-
-//导入util
+// 导入util
 import util from './util/util.js'
 Vue.prototype.$util = util
 
-//导入mini-ui
-import Mint from 'mint-ui';
-import 'mint-ui/lib/style.css'
-Vue.use(Mint);
-
-//导入滚动选择器
-import AwesomePicker from 'vue-awesome-picker';
-Vue.use(AwesomePicker);
-
-//导入cookies
-import VueCookies from 'vue-cookies'
-Vue.use(VueCookies)
-
-//导入手机控制台
-// import VConsole from 'vconsole/dist/vconsole.min.js' //import vconsole
-// let vConsole = new VConsole() // 初始化
-
-//ElementUI
-import ElementUI from 'element-ui'
+// ElementUI
 import 'element-ui/lib/theme-chalk/index.css';
+// 全部引入
+import ElementUI from 'element-ui'
 Vue.use(ElementUI)
+// 按需加载(需要在util ==> element-ui.js加载需要使用的组件，组件名及其他配置参考官网https://element.eleme.io/#/zh-CN/component/quickstart)
+// import element from './util/element-ui'
+// Vue.use(element)
 
-
-
-import '@/assets/style/common.less';
-import '@/assets/style/transition.less';
-
-
+// new Vue({
+//   el: '#app',
+//   router,
+//   components: { App },
+//   template: '<App/>'
+// })
 new Vue({
-  el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
-})
+  store,
+  render: h => h(App),
+}).$mount('#app');

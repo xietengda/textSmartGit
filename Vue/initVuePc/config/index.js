@@ -2,7 +2,14 @@
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
-const path = require('path')
+const path = require('path');
+
+const proUrl = require('../build/env-config');
+
+const ENV_LIST = proUrl.ENV_LIST;
+const argv = JSON.parse(process.env.npm_config_argv).original || process.argv;
+const HOST_ENV = argv[2] ? argv[2].replace(/[^a-z]+/ig,"") : '';
+const HOST_CONF = HOST_ENV  ? ENV_LIST.find(item => item.envName === HOST_ENV) : ENV_LIST[0];
 
 module.exports = {
   dev: {
@@ -10,11 +17,19 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      "/requestApi": { // requestApi相当于一个别名，代指 target
+        "target":HOST_CONF.baseUrl,
+        "changeOrigin":true,
+        "pathRewrite": {
+          "^/requestApi":""
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: process.env.HOST, // can be overwritten by process.env.HOST
-    port: 80, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: HOST_CONF.devHost || 80, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -38,18 +53,19 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, `../dist/index.html`),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, `../dist`),
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
 
     /**
      * Source Maps
      */
 
-    productionSourceMap: true,
+    // productionSourceMap: true,
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
@@ -57,13 +73,15 @@ module.exports = {
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
     // npm install --save-dev compression-webpack-plugin
-    productionGzip: false,
+    // productionGzip: false,
+    productionGzip: true,
     productionGzipExtensions: ['js', 'css'],
 
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
-    bundleAnalyzerReport: process.env.npm_config_report
+    // bundleAnalyzerReport: process.env.npm_config_report,
+    bundleAnalyzerReport: HOST_CONF.report
   }
 }
