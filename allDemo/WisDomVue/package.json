@@ -16,7 +16,7 @@
     "manba": "^1.2.8",
     "mini-css-extract-plugin": "^0.4.1",
     "mint-ui": "^2.2.13",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "shave": "^2.5.3",
     "swiper": "^4.5.0",
     "vconsole": "^3.3.0",
