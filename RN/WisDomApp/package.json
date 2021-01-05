@@ -10,7 +10,7 @@
   "dependencies": {
     "@react-native-community/blur": "^3.3.1",
     "@react-native-community/netinfo": "^2.0.10",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
     "moment": "^2.23.0",
