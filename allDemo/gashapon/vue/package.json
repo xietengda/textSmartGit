@@ -13,7 +13,7 @@
     "axios": "^0.18.0",
     "manba": "^1.2.7",
     "mint-ui": "^2.2.13",
-    "swiper": "^4.4.2",
+    "swiper": "^6.5.1",
     "vconsole": "^3.2.0",
     "vue": "^2.5.18",
     "vue-awesome-picker": "^1.1.0",
